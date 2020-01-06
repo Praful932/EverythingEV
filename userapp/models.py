@@ -21,6 +21,6 @@ class Provider(models.Model):
 class Vehicle(models.Model):
     name = models.CharField(max_length = 100)
     company = models.CharField(max_length = 100)
-    range = models.CharField(max_length = 100)
+    vehicle_range = models.CharField(max_length = 100)
     battery_capacity = models.CharField(max_length = 100)
     
