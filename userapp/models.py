@@ -15,9 +15,13 @@ class Consumer(models.Model):
         ('Pune','Pune'),
         ('Hyderabad','Hyderabad')
         )
+    have_vehicle=(
+        ('Yes','Yes'),
+        ('No','No')
+        )
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)
-    have_vehicle = models.BooleanField('Have Vehicle',default = False)
-    city = models.CharField(max_length=20,choices=city,default="") 
+    have_vehicle = models.CharField(max_length = 10,choices=have_vehicle,default = "")
+    City = models.CharField(max_length=20,choices=city,default="") 
 
 class Provider(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)

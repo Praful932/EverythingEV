@@ -1,18 +1,7 @@
 
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
-#pageintro{padding:200px 0 280px;}/* 280px => 80px for #introblocks negative margin */
 
-#pageintro article, #pageintro article p{display:block; max-width:75%; margin:0 auto; text-align:center;}
-#pageintro article p{max-width:65%; line-height:2rem;}
-#pageintro .heading{margin-bottom:20px; font-size:4rem;}
-#pageintro footer{margin-top:50px;}
-
-.bgded
-{
-    color: white;
-    background-color: #292929;
-}   
 
 
 

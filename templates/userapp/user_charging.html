@@ -1,7 +1,7 @@
 {% extends "userapp/layout.html" %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{%  static 'userapp/iuser_charging.css' %}">
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/user_charging.css' %}">
 {% endblock %}
 {% block body %}
 
@@ -180,7 +180,7 @@
 
 
 {%block script %}
-
+<script>
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
@@ -196,7 +196,7 @@ function filterFunction() {
   for (i = 0; i < a.length; i++) {
     txtValue = a[i].textContent || a[i].innerText;
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
+      a[i].style.display = "";  
     } else {
       a[i].style.display = "none";
     }
@@ -211,4 +211,5 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
+</script>
     {%endblock script%}
