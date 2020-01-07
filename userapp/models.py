@@ -9,8 +9,15 @@ class User(AbstractUser):
         return self.username
 
 class Consumer(models.Model):
+    city=(
+        ('None','None'),
+        ('Mumbai','Mumbai'),
+        ('Pune','Pune'),
+        ('Hyderabad','Hyderabad')
+        )
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)
     have_vehicle = models.BooleanField('Have Vehicle',default = False)
+    city = models.CharField(max_length=20,choices=city,default="") 
 
 class Provider(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)
