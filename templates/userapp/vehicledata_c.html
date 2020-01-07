@@ -1,0 +1,48 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/style1.css' %}">
+{% endblock %}
+{% block body %}
+
+
+
+<body>
+    <p>BASIC INTRODUCTION </p>
+    <p>thank you for choosing our station</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Station Name</h5>
+                    
+                    <form method="POST">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="67tIHSq7C2vhjr3mfOD1Q1aIjQ8vKEy2G3AHd5hJei6MTvoP4i7p2TcwOER4XIVF">
+                        
+
+<div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
+                
+                        <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+    
+{% endblock body %}

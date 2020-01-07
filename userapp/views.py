@@ -7,3 +7,10 @@ def index(request):
 
 def register(request):
     return render(request,"userapp/register.html")
+def stations(request):
+    return render(request, "userapp/stations.html")
+
+def vehicledata_c(request):
+    return render(request, "userapp/vehicledata_c.html")
+def vehicledata_p(request):
+    return render(request, "userapp/vehicledata_p.html")
