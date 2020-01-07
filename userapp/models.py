@@ -23,4 +23,3 @@ class Vehicle(models.Model):
     company = models.CharField(max_length = 100)
     vehicle_range = models.CharField(max_length = 100)
     battery_capacity = models.CharField(max_length = 100)
-    
