@@ -4,3 +4,5 @@ from django.http import HttpResponse
 
 def index(request):
     return render(request,"userapp/index.html")
+def stations(request):
+    return render(request, "userapp/stations.html")
