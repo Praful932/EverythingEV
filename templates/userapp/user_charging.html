@@ -1,0 +1,215 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/user_charging.css' %}">
+{% endblock %}
+{% block body %}
+
+<div class="split left">
+ 
+    <div class="progress-container">
+      <div class="progress-bar" id="myBar"></div>
+      
+    
+    <div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">Filter by</button>
+    <div id="myDropdown" class="dropdown-content">
+      <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+      <a href="#slow">SLOW CHARGING</a>
+      <a href="#fast">DC FAST CHARGING</a>
+      <a href="#rating">RATING</a>
+    </div>
+  </div>
+    
+  
+  <div class="row">
+      <div class="card">
+        <h3>Station name</h3>
+        
+        
+      <div class="rate">
+      <input type="radio" id="star5" name="rate" value="5" />
+      <label for="star5" title="text">5 stars</label>
+      <input type="radio" id="star4" name="rate" value="4" />
+      <label for="star4" title="text">4 stars</label>
+      <input type="radio" id="star3" name="rate" value="3" />
+      <label for="star3" title="text">3 stars</label>
+      <input type="radio" id="star2" name="rate" value="2" />
+      <label for="star2" title="text">2 stars</label>
+      <input type="radio" id="star1" name="rate" value="1" />
+      <label for="star1" title="text">1 star</label>
+    </div>
+      
+        <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+  
+  
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+  
+     
+        
+        <p>Some text</p>
+        <p>CONTACT</p>
+      </div>
+    </div>
+    <br>
+    
+   
+    <div class="row">
+    
+      <div class="card">
+        <h3>Station name</h3>
+        
+        
+      <div class="rate">
+      <input type="radio" id="star5" name="rate" value="5" />
+      <label for="star5" title="text">5 stars</label>
+      <input type="radio" id="star4" name="rate" value="4" />
+      <label for="star4" title="text">4 stars</label>
+      <input type="radio" id="star3" name="rate" value="3" />
+      <label for="star3" title="text">3 stars</label>
+      <input type="radio" id="star2" name="rate" value="2" />
+      <label for="star2" title="text">2 stars</label>
+      <input type="radio" id="star1" name="rate" value="1" />
+      <label for="star1" title="text">1 star</label>
+    </div>
+      
+      
+      <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+  
+  
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+  
+        
+        <p>Some text</p>
+        <p>CONTACT</p>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="card">
+        <h3>Station name</h3>
+        
+        
+      <div class="rate">
+      <input type="radio" id="star5" name="rate" value="5" />
+      <label for="star5" title="text">5 stars</label>
+      <input type="radio" id="star4" name="rate" value="4" />
+      <label for="star4" title="text">4 stars</label>
+      <input type="radio" id="star3" name="rate" value="3" />
+      <label for="star3" title="text">3 stars</label>
+      <input type="radio" id="star2" name="rate" value="2" />
+      <label for="star2" title="text">2 stars</label>
+      <input type="radio" id="star1" name="rate" value="1" />
+      <label for="star1" title="text">1 star</label>
+    </div>
+      
+        
+        <p>Station name</p>
+        <p>CONTACT</p>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="card">
+        <h3>Station name</h3>
+        
+        
+      <div class="rate">
+      <input type="radio" id="star5" name="rate" value="5" />
+      <label for="star5" title="text">5 stars</label>
+      <input type="radio" id="star4" name="rate" value="4" />
+      <label for="star4" title="text">4 stars</label>
+      <input type="radio" id="star3" name="rate" value="3" />
+      <label for="star3" title="text">3 stars</label>
+      <input type="radio" id="star2" name="rate" value="2" />
+      <label for="star2" title="text">2 stars</label>
+      <input type="radio" id="star1" name="rate" value="1" />
+      <label for="star1" title="text">1 star</label>
+    </div>
+      
+      
+      <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+  
+  
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+  
+        
+        <p>Some text</p>
+        <p>CONTACT</p>
+      </div>
+    </div>
+    <br>
+  </div>
+  
+      
+    </div>
+  </div>
+  
+  <div class="split right">
+    <div class="centered">
+      <img src="img_avatar.png" alt="Avatar man">
+      <h2>John Doe</h2>
+      <p>Some text here too.</p>
+      
+     
+      
+    </div>
+  </div>
+      
+      
+    
+{% endblock body %}
+
+
+{%block script %}
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  div = document.getElementById("myDropdown");
+  a = div.getElementsByTagName("a");
+  for (i = 0; i < a.length; i++) {
+    txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";  
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
+
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+    {%endblock script%}
