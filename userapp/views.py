@@ -68,7 +68,7 @@ def ChargingStation(request):
     if request.user.is_consumer:
         return render(request, "userapp/user_charging.html")
     if request.user.is_provider:
-        return render(request, "userapp/stations.html")
+        return render(request, "userapp/service_provider.html")
 
 def logoutf(request):
     # Check if user is logged in if not redirect to login page
