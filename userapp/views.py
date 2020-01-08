@@ -46,8 +46,8 @@ def registerCustomer(request):
 # def stations(request):
 #     return render(request, "userapp/stations.html")
 
-# def stations_user(request):
-#     return render(request, "userapp/user_charging.html")
+def stations_user(request):
+    return render(request, "userapp/user_charging.html")
 
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
