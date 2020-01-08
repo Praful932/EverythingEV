@@ -1,11 +1,44 @@
+.column {
+  float: left;
+  height:100%;
+}
+html,body,.row,.column .right,.card .bg-light,.card-body,#map
+{
+  width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body 
+{
+    background-image: url('charge.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#map
+{
+  height:100%;
+}
+.left {
+  width: 35%;
+  /* background: #2193b0;
+  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  
+  background: linear-gradient(to right, #6dd5ed, #2193b0);  */
+  padding-right: 20px;
+}
 
+.right {
+  /* background-color: grey; */
+  width: 65%;
+}
 
 @import url('https://fonts.googleapis.com/css?family=Abel');
-
-html, body {
-  background: #FCEEB5;
-  font-family: Abel, Arial, Verdana, sans-serif;
-}
 
 .center {
   position: absolute;
@@ -35,7 +68,7 @@ html, body {
   width: 150px;
   height: 100%;
   background: linear-gradient(#dE685E, #EE786E);
-  transition: width 0.2s;
+  transition: width 0.4s;
   overflow: hidden;
   z-index: 2;
 }
@@ -64,7 +97,7 @@ html, body {
   top: 10%;
   right: -2px;
   height: 80%;
-  border-left: 2px solid rgba(0,0,0,0.025);*/
+  border-left: 2px solid rgba(0,0,0,0.025);
 }
 
 .card .additional .user-card .level,
@@ -176,49 +209,4 @@ html, body {
   bottom: 1rem;
   right: 1rem;
   font-size: 0.9em;
-}
-
-
-
-
-
-
-body {
-  font-family: Arial;
-  color: white;
-}
-
-.split {
-  height: 100%;
-
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.left {
-  left: 0;
-    width: 36%;
-  background-color: #111;
-}
-
-.right {
-  right: 0;
-    width: 64%;
-  background-color: red;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.centered img {
-  width: 150px;
-  border-radius: 50%;
 }

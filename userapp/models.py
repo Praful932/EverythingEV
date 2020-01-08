@@ -21,12 +21,10 @@ class Consumer(models.Model):
         )
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)
     have_vehicle = models.CharField(max_length = 10,choices=have_vehicle,default = "")
-    City = models.CharField(max_length=20,choices=city,default="") 
+    city = models.CharField(max_length=20,choices=city,default="") 
 
 class Provider(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)
-    lat = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
-    lng = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
     business_name = models.CharField(max_length = 100)
 
 class Vehicle(models.Model):
@@ -34,3 +32,9 @@ class Vehicle(models.Model):
     company = models.CharField(max_length = 100)
     vehicle_range = models.CharField(max_length = 100)
     battery_capacity = models.CharField(max_length = 100)
+
+class ChargingStation(models.Model):
+    owner=models.ForeignKey(Provider,on_delete=models.CASCADE,related_name="ownerof")
+    lat = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
+    lng = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
+    # noofports,fast(dc),slow(ac),restroom,cctv,photos,opening time, closing time 
