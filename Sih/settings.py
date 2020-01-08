@@ -35,6 +35,7 @@ AUTH_USER_MODEL = 'userapp.User'
 
 INSTALLED_APPS = [
     'userapp.apps.UserappConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,6 +118,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+# After login/logout
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
+
+# If accessing login Required page
+LOGIN_URL = 'login'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -130,3 +138,5 @@ STATICFILES_DIRS = [
 # Timezone
 USE_TZ = True
 TIME_ZONE = "Asia/Calcutta"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,6 +1,6 @@
 {% extends "userapp/layout.html" %}
 {% load static %}
 {% block body %}
-<a href="#" class="btn btn-primary">Register as Consumer</a>
-<a href="#" class="btn btn-secondary">Register as Provider</a> 
+<a href="{% url 'registerConsumer' %}" class="btn btn-primary">Register as Consumer</a>
+<a href="{% url 'registerProvider' %}" class="btn btn-secondary">Register as Provider</a> 
 {% endblock %}

@@ -6,7 +6,7 @@
 {% endblock head %}
 
 {% block title %}
-Register - Customer
+Register - Provider
 {% endblock title %}
 {% load crispy_forms_tags %}
 {% block body %}
@@ -19,9 +19,11 @@ Register - Customer
                     <form method="POST">
                         {% csrf_token %}
                         {{ signupform|crispy }}
-                        {{ consumerform|crispy }}
+                        {{ providerform|crispy }}
                         <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
                     </form>
+
+
                 </div>
             </div>
         </div>

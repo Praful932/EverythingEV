@@ -1,0 +1,36 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'userapp/rs.css'%}">
+{% endblock %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Log In</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <small class="text-muted">
+                            <a href="#">Forgot Password?</a>
+                        </small><br>
+                        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+                        <a class="btn  btn-info" href = "{% url 'register' %}">New Here? Sign Up</a>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

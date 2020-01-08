@@ -19,7 +19,7 @@
 
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #000000;">
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary" style="background-color: #000000;">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -28,9 +28,14 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav navbar-right ml-auto wh">
         <a class="nav-item nav-link" href="{% url 'index' %}" style="padding-right: 15px ; color:white;">Home</a>
-        <a class="nav-item nav-link" href="#" style="padding-right: 15px ; color:white;">Login</a>
+        {% if user.is_authenticated %}
+        <a class="nav-item nav-link" href="{% url 'UpdateProfile' %}" style="padding-right: 15px ; color:white;">Profile</a>
+        <a class="nav-item nav-link" href="{% url 'logout' %}" style="padding-right: 15px ; color:white;">Logout</a>
+        {% else %}
+        <a class="nav-item nav-link" href="{% url 'login' %}" style="padding-right: 15px ; color:white;">Login</a>
         <a class="nav-item nav-link" href="{% url 'register' %}" style="padding-right: 15px ; color:white;">Register</a>
         <a class="nav-item nav-link" href="#" style="padding-right: 15px ; color:white;">About</a>
+        {% endif %}
       </div>
     </div>
   </nav>

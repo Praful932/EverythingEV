@@ -9,8 +9,22 @@ class UserSignUpForm(UserCreationForm):
 
 class ConsumerSignUpForm(forms.ModelForm):
     class Meta():
-        fields = ['have_vehicle','City']
+        fields = ['have_vehicle','city']
         model = Consumer
         labels = {
-            'have_vehicle': 'Do you have an EV?'
+            'have_vehicle': 'Do you have an EV?',
+            'city': 'City'
         }
+
+class ProviderSignUpForm(forms.ModelForm):
+    class Meta():
+        fields = ['business_name']
+        model = Provider
+        labels = {
+            'business_name': 'Business Name'
+        }
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta():
+        fields = ['username','email']
+        model = User
