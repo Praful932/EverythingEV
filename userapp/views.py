@@ -63,13 +63,6 @@ def registerProvider(request):
     }
     return render(request, "userapp/registerProvider.html", context = context)
 
-@login_required
-def ChargingStation(request):
-    if request.user.is_consumer:
-        return render(request, "userapp/user_charging.html")
-    if request.user.is_provider:
-        return render(request, "userapp/stations.html")
-
 def logoutf(request):
     # Check if user is logged in if not redirect to login page
     if request.user.is_authenticated:
@@ -106,8 +99,13 @@ def UpdateProfile(request):
             return redirect('index')
     return render(request, "userapp/updateprofile.html", context=context)
 
-def stations_user(request):
-    return render(request, "userapp/user_charging.html")
+@login_required
+def ChargingStation(request):
+    if request.user.is_consumer:
+        return render(request, "userapp/uc.html")
+    if request.user.is_provider:
+        return render(request, "userapp/stations.html")
+    
 
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
