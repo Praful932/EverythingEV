@@ -106,8 +106,8 @@ def UpdateProfile(request):
             return redirect('index')
     return render(request, "userapp/updateprofile.html", context=context)
 
-# def stations_user(request):
-#     return render(request, "userapp/user_charging.html")
+def stations_user(request):
+    return render(request, "userapp/user_charging.html")
 
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
