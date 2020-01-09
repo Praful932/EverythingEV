@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
@@ -34,7 +35,17 @@ class Vehicle(models.Model):
     battery_capacity = models.CharField(max_length = 100)
 
 class ChargingStation(models.Model):
+    # One Owner can have multiple charging stations
     owner=models.ForeignKey(Provider,on_delete=models.CASCADE,related_name="ownerof")
     lat = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
     lng = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
+    no_of_ports = models.IntegerField(default=0)
+    fast_dc = models.IntegerField(default=0)
+    slow_ac = models.IntegerField(default=0)
+    price_kwh = models.DecimalField(max_digits=5,decimal_places=2,default=0.00)
+    restroom = models.BooleanField(default= False)
+    cctv = models.BooleanField(default = False)
+    opening_time = models.DateTimeField(default = timezone.now)
+    closing_time = models.DateTimeField(default = timezone.now )
+    image = models.ImageField(default='default.jpg', upload_to ='station_pics')
     # noofports,fast(dc),slow(ac),restroom,cctv,photos,opening time, closing time 

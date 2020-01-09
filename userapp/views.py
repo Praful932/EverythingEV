@@ -104,7 +104,7 @@ def ChargingStation(request):
     if request.user.is_consumer:
         return render(request, "userapp/uc.html")
     if request.user.is_provider:
-        return render(request, "userapp/stations.html")
+        return render(request, "userapp/service_provider.html")
     
 
 # def vehicledata_c(request):

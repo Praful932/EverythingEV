@@ -1,5 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -13,6 +15,11 @@ urlpatterns = [
     path("logoutf/", views.logoutf, name='logout'),
     path('ChargingStation/',views.ChargingStation, name = 'ChargingStation')
 ] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
 
 # path("password-reset/", auth_views.PasswordResetView.as_view(
 #         template_name='userapp/password_reset.html'), name='password_reset'),
