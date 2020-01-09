@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from userapp.models import Consumer, Provider, User, Vehicle
+from userapp.models import Consumer, Provider, User, Vehicle, ChargingStation
 
 class UserSignUpForm(UserCreationForm):
     class Meta():
@@ -33,8 +33,14 @@ class ChargingStationForm(forms.ModelForm):
     class Meta():
         fields = ['lat','lng','no_of_ports',
         'fast_dc','slow_ac','price_kwh','restroom','cctv','opening_time','closing_time','image']
+        model = ChargingStation
         labels = {
             'no_of_ports':'No of Ports',
             'fast_dc' : 'Fast Ports',
-            'slow_ac' : 'Slow ports'
+            'slow_ac' : 'Slow ports',
+            'price_kwh' : 'Price/Kwh',
+            'restroom' : 'Restroom',
+            'opening_time' : 'Opening Time',
+            'closing_time' : 'Closing Time',
+            'image' : 'Images'
         }

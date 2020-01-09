@@ -13,7 +13,8 @@ urlpatterns = [
         template_name='userapp/login.html'), name='login'),  
     path("UpdateProfile/", views.UpdateProfile, name='UpdateProfile'),
     path("logoutf/", views.logoutf, name='logout'),
-    path('ChargingStation/',views.ChargingStation, name = 'ChargingStation')
+    path('ChargingStation/',views.ChargingStation, name = 'ChargingStation'),
+    path('AddChargingStation', views.AddChargingStation, name = 'AddChargingStation')
 ] 
 
 if settings.DEBUG:

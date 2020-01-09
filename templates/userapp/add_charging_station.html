@@ -1,0 +1,28 @@
+{% extends 'userapp/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/rs.css'%}">
+{% endblock head %}
+
+{% block title %}
+Chat
+{% endblock title %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Charging Station</h5>                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ stationform|crispy }}
+                        <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

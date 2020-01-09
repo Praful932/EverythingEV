@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django import forms
 from django.http import HttpResponse
-from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm
+from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from userapp.models import User, Consumer, Provider, Vehicle
@@ -106,6 +107,20 @@ def ChargingStation(request):
     if request.user.is_provider:
         return render(request, "userapp/service_provider.html")
     
+@login_required
+def AddChargingStation(request):
+    if request.user.is_consumer:
+        return redirect('index')
+    else:
+        if request.method == 'GET':
+            stationform = ChargingStationForm()
+            stationform.fields['lat'].widget = forms.HiddenInput()
+            stationform.fields['lng'].widget = forms.HiddenInput()
+    context = {
+        'stationform' : stationform
+    }
+    return render(request, "userapp/add_charging_station.html", context = context)
+
 
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
