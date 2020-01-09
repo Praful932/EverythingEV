@@ -13,13 +13,17 @@
     text-align: center;
     margin: 2rem 0;
   }
-  
   .wrapper{
     width: 90%;
     margin: 0 auto;
     max-width: 80rem;
   }
-  
+  .btn-info
+  {
+    position: fixed;
+    right:100px;
+    top:120px;
+  }
   .cols{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -265,6 +269,7 @@ body {
 
 h1 {
   font-weight: 300;
+  margin:0px;
 }
 
 h3 {

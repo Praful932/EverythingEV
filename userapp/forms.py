@@ -28,3 +28,13 @@ class UserUpdateForm(forms.ModelForm):
     class Meta():
         fields = ['username','email']
         model = User
+
+class ChargingStationForm(forms.ModelForm):
+    class Meta():
+        fields = ['lat','lng','no_of_ports',
+        'fast_dc','slow_ac','price_kwh','restroom','cctv','opening_time','closing_time','image']
+        labels = {
+            'no_of_ports':'No of Ports',
+            'fast_dc' : 'Fast Ports',
+            'slow_ac' : 'Slow ports'
+        }
