@@ -15,7 +15,7 @@ Add Charging Station
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Charging Station</h5>                    
-                    <form method="POST" id="form1" enctype="multipart/form-data">
+                    <form method="POST" enctype="multipart/form-data" id="form1" >
                         {% csrf_token %}
                         {{ stationform|crispy }}
                         <button type="submit" class="btn btn-info" onclick="submitloc()">Submit</button>
