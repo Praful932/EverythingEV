@@ -130,7 +130,8 @@ def AddChargingStation(request):
     }
     return render(request, "userapp/add_charging_station.html", context = context)
 
-
+def foo(request):
+    return render(request,"userapp/service_dashboard.html")
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):

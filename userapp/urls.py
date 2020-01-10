@@ -14,7 +14,8 @@ urlpatterns = [
     path("UpdateProfile/", views.UpdateProfile, name='UpdateProfile'),
     path("logoutf/", views.logoutf, name='logout'),
     path('ChargingStation/',views.ChargingStation, name = 'ChargingStation'),
-    path('AddChargingStation', views.AddChargingStation, name = 'AddChargingStation')
+    path('AddChargingStation', views.AddChargingStation, name = 'AddChargingStation'),
+    path('sc/',views.foo,name='sc')
 ] 
 
 if settings.DEBUG:
