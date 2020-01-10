@@ -112,7 +112,16 @@ def AddChargingStation(request):
     if request.user.is_consumer:
         return redirect('index')
     else:
-        if request.method == 'GET':
+        if request.method == 'POST':
+            stationform = ChargingStationForm(request.POST)
+            if stationform.is_valid():
+                print(stationform.cleaned_data['image'])
+                ob = stationform.save(commit = False)
+                provider = Provider.objects.get(user=request.user)
+                ob.owner = provider
+                stationform.save()
+                return redirect('index')
+        else:
             stationform = ChargingStationForm()
             stationform.fields['lat'].widget = forms.HiddenInput()
             stationform.fields['lng'].widget = forms.HiddenInput()

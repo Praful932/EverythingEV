@@ -30,6 +30,8 @@ class UserUpdateForm(forms.ModelForm):
         model = User
 
 class ChargingStationForm(forms.ModelForm):
+    opening_time = widget=forms.TimeInput(format='%H:%M')
+    closing_time = widget=forms.TimeInput(format='%H:%M')
     class Meta():
         fields = ['lat','lng','no_of_ports',
         'fast_dc','slow_ac','price_kwh','restroom','cctv','opening_time','closing_time','image']
