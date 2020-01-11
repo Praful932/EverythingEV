@@ -43,11 +43,15 @@ class Vehicle(models.Model):
 
 class ChargingStation(models.Model):
     # One Owner can have multiple charging stations
+    name = models.CharField(max_length = 100,default="")
+    city = models.CharField(max_length = 100, default="")
+    suburb = models.CharField(max_length = 100,default="")
     owner=models.ForeignKey(Provider,on_delete=models.CASCADE,related_name="ownerof")
     lat = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
     lng = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
     no_of_ports = models.IntegerField(default=0)
     fast_dc = models.IntegerField(default=0)
+    created_at=models.DateTimeField(default = timezone.now)
     slow_ac = models.IntegerField(default=0)
     price_kwh = models.DecimalField(max_digits=5,decimal_places=2,default=0.00)
     restroom = models.BooleanField(default= False)

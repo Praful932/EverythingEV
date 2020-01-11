@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 django-crispy-forms = "*"
 pillow = "*"
+geopy = "*"
 
 [requires]
 python_version = "3.7"

@@ -13,13 +13,13 @@
         <h1>Your Charging Stations</h1>
     </div><br>
     <div class="cols">
-        {% for charging_station in charging_stations %}
+        {% for cs in cslist %}
         <div class="col" style="max-width: 600px;" ontouchstart="this.classList.toggle('hover');">
             <div class="container">
                 <div class="front" style="background-image: url(https://unsplash.it/500/500/)">
                     <div class="inner">
-                        <p>Diligord</p>
-                        <span>Area Name<br>CITY</span>
+                        <p>{{ cs.name }}</p>
+                        <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
                     </div>
                 </div>
                 <div class="back">
@@ -27,15 +27,39 @@
                         <button class="btn">
                             <span>Dashboard</span>
                         </button>
-                        <button type="button" class="btn btn-danger" style="margin-left:30px;">Remove</button>
+                        <button type="button" class="btn btn-danger" style="margin-left:20px ;">Remove</button>
                     </div>
                     <br>
 
                 </div>
             </div>
-        </div>
+        </div>  
         {% endfor %}
+
     </div>
+</div>
+<div class="pagebtn" >
+    {% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1" >First</a>
+    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a>
+    {% endif  %}
+
+    {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+    <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+    <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
+    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
+    {% endif  %}
+
+    {% endif  %}
 </div>
 
 {% endblock %}

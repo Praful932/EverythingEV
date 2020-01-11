@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+from django.core.paginator import Paginator
+from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
@@ -123,6 +125,21 @@ def AddChargingStation(request):
                 ob = stationform.save(commit = False)
                 provider = Provider.objects.get(user=request.user)
                 ob.owner = provider
+                lat = stationform.cleaned_data['lat']
+                lng = stationform.cleaned_data['lng']
+                geolocator = Nominatim(user_agent = 'EV')
+                location = geolocator.reverse(str(lat)+', ' + str(lng))
+                try:
+                        ob.city = location.raw['address']['city']
+                except:
+                        ob.city = location.raw['address']['state_district']
+                try:
+                    ob.suburb = location.raw['address']['suburb']
+                except:
+                    try:
+                        ob.suburb = location.raw['address']['county']
+                    except:
+                        ob.suburb = location.raw['address']['town']
                 stationform.save()
                 return redirect('index')
         else:
@@ -137,17 +154,22 @@ def AddChargingStation(request):
 class ChargingStationProviderListView(LoginRequiredMixin,UserPassesTestMixin,ListView):
     model = ChargingStation
     template_name = 'userapp/provider_charging_stations.html'
+    ordering = ['-created_at']
+    context_object_name = 'cslist'
     paginate_by = 3
     def test_func(self):
         if self.request.user.is_provider:
             return True
         return False
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
         current_provider = Provider.objects.get(user=self.request.user)
-        context['charging_stations'] = ChargingStation.objects.filter(owner=current_provider)
-        return context
+        return ChargingStation.objects.filter(owner=current_provider)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     current_provider = Provider.objects.get(user=self.request.user)
+    #     context['cslist'] = ChargingStation.objects.filter(owner=current_provider)
+    #     return context
 
 
 
