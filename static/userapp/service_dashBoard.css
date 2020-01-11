@@ -45,7 +45,7 @@
     }
     
     .card-list {
-      width: 100%;
+      width: 80%;
     }
     .card-list:before, .card-list:after {
       content: " ";
