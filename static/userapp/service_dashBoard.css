@@ -1,7 +1,7 @@
-@import "https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/dashboard.scss";
+/* @import "https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/dashboard.scss"; */
     body {
-      background-color: #1b2431 !important;
-      color: #202020;
+      /* background-color: #1b2431 !important; */
+      /* color: #202020; */
       font-family: "Montserrat", "Helvetica", "Open Sans", "Arial";
       font-size: 13px;
     }
@@ -18,10 +18,14 @@
     }
     
     .navbar {
-      background-color: #1b2431;
+      background-color: #416597;
+    }
+    .navbar-brand {
+      background-color: #416597;
+
     }
     
-    .sidebar {
+    /* .sidebar {
       background-color: #1b2431;
       box-shadow: none;
     }
@@ -32,8 +36,8 @@
     }
     .sidebar .nav-link:hover {
       color: white;
-    }
-    .sidebar .nav-link.active {
+    } */
+    /* .sidebar .nav-link.active {
       border-left: 5px solid #738297;
       color: white;
     }
@@ -42,7 +46,7 @@
       font-size: 1.35rem;
       margin-right: 5px;
       min-width: 25px;
-    }
+    } */
     
     .card-list {
       width: 100%;

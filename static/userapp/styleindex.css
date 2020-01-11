@@ -28,15 +28,16 @@
 }   
     .cards-list {
         z-index: 0;
-        width: 100%;
+        width: 80%;
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+        padding: 10px;
       }
       
       .card {
         margin: 30px auto;
-        width: 270px;
+        width: 200px;
         height: 270px;
         border-radius: 40px;
       box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
