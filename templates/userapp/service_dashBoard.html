@@ -1,0 +1,399 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/service_dashboard.css'%}">
+<title>Place Searches</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css"> 
+{% endblock %}
+{% block body %}
+
+
+<div class="card-list" style="padding:20px;background-color:#1b2431">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="card blue">
+          <div class="title">All Charging stations</div>
+          <div class="value"><b>Count</b> of stations</div>
+          <div class="stat"><b>Building New </b></div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="card green">
+          <div class="title">All customers</div>
+          <div class="value">customers<b> COUNT</b></div>
+          <div class="stat"><b>increase</b> in customers</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="card red">
+          <div class="title">Charges</div>
+          
+          <div style="line-height:1.2;margin-left: 12px">AC:<br>DC:</div>
+          <div class="stat">Hike or Reduction</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="card red">
+          <div class="title">new customers</div>
+         
+          <div class="value">3</div>
+          <div class="stat"><b>13</b>% decrease</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="projects mb-4">
+    <div class="projects-inner">
+      <header class="projects-header">
+        <div class="title">Charging Station Information</div>
+        <div class="count">| charging Station 1</div>
+        
+      </header>
+      <table class="projects-table">
+        <thead>
+          
+        </thead>
+        <tr>
+          <td>
+            <p>Car name/model</p>
+            <p>Company</p>
+          </td>
+          <td>
+            <p>Date</p>
+            <p class="text-danger">Charging Time </p>
+            </td>
+          <td class="member">
+            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
+            <div class="member-info">
+              <p>Customer name</p>
+              <p>Charging Type used</p>
+            </div>
+          </td>
+          <td>
+            <p>Charges</p>
+            <p>Paid Method</p>
+          </td>
+          <td class="status">
+            <span class="status-text status-orange">charging time   </span>
+          </td>
+          <!-- <td>
+            <form class="form" action="#" method="POST">f
+            </form>
+          </td> -->
+        </tr>
+        <tr class="danger-item">
+          <td>
+            <p>Car name/model</p>
+            <p>company</p>
+          </td>
+          <td>
+            <p>Date</p>
+            <p class="text-danger">charging time</p>
+          </td>
+          <td class="member">
+            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
+            <div class="member-info">
+              <p>Customer name</p>
+              <p>Charging Type used</p>
+            </div>
+          </td>
+          <td>
+            <p>Charges</p>
+            <p>Paid Method</p>
+          </td>
+          <td class="status">
+            <span class="status-text status-red">Charging time</span>
+          </td>
+          <td>
+            <form class="form" action="#" method="POST">
+              
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Car name/model</p>
+            <p>Company</p>
+          </td>
+          <td>
+            <p>Date</p>
+            <p class="text-danger">Charging time</p>
+          </td>
+          <td class="member">
+            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
+            <div class="member-info">
+              <p>Customer name</p>
+              <p>Charging Type used</p>
+            </div>
+          </td>
+          <td>
+            <p>Charges</p>
+            <p>Paid Method</p>
+          </td>
+          <td class="status">
+            <span class="status-text status-orange">Charging time</span>
+          </td>
+          <td>
+            <form class="form" action="#" method="POST">
+              
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Car name/model</p>
+            <p>company</p>
+          </td>
+          <td>
+            <p>Date</p>
+            <p class="text-danger">Charging time</p>
+          </td>
+          <td class="member">
+            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
+            <div class="member-info">
+              <p>Customer Name</p>
+              <p>Charging Type used</p>
+            </div>
+          </td>
+          <td>
+            <p>Charges</p>
+            <p>Paid Method</p>
+          </td>
+          <td class="status">
+            <span class="status-text status-blue">Charging Time</span>
+          </td>
+          <td>
+            <form class="form" action="#" method="POST">
+            
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Car name/model</p>
+            <p>Company</p>
+          </td>
+          <td>
+            <p>Date</p>
+            <p class="text-danger">Charging Time</p>
+          </td>
+          <td class="member">
+            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
+            <div class="member-info">
+              <p>Customer name</p>
+              <p>Charging Type used</p>
+            </div>
+          </td>
+          <td>
+            <p>Charges</p>
+            <p>Paid Method</p>
+          </td>
+          <td class="status">
+            <span class="status-text status-orange">Charging time</span>
+          </td>
+          <td>
+            <form class="form" action="#" method="POST">
+              
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+           
+          
+    </div>
+  </div>
+</main>
+</div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+
+<script>var Selectize = /** @class */ (function () {
+    function Selectize() {
+        this.init();
+    }
+    Selectize.prototype.init = function () {
+        var initValue;
+        $('.action-box').selectric({
+            onInit: function (element) {
+                initValue = $(this).val();
+            },
+            onChange: function (element) {
+                if ($(this).val() !== initValue)
+                    $(element).parents('form').submit();
+            }
+        });
+    };
+    return Selectize;
+}());
+var Charts = /** @class */ (function () {
+    function Charts() {
+        this.colors = ["#DB66AE", "#8185D6", "#89D9DF", "#E08886"];
+        this.tickColor = "#757681";
+        this.initRadar();
+        this.initBarHorizontal();
+        this.initDoughnut();
+    }
+    Charts.prototype.initRadar = function () {
+        var ctxD = $('#radarChartDark'), chartData = {
+            type: 'radar',
+            data: {
+                labels: ["Education", "Food", "Transport", "Drinks", "Other"],
+                datasets: [
+                    {
+                        label: "2014",
+                        backgroundColor: this.convertHex(this.colors[0], 20),
+                        borderColor: this.colors[0],
+                        borderWidth: 1,
+                        pointRadius: 2,
+                        data: [51, 67, 90, 31, 16]
+                    },
+                    {
+                        label: "2015",
+                        backgroundColor: this.convertHex(this.colors[1], 20),
+                        borderColor: this.colors[1],
+                        borderWidth: 1,
+                        pointRadius: 2,
+                        data: [75, 44, 19, 22, 43]
+                    },
+                    {
+                        label: "2015",
+                        backgroundColor: this.convertHex(this.colors[2], 20),
+                        borderColor: this.colors[2],
+                        borderWidth: 1,
+                        pointRadius: 2,
+                        data: [7, 14, 29, 82, 33]
+                    }
+                ]
+            },
+            options: {
+                scale: {
+                    pointLabels: {
+                        fontColor: this.tickColor
+                    },
+                    ticks: {
+                        display: false,
+                        stepSize: 25
+                    }
+                },
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        boxWidth: 11,
+                        fontColor: this.tickColor,
+                        fontSize: 11
+                    }
+                }
+            }
+        }, myDarkRadarChart = new Chart(ctxD, chartData);
+    };
+    Charts.prototype.initBarHorizontal = function () {
+        var ctxD = $("#barChartHDark"), chartData = {
+            type: 'horizontalBar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [{
+                        data: [27, 59, 68, 26, 79, 55, 36, 43, 44, 30, 55, 64],
+                        backgroundColor: this.colors[0],
+                        hoverBackgroundColor: this.convertHex(this.colors[0], 70)
+                    },
+                    {
+                        data: [136, 23, 44, 30, 79, 55, 61, 94, 27, 59, 98, 91],
+                        backgroundColor: this.colors[1],
+                        hoverBackgroundColor: this.convertHex(this.colors[1], 70)
+                    },
+                    {
+                        data: [88, 31, 87, 61, 77, 27, 59, 58, 136, 26, 79, 85],
+                        backgroundColor: this.colors[2],
+                        hoverBackgroundColor: this.convertHex(this.colors[2], 70)
+                    }]
+            },
+            options: {
+                barThickness: 10,
+                scales: {
+                    xAxes: [{
+                            stacked: true,
+                            ticks: {
+                                fontColor: this.tickColor
+                            },
+                            gridLines: {
+                                drawOnChartArea: false
+                            }
+                        }],
+                    yAxes: [{
+                            stacked: true,
+                            ticks: {
+                                fontColor: this.tickColor,
+                                min: 0,
+                                max: 175,
+                                stepSize: 25
+                            }
+                        }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }, myDarkRadarChart = new Chart(ctxD, chartData);
+    };
+    Charts.prototype.initDoughnut = function () {
+        var ctxD = $('#doughnutChartDark'), chartData = {
+            type: 'doughnut',
+            data: {
+                labels: ["Brasil", "India", "China"],
+                datasets: [{
+                        data: [300, 50, 100],
+                        borderWidth: 0,
+                        backgroundColor: [
+                            this.convertHex(this.colors[0], 60),
+                            this.convertHex(this.colors[1], 60),
+                            this.convertHex(this.colors[2], 60),
+                        ],
+                        hoverBackgroundColor: [
+                            this.colors[0],
+                            this.colors[1],
+                            this.colors[2],
+                        ]
+                    }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: "bottom",
+                    labels: {
+                        boxWidth: 11,
+                        fontColor: this.tickColor,
+                        fontSize: 11
+                    }
+                }
+            }
+        }, myDarkRadarChart = new Chart(ctxD, chartData);
+    };
+    Charts.prototype.convertHex = function (hex, opacity) {
+        hex = hex.replace('#', '');
+        var r = parseInt(hex.substring(0, 2), 16);
+        var g = parseInt(hex.substring(2, 4), 16);
+        var b = parseInt(hex.substring(4, 6), 16);
+        var result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')';
+        return result;
+    };
+    return Charts;
+}());
+new Selectize();
+new Charts();</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/jquery.selectric.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+{% endblock %}

@@ -4,7 +4,19 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
   }
-  
+  .pagebtn
+  {
+    display:inline-block;
+    position:relative;
+    left:40%;
+    top:50%;
+    font-weight: 900;
+  }
+  .btn-outline-info
+  {
+    color:white !important;
+  }
+
   h1{
     font-size: 2.5rem;
     font-family: 'Montserrat';
@@ -13,13 +25,21 @@
     text-align: center;
     margin: 2rem 0;
   }
-  
   .wrapper{
     width: 90%;
     margin: 0 auto;
     max-width: 80rem;
   }
-  
+  .btn-info
+  {
+    position: fixed;
+    right:100px;
+    top:120px;
+  }
+  .col
+  {
+    padding-left:0px;
+  }
   .cols{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -64,10 +84,10 @@
   }
   
   .back{
-    background: #cedce7;
-    background: -webkit-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
-    background: -o-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
-    background: linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+    background: #ff8080;
+    background: -webkit-linear-gradient(45deg,  #ff8080 0%,#596a72 100%);
+    background: -o-linear-gradient(45deg,  #ff8080 0%,#596a72 100%);
+    background: linear-gradient(45deg,  #ff8080 0%,#596a72 100%);
   }
   
   .front:after{
@@ -156,7 +176,7 @@
     width: 4rem;
     height: 2px;
     position: absolute;
-    background: #C6D4DF;
+    background: #ff8080;
     display: block;
     left: 0;
     right: 0;
@@ -215,4 +235,211 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: "Exo", sans-serif;
+  color: #fff;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.container {
+  width: 100%;
+  position: absolute;
+  top: 35%;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 300;
+  margin:0px;
+}
+
+h3 {
+  color: #eee;
+  font-weight: 100;
+}
+
+h5 {
+  color:#eee;
+  font-weight:300;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+
+
+
+.btn {
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+.btn-danger
+{
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #dc3545 ;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+
+svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.btn:hover {
+  transition: 1s ease-in-out;
+  background: #4F95DA;
+}
+
+.btn:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.btn span {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+}
+.btn-danger:hover
+{
+  transition: 1s ease-in-out;
+  background: #dc3545;
+}
+
+
+
+
+
+
+
+
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Rubik:500");
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.button {
+  padding: 5px 5px;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+  line-height: 1.25;
+  background: #FC6E51;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  position: relative;
+  transition: background-color .6s ease;
+  overflow: hidden;
+}
+.button:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform-style: flat;
+          transform-style: flat;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100%;
+  transition: width .3s ease, height .3s ease;
+}
+.button:focus, .button:hover {
+  background: #fb512e;
+}
+.button:active:after {
+  width: 200px;
+  height: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.example_b {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #60a3bc;
+  padding: 20px;
+  border-radius: 50px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
   }
