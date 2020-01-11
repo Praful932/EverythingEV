@@ -54,8 +54,8 @@ class ChargingStation(models.Model):
     cctv = models.BooleanField(default = False)
     opening_time = models.TimeField(default = '00:00:00')
     closing_time = models.TimeField(default = '00:00:00')
-    image = models.ImageField(default='default.jpg', upload_to ='station_pics')
+    image = models.ImageField(null=True, upload_to ='station_pics')
 
     def __str__(self):
-        return self.owner.user.username + "'s - Charging Station"
+        return str(self.pk) + '.' + self.owner.user.username +" - Charging Station"
     # noofports,fast(dc),slow(ac),restroom,cctv,photos,opening time, closing time 

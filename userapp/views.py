@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation
 
 # Create your views here.
 
@@ -100,12 +103,14 @@ def UpdateProfile(request):
             return redirect('index')
     return render(request, "userapp/updateprofile.html", context=context)
 
+# ChargingStation
 @login_required
-def ChargingStation(request):
+def CS(request):
     if request.user.is_consumer:
         return render(request, "userapp/uc.html")
     if request.user.is_provider:
-        return render(request, "userapp/service_provider.html")
+        # Redirect to Charging Station Provider ListView
+        return redirect('Charging-Station-PLV')
     
 @login_required
 def AddChargingStation(request):
@@ -113,9 +118,8 @@ def AddChargingStation(request):
         return redirect('index')
     else:
         if request.method == 'POST':
-            stationform = ChargingStationForm(request.POST)
+            stationform = ChargingStationForm(request.POST, request.FILES)
             if stationform.is_valid():
-                print(stationform.cleaned_data['image'])
                 ob = stationform.save(commit = False)
                 provider = Provider.objects.get(user=request.user)
                 ob.owner = provider
@@ -130,8 +134,25 @@ def AddChargingStation(request):
     }
     return render(request, "userapp/add_charging_station.html", context = context)
 
-def foo(request):
-    return render(request,"userapp/service_dashboard.html")
+class ChargingStationProviderListView(LoginRequiredMixin,UserPassesTestMixin,ListView):
+    model = ChargingStation
+    template_name = 'userapp/provider_charging_stations.html'
+    paginate_by = 3
+    def test_func(self):
+        if self.request.user.is_provider:
+            return True
+        return False
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_provider = Provider.objects.get(user=self.request.user)
+        context['charging_stations'] = ChargingStation.objects.filter(owner=current_provider)
+        return context
+
+
+
+# def foo(request):
+#     return render(request,"userapp/service_dashboard.html")
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
