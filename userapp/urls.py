@@ -18,7 +18,8 @@ urlpatterns = [
     path("logoutf/", views.logoutf, name='logout'),
     path('Charging-Station/',views.CS, name = 'Charging-Station'),
     path('Charging-Station/add/', views.AddChargingStation, name = 'AddChargingStation'),
-    path('Charging-Station/my-stations',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV')
+    path('Charging-Station/my-stations',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
+    path('sc/',views.foo,name='sc')
 
 ] 
 
@@ -26,7 +27,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 
-    # path('sc/',views.foo,name='sc')
 # path("password-reset/", auth_views.PasswordResetView.as_view(
 #         template_name='userapp/password_reset.html'), name='password_reset'),
 #     path("password-reset/done/", auth_views.PasswordResetDoneView.as_view(
