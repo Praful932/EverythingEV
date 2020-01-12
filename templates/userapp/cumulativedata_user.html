@@ -1,0 +1,418 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/style1.css' %}">
+{% endblock %}
+{% block body %}
+    
+
+<main>
+    <div class="mw8 center pv4 ph3" id="dashboard">
+      <section class="flex-m flex-l nl3-m nr3-m nl3-l nr3-l">
+        <nav class="w-100 w-25-m w-25-l mb4 mb0-l ph3-m ph3-l">
+          <header class="mb2">
+            <i class="material-icons f2 black-70">dashboard</i>
+          </header>
+          <form class="mb4 w-100 w-70-m w-80-l">
+            <input type="text" placeholder="Search" class="input-reset ba b--black-20 pa1 br2 f5 w-100" />
+          </form>
+          <h2 class="ttu mt0 mb2 f6 fw5 silver">Vector</h2>
+          <ul class="list pl0 mt0 mb4">
+            <li class="mb2">
+              <a href="#" class="block link dim blue">Overview</a>
+            </li>
+            <li class="mb2">
+              <a href="#" class="block link dim blue">Servers History</a>
+            </li>
+            <li class="mb2">
+              <a href="#" class="block link dim blue">SONIC</a>
+            </li>
+            <li>
+              <a href="#" class="block link dim blue">Infrastructures</a>
+            </li>
+          </ul>
+          <h2 class="ttu mt0 mb2 f6 fw5 silver">More</h2>
+          <ul class="list pl0 mt0 mb2">
+            <li class="mb2">
+              <a href="#" class="block link dim blue">Intelligence Center</a>
+            </li>
+            <li class="mb2">
+              <a href="#" class="block link dim blue">Reports</a>
+            </li>
+            <li class="mb2">
+              <a href="#" class="block link dim blue">Dark UI</a>
+            </li>
+            <li>
+              <a href="#" class="block link dim blue">Details</a>
+            </li>
+          </ul>
+        </nav>
+        <article class="w-100 w-75-m w-75-l ph3-m ph3-l">
+          <header class="mb3">
+            <h2 class="ttu mt0 mb1 f6 fw5 silver">Status</h2>
+            <h1 class="fw3 dark-gray mt0 mb0">PROTECTED</h1>
+          </header>
+          <hr class="o-20" />
+          <div class="flex-m flex-l flex-wrap items-center justify-between nl3 nr3 pt4 mb4">
+            <div class="w-100 w-50-m w-33-l ph3 tc mb4 mb0-l">
+              <div class="w-50 w-50-m w-75-l center">
+                <doughnut :labels="newVsReturning.labels" :data="newVsReturning.data"></doughnut>
+              </div>
+              <h3 class="mt3 mb1 f6 fw5 silver">Traffic</h3>
+              <h4 class="dark-gray f3 fw3 mv0">Inbound vs. Outboud</h4>
+            </div>
+            <div class="w-100 w-50-m w-33-l ph3 tc mb4 mb0-l">
+              <div class="w-50 w-50-m w-75-l center">
+                <doughnut :labels="newVsRecurring.labels" :data="newVsRecurring.data"></doughnut>
+              </div>
+              <h3 class="mt3 mb1 f6 fw5 silver">Network</h3>
+              <h4 class="dark-gray f3 fw3 mv0">Infrastructures</h4>
+            </div>
+            <div class="w-100 w-50-m w-33-l ph3 tc mb4 mb0-l">
+              <div class="w-50 w-50-m w-75-l center">
+                <doughnut :labels="directVsReferrals.labels" :data="directVsReferrals.data"></doughnut>
+              </div>
+              <h3 class="mt3 mb1 f6 fw5 silver">Threat Analysis</h3>
+              <h4 class="dark-gray f3 fw3 mv0">Sonic Scanning</h4>
+            </div>
+          </div>
+          <div class="divide tc relative">
+            <h5 class="fw4 ttu mv0 dib bg-white ph3">Quick Stats</h5>
+          </div>
+          <div class="flex flex-wrap mt3 nl3 nr3">
+            <div class="w-50 w-25-l mb4 mb0-l relative flex flex-column ph3">
+              <sparkline title="Stations" class="bg-green" value="20"></sparkline>
+            </div>
+            <div class="w-50 w-25-l mb4 mb0-l relative flex flex-column ph3">
+              <sparkline title="Criticals" class="bg-red" value="758"></sparkline>
+            </div>
+            <div class="w-50 w-25-l mb4 mb0-l relative flex flex-column ph3">
+              <sparkline title="Users" class="bg-purple" value="20"></sparkline>
+            </div>
+            <div class="w-50 w-25-l mb4 mb0-l relative flex flex-column ph3">
+              <sparkline title="Files" class="bg-blue" value="75,800"></sparkline>
+            </div>
+          </div>
+          <hr class="o-20 mt4" />
+          <div class="flex flex-wrap pt3 nl3 nr3">
+            <div class="w-100 w-50-l ph3 mb3 mb0-l">
+              <div class="bt bl br b--black-10 br2">
+                <div class="pa3 bb b--black-10">
+                  <h4 class="mv0">Traffic Location</h4>
+                </div>
+                <metric-list-item v-for="(country, index) in countryData" :key="index" :show-bar="country.showBar" :name="country.name" :value="country.value">
+                </metric-list-item>
+              </div>
+              <a href="#" class="no-underline fw5 mt3 br2 ph3 pv2 dib ba b--blue blue bg-white hover-bg-blue hover-white">All Countries</a>
+            </div>
+            <div class="w-100 w-50-l ph3 mb3 mb0-l">
+              <div class="bt bl br b--black-10 br2">
+                <div class="pa3 bb b--black-10">
+                  <h4 class="mv0">Directory Analysis</h4>
+                </div>
+                <metric-list-item v-for="(page, index) in pageData" :key="index" :show-bar="page.showBar" :name="page.name" :value="page.value">
+                </metric-list-item>
+              </div>
+              <a href="#" class="no-underline fw5 mt3 br2 ph3 pv2 dib ba b--blue blue bg-white hover-bg-blue hover-white">See All</a>
+            </div>
+          </div>
+          <div class="mt4">
+            <div class="w-100 mb3 mb0-l">
+              <div class="bt bl br b--black-10 br2">
+                <div class="pa3 bb b--black-10">
+                  <h4 class="mv0">Devices</h4>
+                </div>
+                <metric-list-item v-for="(device, index) in deviceData" :key="index" :show-bar="device.showBar" :name="device.name" :value="device.value">
+                </metric-list-item>
+              </div>
+              <a href="#" class="no-underline fw5 mt3 br2 ph3 pv2 dib ba b--blue blue bg-white hover-bg-blue hover-white">All Devices</a>
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+{% endblock body %}
+
+
+
+
+
+
+{% block script %}
+<script>
+    Vue.component("doughnut", {
+        props: ["data", "labels"],
+        data: function() {
+          ctx: null;
+        },
+        template: `
+          <canvas></canvas>
+        `,
+        mounted: function() {
+          let self = this;
+          this.ctx = this.$el.getContext("2d");
+      
+          new Chart(this.ctx, {
+            type: "doughnut",
+            options: {
+              cutoutPercentage: 80
+            },
+            data: {
+              labels: self.labels,
+              datasets: [
+                {
+                  data: self.data,
+                  backgroundColor: ["#1BC98E", "#1CA8DD"],
+                  hoverBackgroundColor: ["#1BC98E", "#1CA8DD"]
+                }
+              ]
+            }
+          });
+        }
+      });
+      
+      Vue.component("sparkline", {
+        props: ["title", "value"],
+        data: function() {
+          ctx: null;
+        },
+        template: `
+          <div class="br2">
+            <div class="pa3 flex-auto bb b--white-10">
+              <h3 class="mt0 mb1 f6 ttu white o-70">{{ title }}</h3>
+              <h2 class="mv0 f2 fw5 white">{{ value }}</h2>
+            </div>
+            <div class="pt2">
+              <canvas></canvas>
+            </div>
+          </div>
+        `,
+        mounted: function() {
+          this.ctx = this.$el.querySelector("canvas").getContext("2d");
+          let sparklineGradient = this.ctx.createLinearGradient(0, 0, 0, 135);
+          sparklineGradient.addColorStop(0, "rgba(255,255,255,0.35)");
+          sparklineGradient.addColorStop(1, "rgba(255,255,255,0)");
+      
+          let data = {
+            labels: ["A", "B", "C", "D", "E", "F"],
+            datasets: [
+              {
+                backgroundColor: sparklineGradient,
+                borderColor: "#FFFFFF",
+                data: [2, 4, 6, 4, 8, 10]
+              }
+            ]
+          };
+      
+          Chart.Line(this.ctx, {
+            data: data,
+            options: {
+              elements: {
+                point: {
+                  radius: 0
+                }
+              },
+              scales: {
+                xAxes: [
+                  {
+                    display: false
+                  }
+                ],
+                yAxes: [
+                  {
+                    display: false
+                  }
+                ]
+              }
+            }
+          });
+        }
+      });
+      
+      Vue.component("metric-list-item", {
+        props: ["name", "value", "showBar"],
+        computed: {
+          barWidth: function() {
+            return `${this.value}%`;
+          }
+        },
+        template: `
+          <a href="#" class="link dark-gray flex justify-between relative pa3 bb b--black-10 hover-bg-near-white">
+            <span v-if="showBar" class="absolute top-0 left-0 right-0 bottom-0 h-100 bg-near-white" v-bind:style="{ width: barWidth, zIndex: -1 }"></span>
+            <span>{{ name }}</span>
+            <span>{{ value }}</span>
+          </a>
+        `
+      });
+      
+      new Vue({
+        el: "#dashboard",
+        data: {
+          newVsReturning: {
+            data: [130, 230],
+            labels: ["New", "Returning"]
+          },
+          newVsRecurring: {
+            data: [30, 330],
+            labels: ["New", "Recurring"]
+          },
+          directVsReferrals: {
+            data: [260, 160],
+            labels: ["Direct", "Referrals"]
+          },
+          countryData: [
+            {
+              name: "United States",
+              value: "62.4",
+              showBar: true
+            },
+            {
+              name: "India",
+              value: "15",
+              showBar: true
+            },
+            {
+              name: "United Kingdom",
+              value: "5",
+              showBar: true
+            },
+            {
+              name: "Canada",
+              value: "5",
+              showBar: true
+            },
+            {
+              name: "Russia",
+              value: "4.5",
+              showBar: true
+            },
+            {
+              name: "Mexico",
+              value: "2.3",
+              showBar: true
+            },
+            {
+              name: "Spain",
+              value: "1.7",
+              showBar: true
+            }
+          ],
+          pageData: [
+            {
+              name: "/ (Logged out)",
+              value: "3,929,481",
+              showBar: false
+            },
+      
+            {
+              name: "/ (Logged in)",
+              value: "1,143,393",
+              showBar: false
+            },
+      
+            {
+              name: "/tour",
+              value: "938,287",
+              showBar: false
+            },
+      
+            {
+              name: "/features/something",
+              value: "749,393",
+              showBar: false
+            },
+      
+            {
+              name: "/features/another-thing",
+              value: "695,912",
+              showBar: false
+            },
+      
+            {
+              name: "/users/username",
+              value: "501,938",
+              showBar: false
+            },
+      
+            {
+              name: "/page-title",
+              value: "392,842",
+              showBar: false
+            }
+          ],
+          deviceData: [
+            {
+              name: "Desktop (1920x1080)",
+              value: "3,929,481",
+              showBar: false
+            },
+      
+            {
+              name: "Desktop (1366x768)",
+              value: "1,143,393",
+              showBar: false
+            },
+      
+            {
+              name: "Desktop (1440x900)",
+              value: "938,287",
+              showBar: false
+            },
+      
+            {
+              name: "Desktop (1280x800)",
+              value: "749,393",
+              showBar: false
+            },
+      
+            {
+              name: "Tablet (1024x768)",
+              value: "695,912",
+              showBar: false
+            },
+      
+            {
+              name: "Tablet (768x1024)",
+              value: "501,938",
+              showBar: false
+            },
+      
+            {
+              name: "Phone (320x480)",
+              value: "392,842",
+              showBar: false
+            },
+      
+            {
+              name: "Phone (720x450)",
+              value: "298,183",
+              showBar: false
+            },
+      
+            {
+              name: "Desktop (2560x1080)",
+              value: "193,129",
+              showBar: false
+            },
+      
+            {
+              name: "Desktop (2560x1600)",
+              value: "93,382",
+              showBar: false
+            }
+          ]
+        },
+        created: function() {
+          Chart.defaults.global.legend.display = false;
+        }
+      });
+      
+
+</script>
+
+
+<script>https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js</script>
+<script>https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js</script>
+{% endblock %}
