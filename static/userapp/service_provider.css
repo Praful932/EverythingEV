@@ -4,7 +4,19 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
   }
-  
+  .pagebtn
+  {
+    display:inline-block;
+    position:relative;
+    left:40%;
+    top:50%;
+    font-weight: 900;
+  }
+  .btn-outline-info
+  {
+    color:white !important;
+  }
+
   h1{
     font-size: 2.5rem;
     font-family: 'Montserrat';
@@ -13,13 +25,21 @@
     text-align: center;
     margin: 2rem 0;
   }
-  
   .wrapper{
     width: 90%;
     margin: 0 auto;
     max-width: 80rem;
   }
-  
+  .btn-info
+  {
+    position: fixed;
+    right:100px;
+    top:120px;
+  }
+  .col
+  {
+    padding-left:0px;
+  }
   .cols{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -265,6 +285,7 @@ body {
 
 h1 {
   font-weight: 300;
+  margin:0px;
 }
 
 h3 {
@@ -299,11 +320,19 @@ a:hover {
 
 
 .btn {
-  width: 100px;
+  width: 120px;
   height: 40px;
   cursor: pointer;
   background: transparent;
   border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+.btn-danger
+{
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #dc3545 ;
   outline: none;
   transition: 1s ease-in-out;
 }
@@ -332,6 +361,11 @@ svg {
   color: white;
   font-size: 18px;
   font-weight: 100;
+}
+.btn-danger:hover
+{
+  transition: 1s ease-in-out;
+  background: #dc3545;
 }
 
 
