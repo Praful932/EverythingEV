@@ -3,7 +3,6 @@
 {% block head %}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.1/css/tachyons.css">
 <link rel="stylesheet" type="text/css" href="{%  static 'userapp/cumulativedata_user.css' %}">
 {% endblock %}
 {% block body %}
@@ -144,6 +143,8 @@
 
 
 {% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script>
     Vue.component("doughnut", {
         props: ["data", "labels"],
@@ -414,8 +415,4 @@
       
 
 </script>
-
-
-<script>https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js</script>
-<script>https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js</script>
 {% endblock %}

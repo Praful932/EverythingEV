@@ -19,7 +19,7 @@ urlpatterns = [
     path('Charging-Station/',views.CS, name = 'Charging-Station'),
     path('Charging-Station/add/', views.AddChargingStation, name = 'AddChargingStation'),
     path('Charging-Station/my-stations',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
-    path('sc/',views.foo,name='sc')
+    path('sc/',views.foo,name='sc'),
 
 ] 
 

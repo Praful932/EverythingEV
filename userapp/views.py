@@ -174,7 +174,7 @@ class ChargingStationProviderListView(LoginRequiredMixin,UserPassesTestMixin,Lis
 
 
 def foo(request):
-    return render(request,"userapp/service_dashboard.html")
+    return render(request,"userapp/cumulativedata_user.html")
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
