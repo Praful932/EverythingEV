@@ -18,10 +18,11 @@ class ConsumerSignUpForm(forms.ModelForm):
 
 class ProviderSignUpForm(forms.ModelForm):
     class Meta():
-        fields = ['business_name']
+        fields = ['business_name','image']
         model = Provider
         labels = {
-            'business_name': 'Business Name'
+            'business_name': 'Business Name',
+            'image' : 'Logo'
         }
 
 class UserUpdateForm(forms.ModelForm):
@@ -33,10 +34,11 @@ class ChargingStationForm(forms.ModelForm):
     opening_time = widget=forms.TimeInput(format='%H:%M')
     closing_time = widget=forms.TimeInput(format='%H:%M')
     class Meta():
-        fields = ['lat','lng','no_of_ports',
+        fields = ['name','lat','lng','no_of_ports',
         'fast_dc','slow_ac','price_kwh','restroom','cctv','opening_time','closing_time','image']
         model = ChargingStation
         labels = {
+            'name': 'Name',
             'no_of_ports':'No of Ports',
             'fast_dc' : 'Fast Ports',
             'slow_ac' : 'Slow ports',

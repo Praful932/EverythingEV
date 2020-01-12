@@ -31,7 +31,7 @@ class Consumer(models.Model):
 class Provider(models.Model):
     user = models.OneToOneField(User,on_delete = models.CASCADE, primary_key = True)
     business_name = models.CharField(max_length = 100)
-
+    image = models.ImageField(blank=True, upload_to ='provider_pics')
     def __str__(self):
         return self.user.username + ' - Provider'
 
@@ -61,5 +61,5 @@ class ChargingStation(models.Model):
     image = models.ImageField(null=True, upload_to ='station_pics')
 
     def __str__(self):
-        return str(self.pk) + '.' + self.owner.user.username +" - Charging Station"
+        return str(self.pk) + '. ' +  self.owner.user.username + ' ' + self.city
     # noofports,fast(dc),slow(ac),restroom,cctv,photos,opening time, closing time 
