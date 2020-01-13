@@ -143,3 +143,6 @@ USE_TZ = True
 TIME_ZONE = "Asia/Calcutta"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# GEOIP
+GEOIP_PATH = os.path.join(BASE_DIR, 'db')

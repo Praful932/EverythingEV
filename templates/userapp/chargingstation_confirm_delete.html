@@ -1,0 +1,31 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'userapp/rs.css'%}">
+{% endblock %}
+
+{% block title %}
+Delete Charging Station
+{% endblock %}
+
+{% block body %}
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Delete Charging Station</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                        Are You Sure you want to Delete Your Charging Station<br>
+                        <button class="btn btn-lg btn-danger" type="submit">Yes, Delete</button>
+                        <a href="{% url 'Charging-Station-PLV' %}" class="btn-lg ml-2 btn-secondary">Cancel</a>                
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

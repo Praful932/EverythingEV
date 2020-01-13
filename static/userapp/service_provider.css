@@ -4,7 +4,19 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
   }
-  
+  .pagebtn
+  {
+    display:inline-block;
+    position:relative;
+    left:40%;
+    top:50%;
+    font-weight: 900;
+  }
+  .btn-outline-info
+  {
+    color:white !important;
+  }
+
   h1{
     font-size: 2.5rem;
     font-family: 'Montserrat';
@@ -23,6 +35,10 @@
     position: fixed;
     right:100px;
     top:120px;
+  }
+  .col
+  {
+    padding-left:0px;
   }
   .cols{
     display: -webkit-box;

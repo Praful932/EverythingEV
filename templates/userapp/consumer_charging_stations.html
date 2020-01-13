@@ -1,0 +1,164 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/uc.css'%}">
+{% endblock %}
+{% block body %}
+<div class="row">
+  <div class="column left">
+    {% for cs in cslist %}
+    <div class="card">
+      <div class="additional">
+        <div class="user-card">
+          <div class="level center">
+            Level 13
+          </div>
+          <!-- <img class="rounded-circle" src="{{ cs.owner.image.url }}"> -->
+          <div class="points center">
+            5,312 Points
+          </div>
+        </div>
+        <div class="more-info">
+          <h1>{{ cs.name }}</h1>
+          <div class="coords">
+            <span>Owner : {{ cs.owner.user.username }}</span>
+            <span>{{ cs.opening_time }} - {{ cs.closing_time }}</span>
+          </div>
+          <div class="coords">
+            <span>Price/KwH : &#x20b9;{{ cs.price_kwh }}</span>
+            <span>{{ cs.suburb }}, {{ cs.city }}</span>
+          </div>
+          <div class="stats">
+            <div>
+              <div class="title">Fast</div>
+              <div class="value">{{cs.fast_dc}}</div>
+            </div>
+            <div>
+              <div class="title">Slow</div>
+              <div class="value">{{cs.slow_ac}}</div>
+            </div>
+            {% if cs.cctv %}
+            <div>
+              <i class="fa fa-video-camera mt-2" aria-hidden="true"></i>
+            </div>
+            {% endif %}
+            {% if cs.restroom %}
+            <div>
+              <i class="fas fa-restroom mt-2" aria-hidden="true"></i>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="general">
+        <h1>{{ cs.name }}</h1>
+        <p>City : {{ cs.city }}<br>
+          Suburb : {{ cs.suburb }}
+        </p>
+        <span class="more">Hover over the card for more info</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="column right">
+    <div class="card bg-light" style="height: 500px; width:800px;">
+      <div class="card-header">
+        <input type="text" class="form-control float-right" style="width:300px;" id="location-text-box"
+          placeholder="Enter place to search">
+      </div>
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+  // Convert to String to Array Object
+  var csdata = JSON.parse('{{ csdata|safe }}');
+</script>
+<script>
+  var i;
+  // If you're adding a number of markers, you may want to drop them on the map
+  // consecutively rather than all at once. This example shows how to use
+  // window.setTimeout() to space your markers' animation.
+
+  var latlang_cs = [];
+  var infowindows_cs = [];
+  var content_cs = [];
+  // Construct Array of Objects
+  for (var i = 0; i < csdata.length; i++) {
+    latlang_cs.push(
+      {
+        lat: csdata[i][4],
+        lng: csdata[i][5]
+      }
+    );
+    content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> " 
+      + csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>"+ csdata[i][7] + "<br><b>Slow Ports:</b>"+ csdata[i][8] 
+      + "<br><b>Price/Kwh:</b>"+ csdata[i][9] + "<br><b>Restroom:</b>"+ csdata[i][10] + "<br><b>CCTV:</b>"+ csdata[i][11] + "<br><b>Opening Time:</b>"+ csdata[i][12] 
+      + "<br><b>Closing Time:</b>"+ csdata[i][13] + "</div>";
+  }
+  var markers = [];
+  var markers_cs = [];
+  var map;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: { lat: 20.5937, lng: 78.9629 }
+    });
+  }
+
+  window.onload = function () {
+    clearMarkers();
+    for (var i = 0; i < latlang_cs.length; i++) {
+      addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 200);
+    }
+  };
+
+  var prev_infowindow = false;
+  
+  function addMarkerWithTimeout(position, html, timeout) {
+    window.setTimeout(function () {
+      var data = position;
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: data.name,
+        animation: google.maps.Animation.DROP
+      });
+      markers.push(marker);
+      var infowindow = new google.maps.InfoWindow(
+        {
+          content: html,
+        });
+      google.maps.event.addListener(marker, 'click', (function (marker, html) {
+        return function () {
+          if (this.getMap()) {
+            if (prev_infowindow) {
+              prev_infowindow.close();
+            }
+            infowindow.open(this.getMap(), this);
+          }
+          prev_infowindow = infowindow;
+        }
+      })(marker, html));
+
+    }, timeout);
+  }
+
+  function clearMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+    markers_cs = [];
+  }
+</script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
+  <!-- async defer -->
+
+{% endblock %}
