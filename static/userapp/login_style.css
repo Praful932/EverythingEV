@@ -1,0 +1,17 @@
+html, body {
+    background-image: url('https://c-parity.com/wp-content/uploads/2018/01/analytics-final-background-1-1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .container
+{
+    font-size: 20px;
+    opacity: 0.9;
+}
+.card-body {
+    padding: 2rem;
+}   

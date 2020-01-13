@@ -35,7 +35,7 @@ def index(request):
     return render(request,"userapp/index.html")
 
 def register(request):
-    return render(request,"userapp/register.html")
+    return render(request,"userapp/registration_page.html")
 
 def registerConsumer(request):
     if request.user.is_authenticated:
@@ -60,7 +60,7 @@ def registerConsumer(request):
         'signupform' : signupform,
         'consumerform' : consumerform
     }
-    return render(request, "userapp/registerCustomer.html", context = context)
+    return render(request, "userapp/registerConsumer.html", context = context)
 
 def registerProvider(request):
     if request.user.is_authenticated:
@@ -268,7 +268,7 @@ def ChargingStationConsumer(request):
 
 
 def foo(request):
-    return render(request,"userapp/cumulativedata_user.html")
+    return render(request,"userapp/analytics.html")
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
