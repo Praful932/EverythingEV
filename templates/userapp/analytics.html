@@ -1,0 +1,417 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/analytics.css' %}">
+<link rel="stylesheet" type="text/css" href="https://cdn.corvidor.com/mdb4.5.0/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.corvidor.com/mdb4.5.0/css/mdb.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/kamranahmedse/driver.js/master/dist/driver.min.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+{% endblock %}
+{% block body %}
+<div style="padding:40px">
+<div class="row">
+    <div class="col-md-12">
+      <p id="businessName" class="h1 animated fadeInLeft"><b>Statistics</b></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <p class="animated fadeInLeft"><span class="font-weight-bold">Data Sources:</span><span> Users</span>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <p class="animated fadeInLeft text-right">
+        <span class="font-weight-bold">Last Pulled:</span> 3/2/2018 7:21 PM
+      </p>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card green-chart mb-4 animated fadeInLeft card-body">
+        <p class="text-white font-weight-bold animated fadeInLeft">Total Users</p>
+        <p class="h3 text-white animated fadeInLeft">XXX</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card green-chart mb-4 animated fadeInLeft card-body">
+        <p class="text-white font-weight-bold animated fadeInLeft">Total Charging Stations</p>
+        <p class="h3 text-white animated fadeInLeft">XXX</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card green-chart mb-4 animated fadeInLeft card-body">
+        <p class="text-white font-weight-bold animated fadeInLeft">Total Electricity Consumed(Today)</p>
+      <p class="h3 text-white animated fadeInLeft">XXX</p>
+      </div>
+    </div>
+  </div>  
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card card-body animated fadeInLeft">
+        <p class="black-text font-weight-bold animated fadeInLeft">Total Charging Expenses</p>
+        <p class="h3 black-text animated fadeInLeft">XXX</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card card-body animated fadeInLeft">
+        <p class="black-text font-weight-bold animated fadeInLeft">Total Savings</p>
+        <p class="h3 black-text animated fadeInLeft">XXX</p>
+      </div>
+    </div>
+  </div>  
+
+
+  
+
+
+
+
+
+
+        
+<div class="line-chart" >
+    <div class="aspect-ratio">
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
+  
+  
+  
+  
+  <div class="chartjs-wrapper">
+    <canvas class="chartjs-gauge"></canvas>
+  </div>
+  
+    
+
+
+
+  <!--
+THe post that goes with this pen:
+https://codepen.io/k3no/post/learning-by-example-getting-started-with-chart-js 
+-->
+
+<div class="container">
+    <br />
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+  <!--       Chart.js Canvas Tag -->
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="col-md-1"></div>    
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-1"></div>    
+      <div class="col-md-10"><button type="button" class="btn btn-success btn-md" onclick="toggleChart();">Toggle Chart </button></div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</div>
+  
+{% endblock body %}
+
+
+{% block script %}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://codepen.io/grayghostvisuals/pen/a08e0d79c150ff5030f9b6afaa137749"></script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
+<script>
+
+
+
+
+
+
+
+
+// ============================================
+// As of Chart.js v2.5.0
+// http://www.chartjs.org/docs
+// ============================================
+
+var chart    = document.getElementById('chart').getContext('2d'),
+    gradient = chart.createLinearGradient(0, 0, 0, 450);
+
+gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)');
+gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+
+
+var data  = {
+    labels: [ 'January', 'February', 'March', 'April', 'May', 'June' ],
+    datasets: [{
+			label: 'Custom Label Name',
+			backgroundColor: gradient,
+			pointBackgroundColor: 'white',
+			borderWidth: 1,
+			borderColor: '#911215',
+			data: [50, 55, 80, 81, 54, 50]
+    }]
+};
+
+
+var options = {
+	responsive: true,
+	maintainAspectRatio: true,
+	animation: {
+		easing: 'easeInOutQuad',
+		duration: 520
+	},
+	scales: {
+		xAxes: [{
+			gridLines: {
+				color: 'rgba(200, 200, 200, 0.05)',
+				lineWidth: 1
+			}
+		}],
+		yAxes: [{
+			gridLines: {
+				color: 'rgba(200, 200, 200, 0.08)',
+				lineWidth: 1
+			}
+		}]
+	},
+	elements: {
+		line: {
+			tension: 0.4
+		}
+	},
+	legend: {
+		display: false
+	},
+	point: {
+		backgroundColor: 'white'
+	},
+	tooltips: {
+		titleFontFamily: 'Open Sans',
+		backgroundColor: 'rgba(0,0,0,0.3)',
+		titleFontColor: 'red',
+		caretSize: 5,
+		cornerRadius: 2,
+		xPadding: 10,
+		yPadding: 10
+	}
+};
+
+
+var chartInstance = new Chart(chart, {
+    type: 'line',
+    data: data,
+		options: options
+});
+
+
+
+
+
+
+
+
+
+
+// Create chart
+var ctx = document.getElementsByClassName("chartjs-gauge");
+var chart = new Chart(ctx, {
+    type:"doughnut",
+    data: {
+        labels : ["Red","Blue"],
+        datasets: [{
+            label: "Gauge",
+            data : [50, 150],
+            backgroundColor: [
+                "rgb(255, 99, 132)",
+                "rgb(54, 162, 235)",
+                "rgb(255, 205, 86)"
+            ]
+        }]
+    },
+    options: {
+        circumference: Math.PI,
+        rotation : Math.PI,
+        cutoutPercentage : 80, // precent
+        plugins: {
+					  datalabels: {
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+						  borderColor: '#ffffff',
+              color: function(context) {
+							  return context.dataset.backgroundColor;
+						  },
+						  font: function(context) {
+                var w = context.chart.width;
+                return {
+                  size: w < 512 ? 18 : 20
+                }
+              },
+              align: 'start',
+              anchor: 'start',
+              offset: 10,
+						  borderRadius: 4,
+						  borderWidth: 1,
+              formatter: function(value, context) {
+							  var i = context.dataIndex;
+                var len = context.dataset.data.length - 1;
+                if(i == len){
+                  return null;
+                }
+							  return value+' mph';
+						  }
+            }
+        },
+        legend: {
+            display: false
+        },
+        tooltips: {
+            enabled: false
+        }
+    }
+});
+
+
+// DEMO Code: not relevant to example
+function change_gauge(chart, label, data){
+  chart.data.datasets.forEach((dataset) => {
+    if(dataset.label == label){
+      dataset.data = data;
+    }  
+  });
+  chart.update();
+}
+
+var accelerating = false;
+function accelerate(){
+  accelerating = false;
+
+
+  window.setTimeout(function(){
+      change_gauge(chart,"Gauge",[60,140])
+  }, 2000);
+
+  window.setTimeout(function(){
+      change_gauge(chart,"Gauge",[100,100])
+  }, 3000);
+
+}
+
+// Start sequence
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var canvas = document.getElementById("barChart");
+var ctx = canvas.getContext('2d');
+// We are only changing the chart type, so let's make that a global variable along with the chart object:
+var chartType = 'bar';
+var myBarChart;
+
+// Global Options:
+Chart.defaults.global.defaultFontColor = 'grey';
+Chart.defaults.global.defaultFontSize = 16;
+
+var data = {
+  labels: ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+  datasets: [{
+    label: "UFO Sightings",
+    fill: true,
+    lineTension: 0.1,
+    backgroundColor: "rgba(0,255,0,0.4)",
+    borderColor: "green", // The main line color
+    borderCapStyle: 'square',
+    pointBorderColor: "white",
+    pointBackgroundColor: "green",
+    pointBorderWidth: 1,
+    pointHoverRadius: 8,
+    pointHoverBackgroundColor: "yellow",
+    pointHoverBorderColor: "green",
+    pointHoverBorderWidth: 2,
+    pointRadius: 4,
+    pointHitRadius: 10,
+    data: [10, 13, 17, 12, 30, 47, 60, 120, 230, 300, 310, 400],
+    spanGaps: true,
+  }]
+};
+
+// Notice the scaleLabel at the same level as Ticks
+var options = {
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
+  },
+  title: {
+    fontSize: 18,
+    display: true,
+    text: 'I want to believe !',
+    position: 'bottom'
+  }
+};
+
+
+// We add an init function down here after the chart options are declared.
+
+init();
+
+function init() {
+  // Chart declaration:
+  myBarChart = new Chart(ctx, {
+    type: chartType,
+    data: data,
+    options: options
+  });
+}
+
+function toggleChart() {
+  //destroy chart:
+  myBarChart.destroy();
+  //change chart type: 
+  this.chartType = (this.chartType == 'bar') ? 'line' : 'bar';
+  //restart chart:
+  init();
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

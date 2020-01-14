@@ -18,8 +18,10 @@ urlpatterns = [
     path("logoutf/", views.logoutf, name='logout'),
     path('Charging-Station/',views.CS, name = 'Charging-Station'),
     path('Charging-Station/add/', views.AddChargingStation, name = 'AddChargingStation'),
-    path('Charging-Station/my-stations',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
-    path('sc/',views.foo,name='sc'),
+    path('Charging-Station/my-stations/',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
+    path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
+    path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
+    path('sc/',views.foo,name='sc')
 
 ] 
 

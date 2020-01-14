@@ -1,0 +1,61 @@
+{% extends 'userapp/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/registration_page.css'%}">
+{% endblock head %}
+
+{% block title %}
+Registration Page
+{% endblock title %}
+
+{% block body %}
+<div class ="row" style="margin-left: 200px; margin-right: 200px; opacity: 0.9;">
+<div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px;">
+   <img src="https://ya-webdesign.com/transparent450_/log-clipart-user-login-8.png" alt="Man with backpack"    
+      class="d-block w-full">
+
+   <div class="px-2 py-2">
+
+    <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+      User Registration
+    </h1>
+    
+    
+
+    <p class="mb-1">
+    <br><br>
+    </p>
+    
+  </div>
+
+  <a href="{% url 'registerConsumer' %}" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">
+    <input type="button" style="background-color:rgb(42, 68, 219);color:white;width:150px;
+    height:40px;" value="Register">
+  </a>
+</div>
+
+<div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px; overflow: hidden; border-radius: 1px;">
+        <img src="https://previews.123rf.com/images/macrovector/macrovector1803/macrovector180300510/97139901-taxi-round-composition-with-silhouette-icons-and-images-of-taxi-provider-cabs-money-baggage-and-peop.jpg" alt="Man with backpack"    
+            class="d-block w-full">
+
+  <div class="px-2 py-2">
+
+    <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
+      Provider  Registration
+    </h1>
+
+    <p >
+     <br><br>
+    </p>
+    
+
+  </div>
+
+  <a href="{% url 'registerProvider' %}" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 text-center styled-link">
+    <input type="button" style="background-color:rgb(42, 68, 219);color:white;width:150px;
+    height:40px; margin-bottom: 0px;" value="Register">
+  </a>
+</div>
+</div>
+{% endblock body %}
+
