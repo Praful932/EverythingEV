@@ -50,6 +50,7 @@ class ChargingStation(models.Model):
     lat = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
     lng = models.DecimalField(max_digits=9,decimal_places=6,blank=True,null=True)
     no_of_ports = models.IntegerField(default=0)
+    available_ports = models.IntegerField(default=0)
     fast_dc = models.IntegerField(default=0)
     created_at=models.DateTimeField(default = timezone.now)
     slow_ac = models.IntegerField(default=0)
@@ -63,3 +64,12 @@ class ChargingStation(models.Model):
     def __str__(self):
         return str(self.pk) + '. ' +  self.owner.user.username + ' ' + self.city
     # noofports,fast(dc),slow(ac),restroom,cctv,photos,opening time, closing time 
+
+class ChargingStationRecord(models.Model):
+    # Records for ChargingStation arrivals of vehicle
+    # time start-end, elec reqd,
+    cs = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
+    vehicle =models.ManyToManyField(Vehicle,blank=False,related_name="csvehicles")
+    starttime = models.TimeField(default = '00:00:00')
+    stoptime = models.TimeField(default = '00:00:00')
+    elec_kwh = models.DecimalField(max_digits=9,decimal_places=6)

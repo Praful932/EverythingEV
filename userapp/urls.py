@@ -21,7 +21,8 @@ urlpatterns = [
     path('Charging-Station/my-stations/',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
-    path('sc/',views.foo,name='sc')
+    path('ajax/update_ports/',views.ChargingStatus, name = 'ChargingStatus'),
+    path('Analytics',views.Analytics, name = 'Analytics')
 
 ] 
 
