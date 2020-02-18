@@ -4,6 +4,7 @@
 }
  html,body,.row,.column .right,.card .bg-light,#map
 {
+  
   width: 100%;
     height: 100%;
     margin: 0;
@@ -11,7 +12,10 @@
 }
 body 
 {
-  background: linear-gradient(to right, #061700, #52c234); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #D3CCE3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   background-repeat: no-repeat;
   background-attachment: fixed;
     background-repeat: no-repeat;

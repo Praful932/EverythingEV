@@ -12,8 +12,15 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation
 from urllib.request import urlopen
+from django.http import JsonResponse
 import json
+import random
 import math
+import cv2
+import matplotlib.pyplot as plt
+import cvlib as cv
+from cvlib.object_detection import draw_bbox
+
 # Create your views here.
 
 import math
@@ -35,7 +42,7 @@ def index(request):
     return render(request,"userapp/index.html")
 
 def register(request):
-    return render(request,"userapp/register.html")
+    return render(request,"userapp/registration_page.html")
 
 def registerConsumer(request):
     if request.user.is_authenticated:
@@ -60,7 +67,7 @@ def registerConsumer(request):
         'signupform' : signupform,
         'consumerform' : consumerform
     }
-    return render(request, "userapp/registerCustomer.html", context = context)
+    return render(request, "userapp/registerConsumer.html", context = context)
 
 def registerProvider(request):
     if request.user.is_authenticated:
@@ -216,7 +223,6 @@ def ChargingStationConsumer(request):
         distid_list.sort()
         # Sorted id of Charging Station according to user location
         id_list = [x[1] for x in distid_list]
-        
         name_cleaned = []
         city_cleaned = []
         suburb_cleaned = []
@@ -264,11 +270,24 @@ def ChargingStationConsumer(request):
         }
         return render(request,'userapp/consumer_charging_stations.html', context = context)
 
+def ChargingStatus(request):
+    id = request.GET.get('id', None)
+    path = 'Cars/' + str(random.randint(1,25)) + '.jpg'
+    im = cv2.imread(path)
+    bbox, label, conf = cv.detect_common_objects(im)
+    data = {
+        'port' : label.count('car')
+    }
+    return JsonResponse(data)
 
-
-
-def foo(request):
-    return render(request,"userapp/cumulativedata_user.html")
+def Analytics(request):
+    totalcount= User.objects.all().count()
+    cscount = ChargingStation.objects.all().count()
+    context ={
+        'totalcount' : totalcount,
+        'cscount' : cscount
+    }
+    return render(request,"userapp/analytics.html",context = context)
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
