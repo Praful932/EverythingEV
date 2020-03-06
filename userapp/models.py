@@ -36,10 +36,12 @@ class Provider(models.Model):
         return self.user.username + ' - Provider'
 
 class Vehicle(models.Model):
-    name = models.CharField(max_length = 100)
     company = models.CharField(max_length = 100)
-    vehicle_range = models.CharField(max_length = 100)
-    battery_capacity = models.CharField(max_length = 100)
+    type4or2 = models.IntegerField()
+    horsepower = models.CharField(max_length = 100)
+    vehicle_range = models.IntegerField()
+    price = models.DecimalField(max_digits=9,decimal_places=6)
+    battery_type = models.CharField(max_length = 100)
 
 class ChargingStation(models.Model):
     # One Owner can have multiple charging stations
@@ -59,7 +61,7 @@ class ChargingStation(models.Model):
     cctv = models.BooleanField(default = False)
     opening_time = models.TimeField(default = '00:00:00')
     closing_time = models.TimeField(default = '00:00:00')
-    image = models.ImageField(null=True, upload_to ='station_pics')
+    image = models.ImageField(null=True, upload_to ='station_pics',default = 'station_pics/default.jpg')
 
     def __str__(self):
         return str(self.pk) + '. ' +  self.owner.user.username + ' ' + self.city
@@ -69,7 +71,10 @@ class ChargingStationRecord(models.Model):
     # Records for ChargingStation arrivals of vehicle
     # time start-end, elec reqd,
     cs = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
-    vehicle =models.ManyToManyField(Vehicle,blank=False,related_name="csvehicles")
+    vehicle =models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name="csvehicles")
+    consumer_vehicle = models.ForeignKey(Consumer,on_delete=models.CASCADE,related_name="userVehicles")
     starttime = models.TimeField(default = '00:00:00')
     stoptime = models.TimeField(default = '00:00:00')
     elec_kwh = models.DecimalField(max_digits=9,decimal_places=6)
+
+# 1 -  Date&time column 2nd column

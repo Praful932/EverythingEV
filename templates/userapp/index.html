@@ -9,7 +9,7 @@
   <div id="pageintro" class="hoc clear">     
     <article>
       <h3 class="heading">EverythingEV</h3>
-      <p>One stop solution for everything related to EV !!!</p>
+      <p>One stop solution for everything related to EV!</p>
     </article>
   </div>
   <div class="cards-list">
@@ -17,8 +17,12 @@
     <a href="{% url 'Charging-Station' %}"><div class="card 1">
       <div class="card_image"> <img src="https://i.redd.it/b3esnz5ra34y.jpg" /> </div>
       <div class="card_title title-white">
-        <p>Nearby Charging Stations</p>
-      </div>
+        {% if user.is_provider %}
+        <p>Your Charging Stations</p>
+        {% else %}
+        Nearby Charging Stations
+        {% endif %}
+        </div>
     </div></a>
     
       <a href="{% url 'Analytics' %}"><div class="card 2">

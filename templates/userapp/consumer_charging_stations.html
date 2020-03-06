@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{% static 'userapp/uc.css'%}">
 {% endblock %}
 {% block body %}
+<img id="img" style="display: none;" />
 <div class="row">
   <div class="column left">
     {% for cs in cslist %}
@@ -11,11 +12,11 @@
       <div class="additional">
         <div class="user-card">
           <div class="level center" id="av_ports{{ cs.pk }}">
-            Ports Available : 
+            Ports Available :
           </div>
           <!-- <img class="rounded-circle" src="{{ cs.owner.image.url }}"> -->
-          <div class="points center"  onclick="foo('{{cs.pk}}')">
-            Update 
+          <div class="points center" onclick="foo('{{cs.pk}}')">
+            Update
           </div>
         </div>
         <div class="more-info">
@@ -200,31 +201,47 @@
     }
     markers_cs = [];
   }
-  
 
-  
+
+
 </script>
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
 <!-- async defer -->
 <script>
-  function foo(pk)
-  {
-    console.log(pk);
+  function foo(pk) {
+    //console.log(pk);
     $.updateport(pk);
   }
-  $.updateport = function(pk) {
-    $.ajax({
-      url: '{% url "ChargingStatus" %}',
-      data: {
-        'id': pk
-      },
-      dataType: 'json',
-      success: function (data){
-        $("#av_ports"+pk).text("Available Ports: "+data.port);
-      }
+  const imageBase = '{%  static "userapp/cars/" %}';
+  $.updateport = function (pk) 
+  {
+    var no = Math.floor(Math.random() *  25) + 1;
+    const a=imageBase + no + ".jpg";
+    document.getElementById('img').setAttribute("src",a);
+    let count = 0;
+    const img = document.getElementById('img');
+    // Load the model.
+    cocoSsd.load().then(model => {
+      // detect objects in the image.
+      model.detect(img).then(predictions => {
+        for (let i = 0; i < predictions.length; i++) {
+          if (predictions[i].class = "car")
+            count++;
+        }
+        $("#av_ports"+pk).text("Available Ports: "+count);
+      });
     });
   }
 </script>
+<!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+<!-- Load the coco-ssd model. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+
+<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
+
+<!-- Place your code in the script tag below. You can also use an external .js file -->
+
 
 {% endblock %}

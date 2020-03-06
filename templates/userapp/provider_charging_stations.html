@@ -20,13 +20,11 @@
                     <div class="inner">
                         <p>{{ cs.name }}</p>
                         <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
-                    </div>
+                    </div>"
                 </div>
                 <div class="back">
                     <div class="inner">
-                        <button class="btn">
-                            <span>Dashboard</span>
-                        </button>
+                        <a href="{% url 'Charging-Station-Dashboard' cs.id %}">Dashboard</a>
                         <a href="{% url 'DeleteStation' cs.id %}" style="margin-left:20px ;" class="btn btn-danger">Remove</a>                
                         <!-- <a type="button" class="btn btn-danger" style="margin-left:20px ;">Remove</button> -->
                     </div>
