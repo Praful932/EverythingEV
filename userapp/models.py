@@ -91,11 +91,11 @@ def stoptime():
 class ChargingStation(models.Model):
     # One Owner can have multiple charging stations
     name = models.CharField(max_length = 100,default=csnames)
-    city = models.CharField(max_length = 100, default=geocity)
-    suburb = models.CharField(max_length = 100,default=geosub)
+    city = models.CharField(max_length = 100, default="city")
+    suburb = models.CharField(max_length = 100,default="suburb")
     owner=models.ForeignKey(Provider,on_delete=models.CASCADE,related_name="ownerof")
-    lat = models.DecimalField(max_digits=9,decimal_places=6,default=lat)
-    lng = models.DecimalField(max_digits=9,decimal_places=6,default=lng)
+    lat = models.DecimalField(max_digits=9,decimal_places=6,default=0.00)
+    lng = models.DecimalField(max_digits=9,decimal_places=6,default=0.00)
     no_of_ports = models.IntegerField(default=portscount)
     available_ports = models.IntegerField(default=0)
     fast_dc = models.IntegerField(default=fasports)
@@ -134,6 +134,9 @@ class Vehicle(models.Model):
     vehicle_range=models.IntegerField()
     price=models.DecimalField(max_digits=9,decimal_places=6)
     battery_type=models.CharField(max_length=100)
+    def __str__(self):
+        return str(self.pk) + '. ' + self.company
+
 
 class ChargingStationRecord(models.Model):
     # Records for ChargingStation arrivals of vehicle
@@ -143,6 +146,9 @@ class ChargingStationRecord(models.Model):
     vehicle =models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name="csvehicles")
     duration = models.IntegerField(default=duration)
     elec_consumption = models.IntegerField(default=cost)
+    def __str__(self):
+        return str(self.pk) + '. ' + self.consumer.user.username
+
 
 def randomvehicles():
     y=random.randrange (00,15, 2)
