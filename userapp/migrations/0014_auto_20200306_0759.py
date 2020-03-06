@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='chargingstationrecord',
-            name='elec_kwh',
-            field=models.DecimalField(decimal_places=6, default=userapp.models.cost, max_digits=9),
+            name='elec_consumption',
+            field=models.IntegerField(default=userapp.models.cost),
         ),
     ]

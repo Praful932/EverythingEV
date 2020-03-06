@@ -61,13 +61,17 @@ def geocity():
     lat=generate_lat()
     lng=generate_lng()
     location = geolocator.reverse(str(lat)+', ' + str(lng),timeout=100)
-    return location.raw['address']['city']
+    if location.raw['address']['city']:
+        return location.raw['address']['city']
+    return "Lorem ipsum"
 def geosub():
     geolocator = Nominatim(user_agent = 'EV')
     lat=generate_lat()
     lng=generate_lng()
     location = geolocator.reverse(str(lat)+', ' + str(lng),timeout=100)
-    return location.raw['address']['suburb']
+    if location.raw['address']['suburb']:
+        return location.raw['address']['suburb']
+    return "Lorem ipsum"
     
 def portscount():
     return random.choice([15,17,13,20,25,14,10])
@@ -122,15 +126,6 @@ def cost():
         return random.randrange(25,35,1)
     if(106<=due<=120):
         return random.randrange(35,50,1)
-class ChargingStationRecord(models.Model):
-    # Records for ChargingStation arrivals of vehicle
-    # time start-end, elec reqd,
-    cs = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
-    # vehicle =models.OneToOne(Vehicle,on_delete=models.CASCADE,related_name="csvehicles")
-    # starttime = models.TimeField(default = '00:00:00')
-    # stoptime = models.TimeField(default = '00:00:00')
-    # duration = IntegerField(default=0)
-    elec_kwh = models.DecimalField(max_digits=9,decimal_places=6,default=cost)
 
 class Vehicle(models.Model):
     company=models.CharField(max_length=100)
@@ -140,6 +135,14 @@ class Vehicle(models.Model):
     price=models.DecimalField(max_digits=9,decimal_places=6)
     battery_type=models.CharField(max_length=100)
 
+class ChargingStationRecord(models.Model):
+    # Records for ChargingStation arrivals of vehicle
+    # time start-end, elec reqd,
+    cs = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
+    consumer = models.ForeignKey(Consumer,on_delete=models.CASCADE,related_name="recordof")
+    vehicle =models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name="csvehicles")
+    duration = models.IntegerField(default=duration)
+    elec_consumption = models.IntegerField(default=cost)
 
 def randomvehicles():
     y=random.randrange (00,15, 2)
