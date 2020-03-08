@@ -10,16 +10,12 @@ from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord
 from urllib.request import urlopen
 from django.http import JsonResponse
 import json
 import random
 import math
-import cv2
-import matplotlib.pyplot as plt
-import cvlib as cv
-from cvlib.object_detection import draw_bbox
 
 # Create your views here.
 
@@ -270,24 +266,17 @@ def ChargingStationConsumer(request):
         }
         return render(request,'userapp/consumer_charging_stations.html', context = context)
 
-def ChargingStatus(request):
-    id = request.GET.get('id', None)
-    path = 'Cars/' + str(random.randint(1,25)) + '.jpg'
-    im = cv2.imread(path)
-    bbox, label, conf = cv.detect_common_objects(im)
-    data = {
-        'port' : label.count('car')
-    }
-    return JsonResponse(data)
 
-def Analytics(request):
-    totalcount= User.objects.all().count()
-    cscount = ChargingStation.objects.all().count()
-    context ={
-        'totalcount' : totalcount,
-        'cscount' : cscount
+
+def ChargingStationAnalytics(request,pk):
+    current_cs = ChargingStation.objects.get(id=pk)
+    reportcount = ChargingStationRecord.objects.filter(cs=current_cs).count()
+    cscount = ChargingStation.objects.filter(owner=request.user.provider).count()
+    context = {
+        'totalcount':reportcount,
+        'cscount': cscount
     }
-    return render(request,"userapp/analytics.html",context = context)
+    return render(request,"userapp/analytics.html",context=context)
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):

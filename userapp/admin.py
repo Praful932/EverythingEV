@@ -1,12 +1,17 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle
+from import_export.admin import ImportExportModelAdmin
+from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle,CsReport, ChargingStationRecord
 # Register your models here.
-
+@admin.register(Vehicle)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
 admin.site.register(Consumer)
 admin.site.register(Provider)
 admin.site.register(ChargingStation)
-admin.site.register(Vehicle)
+admin.site.register(ChargingStationRecord)
+admin.site.register(CsReport)
+
 ADDITIONAL_USER_FIELDS = (
     (None, {'fields': ('is_consumer','is_provider')}),
 )
