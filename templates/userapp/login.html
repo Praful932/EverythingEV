@@ -1,36 +1,39 @@
-{% extends "userapp/layout.html" %}
-{% load static %}
-{% block head %}
-{% load crispy_forms_tags %}
-<link rel="stylesheet" href="{% static 'userapp/login_style.css'%}">
-{% endblock %}
-
-{% block title %}
-Login
-{% endblock %}
-
-{% block body %}
+{% extends "userapp/layout.html" %} {% load static %} {% block head %} {% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'userapp/login_style.css'%}"> {% endblock %} {% block title %} Login {% endblock %} {% block body %}
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h2 class="card-title text-center"><b><u>Login</u></b></h2>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form|crispy }}
 
-                        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-                        <small class="text-muted">
+<div class="container" style="border-radius: 40px; margin-top:20px;!important">
+    <div class="row" style="border-radius: 40px;">
+        <div class="col-md-5 mx-auto" style="border-radius: 40px;">
+            <div class="card card-signin my-5" style="border-radius: 40px;">
+                <div class="card-body" style="border-radius: 40px;">
+                    <h2 class="card-title text-center" style="margin-top: 20px;"><b>Login</b></h2>
+                    <form method="POST">
+                        {% csrf_token %} {{ form|crispy }}
+                        <div class=" text-center">
+
+                            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+                            <br>
+                            <small class="text-muted">
                             <a href="#">Forgot Password?</a>
+                            <br>
                         </small><br>
-                        <a class="btn  btn-info mt-2" href = "{% url 'register' %}">New Here? Sign Up</a>
+                            <a class="btn  btn-info mt-2" href="{% url 'register' %}">New Here? Sign Up</a>
+                        </div>
                     </form>
 
 
                 </div>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    <canvas class="background"></canvas>
+    <script src="{% static 'userapp/particles.min.js' %}"></script>
+    <script>
+        window.onload = function() {
+            Particles.init({
+                selector: '.background'
+            });
+        };
+    </script>
+    {% endblock %}
