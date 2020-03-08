@@ -8,20 +8,20 @@
     html {
         scroll-behavior: smooth;
     }
-    
+
     .iconb {
         border: 2px solid #4c5760;
         border-radius: 3px;
         margin-right: 10px;
         padding: 5px;
     }
-    
+
     .title {
         padding: 2rem 1rem;
         margin-bottom: 2rem;
         border-radius: 0.3rem;
     }
-    
+
     .card_title {
         text-align: center;
         font-family: sans-serif;
@@ -29,13 +29,13 @@
         font-weight: 700;
         margin-top: -60px;
     }
-    
+
     .card_image {
         width: inherit;
         height: inherit;
         margin-top: 20px;
     }
-    
+
     a {
         text-decoration: none;
         color: black;
@@ -43,7 +43,7 @@
 </style>
 {% endblock %} {% block body %}
 <div class="title text-center" style="padding-top:150px">
-    <h1 class="display-3" style="font-family: 'Roboto', sans-serif;font-weight: 700;">EverythingEV</h1>
+    <h1 class="display-3" style="font-family: 'Roboto', sans-serif;font-weight: 700;">Linea</h1>
     <p>One stop solution for every effin EV problem.</p>
 </div>
 <div>
@@ -79,7 +79,8 @@
                 <a href="#pool">
                     <div class="cardicon">
                         <div class="card_image">
-                            <img src="{% static 'userapp/icons/charge pooling.png' %}" style="width:100px;height:100px" />
+                            <img src="{% static 'userapp/icons/charge pooling.png' %}"
+                                style="width:100px;height:100px" />
                         </div>
                         <div class="card_title">
                             <br>
@@ -142,17 +143,23 @@
 <div class="container " id="charging" style="padding-left:70px">
     <div class="row top-buffer">
         <div class="col-lg-4">
-            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:20px">
+            <div class="card"
+                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:50px;margin-top:20px">
                 <div class="card-body">
-                    <h4 class="card-title">Nearby Charging Stations</h4>
+                    <a href="{% url 'Charging-Station-PLV' %}">
+                        <h4 class="card-title">Nearby Charging Stations</h4>
+                    </a>
                     <p class="card-text">Find Stations, View and Book ports</p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 text-center" id="route-the-way">
-            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+            <div class="card"
+                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
                 <div class="card-body">
                     <h4 class="card-title">Route your way</h4>
                     <p class="card-text">Going Somewhere? Find the route to take your EV</p>
@@ -160,8 +167,10 @@
             </div>
         </div>
         <div class="col-lg-4 text-center " id="pool">
-            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/charge pooling.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+            <div class="card"
+                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/charge pooling.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
                 <div class="card-body">
                     <h4 class="card-title">Charge Pooling</h4>
                     <p class="card-text">Find another user with charging gear installed</p>
@@ -169,8 +178,10 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="mechanic">
-            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+            <div class="card"
+                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
                 <div class="card-body">
                     <h4 class="card-title">Hire Mechanic</h4>
                     <p class="card-text">Car broken?Need a checkup? We got you covered.</p>
@@ -178,8 +189,10 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px">
-            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image" style="width:200px;height:170px;margin-left:50px;margin-top:25px">
+            <div class="card"
+                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image"
+                    style="width:200px;height:170px;margin-left:50px;margin-top:25px">
                 <div class="card-body">
                     <h4 class="card-title">Build your own Charging station</h4>
                     <p class="card-text">Want to be a service provider? We got you covered.</p>
@@ -187,8 +200,10 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="saleofev">
-            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image" style="width:200px;height:175px;margin-left:50px;margin-top:25px">
+            <div class="card"
+                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image"
+                    style="width:200px;height:175px;margin-left:50px;margin-top:25px">
                 <div class="card-body">
                     <br>
                     <h4 class="card-title">Sales</h4>
@@ -199,20 +214,87 @@
     </div>
 
 </div>
-<script>
+<!-- <script>
     window.onload = function() {
         Particles.init({
             selector: '.background'
         });
     };
 </script>
-<canvas class="background"></canvas>
-<script src="path/to/particles.min.js"></script>
+<canvas class="background"></canvas> -->
 <div>
     <br>
     <br>
-    <br>s
+    <br>
 </div>
+
+<!-- Footer -->
+<footer>
+    <section id="footer">
+        <div class="container">
+            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Quick links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Quick links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5>Quick links</h5>
+                    <ul class="list-unstyled quick-links">
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+                        <li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i
+                                    class="fa fa-angle-double-right"></i>Imprint</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                    <ul class="list-unstyled list-inline social text-center">
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i
+                                    class="fa fa-envelope"></i></a></li>
+                    </ul>
+                </div>
+                </hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is a
+                        Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
+                        Minneapolis, MN]
+                    </p>
+                    <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com"
+                            target="_blank">Sunlimetech</a></p>
+                </div>
+                </hr>
+            </div>
+        </div>
+    </section>
+</footer>
 {% endblock body %}
 
 

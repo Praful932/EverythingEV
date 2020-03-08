@@ -1,65 +1,157 @@
-{% extends "userapp/layout.html" %}
-{% load static %}
-{% block head %}
+{% extends "userapp/layout.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{%  static 'userapp/service_provider.css' %}">
-
-{% endblock %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/bootstrap.css' %}"> {% endblock %}
 {% block body %}
-
 <br><br>
 <div class="wrapper">
     <div class="container-fluid">
-        <a href="{% url 'AddChargingStation' %}" class="btn-lg mb-2 btn-info ">Add New</a>
-        <h1>Your Charging Stations</h1>
-    </div><br>
+        <br>
+        <br>
+        <a href="{% url 'AddChargingStation' %}" class="btn btn-info"
+            style="margin-bottom: 50px;position: absolute;color: #fff;background-color: #17a2b8;border-color: #17a2b8;">Add
+            New</a>
+        <h1 class="display-4" style="font-weight: 500;">Your Charging Stations</h1>
+    </div>
+    <br>
     <div class="cols">
         {% for cs in cslist %}
         <div class="col" style="max-width: 600px;" ontouchstart="this.classList.toggle('hover');">
             <div class="container">
-                <div class="front" style="background-image: url(https://unsplash.it/500/500/)">
+                <div class="front" style="background-color:rgb(107, 226, 247);">
                     <div class="inner">
                         <p>{{ cs.name }}</p>
                         <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
                     </div>"
                 </div>
                 <div class="back">
-                    <div class="inner">
-                        <a href="#">Dashboard</a>
-                        <a href="{% url 'DeleteStation' cs.id %}" style="margin-left:20px ;" class="btn btn-danger">Remove</a>                
-                        <a href="{% url 'Charging-Station-Analytics' cs.id %}" style="margin-right:20px ;" class="btn btn-info">Analytics</a>                
-                        <!-- <a type="button" class="btn btn-danger" style="margin-left:20px ;">Remove</button> -->
+                    <div class="text-center">
+                        <div class="inner">
+                            <div>
+                                <a href="#" class="btn btn-primary shadow" style="margin:10px">Dashboard</a>
+                            </div>
+                            <a href="{% url 'DeleteStation' cs.id %}" style="margin:10px ;"
+                                class="btn btn-danger shadow">Remove</a>
+                            <a href="{% url 'Charging-Station-Analytics' cs.id %}"
+                                style="margin:10px; color: #fff;background-color: #17a2b8;border-color: #17a2b8;"
+                                class="btn shadow">Analytics</a>
+                            <!-- <a type="button" class="btn btn-danger" style="margin-left:20px ;">Remove</button> -->
+                        </div>
                     </div>
                     <br>
-
                 </div>
             </div>
-        </div>  
+        </div>
         {% endfor %}
 
     </div>
 </div>
-<div class="pagebtn" >
-    {% if is_paginated %}
+<!-- <div>
+    <br><br>
+</div> -->
+<footer style="align-content: center;margin-right: 70px;">
+    <section>
+        <div class="pagebtn">
+            {% if is_paginated %}
 
-    {% if page_obj.has_previous %}
-    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1" >First</a>
-    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a>
-    {% endif  %}
+            {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" style="width:100px;"
+                href="?page={{ page.obj.previous_page_number}}">Previous</a>
+            {% endif  %}
 
-    {% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-    <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-    <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-    {% endfor %}
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
 
-    {% if page_obj.has_next %}
-    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
-    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
-    {% endif  %}
+            {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" style="width:70px;"
+                href="?page={{ page_obj.next_page_number }}">First</a>
+            <a class="btn btn-outline-info mb-4" style="width:100px;"
+                href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
+            {% endif  %}
 
-    {% endif  %}
+            {% endif  %}
+        </div>
+    </section>
+</footer>
+<div>
+    <footer>
+        <section id="footer">
+            <div class="container">
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Quick links</h5>
+                        <ul class="list-unstyled quick-links">
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a>
+                            </li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Quick links</h5>
+                        <ul class="list-unstyled quick-links">
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a>
+                            </li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h5>Quick links</h5>
+                        <ul class="list-unstyled quick-links">
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+                            <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a>
+                            </li>
+                            <li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i
+                                        class="fa fa-angle-double-right"></i>Imprint</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                        <ul class="list-unstyled list-inline social text-center">
+                            <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();"><i
+                                        class="fa fa-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();"><i
+                                        class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i
+                                        class="fa fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                    </hr>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                        <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is
+                            a
+                            Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
+                            Minneapolis, MN]
+                        </p>
+                        <p class="h6">&copy All right Reversed.<a class="text-green ml-2"
+                                href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
+                    </div>
+                    </hr>
+                </div>
+            </div>
+        </section>
+    </footer>
 </div>
 
 {% endblock %}
