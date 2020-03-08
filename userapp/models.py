@@ -140,10 +140,10 @@ class Vehicle(models.Model):
 
 class ChargingStationRecord(models.Model):
     # Records for ChargingStation arrivals of vehicle
-    # time start-end, elec reqd,
-    cs = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
+    # time start-end, elec reqd
+    cs = models.ForeignKey(ChargingStation, on_delete = models.CASCADE)
     consumer = models.ForeignKey(Consumer,on_delete=models.CASCADE,related_name="recordof")
-    vehicle =models.OneToOneField(Vehicle,on_delete=models.CASCADE,related_name="csvehicles")
+    vehicle =models.ForeignKey(Vehicle,on_delete=models.CASCADE,related_name="csvehicles")
     duration = models.IntegerField(default=duration)
     elec_consumption = models.IntegerField(default=cost)
     def __str__(self):

@@ -24,8 +24,9 @@
                 </div>
                 <div class="back">
                     <div class="inner">
-                        <a href="{% url 'Charging-Station-Dashboard' cs.id %}">Dashboard</a>
+                        <a href="#">Dashboard</a>
                         <a href="{% url 'DeleteStation' cs.id %}" style="margin-left:20px ;" class="btn btn-danger">Remove</a>                
+                        <a href="{% url 'Charging-Station-Analytics' cs.id %}" style="margin-right:20px ;" class="btn btn-info">Analytics</a>                
                         <!-- <a type="button" class="btn btn-danger" style="margin-left:20px ;">Remove</button> -->
                     </div>
                     <br>

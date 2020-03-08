@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from userapp.models import ChargingStation
-from userapp.views import ChargingStationProviderListView, ChargingStationProviderDeleteView, ChargingStationDashboard
+from userapp.views import ChargingStationProviderListView, ChargingStationProviderDeleteView
 
 # ChargingStation - CS
 urlpatterns = [
@@ -19,11 +19,10 @@ urlpatterns = [
     path('Charging-Station/',views.CS, name = 'Charging-Station'),
     path('Charging-Station/add/', views.AddChargingStation, name = 'AddChargingStation'),
     path('Charging-Station/my-stations/',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
-    path('Charging-Station/dashboard/<int:pk>',views.ChargingStationDashboard,name='Charging-Station'),
+    path('Charging-Station/analytics/<int:pk>',views.ChargingStationAnalytics,name='Charging-Station-Analytics'),
+    # path('Charging-Station/dashboard/<int:pk>',views.ChargingStationDashboard,name='Charging-Station'),
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
-    path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
-    path('ajax/update_ports/',views.ChargingStatus, name = 'ChargingStatus'),
-    path('Analytics',views.Analytics, name = 'Analytics')
+    path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV')
 ] 
 
 if settings.DEBUG:

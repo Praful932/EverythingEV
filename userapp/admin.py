@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from import_export.admin import ImportExportModelAdmin
-from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle,ChargingStationRecord,CsReport
+from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle,CsReport, ChargingStationRecord
 # Register your models here.
 @admin.register(Vehicle)
 class ViewAdmin(ImportExportModelAdmin):
