@@ -1,84 +1,224 @@
-{% extends "userapp/layout.html" %}
-{% load static %}
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{%  static 'userapp/styleindex.css' %}">
+{% extends "userapp/layout.html" %} {% load static %} {% block head %}
+<!-- <link rel="stylesheet" type="text/css" href="{%  static 'userapp/styleindex.css' %}"> -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'userapp/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'userapp/styleindex.css' %}">
 
-  {% endblock %}
-{% block body %}
-<div class="bgded overlay">
-  <div id="pageintro" class="hoc clear">     
-    <article>
-      <h3 class="heading">EverythingEV</h3>
-      <p>One stop solution for everything related to EV!</p>
-    </article>
-  </div>
-  <div class="cards-list">
-  
-    <a href="{% url 'Charging-Station' %}"><div class="card 1">
-      <div class="card_image"> <img src="https://i.redd.it/b3esnz5ra34y.jpg" /> </div>
-      <div class="card_title title-white">
-        {% if user.is_provider %}
-        <p>Your Charging Stations</p>
-        {% else %}
-        Nearby Charging Stations
-        {% endif %}
-        </div>
-    </div></a>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
     
-      <a href="#"><div class="card 2">
-      <div class="card_image">
-        <img src="https://images.pexels.com/photos/185576/pexels-photo-185576.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
-        </div>
-      <div class="card_title title-white">
-        <p>Analytics</p>
-      </div>
-    </div></a>
+    .iconb {
+        border: 2px solid #4c5760;
+        border-radius: 3px;
+        margin-right: 10px;
+        padding: 5px;
+    }
     
-    <a><div class="card 3">
-      <div class="card_image">
-        <img src="https://media.giphy.com/media/10SvWCbt1ytWCc/giphy.gif" />
-      </div>
-      <div class="card_title">
-        <p>Accessories</p>
-      </div>
-    </div></a>
-      
-      <a><div class="card 4">
-      <div class="card_image">
-        <img src="https://media.giphy.com/media/LwIyvaNcnzsD6/giphy.gif" />
-        </div>
-      <div class="card_title title-black">
-        <p>Why Choose EV</p>
-      </div>
-      <div>
+    .title {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 0.3rem;
+    }
     
+    .card_title {
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: -60px;
+    }
+    
+    .card_image {
+        width: inherit;
+        height: inherit;
+        margin-top: 20px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+{% endblock %} {% block body %}
+<div class="title text-center" style="padding-top:150px">
+    <h1 class="display-3" style="font-family: 'Roboto', sans-serif;font-weight: 700;">EverythingEV</h1>
+    <p>One stop solution for every effin EV problem.</p>
+</div>
+<div>
+    <table class="text-center">
+        <tr>
+            <td style="padding-left: 50px;">
+                <a>
+                    <div class="cardicon ">
+                        <div class="card_image">
+                            <img src="{% static 'userapp/icons/pngwave.png' %}" style="width:100px;height:100px" />
+                        </div>
+                        <div class="card_title">
+                            <br>
+                            <p>Why Choose EV?</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="#charging">
+                    <div class="cardicon ">
+                        <div class="card_image">
+                            <img src="{% static 'userapp/icons/location.png' %}" style="width:100px;height:100px" />
+                        </div>
+                        <div class="card_title">
+                            <br>
+                            <p>Charging<br>Stations</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="#pool">
+                    <div class="cardicon">
+                        <div class="card_image">
+                            <img src="{% static 'userapp/icons/charge pooling.png' %}" style="width:100px;height:100px" />
+                        </div>
+                        <div class="card_title">
+                            <br>
+                            <p>Charge Pooling</p>
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="#route-the-way">
+                    <div class="cardicon ">
+                        <div class="card_image">
+                            <img src="{% static 'userapp/icons/way.png' %}" style="width:100px;height:100px" />
+                        </div>
+                        <div class="card_title">
+                            <br>
+                            <p>Route Your Way</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="#mechanic">
+                    <div class="cardicon">
+                        <div class="card_image">
+                            <img src="{% static 'userapp/icons/mechanic.png' %}" style="width:100px;height:100px" />
+                        </div>
+                        <div class="card_title">
+                            <br>
+                            <p class="hover">Hire a Mechanic</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <a href="#saleofev">
+                    <div class="cardicon">
+                        <div class="card_image">
+                            <img src="{%static 'userapp/icons/sales.png'%}" style="width:125px;height:90px" />
+                        </div>
+                        <div class="card_title">
+                            <br>
+                            <p>Sales</p>
+                        </div>
+                    </div>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+<p>
+    <br>
+    <br>
+    <br>
+</p>
+<div class="container " id="charging" style="padding-left:70px">
+    <div class="row top-buffer">
+        <div class="col-lg-4">
+            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:20px">
+                <div class="card-body">
+                    <h4 class="card-title">Nearby Charging Stations</h4>
+                    <p class="card-text">Find Stations, View and Book ports</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center" id="route-the-way">
+            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+                <div class="card-body">
+                    <h4 class="card-title">Route your way</h4>
+                    <p class="card-text">Going Somewhere? Find the route to take your EV</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center " id="pool">
+            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/charge pooling.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+                <div class="card-body">
+                    <h4 class="card-title">Charge Pooling</h4>
+                    <p class="card-text">Find another user with charging gear installed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center" style="margin-top:60px" id="mechanic">
+            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+                <div class="card-body">
+                    <h4 class="card-title">Hire Mechanic</h4>
+                    <p class="card-text">Car broken?Need a checkup? We got you covered.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center" style="margin-top:60px">
+            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image" style="width:200px;height:170px;margin-left:50px;margin-top:25px">
+                <div class="card-body">
+                    <h4 class="card-title">Build your own Charging station</h4>
+                    <p class="card-text">Want to be a service provider? We got you covered.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center" style="margin-top:60px" id="saleofev">
+            <div class="card" style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image" style="width:200px;height:175px;margin-left:50px;margin-top:25px">
+                <div class="card-body">
+                    <br>
+                    <h4 class="card-title">Sales</h4>
+                    <p class="card-text">Wanna buy an EV? Find the best here.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div></a>
-
-<!-- <div class="card-deck">
-   <div class="card bg-primary ml-10">
-      <div class="card-body text-center">
-        <p class="card-text"><a href="#">Charging Station</a></p>
-      </div>
-    </div>
-    <div class="card bg-warning ml-10">
-      <div class="card-body text-center">
-        <p class="card-text">Some text inside the second card</p>
-      </div>
-    </div>
-  </div>
-  <div class="card-deck">
-    <div class="card bg-success ml-10">
-      <div class="card-body text-center">
-        <p class="card-text">Some text inside the third card</p>
-      </div>
-    </div>
-    <div class="card bg-danger ml-10">
-      <div class="card-body text-center">
-        <p class="card-text">Some text inside the fourth card</p>
-      </div>
-    </div>
-  </div> -->
-
+</div>
+<script>
+    window.onload = function() {
+        Particles.init({
+            selector: '.background'
+        });
+    };
+</script>
+<canvas class="background"></canvas>
+<script src="path/to/particles.min.js"></script>
+<div>
+    <br>
+    <br>
+    <br>s
+</div>
 {% endblock body %}
+
+
+
+<!-- <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
+      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
+      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
+      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
+      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a> -->

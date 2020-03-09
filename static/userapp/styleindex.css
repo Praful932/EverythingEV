@@ -1,95 +1,111 @@
-    html,body
-    {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-    body
-    {
-      background-image: url(home_bg.jpeg);  /* fallback for old browsers */
-      background-repeat: no-repeat;
+x html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-image: url(background.jpg);
+    /* fallback for old browsers */
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-                  
-    }
-    #pageintro{
-      padding-top: 20px;
-    }/* 280px => 80px for #introblocks negative margin */
+}
 
-#pageintro article, #pageintro article p{display:block; max-width:75%; margin:0 auto; text-align:center;}
-#pageintro article p{max-width:65%; line-height:2rem;}
-#pageintro .heading{font-size:4rem;}
-#pageintro footer{margin-top:50px;}
+#pageintro {
+    padding-top: 20px;
+}
 
-.bgded
-{
+
+/* 280px => 80px for #introblocks negative margin */
+
+#pageintro article,
+#pageintro article p {
+    display: block;
+    max-width: 75%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#pageintro article p {
+    max-width: 65%;
+    line-height: 2rem;
+}
+
+#pageintro .heading {
+    font-size: 4rem;
+}
+
+#pageintro footer {
+    margin-top: 50px;
+}
+
+.bgded {
     color: black;
     /* background-color: #292929; */
-}   
-    .cards-list {
-        z-index: 0;
-        width:100%;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
+}
 
-      }
-      
-      .card {
-        margin: 30px auto;
-        width: 270px;
-        height: 270px;
-        border-radius: 40px;
-      box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
-        cursor: pointer;
-        transition: 0.4s;
-      }
-      
-      .card .card_image {
-        width: inherit;
-        height: inherit;
-        border-radius: 40px;
-      }
-      
-      .card .card_image img {
-        width: inherit;
-        height: inherit;
-        border-radius: 40px;
-        object-fit: cover;
-      }
-      
-      .card .card_title {
-        text-align: center;
-        border-radius: 0px 0px 40px 40px;
-        font-family: sans-serif;
-        font-weight: bold;
-        font-size: 30px;
-        margin-top: -80px;
-        height: 40px;
-      }
-      
-      .card:hover {
-        transform: scale(0.9, 0.9);
-        box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
-          -5px -5px 30px 15px rgba(0,0,0,0.22);
-      }
-      
-      .title-white {
-        color: white;
-      }
-      
-      .title-black {
-        color: black;
-      }
-      
-      @media all and (max-width: 500px) {
-        .card-list {
-          /* On small screens, we are no longer using row direction but column */
-          flex-direction: column;
-        }
-      }
-      
-      
-      /*
+.cards-list {
+    z-index: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.cardicon {
+    margin: 30px auto;
+    width: 170px;
+    height: 170px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    margin: 10px;
+}
+
+.cardicon .card_image img {
+    width: inherit;
+    height: inherit;
+    margin-top: 20px;
+}
+
+.cardicon:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22);
+}
+
+.title-white {
+    color: white;
+}
+
+.title-black {
+    color: black;
+}
+
+@media all and (max-width: 500px) {
+    .card-list {
+        /* On small screens, we are no longer using row direction but column */
+        flex-direction: column;
+    }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+
+/*
       .card {
         margin: 30px auto;
         width: 300px;
@@ -100,7 +116,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-repeat: no-repeat;
-      box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+        box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
         transition: 0.4s;
       }
       */
