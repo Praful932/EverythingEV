@@ -13,13 +13,17 @@ section {
 
 section .section-title {
     text-align: center;
-    color: #007b5e;
+    color:  black;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
 #footer {
     display: block;
+<<<<<<< HEAD
     background: #3a3939 !important;
+=======
+    background-color: black !important;
+>>>>>>> 0833beb6e89aa79c885bc77fde2c519a30554f59
 }
 #footer h5{
 	padding-left: 10px;

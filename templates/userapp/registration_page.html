@@ -9,53 +9,48 @@ Registration Page
 {% endblock title %}
 
 {% block body %}
-<div class ="row" style="margin-left: 200px; margin-right: 200px; opacity: 0.9;">
-<div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px;">
-   <img src="https://ya-webdesign.com/transparent450_/log-clipart-user-login-8.png" alt="Man with backpack"    
-      class="d-block w-full">
+<br>
+<br>
+<br>
+<div class="row" style="margin-left: 200px; margin-right: 200px;margin-top: 100pxz; opacity: 0.9; ">
+<!--user-->
+  <div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px; border-radius: 10px;">
+      <img src="{% static 'userapp/user_register.png' %}"alt="Man with backpack"
+          class="d-block w-full">
+          <br>
+        <div class="px-2 py-2">
+            <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25; ">
+                User Registration
+            </h1>
+            <p class="mb-1">
+                <br><br>
+            </p>
+        </div>
+      <div class="text-center " style="margin-bottom: 25px; margin-top: -40;">
+      <a class="btn  btn-info mt-2 text-center " style="width: 150px;height:40px ;line-height: 1.25;
+      font-size: larger;    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);" href="{% url 'registerConsumer' %}">Register</a>
+      </div>
+    </div>
+<!--provider-->
+    <div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px; border-radius: 10px;">
+      <img src="{% static 'userapp/provider_register.png' %}"alt="Man with backpack"
+          class="d-block w-full">
+          <br>
+        <div class="px-2 py-2">
+            <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25; ">
+                Provider Registration
+            </h1>
+            <p class="mb-1">
+                <br><br>
+            </p>
+        </div>
+      <div class="text-center " style="margin-bottom: 25px; margin-top: -40;">
+      <a class="btn  btn-info mt-2 text-center " style="width: 150px;height:40px ;line-height: 1.25;
+      font-size: larger;    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);" href="{% url 'registerProvider' %}">Register</a>
+      </div>
+    </div>
 
-   <div class="px-2 py-2">
-
-    <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
-      User Registration
-    </h1>
     
-    
-
-    <p class="mb-1">
-    <br><br>
-    </p>
-    
-  </div>
-
-  <a href="{% url 'registerConsumer' %}" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link">
-    <input type="button" style="background-color:rgb(42, 68, 219);color:white;width:150px;
-    height:40px;" value="Register">
-  </a>
 </div>
-
-<div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px; overflow: hidden; border-radius: 1px;">
-        <img src="https://previews.123rf.com/images/macrovector/macrovector1803/macrovector180300510/97139901-taxi-round-composition-with-silhouette-icons-and-images-of-taxi-provider-cabs-money-baggage-and-peop.jpg" alt="Man with backpack"    
-            class="d-block w-full">
-
-  <div class="px-2 py-2">
-
-    <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1" style="line-height: 1.25;">
-      Provider  Registration
-    </h1>
-
-    <p >
-     <br><br>
-    </p>
-    
-
-  </div>
-
-  <a href="{% url 'registerProvider' %}" class="text-uppercase d-inline-block font-weight-medium lts-2px ml-2 text-center styled-link">
-    <input type="button" style="background-color:rgb(42, 68, 219);color:white;width:150px;
-    height:40px; margin-bottom: 0px;" value="Register">
-  </a>
-</div>
-</div>
+<br>
 {% endblock body %}
-
