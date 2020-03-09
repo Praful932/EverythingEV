@@ -149,6 +149,15 @@ class ChargingStationRecord(models.Model):
     def __str__(self):
         return str(self.pk) + '. ' + self.consumer.user.username
 
+class ChargingStationWeekly(models.Model):
+    cs = models.ForeignKey(ChargingStation, on_delete = models.CASCADE)
+    d1 = models.IntegerField(default=cost)
+    d2 = models.IntegerField(default=cost)
+    d3 = models.IntegerField(default=cost)
+    d4 = models.IntegerField(default=cost)
+    d5 = models.IntegerField(default=cost)
+    d6 = models.IntegerField(default=cost)
+    d7 = models.IntegerField(default=cost)
 
 def randomvehicles():
     y=random.randrange (00,15, 2)
@@ -161,7 +170,7 @@ def randomdate():
     return random_day
 
 class CsReport(models.Model):
-    cs = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
+    cs = models.ForeignKey(ChargingStation, on_delete = models.CASCADE)
     time=models.DateField(default = randomdate )
     t0=models.IntegerField(default=randomvehicles)
     t1=models.IntegerField(default=randomvehicles)
@@ -187,7 +196,7 @@ class CsReport(models.Model):
     t21=models.IntegerField(default=randomvehicles)
     t22=models.IntegerField(default=randomvehicles)
     t23=models.IntegerField(default=randomvehicles)
-    t24=models.IntegerField(default=randomvehicles)
+
 
     def __str__(self):
         return str(self.pk) + '. ' + self.cs.name+' .'+self.cs.city
