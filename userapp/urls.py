@@ -23,7 +23,12 @@ urlpatterns = [
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
     path('ajax/update_ports/',views.ChargingStatus, name = 'ChargingStatus'),
-    path('Analytics',views.Analytics, name = 'Analytics')
+# <<<<<<< Updated upstream
+    # path('Analytics',views.Analytics, name = 'Analytics')
+# =======
+    path('Analytics',views.Analytics, name = 'Analytics'),
+    path('Why-Choose-EV',views.WhyChooseEV, name = 'Why-Choose-EV')
+# >>>>>>> Stashed changes
 ] 
 
 if settings.DEBUG:

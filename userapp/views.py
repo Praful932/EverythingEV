@@ -287,11 +287,18 @@ def Analytics(request):
         'totalcount' : totalcount,
         'cscount' : cscount
     }
+# <<<<<<< Updated upstream
     return render(request,"userapp/analytics.html",context = context)
 
 def ChargingStationDashboard(request,pk):
     pass
 
+# =======
+def WhyChooseEV(request):
+    return render(request,"userapp/why_choose_EV.html")
+   
+#     return render(request, "userapp/vehicledata_c.html")
+# >>>>>>> Stashed changes
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
