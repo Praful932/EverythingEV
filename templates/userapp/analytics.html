@@ -134,14 +134,9 @@ https://codepen.io/k3no/post/learning-by-example-getting-started-with-chart-js
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
 <script>
-
-
-
-
-
-
-
-
+  var freq = JSON.parse('{{ freq|safe }}');
+  var consumption = JSON.parse('{{ consumption|safe }}');
+  var wr = JSON.parse('{{ wr|safe }}');
 // ============================================
 // As of Chart.js v2.5.0
 // http://www.chartjs.org/docs
@@ -163,7 +158,7 @@ var data  = {
 			pointBackgroundColor: 'white',
 			borderWidth: 1,
 			borderColor: '#911215',
-			data: [10,18,13,8,4,4,20,40,60,40,50,80,87,54,59,30,72,60,40,90,54,40,23,38]
+			data: freq
     }]
 };
 
@@ -236,7 +231,7 @@ var chart = new Chart(ctx, {
         labels : ["Red","Blue"],
         datasets: [{
             label: "Gauge",
-            data : [160,220],
+            data : consumption,
             backgroundColor: [
                 "rgb(255, 99, 132)",
                 "rgb(54, 162, 235)",
@@ -355,7 +350,7 @@ var data = {
     pointHoverBorderWidth: 2,
     pointRadius: 4,
     pointHitRadius: 10,
-    data: [128,140,70,100,64,180,220],
+    data: wr,
     spanGaps: true,
   }]
 };

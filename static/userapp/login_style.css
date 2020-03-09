@@ -1,17 +1,33 @@
-html, body {
-    background-image: url('https://c-parity.com/wp-content/uploads/2018/01/analytics-final-background-1-1.jpg');
+body {
+    background-image: url(https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     height: 100%;
     margin: 0;
     padding: 0;
-  }
-  .container
-{
+}
+
+.container {
     font-size: 20px;
     opacity: 0.9;
 }
+
 .card-body {
     padding: 2rem;
-}   
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.card-signin {
+    border: 2;
+    border-radius: 40px;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}

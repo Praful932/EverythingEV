@@ -10,16 +10,12 @@ from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly
 from urllib.request import urlopen
 from django.http import JsonResponse
 import json
 import random
 import math
-import cv2
-import matplotlib.pyplot as plt
-import cvlib as cv
-from cvlib.object_detection import draw_bbox
 
 # Create your views here.
 
@@ -270,35 +266,50 @@ def ChargingStationConsumer(request):
         }
         return render(request,'userapp/consumer_charging_stations.html', context = context)
 
-def ChargingStatus(request):
-    id = request.GET.get('id', None)
-    path = 'Cars/' + str(random.randint(1,25)) + '.jpg'
-    im = cv2.imread(path)
-    bbox, label, conf = cv.detect_common_objects(im)
-    data = {
-        'port' : label.count('car')
+
+
+def ChargingStationAnalytics(request,pk):
+    current_cs = ChargingStation.objects.get(id=pk)
+    # how many consumers visited this charging station
+    reportcount = ChargingStationRecord.objects.filter(cs=current_cs).count()
+    # total charging station of the provider
+    cscount = ChargingStation.objects.filter(owner=request.user.provider).count()
+    # find one sample csreport of current charging station
+    report = CsReport.objects.filter(cs=current_cs)[0]
+    allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
+    freq = []
+    for i in range(24):
+        # getattr to access changing field anme
+        freq.append(getattr(report,'t'+str(i)))
+    wholecs = ChargingStationRecord.objects.all()
+    consumption = []
+    sum = 0
+    n = 0
+    for ele in wholecs:
+        n+=1
+        sum+=ele.elec_consumption
+    sum/=n
+    consumption.append(sum)
+    csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
+    sum = 0
+    n = 0
+    for cs in csrecord:
+        n+=1
+        sum=sum + cs.elec_consumption
+    consumption.append(sum)
+    weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
+    wr = []
+    for i in range(7):
+        wr.append(getattr(weekreport,'d'+str(i+1)))
+    context = {
+        'totalcount':reportcount,
+        'cscount': cscount,
+        'freq': json.dumps(freq),
+        'consumption':json.dumps(consumption),
+        'wr':json.dumps(wr)
     }
-    return JsonResponse(data)
-
-def Analytics(request):
-    totalcount= User.objects.all().count()
-    cscount = ChargingStation.objects.all().count()
-    context ={
-        'totalcount' : totalcount,
-        'cscount' : cscount
-    }
-# <<<<<<< Updated upstream
-    return render(request,"userapp/analytics.html",context = context)
-
-def ChargingStationDashboard(request,pk):
-    pass
-
-# =======
-def WhyChooseEV(request):
-    return render(request,"userapp/why_choose_EV.html")
-   
-#     return render(request, "userapp/vehicledata_c.html")
-# >>>>>>> Stashed changes
+    print(consumption)
+    return render(request,"userapp/analytics.html",context=context)
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):

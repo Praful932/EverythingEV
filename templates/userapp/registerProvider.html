@@ -11,11 +11,15 @@ Register - Provider
 {% load crispy_forms_tags %}
 {% block body %}
 <div class="container">
+    <br>
     <div class="row">
         <div class="col-lg-9 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Sign Up</h5>
+                    <div class="text-center">
+                        <img src="{% static 'userapp/user.png' %}" style="width: 100px;height:100px">
+                    </div>
+                    <h5 class="card-title text-center" style="font-weight: 700;font-size: xx-large;">Sign Up</h5>
                     <form method="POST">
                         {% csrf_token %}
                         {{ signupform|crispy }}
