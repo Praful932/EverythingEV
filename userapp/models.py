@@ -200,3 +200,29 @@ class CsReport(models.Model):
 
     def __str__(self):
         return str(self.pk) + '. ' + self.cs.name+' .'+self.cs.city
+def city():
+    numberList = (["Mumbai", "Pune","Aurangabad","Nagpur","Hyderabad","Banglore","Chennai","Chandigarh"])
+    cName = random.choice(numberList)
+    return cName
+    
+def phone():
+    numberList = (["905XXXX876", "7798XXXX67","876XXXXX12","234XXXX345","343XXXX909","2345XXX436","3333XXXX23","6787XXX123"])
+    return random.choice(numberList) 
+
+def price():
+    p = ([12,32,9,10,12,20])
+    return random.choice(p)
+def sub():
+    numberList = (["sector 29","sector 32","sector 21","sector 18","Dwarka"])
+    sName = random.choice(numberList)
+    return sName
+
+
+class ChargePooler(models.Model):
+    consumer = models.OneToOneField(Consumer, on_delete = models.CASCADE, primary_key=True)
+    city = models.CharField(max_length=25,default= city )
+    local_area = models.CharField( max_length= 25 ,default=sub)
+    ph_no = models.CharField(max_length=13,default=phone)
+    cost = models.CharField(max_length= 25,default=price)
+    normal_port = models.BooleanField(default= True)
+    fast_port = models.BooleanField(default= False)
