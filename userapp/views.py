@@ -310,6 +310,9 @@ def ChargingStationAnalytics(request,pk):
     }
     print(consumption)
     return render(request,"userapp/analytics.html",context=context)
+
+def ChargePooling(request):
+    return render(request,"userapp/chargepoolerpage.html")
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
