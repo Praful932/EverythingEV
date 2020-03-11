@@ -22,7 +22,8 @@ urlpatterns = [
     path('Charging-Station/analytics/<int:pk>',views.ChargingStationAnalytics,name='Charging-Station-Analytics'),
     path('Charging-Station/dashboard/<int:pk>',views.ChargingStationDashboard,name='Charging-Station-Dashboard'),
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
-    path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV')
+    path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
+    path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling')
 ] 
 
 if settings.DEBUG:
