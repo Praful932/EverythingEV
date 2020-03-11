@@ -20,7 +20,7 @@ urlpatterns = [
     path('Charging-Station/add/', views.AddChargingStation, name = 'AddChargingStation'),
     path('Charging-Station/my-stations/',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),
     path('Charging-Station/analytics/<int:pk>',views.ChargingStationAnalytics,name='Charging-Station-Analytics'),
-    # path('Charging-Station/dashboard/<int:pk>',views.ChargingStationDashboard,name='Charging-Station'),
+    path('Charging-Station/dashboard/<int:pk>',views.ChargingStationDashboard,name='Charging-Station-Dashboard'),
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV')
 ] 

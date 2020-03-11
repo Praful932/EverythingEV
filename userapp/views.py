@@ -308,9 +308,30 @@ def ChargingStationAnalytics(request,pk):
         'consumption':json.dumps(consumption),
         'wr':json.dumps(wr)
     }
-    print(consumption)
     return render(request,"userapp/analytics.html",context=context)
-# def vehicledata_c(request):
+
+def ChargingStationDashboard(request,pk):
+    current_cs = ChargingStation.objects.get(id=pk)
+    # get all records of the current_cs
+    allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
+    username_cleaned = []
+    vehicle_cleaned = []
+    duration_cleaned = []
+    consumption_cleaned = []
+    for record in allrecords:
+        username_cleaned.append(str(record.consumer.user.username))
+        vehicle_cleaned.append(str(record.vehicle.company))
+        duration_cleaned.append(int(record.duration))
+        consumption_cleaned.append(int(record.elec_consumption))
+    recorddata = [list(x) for x in zip(username_cleaned,
+        vehicle_cleaned, duration_cleaned, consumption_cleaned)]
+    print(recorddata)
+    context = {
+        'records':recorddata
+    }
+    return render(request,"userapp/dashboard.html",context=context)
+
+# def vehicledata_c(request):q
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
 #     return render(request, "userapp/vehicledata_p.html")
