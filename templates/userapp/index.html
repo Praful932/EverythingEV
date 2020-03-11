@@ -46,108 +46,100 @@
     <h1 class="display-3" style="font-family: 'Roboto', sans-serif;font-weight: 700;">Linea</h1>
     <p>One stop solution for every effin EV problem.</p>
 </div>
-<div>
-    <table class="text-center">
-        <tr>
-            <td style="padding-left: 50px;">
-                <a>
-                    <div class="cardicon ">
-                        <div class="card_image">
-                            <img src="{% static 'userapp/icons/pngwave.png' %}" style="width:100px;height:100px" />
-                        </div>
-                        <div class="card_title">
-                            <br>
-                            <p>Why Choose EV?</p>
-                        </div>
+<div class="container" style="padding-right:10px">
+    <div class="row top-buffer">
+        <div class="col-lg-2 col-sm-4 text-center">
+            <a>
+                <div class="cardicon">
+                    <div class="card_image">
+                        <img src="{% static 'userapp/icons/pngwave.png' %}" style="width:100px;height:100px" />
                     </div>
-                </a>
-            </td>
-            <td>
-                <a href="#charging">
-                    <div class="cardicon ">
-                        <div class="card_image">
-                            <img src="{% static 'userapp/icons/location.png' %}" style="width:100px;height:100px" />
-                        </div>
-                        <div class="card_title">
-                            <br>
-                            <p>Charging<br>Stations</p>
-                        </div>
+                    <div class="card_title">
+                        <br>
+                        <p>Why Choose EV?</p>
                     </div>
-                </a>
-            </td>
-            <td>
-                <a href="#pool">
-                    <div class="cardicon">
-                        <div class="card_image">
-                            <img src="{% static 'userapp/icons/charge pooling.png' %}"
-                                style="width:100px;height:100px" />
-                        </div>
-                        <div class="card_title">
-                            <br>
-                            <p>Charge Pooling</p>
-                        </div>
-                        <div>
-
-                        </div>
-
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <a href="#charging">
+                <div class="cardicon ">
+                    <div class="card_image">
+                        <img src="{% static 'userapp/icons/location.png' %}" style="width:100px;height:90px" />
                     </div>
-                </a>
-            </td>
-            <td>
-                <a href="#route-the-way">
-                    <div class="cardicon ">
-                        <div class="card_image">
-                            <img src="{% static 'userapp/icons/way.png' %}" style="width:100px;height:100px" />
-                        </div>
-                        <div class="card_title">
-                            <br>
-                            <p>Route Your Way</p>
-                        </div>
+                    <div class="card_title" style="margin-top:-50px">
+                        <p>Charging<br>Stations</p>
                     </div>
-                </a>
-            </td>
-            <td>
-                <a href="#mechanic">
-                    <div class="cardicon">
-                        <div class="card_image">
-                            <img src="{% static 'userapp/icons/mechanic.png' %}" style="width:100px;height:100px" />
-                        </div>
-                        <div class="card_title">
-                            <br>
-                            <p class="hover">Hire a Mechanic</p>
-                        </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <a href="#pool">
+                <div class="cardicon">
+                    <div class="card_image">
+                        <img src="{% static 'userapp/route-way.png' %}" style="width:100px;height:100px" />
                     </div>
-                </a>
-            </td>
-            <td>
-                <a href="#saleofev">
-                    <div class="cardicon">
-                        <div class="card_image">
-                            <img src="{%static 'userapp/icons/sales.png'%}" style="width:125px;height:90px" />
-                        </div>
-                        <div class="card_title">
-                            <br>
-                            <p>Sales</p>
-                        </div>
+                    <div class="card_title">
+                        <br>
+                        <p>Charge Pooling</p>
                     </div>
-                </a>
-            </td>
-        </tr>
-    </table>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <a href="#route-the-way">
+                <div class="cardicon">
+                    <div class="card_image">
+                        <img src="{% static 'userapp/icons/way.png' %}" style="width:100px;height:100px" />
+                    </div>
+                    <div class="card_title">
+                        <br>
+                        <p>Route Your Way</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <a href="#mechanic">
+                <div class="cardicon">
+                    <div class="card_image">
+                        <img src="{% static 'userapp/icons/mechanic.png' %}" style="width:100px;height:100px" />
+                    </div>
+                    <div class="card_title">
+                        <br>
+                        <p class="hover">Hire a Mechanic</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-4 text-center">
+            <a href="#saleofev">
+                <div class="cardicon">
+                    <div class="card_image">
+                        <img src="{%static 'userapp/icons/car-sales.png'%}" style="width:125px;height:110px" />
+                    </div>
+                    <div class="card_title">
+                        <br>
+                        <p>Sales</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 <p>
     <br>
     <br>
     <br>
 </p>
-<div class="container " id="charging" style="padding-left:70px">
+<div class="container " id="charging" style="padding-left:60px">
     <div class="row top-buffer">
         <div class="col-lg-4">
             <div class="card"
-                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
                 <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image"
-                    style="width:200px;height:200px;margin-left:50px;margin-top:20px">
-                <div class="card-body">
+                    style="width:200px;height:200px;margin-left:40px;margin-top:20px;margin-bottom:10px">
+                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px">
                     <a href="{% url 'Charging-Station-PLV' %}">
                         <h4 class="card-title">Nearby Charging Stations</h4>
                     </a>
@@ -157,10 +149,10 @@
         </div>
         <div class="col-lg-4 text-center" id="route-the-way">
             <div class="card"
-                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
                 <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image"
-                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
-                <div class="card-body">
+                    style="width:200px;height:185px;margin-left:50px;margin-top:25px;margin-bottom:20px">
+                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px">
                     <h4 class="card-title">Route your way</h4>
                     <p class="card-text">Going Somewhere? Find the route to take your EV</p>
                 </div>
@@ -168,21 +160,25 @@
         </div>
         <div class="col-lg-4 text-center " id="pool">
             <div class="card"
-                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/charge pooling.png'%}" alt="Card image"
-                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
-                <div class="card-body">
-                    <h4 class="card-title">Charge Pooling</h4>
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/route-way.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:40px;margin-bottom:10px">
+                <div class="card-body"
+                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
+                    <a href=# data-toggle="modal" data-target="#pooling">
+                        <h4 class="card-title">Charge Pooling</h4>
+                    </a>
                     <p class="card-text">Find another user with charging gear installed</p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="mechanic">
             <div class="card"
-                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
                 <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image"
                     style="width:200px;height:200px;margin-left:50px;margin-top:25px">
-                <div class="card-body">
+                <div class="card-body"
+                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
                     <h4 class="card-title">Hire Mechanic</h4>
                     <p class="card-text">Car broken?Need a checkup? We got you covered.</p>
                 </div>
@@ -190,10 +186,10 @@
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px">
             <div class="card"
-                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
                 <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image"
-                    style="width:200px;height:170px;margin-left:50px;margin-top:25px">
-                <div class="card-body">
+                    style="width:200px;height:170px;margin-left:50px;margin-top:25px;margin-bottom:30px">
+                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px">
                     <h4 class="card-title">Build your own Charging station</h4>
                     <p class="card-text">Want to be a service provider? We got you covered.</p>
                 </div>
@@ -201,11 +197,11 @@
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="saleofev">
             <div class="card"
-                style="width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
                 <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image"
-                    style="width:200px;height:175px;margin-left:50px;margin-top:25px">
-                <div class="card-body">
-                    <br>
+                    style="width:200px;height:175px;margin-left:50px;margin-top:50px">
+                <div class="card-body"
+                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px;margin-bottom:27px">
                     <h4 class="card-title">Sales</h4>
                     <p class="card-text">Wanna buy an EV? Find the best here.</p>
                 </div>
@@ -295,12 +291,27 @@
         </div>
     </section>
 </footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="pooling" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Charge Pooling</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock body %}
-
-
-
-<!-- <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
-      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
-      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
-      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a>
-      <a><img src="{%static 'userapp/icons/location.png'%}" style="width:100px;height:100px" /></a> -->
