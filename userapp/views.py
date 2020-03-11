@@ -338,3 +338,7 @@ def ChargePooling(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
 #     return render(request, "userapp/vehicledata_p.html")
+
+
+def temp(request):
+    return render(request,"userapp/dashboard.html")
