@@ -23,7 +23,8 @@ urlpatterns = [
     path('Charging-Station/dashboard/<int:pk>',views.ChargingStationDashboard,name='Charging-Station-Dashboard'),
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
-    path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling')
+    path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling'),
+    path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way')
 ] 
 
 if settings.DEBUG:

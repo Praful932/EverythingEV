@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler
 from urllib.request import urlopen
 from django.http import JsonResponse
 import json
@@ -267,7 +267,6 @@ def ChargingStationConsumer(request):
         return render(request,'userapp/consumer_charging_stations.html', context = context)
 
 
-
 def ChargingStationAnalytics(request,pk):
     current_cs = ChargingStation.objects.get(id=pk)
     # how many consumers visited this charging station
@@ -331,14 +330,58 @@ def ChargingStationDashboard(request,pk):
     }
     return render(request,"userapp/dashboard.html",context=context)
 
-# def vehicledata_c(request):q
+# def vehicledata_c(request):
 def ChargePooling(request):
-    return render(request,"userapp/chargepoolerpage.html")
+    chargepoolers = ChargePooler.objects.all()
+    context = {
+        'chargepoolers' : chargepoolers
+    }
+    return render(request,"userapp/chargepoolerpage.html",context = context)
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
 #     return render(request, "userapp/vehicledata_p.html")
 
-
+def RouteYourWay(request):
+    cslist = ChargingStation.objects.all()
+    # Sorted id of Charging Station according to user location
+    name_cleaned = []
+    city_cleaned = []
+    suburb_cleaned = []
+    owner_cleaned = []
+    lngs_cleaned = []
+    lats_cleaned = []
+    ports_cleaned = []
+    dc_cleaned = []
+    ac_cleaned = []
+    price_cleaned = []
+    restroom_cleaned = []
+    cctv_cleaned = []
+    closing_cleaned = []
+    opening_cleaned = []
+    for cs in cslist:
+        name_cleaned.append(str(cs.name))
+        city_cleaned.append(str(cs.city))
+        suburb_cleaned.append(str(cs.suburb))
+        owner_cleaned.append(str(cs.owner.user.username))
+        lats_cleaned.append(float(cs.lat))     
+        lngs_cleaned.append(float(cs.lng))  
+        ports_cleaned.append(int(cs.no_of_ports))
+        dc_cleaned.append(int(cs.fast_dc))
+        ac_cleaned.append(int(cs.slow_ac))
+        price_cleaned.append(float(cs.price_kwh))
+        restroom_cleaned.append(int(cs.restroom))
+        cctv_cleaned.append(int(cs.cctv))
+        opening_cleaned.append(str(cs.opening_time))
+        closing_cleaned.append(str(cs.closing_time))
+    csdata = [list(x) for x in zip(
+        name_cleaned , city_cleaned , suburb_cleaned, owner_cleaned, 
+        lats_cleaned, lngs_cleaned, ports_cleaned, dc_cleaned, 
+        ac_cleaned, price_cleaned, restroom_cleaned, cctv_cleaned, 
+        opening_cleaned, closing_cleaned )]
+    context = {
+        'csdata': json.dumps(csdata),
+    }
+    return render(request,"userapp/routeyourway.html",context=context)
 def temp(request):
     return render(request,"userapp/dashboard.html")

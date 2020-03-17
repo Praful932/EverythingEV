@@ -9,58 +9,33 @@
 {% block body %}
 
 <div class="container">
-    <h2>Filterable Table</h2>
-    <p>Type something in the input field to search the table for first names, last names or emails:</p>  
+    <h2>Find a Charge Pooler</h2>
+    <p>Type place where you want to search in the input box below</p>  
     <input class="form-control" id="myInput" type="text" placeholder="Search for City or Region..">
     <br>
     <table class="table table-bordered table-striped", id="table01", style="display: none;">
       <thead>
         <tr>
-          <th>local_area, City</th>
-          <th>Phone number</th>
+          <th>Where</th>
+          <th>Contact</th>
           <th>Normal Charger</th>
           <th>Fast Charger</th>
-          <th>Slow Charger</th>
           <th>Cost per Kwh</th>
         </tr>
       </thead>
       <tbody id="myTable">
+        {% for chargepooler in chargepoolers %}
         <tr>
-          <td>John</td>
-          <td>Doe</td>
-          <td>john@example.com</td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{ chargepooler.local_area|title }}, {{ chargepooler.city|title }}</td>
+          <td>{{ chargepooler.ph_no }}</td>
+          <td>{{ chargepooler.normal_port }}</td>
+          <td>{{ chargepooler.fast_port }}</td>
+          <td>{{ chargepooler.cost }}</td>
         </tr>
-        <tr>
-          <td>Mary</td>
-          <td>Moe</td>
-          <td>mary@mail.com</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>July</td>
-          <td>Dooley</td>
-          <td>july@greatstuff.com</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Anja</td>
-          <td>Ravendale</td>
-          <td>a_r@test.com</td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
     
-    <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
   </div>
   
 
