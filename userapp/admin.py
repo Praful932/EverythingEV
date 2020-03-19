@@ -6,13 +6,34 @@ from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle, C
 @admin.register(Vehicle)
 class ViewAdmin(ImportExportModelAdmin):
     pass
-admin.site.register(Consumer)
-admin.site.register(Provider)
-admin.site.register(ChargingStation)
-admin.site.register(ChargingStationRecord)
-admin.site.register(ChargingStationWeekly)
-admin.site.register(CsReport)
-admin.site.register(ChargePooler)
+@admin.register(ChargingStation)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+@admin.register(ChargingStationRecord)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+@admin.register(ChargingStationWeekly)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+@admin.register(CsReport)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+@admin.register(ChargePooler)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+@admin.register(Consumer)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+@admin.register(Provider)
+class ViewAdmin(ImportExportModelAdmin):
+    pass
+# admin.site.register(Consumer)
+# admin.site.register(Provider)
+# admin.site.register(ChargingStation)
+# admin.site.register(ChargingStationRecord)
+# admin.site.register(ChargingStationWeekly)
+# admin.site.register(CsReport)
+# admin.site.register(ChargePooler)
 
 ADDITIONAL_USER_FIELDS = (
     (None, {'fields': ('is_consumer','is_provider')}),
