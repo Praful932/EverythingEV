@@ -1,211 +1,215 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Place Autocomplete and Directions</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .controls {
-        margin-top: 10px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
-
-      #origin-input,
-      #destination-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 200px;
-      }
-
-      #origin-input:focus,
-      #destination-input:focus {
-        border-color: #4d90fe;
-      }
-
-      #mode-selector {
-        color: #fff;
-        background-color: #4d90fe;
-        margin-left: 12px;
-        padding: 5px 11px 0px 11px;
-      }
-
-      #mode-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-    </style>
-  </head>
-  <body>
-    <div style="display: none">
-        <input id="origin-input" class="controls" type="text"
-            placeholder="Enter an origin location">
-
-        <input id="destination-input" class="controls" type="text"
-            placeholder="Enter a destination location">
-
+{% extends "userapp/layout.html" %} {% load static %} {% block head %}
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<link rel="stylesheet" href="{% static 'userapp/routeyourway.css' %}"> {% endblock %} {% block body %}
+<div class="row">
+    <div class="col-sm-12">
+        <div style="display: none">
+            <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location">
+            <input id="destination-input" class="controls" type="text" placeholder="Enter a destination location">
+        </div>
+        <div id="map"></div>
     </div>
-
-    <div id="map"></div>
-
-    <script>
-      var csdata;
-// This example requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script
-// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-function initMap() {
-    csdata = JSON.parse('{{ csdata|safe }}');
-  var map = new google.maps.Map(document.getElementById('map'), {
-    mapTypeControl: false,
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13
-  });
-
-  new AutocompleteDirectionsHandler(map);
-}
-
-/**
- * @constructor
- */
-function AutocompleteDirectionsHandler(map) {
-  this.map = map;
-  this.originPlaceId = null;
-  this.destinationPlaceId = null;
-  this.travelMode = 'DRIVING';
-  this.directionsService = new google.maps.DirectionsService;
-  this.directionsRenderer = new google.maps.DirectionsRenderer;
-  this.directionsRenderer.setMap(map);
-
-  var originInput = document.getElementById('origin-input');
-  var destinationInput = document.getElementById('destination-input');
-  var modeSelector = document.getElementById('mode-selector');
-  var originAutocomplete = new google.maps.places.Autocomplete(originInput);
-  // Specify just the place data fields that you need.
-  originAutocomplete.setFields(['place_id']);
-  var destinationAutocomplete =
-      new google.maps.places.Autocomplete(destinationInput);
-  // Specify just the place data fields that you need.
-  destinationAutocomplete.setFields(['place_id']);
-
-
-  this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-  this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
-      destinationInput);
-  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
-}
-
-// Sets a listener on a radio button to change the filter type on Places
-// Autocomplete.
-AutocompleteDirectionsHandler.prototype.setupClickListener = function(
-    id, mode) {
-  var radioButton = document.getElementById(id);
-  var me = this;
-
-  radioButton.addEventListener('click', function() {
-    me.travelMode = mode;
-    me.route();
-  });
-};
-
-AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
-    autocomplete, mode) {
-  var me = this;
-  autocomplete.bindTo('bounds', this.map);
-
-  autocomplete.addListener('place_changed', function() {
-    var place = autocomplete.getPlace();
-    if (!place.place_id) {
-      window.alert('Please select an option from the dropdown list.');
-      return;
+</div>
+{% endblock %} {% block script %}
+<script>
+    var latlang_cs = [];
+    var infowindows_cs = [];
+    var content_cs = [];
+    var csdata = JSON.parse('{{ csdata|safe }}');;
+    var markers = [];
+    var markers_cs = [];
+    var map;
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script
+    // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    for (var i = 0; i < csdata.length; i++) {
+        latlang_cs.push({
+            lat: csdata[i][4],
+            lng: csdata[i][5]
+        });
+        content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> " +
+            csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>" + csdata[i][7] + "<br><b>Slow Ports:</b>" + csdata[i][8] +
+            "<br><b>Price/Kwh:</b>" + csdata[i][9] + "<br><b>Restroom:</b>" + csdata[i][10] + "<br><b>CCTV:</b>" + csdata[i][11] + "<br><b>Opening Time:</b>" + csdata[i][12] +
+            "<br><b>Closing Time:</b>" + csdata[i][13] + "</div>";
     }
-    if (mode === 'ORIG') {
-      me.originPlaceId = place.place_id;
-    } else {
-      me.destinationPlaceId = place.place_id;
+
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            mapTypeControl: false,
+            center: {
+                lat: -33.8688,
+                lng: 151.2195
+            },
+            zoom: 13
+        });
+
+        new AutocompleteDirectionsHandler(map);
     }
-    me.route();
-  });
-};
 
-AutocompleteDirectionsHandler.prototype.route = function() {
-  if (!this.originPlaceId || !this.destinationPlaceId) {
-    return;
-  }
-  var lat1,lng1,lat2,lng2;
-  var me = this;
-  var geocoder = new google.maps.Geocoder;
+    /**
+     * @constructor
+     */
+    function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'DRIVING';
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsRenderer = new google.maps.DirectionsRenderer;
+        this.directionsRenderer.setMap(map);
 
-  geocoder.geocode({'placeId': this.originPlaceId}, function(results, status) {
-    if (status === 'OK') {
-      lat1 = results[0]["geometry"]["location"].lat();
-      lng1 = results[0]["geometry"]["location"].lng();
-      console.log(lat1);
-      console.log(lng1);
-      console.log(csdata);
-      }
-    else {
-      window.alert('Geocoder failed due to: ' + status);
+        var originInput = document.getElementById('origin-input');
+        var destinationInput = document.getElementById('destination-input');
+        var modeSelector = document.getElementById('mode-selector');
+        var originAutocomplete = new google.maps.places.Autocomplete(originInput);
+        // Specify just the place data fields that you need.
+        originAutocomplete.setFields(['place_id']);
+        var destinationAutocomplete =
+            new google.maps.places.Autocomplete(destinationInput);
+        // Specify just the place data fields that you need.
+        destinationAutocomplete.setFields(['place_id']);
+
+
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
+            destinationInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
     }
-  });
 
-  geocoder.geocode({'placeId': this.destinationPlaceId}, function(results, status) {
-    if (status === 'OK') {
-      lat2 = results[0]["geometry"]["location"].lat();
-      lng2 = results[0]["geometry"]["location"].lng();
-      console.log(lat2);
-      console.log(lng2);
-      }
-    else {
-      window.alert('Geocoder failed due to: ' + status);
-    }
-  });
+    // Sets a listener on a radio button to change the filter type on Places
+    // Autocomplete.
+    AutocompleteDirectionsHandler.prototype.setupClickListener = function(
+        id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
 
+        radioButton.addEventListener('click', function() {
+            me.travelMode = mode;
+            me.route();
+        });
+    };
 
-  this.directionsService.route(
-      {
-        origin: {'placeId': this.originPlaceId},
-        destination: {'placeId': this.destinationPlaceId},
-        travelMode: this.travelMode
-      },
-      function(response, status) {
-        if (status === 'OK') {
-          me.directionsRenderer.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to ' + status);
+    AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
+        autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.place_id) {
+                window.alert('Please select an option from the dropdown list.');
+                return;
+            }
+            if (mode === 'ORIG') {
+                me.originPlaceId = place.place_id;
+            } else {
+                me.destinationPlaceId = place.place_id;
+            }
+            me.route();
+        });
+    };
+
+    AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+            return;
         }
-      });
-};
+        var lat1, lng1, lat2, lng2;
+        var me = this;
+        var geocoder = new google.maps.Geocoder;
 
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsIEEqoBh7-rXnD9hU2PCbLy2WAJakfb0&libraries=places&callback=initMap"
-        async defer></script>
-  </body>
-</html>
+        geocoder.geocode({
+            'placeId': this.originPlaceId
+        }, function(results, status) {
+            if (status === 'OK') {
+                lat1 = results[0]["geometry"]["location"].lat();
+                lng1 = results[0]["geometry"]["location"].lng();
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+
+        geocoder.geocode({
+            'placeId': this.destinationPlaceId
+        }, function(results, status) {
+            if (status === 'OK') {
+                lat2 = results[0]["geometry"]["location"].lat();
+                lng2 = results[0]["geometry"]["location"].lng();
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+
+
+        this.directionsService.route({
+                origin: {
+                    'placeId': this.originPlaceId
+                },
+                destination: {
+                    'placeId': this.destinationPlaceId
+                },
+                travelMode: this.travelMode
+            },
+            function(response, status) {
+                if (status === 'OK') {
+                    clearMarkers();
+                    me.directionsRenderer.setDirections(response);
+                    map.setCenter()
+                    plot();
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+    };
+
+    function plot() {
+        clearMarkers();
+        for (var i = 0; i < latlang_cs.length; i++) {
+            addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 200);
+        }
+    };
+
+    var prev_infowindow = false;
+
+    function addMarkerWithTimeout(position, html, timeout) {
+        window.setTimeout(function() {
+            var data = position;
+            var markerd = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: data.name,
+                animation: google.maps.Animation.DROP
+            });
+            markers.push(markerd);
+            var infowindow = new google.maps.InfoWindow({
+                content: html,
+            });
+            google.maps.event.addListener(markerd, 'click', (function(markerd, html) {
+                return function() {
+                    if (this.getMap()) {
+                        if (prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        infowindow.open(this.getMap(), this);
+                    }
+                    prev_infowindow = infowindow;
+                }
+            })(markerd, html));
+
+        }, timeout);
+    }
+
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        markers_cs = [];
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsIEEqoBh7-rXnD9hU2PCbLy2WAJakfb0&libraries=places&callback=initMap" async defer></script>
+{% endblock %}
