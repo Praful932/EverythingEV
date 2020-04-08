@@ -265,123 +265,135 @@ def ChargingStationConsumer(request):
             'cslist' : cslist
         }
         return render(request,'userapp/consumer_charging_stations.html', context = context)
+    return redirect('index')
 
-
+@login_required
 def ChargingStationAnalytics(request,pk):
-    current_cs = ChargingStation.objects.get(id=pk)
-    # how many consumers visited this charging station
-    reportcount = ChargingStationRecord.objects.filter(cs=current_cs).count()
-    # total charging station of the provider
-    cscount = ChargingStation.objects.filter(owner=request.user.provider).count()
-    # find one sample csreport of current charging station
-    report = CsReport.objects.filter(cs=current_cs)[0]
-    allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
-    freq = []
-    for i in range(24):
-        # getattr to access changing field anme
-        freq.append(getattr(report,'t'+str(i)))
-    wholecs = ChargingStationRecord.objects.all()
-    consumption = []
-    sum = 0
-    n = 0
-    for ele in wholecs:
-        n+=1
-        sum+=ele.elec_consumption
-    sum/=n
-    consumption.append(sum)
-    csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
-    sum = 0
-    n = 0
-    for cs in csrecord:
-        n+=1
-        sum=sum + cs.elec_consumption
-    consumption.append(sum)
-    weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
-    wr = []
-    for i in range(7):
-        wr.append(getattr(weekreport,'d'+str(i+1)))
-    context = {
-        'totalcount':reportcount,
-        'cscount': cscount,
-        'freq': json.dumps(freq),
-        'consumption':json.dumps(consumption),
-        'wr':json.dumps(wr)
-    }
-    return render(request,"userapp/analytics.html",context=context)
+    if request.user.is_provider:
+        current_cs = ChargingStation.objects.get(id=pk)
+        # how many consumers visited this charging station
+        reportcount = ChargingStationRecord.objects.filter(cs=current_cs).count()
+        # total charging station of the provider
+        cscount = ChargingStation.objects.filter(owner=request.user.provider).count()
+        # find one sample csreport of current charging station
+        report = CsReport.objects.filter(cs=current_cs)[0]
+        allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
+        freq = []
+        for i in range(24):
+            # getattr to access changing field anme
+            freq.append(getattr(report,'t'+str(i)))
+        wholecs = ChargingStationRecord.objects.all()
+        consumption = []
+        sum = 0
+        n = 0
+        for ele in wholecs:
+            n+=1
+            sum+=ele.elec_consumption
+        sum/=n
+        consumption.append(sum)
+        csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
+        sum = 0
+        n = 0
+        for cs in csrecord:
+            n+=1
+            sum=sum + cs.elec_consumption
+        consumption.append(sum)
+        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
+        wr = []
+        for i in range(7):
+            wr.append(getattr(weekreport,'d'+str(i+1)))
+        context = {
+            'totalcount':reportcount,
+            'cscount': cscount,
+            'freq': json.dumps(freq),
+            'consumption':json.dumps(consumption),
+            'wr':json.dumps(wr)
+        }
+        return render(request,"userapp/analytics.html",context=context)
+    return redirect('index')
 
+@login_required
 def ChargingStationDashboard(request,pk):
-    current_cs = ChargingStation.objects.get(id=pk)
-    # get all records of the current_cs
-    allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
-    username_cleaned = []
-    vehicle_cleaned = []
-    duration_cleaned = []
-    consumption_cleaned = []
-    for record in allrecords:
-        username_cleaned.append(str(record.consumer.user.username))
-        vehicle_cleaned.append(str(record.vehicle.company))
-        duration_cleaned.append(int(record.duration))
-        consumption_cleaned.append(int(record.elec_consumption))
-    recorddata = [list(x) for x in zip(username_cleaned,
-        vehicle_cleaned, duration_cleaned, consumption_cleaned)]
-    print(recorddata)
-    context = {
-        'records':recorddata
-    }
-    return render(request,"userapp/dashboard.html",context=context)
+    if request.user.is_provider:
+        current_cs = ChargingStation.objects.get(id=pk)
+        # get all records of the current_cs
+        allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
+        username_cleaned = []
+        vehicle_cleaned = []
+        duration_cleaned = []
+        consumption_cleaned = []
+        for record in allrecords:
+            username_cleaned.append(str(record.consumer.user.username))
+            vehicle_cleaned.append(str(record.vehicle.company))
+            duration_cleaned.append(int(record.duration))
+            consumption_cleaned.append(int(record.elec_consumption))
+        recorddata = [list(x) for x in zip(username_cleaned,
+            vehicle_cleaned, duration_cleaned, consumption_cleaned)]
+        print(recorddata)
+        context = {
+            'records':recorddata
+        }
+        return render(request,"userapp/dashboard.html",context=context)
+    return redirect('index')
 
 # def vehicledata_c(request):
+@login_required
 def ChargePooling(request):
-    chargepoolers = ChargePooler.objects.all()
-    context = {
-        'chargepoolers' : chargepoolers
-    }
-    return render(request,"userapp/chargepoolerpage.html",context = context)
+    if request.user.is_consumer:
+        chargepoolers = ChargePooler.objects.all()
+        context = {
+            'chargepoolers' : chargepoolers
+        }
+        return render(request,"userapp/chargepoolerpage.html",context = context)
+    return redirect('index')
 # def vehicledata_c(request):
 #     return render(request, "userapp/vehicledata_c.html")
 # def vehicledata_p(request):
 #     return render(request, "userapp/vehicledata_p.html")
 
+@login_required
 def RouteYourWay(request):
-    cslist = ChargingStation.objects.all()
-    # Sorted id of Charging Station according to user location
-    name_cleaned = []
-    city_cleaned = []
-    suburb_cleaned = []
-    owner_cleaned = []
-    lngs_cleaned = []
-    lats_cleaned = []
-    ports_cleaned = []
-    dc_cleaned = []
-    ac_cleaned = []
-    price_cleaned = []
-    restroom_cleaned = []
-    cctv_cleaned = []
-    closing_cleaned = []
-    opening_cleaned = []
-    for cs in cslist:
-        name_cleaned.append(str(cs.name))
-        city_cleaned.append(str(cs.city))
-        suburb_cleaned.append(str(cs.suburb))
-        owner_cleaned.append(str(cs.owner.user.username))
-        lats_cleaned.append(float(cs.lat))     
-        lngs_cleaned.append(float(cs.lng))  
-        ports_cleaned.append(int(cs.no_of_ports))
-        dc_cleaned.append(int(cs.fast_dc))
-        ac_cleaned.append(int(cs.slow_ac))
-        price_cleaned.append(float(cs.price_kwh))
-        restroom_cleaned.append(int(cs.restroom))
-        cctv_cleaned.append(int(cs.cctv))
-        opening_cleaned.append(str(cs.opening_time))
-        closing_cleaned.append(str(cs.closing_time))
-    csdata = [list(x) for x in zip(
-        name_cleaned , city_cleaned , suburb_cleaned, owner_cleaned, 
-        lats_cleaned, lngs_cleaned, ports_cleaned, dc_cleaned, 
-        ac_cleaned, price_cleaned, restroom_cleaned, cctv_cleaned, 
-        opening_cleaned, closing_cleaned )]
-    context = {
-        'csdata': json.dumps(csdata),
-    }
-    return render(request,"userapp/routeyourway.html",context=context)
+    if request.user.is_consumer:
+        cslist = ChargingStation.objects.all()
+        # Sorted id of Charging Station according to user location
+        name_cleaned = []
+        city_cleaned = []
+        suburb_cleaned = []
+        owner_cleaned = []
+        lngs_cleaned = []
+        lats_cleaned = []
+        ports_cleaned = []
+        dc_cleaned = []
+        ac_cleaned = []
+        price_cleaned = []
+        restroom_cleaned = []
+        cctv_cleaned = []
+        closing_cleaned = []
+        opening_cleaned = []
+        for cs in cslist:
+            name_cleaned.append(str(cs.name))
+            city_cleaned.append(str(cs.city))
+            suburb_cleaned.append(str(cs.suburb))
+            owner_cleaned.append(str(cs.owner.user.username))
+            lats_cleaned.append(float(cs.lat))     
+            lngs_cleaned.append(float(cs.lng))  
+            ports_cleaned.append(int(cs.no_of_ports))
+            dc_cleaned.append(int(cs.fast_dc))
+            ac_cleaned.append(int(cs.slow_ac))
+            price_cleaned.append(float(cs.price_kwh))
+            restroom_cleaned.append(int(cs.restroom))
+            cctv_cleaned.append(int(cs.cctv))
+            opening_cleaned.append(str(cs.opening_time))
+            closing_cleaned.append(str(cs.closing_time))
+        csdata = [list(x) for x in zip(
+            name_cleaned , city_cleaned , suburb_cleaned, owner_cleaned, 
+            lats_cleaned, lngs_cleaned, ports_cleaned, dc_cleaned, 
+            ac_cleaned, price_cleaned, restroom_cleaned, cctv_cleaned, 
+            opening_cleaned, closing_cleaned )]
+        context = {
+            'csdata': json.dumps(csdata),
+        }
+        return render(request,"userapp/routeyourway.html",context=context)
+    return redirect('index')
 def temp(request):
     return render(request,"userapp/dashboard.html")
