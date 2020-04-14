@@ -34,6 +34,11 @@ AUTH_USER_MODEL = 'userapp.User'
 # Format appname.apps.configname
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'userapp.apps.UserappConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -45,6 +50,10 @@ INSTALLED_APPS = [
     'import_export'
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -148,3 +157,29 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # GEOIP
 GEOIP_PATH = os.path.join(BASE_DIR, 'db')
+
+# Allauth settings
+SITE_ID=2
+
+# access_type:offline in order to receive a refresh token on first login and on reauthentication requests.
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+}   
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+# SMTP Server
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS_EV')

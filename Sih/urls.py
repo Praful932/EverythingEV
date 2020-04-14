@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import  path, include
+from django.conf.urls import url
+
 
 # including chops off and sends empty / to app
 
 urlpatterns = [
+    # Django Admin
     path('admin/', admin.site.urls),
+
+    # User Management
     path('',include('userapp.urls')),
+    path('accounts/', include('allauth.urls'))
 ]
