@@ -1,0 +1,41 @@
+#Row1 {
+  background: #c7c9d3;
+  color:#fff;
+  height:220px;
+  margin-top:15px;
+}
+
+#Row2 {
+  height:350px;
+  margin-top:15px;
+}
+.card{
+  border: 1px solid rgba(0, 0, 0, 0)!important;
+}
+.carousel {
+  background: #EEE;
+}
+
+.carousel-cell {
+  width: 15%;
+  height: 300px;
+  min-width:180px;
+  margin-right: 2px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+
+.carousel-cell.is-selected {
+  background: #21e6a3;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(carousel-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}

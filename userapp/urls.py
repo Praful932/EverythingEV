@@ -24,8 +24,11 @@ urlpatterns = [
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
     path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling'),
-    path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way')
-] 
+    path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way'),
+    path('Maintenance-man/dashboard', views.MaintenanceDashboard, name = 'Maintenance-man-dashboard'),
+    path('Maintenance-man/view-all', views.AllMaintenanceMan, name = 'All-Maintenance-Man'),
+    path('Maintenance-man/complaints', views.PendingComplaints, name = 'Complaint-Dashboard'),
+    ] 
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

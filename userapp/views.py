@@ -397,3 +397,12 @@ def RouteYourWay(request):
     return redirect('index')
 def temp(request):
     return render(request,"userapp/dashboard.html")
+
+def MaintenanceDashboard(request):
+    return render(request,"userapp/maintenance_dashboard.html")
+
+def AllMaintenanceMan(request):
+    return render(request,"userapp/table.html")
+
+def PendingComplaints(request):
+    return render(request,"userapp/complaint_dashboard.html")
