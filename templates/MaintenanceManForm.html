@@ -1,0 +1,38 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  
+{% endblock %}
+{% block body%}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Register</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <form method="POST" style="width: 15cm; margin:auto; border: 3px solid rgb(59, 199, 241);  padding: 20px;
+    ">
+        {% csrf_token %}
+
+        {{form|crispy}}
+
+        <button class="btn btn-lg btn-primary" type="submit">Set</button>
+
+    </form>
+</body>
+
+</html>
+{% endblock %}
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{%endblock%}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler,MaintenanceManDetails
 from urllib.request import urlopen
 from django.http import JsonResponse
 import json
@@ -397,3 +397,17 @@ def RouteYourWay(request):
     return redirect('index')
 def temp(request):
     return render(request,"userapp/dashboard.html")
+
+class MaintenanceMan(CreateView):
+    model = MaintenanceManDetails
+    template_name='MaintenanceManForm.html'
+    fields = ['name','OrgName','ph1','ph2','OfficeAdd','AreaLocality']
+    def form_valid(self, form):
+        form.instance.own=self.request.user.provider
+        return super().form_valid(form)
+
+
+# class SearchListView(ListView):
+#     model = MaintenanceManDetails
+#     template_name='search.html'
+#     context_object_name='d'

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from import_export.admin import ImportExportModelAdmin
-from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle, ChargingStationRecord, CsReport, ChargingStationWeekly,ChargePooler
+from userapp.models import User, Consumer, Provider, ChargingStation, Vehicle, ChargingStationRecord, CsReport, ChargingStationWeekly,ChargePooler,MaintenanceManDetails,CsMaintenance
 # Register your models here.
 @admin.register(Vehicle)
 class ViewAdmin(ImportExportModelAdmin):
@@ -32,8 +32,8 @@ class ViewAdmin(ImportExportModelAdmin):
 # admin.site.register(ChargingStation)
 # admin.site.register(ChargingStationRecord)
 # admin.site.register(ChargingStationWeekly)
-# admin.site.register(CsReport)
-# admin.site.register(ChargePooler)
+admin.site.register(CsMaintenance)
+admin.site.register(MaintenanceManDetails)
 
 ADDITIONAL_USER_FIELDS = (
     (None, {'fields': ('is_consumer','is_provider')}),

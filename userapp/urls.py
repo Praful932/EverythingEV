@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from userapp.models import ChargingStation
-from userapp.views import ChargingStationProviderListView, ChargingStationProviderDeleteView
+from userapp.views import ChargingStationProviderListView, ChargingStationProviderDeleteView,MaintenanceMan
 
 # ChargingStation - CS
 urlpatterns = [
@@ -24,7 +24,8 @@ urlpatterns = [
     path('station/<int:pk>/delete/',ChargingStationProviderDeleteView.as_view(), name = 'DeleteStation'),
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
     path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling'),
-    path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way')
+    path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way'),
+    path('registerMaintenance/',MaintenanceMan.as_view(),name="registerMaintenance")
 ] 
 
 if settings.DEBUG:
