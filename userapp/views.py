@@ -398,6 +398,7 @@ def RouteYourWay(request):
 def temp(request):
     return render(request,"userapp/dashboard.html")
 
+<<<<<<< HEAD
 class MaintenanceMan(CreateView):
     model = MaintenanceManDetails
     template_name='MaintenanceManForm.html'
@@ -411,3 +412,13 @@ class MaintenanceMan(CreateView):
 #     model = MaintenanceManDetails
 #     template_name='search.html'
 #     context_object_name='d'
+=======
+def MaintenanceDashboard(request):
+    return render(request,"userapp/maintenance_dashboard.html")
+
+def AllMaintenanceMan(request):
+    return render(request,"userapp/table.html")
+
+def PendingComplaints(request):
+    return render(request,"userapp/complaint_dashboard.html")
+>>>>>>> feaf9b32200dd84dd8b82ca86b100b62af8cae1f

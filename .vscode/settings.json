@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\Shreyas Mahajan\\.virtualenvs\\s1\\Scripts\\python.exe"
+=======
+    "python.pythonPath": "venv\\Scripts\\python.exe"
+>>>>>>> feaf9b32200dd84dd8b82ca86b100b62af8cae1f
 }
