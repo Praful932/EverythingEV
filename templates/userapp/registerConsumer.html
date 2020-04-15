@@ -1,6 +1,7 @@
 {% extends 'userapp/layout.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load socialaccount %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'userapp/rs_consumer.css'%}">
 {% endblock head %}
@@ -28,6 +29,7 @@ Register - Customer
                         {{ signupform|crispy }}
                         {{ consumerform|crispy }}
                         <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
+                        <a class="btn  btn-info mt-2" href="{% provider_login_url 'google' %}">Sign in with Google</a>
                     </form>
                 </div>
             </div>
