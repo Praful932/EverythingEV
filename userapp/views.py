@@ -395,5 +395,19 @@ def RouteYourWay(request):
         }
         return render(request,"userapp/routeyourway.html",context=context)
     return redirect('index')
-def temp(request):
-    return render(request,"userapp/dashboard.html")
+
+class dash(LoginRequiredMixin,UserPassesTestMixin,ListView):
+    model = ChargingStation
+    template_name = 'userapp/business.html'
+    ordering = ['-created_at']
+    context_object_name = 'cslist'
+    paginate_by = 3
+
+    def test_func(self):
+        if self.request.user.is_provider:
+            return True
+        return False
+    
+    def get_queryset(self):
+        current_provider = Provider.objects.get(user=self.request.user)
+        return ChargingStation.objects.filter(owner=current_provider)

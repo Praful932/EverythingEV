@@ -1,14 +1,12 @@
 {% extends "userapp/layout.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{%  static 'userapp/service_provider.css' %}">
-<link rel="stylesheet" type="text/css" href="{%  static 'userapp/bootstrap.css' %}"> {% endblock %}
-{% block body %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/bootstrap.css' %}"> {% endblock %} {% block body %}
 <br><br>
 <div class="wrapper">
     <div class="container-fluid">
         <br>
         <br>
-        <a href="{% url 'AddChargingStation' %}" class="btn btn-info"
-            style="margin-bottom: 50px;position: absolute;color: #fff;background-color: #17a2b8;border-color: #17a2b8;">Add
+        <a href="{% url 'AddChargingStation' %}" class="btn btn-info" style="margin-bottom: 50px;position: absolute;color: #fff;background-color: #17a2b8;border-color: #17a2b8;">Add
             New</a>
         <h1 class="display-4" style="font-weight: 500;">Your Charging Stations</h1>
     </div>
@@ -29,11 +27,8 @@
                             <div>
                                 <a href="#" class="btn btn-primary shadow" style="margin:10px">Dashboard</a>
                             </div>
-                            <a href="{% url 'DeleteStation' cs.id %}" style="margin:10px ;"
-                                class="btn btn-danger shadow">Remove</a>
-                            <a href="{% url 'Charging-Station-Analytics' cs.id %}"
-                                style="margin:10px; color: #fff;background-color: #17a2b8;border-color: #17a2b8;"
-                                class="btn shadow">Analytics</a>
+                            <a href="{% url 'DeleteStation' cs.id %}" style="margin:10px ;" class="btn btn-danger shadow">Remove</a>
+                            <a href="{% url 'Charging-Station-Analytics' cs.id %}" style="margin:10px; color: #fff;background-color: #17a2b8;border-color: #17a2b8;" class="btn shadow">Analytics</a>
                             <!-- <a type="button" class="btn btn-danger" style="margin-left:20px ;">Remove</button> -->
                         </div>
                     </div>
@@ -51,30 +46,14 @@
 <footer style="align-content: center;margin-right: 70px;">
     <section>
         <div class="pagebtn">
-            {% if is_paginated %}
-
-            {% if page_obj.has_previous %}
+            {% if is_paginated %} {% if page_obj.has_previous %}
             <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1">First</a>
-            <a class="btn btn-outline-info mb-4" style="width:100px;"
-                href="?page={{ page.obj.previous_page_number}}">Previous</a>
-            {% endif  %}
-
-            {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-            <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
-            {% endif %}
-            {% endfor %}
-
-            {% if page_obj.has_next %}
-            <a class="btn btn-outline-info mb-4" style="width:70px;"
-                href="?page={{ page_obj.next_page_number }}">First</a>
-            <a class="btn btn-outline-info mb-4" style="width:100px;"
-                href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
-            {% endif  %}
-
-            {% endif  %}
+            <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a> {% endif %} {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
+            <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a> {% elif num > page_obj.number|add:'-3' and num
+            < page_obj.number|add: '3' %} <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
+                {% endif %} {% endfor %} {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
+                <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a> {% endif %} {% endif %}
         </div>
     </section>
 </footer>
@@ -139,13 +118,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-                        <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is
-                            a
-                            Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
-                            Minneapolis, MN]
+                        <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is a Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis, MN]
                         </p>
-                        <p class="h6">&copy All right Reversed.<a class="text-green ml-2"
-                                href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
+                        <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
                     </div>
                     </hr>
                 </div>
