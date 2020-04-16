@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "e:\\Programs\\Github\\SIH-2020\\venv\\Scripts\\python.exe"
+    "python.pythonPath": "e:\\Programs\\Github\\SIH-2020\\venv\\Scripts\\python.exe",
+    "workbench.editor.enablePreview": false
 }

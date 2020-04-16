@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://npmcdn.com/flickity@2/dist/flickity.css'>
+<link rel="stylesheet" href="{%  static 'userapp/complaint_style.css' %}">
+
+</head>
+<body>
+
+<div class="container-fluid"> 
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body" id="Row1">
+          <h3 class="card-title">Pending Complaints</h3>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">4</p>
+        </div>
+      </div>
+    </div>
+        <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body" id="Row1">
+          <h3 class="card-title">Complaints Solved</h3>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">23<i class="fa fa-arrow-down" aria-hidden="true"></i></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body" id="Row1">
+          <h3 class="card-title">Total Complaints</h3>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">27</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6" >
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222956.1460761856!2d-82.29689329564486!3d29.173812511425073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e62b541cba3ce5%3A0xf5f53be4b1380536!2sOcala%2C+FL!5e0!3m2!1sen!2sus!4v1563387105323!5m2!1sen!2sus" width="100%" height="100%" frameborder="0" style="border:0" id="Row2" allowfullscreen></iframe>
+    </div>
+    <div class="col-sm-6">
+      <table class="table" id="Row2">
+        <p>Pending Complaint Details</p>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact No.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>Pune</td>
+            <td>9876543210</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>9876543210</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>Mumbai</td>
+            <td>9876543210</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   <div class="col-sm-12">
+      <div class="carousel" data-flickity='{ "groupCells": true }'>
+        <div class="carousel-cell">Report1</div>
+        <div class="carousel-cell">Report2</div>
+        <div class="carousel-cell">Report3</div>
+        <div class="carousel-cell">Report4</div>
+        <div class="carousel-cell">Report5</div>
+        <div class="carousel-cell">Report6</div>
+        <div class="carousel-cell">Report7</div>
+        <div class="carousel-cell">Report8</div>
+        <div class="carousel-cell">Report9</div>
+        <div class="carousel-cell">Report10</div>
+        <div class="carousel-cell">Report11</div>
+        <div class="carousel-cell">Report12</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://npmcdn.com/flickity@2/dist/flickity.pkgd.js'></script>
+</body>
+</html>
