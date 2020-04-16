@@ -161,6 +161,7 @@ GEOIP_PATH = os.path.join(BASE_DIR, 'db')
 # Allauth settings
 SITE_ID=2
 
+
 # access_type:offline in order to receive a refresh token on first login and on reauthentication requests.
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

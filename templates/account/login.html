@@ -23,11 +23,11 @@
 
                             <br>
                             <small class="text-muted">
-                                <a href="#">Forgot Password?</a>
+                                <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
                                 <br>
                             </small><br>
                             <a class="btn  btn-info mt-2" href="#">New Here? Sign Up</a>
-                            <a class="btn  btn-info mt-2" href="{% provider_login_url 'google' %}">Sign in with
+                            <a class="btn  btn-info mt-2" href="{% provider_login_url 'google' %}">Sign up with
                                 Google</a>
                         </div>
                     </form>
