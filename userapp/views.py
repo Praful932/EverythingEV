@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler,MaintenanceManDetails
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler,MaintenanceManDetails,CsMaintenance
 from urllib.request import urlopen
 from django.http import JsonResponse
 import json
@@ -309,7 +309,7 @@ def ChargingStationAnalytics(request,pk):
             'consumption':json.dumps(consumption),
             'wr':json.dumps(wr)
         }
-        return render(request,"userapp/analytics.html",context=context)
+        return render(request,"userapp/analytics_v2.html",context=context)
     return redirect('index')
 
 @login_required
@@ -398,27 +398,68 @@ def RouteYourWay(request):
 def temp(request):
     return render(request,"userapp/dashboard.html")
 
-<<<<<<< HEAD
 class MaintenanceMan(CreateView):
     model = MaintenanceManDetails
     template_name='MaintenanceManForm.html'
-    fields = ['name','OrgName','ph1','ph2','OfficeAdd','AreaLocality']
+    fields = ['name','OrgName','ph1','ph2','OfficeAdd','City','AreaLocality']
     def form_valid(self, form):
         form.instance.own=self.request.user.provider
         return super().form_valid(form)
 
 
-# class SearchListView(ListView):
-#     model = MaintenanceManDetails
-#     template_name='search.html'
-#     context_object_name='d'
-=======
+def bookMaintenanceMan(request,pk):
+    cscount = ChargingStation.objects.filter(owner=request.user.provider)
+
+    if request.method == 'POST':
+
+        if request.POST.get('problem'):
+            CsM=CsMaintenance()
+            # get the id from url for maintenanca
+            # get reueds .user.
+            # get descrip
+            CsM.csm = request.user.provider
+            CsM.Mm_id=pk
+            CsM.Problem = request.POST.get('problem')
+            CsM.ph =request.POST.get('phone')
+            cname= request.POST.get('Cs')
+            c = ChargingStation.objects.filter(name=cname)[0]
+            CsM.CsSelect = c
+            CsM.save()
+    return render(request,"booking.html",{'cs':cscount})
+
+class SearchListView(ListView):
+    model = MaintenanceManDetails
+    template_name='userapp/table.html'
+    context_object_name='d'
+
+
+
 def MaintenanceDashboard(request):
     return render(request,"userapp/maintenance_dashboard.html")
 
-def AllMaintenanceMan(request):
-    return render(request,"userapp/table.html")
 
-def PendingComplaints(request):
+class ComplaintsListView(ListView):
+    model = CsMaintenance
+    template_name='userapp/complaint_dashboard.html'
+    context_object_name='d'
+    # def get_queryset(self):
+    #     return CsMaintenance.objects.filter(Mm_own=self.request.user.provider)
+
+
+
+def MaintenanceComplaint(request):
+    # current_proviider = Provider.objects.get(user)
+    m = MaintenanceManDetails.objects.get(own=request.user.provider)
+    d = m.jobs.all()
+    print(d)
+    return render(request,"userapp/complaint_dashboard.html",{'d':d})
+    
+
+
+
+def PendingComplaintsListView(request):
     return render(request,"userapp/complaint_dashboard.html")
->>>>>>> feaf9b32200dd84dd8b82ca86b100b62af8cae1f
+
+
+def test23(request):
+    return (request,"analytics_v2.html",{})

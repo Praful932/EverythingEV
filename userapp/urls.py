@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from userapp.models import ChargingStation
-from userapp.views import ChargingStationProviderListView, ChargingStationProviderDeleteView,MaintenanceMan
+from userapp.views import ChargingStationProviderListView, ChargingStationProviderDeleteView,MaintenanceMan,SearchListView,bookMaintenanceMan,ComplaintsListView,test23,MaintenanceComplaint
 
 # ChargingStation - CS
 urlpatterns = [
@@ -25,15 +25,13 @@ urlpatterns = [
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
     path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling'),
     path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way'),
-<<<<<<< HEAD
-    path('registerMaintenance/',MaintenanceMan.as_view(),name="registerMaintenance")
-] 
-=======
+    path('registerMaintenance/',MaintenanceMan.as_view(),name="registerMaintenance"),
     path('Maintenance-man/dashboard', views.MaintenanceDashboard, name = 'Maintenance-man-dashboard'),
-    path('Maintenance-man/view-all', views.AllMaintenanceMan, name = 'All-Maintenance-Man'),
-    path('Maintenance-man/complaints', views.PendingComplaints, name = 'Complaint-Dashboard'),
+    path('Maintenance-man/view-all',SearchListView.as_view(), name = 'All-Maintenance-Man'),
+    path('Maintenance-man/complaints',views.MaintenanceComplaint, name = 'Complaint-Dashboard'),
+    path('book/<int:pk>',views.bookMaintenanceMan, name="bookingMm"),
+    path('test/',views.test23,name="test")
     ] 
->>>>>>> feaf9b32200dd84dd8b82ca86b100b62af8cae1f
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -229,16 +229,19 @@ class ChargePooler(models.Model):
 
 
 class MaintenanceManDetails(models.Model):
-    own=models.OneToOneField(Provider,on_delete=models.CASCADE,related_name="owner")
+    own=models.OneToOneField(Provider,on_delete=models.CASCADE)
     name = models.CharField(max_length = 50)
     OrgName = models.CharField(max_length = 30)
     ph1 = models.CharField(max_length = 14)
     ph2 = models.CharField(max_length= 14)
     OfficeAdd = models.TextField()
     AreaLocality = models.CharField(max_length = 30)
+    City = models.CharField(max_length = 20)
 
 
 class CsMaintenance(models.Model):
-    Mm = models.ForeignKey(MaintenanceManDetails, on_delete=models.CASCADE)
-    csm = models.OneToOneField(ChargingStation, on_delete = models.CASCADE, primary_key=True)
+    Mm = models.ForeignKey(MaintenanceManDetails, on_delete=models.CASCADE,related_name="jobs")
+    csm = models.OneToOneField(Provider, on_delete = models.CASCADE, primary_key=True)
+    CsSelect = models.OneToOneField(ChargingStation, on_delete = models.CASCADE)
+    ph=models.CharField(max_length=14)
     Problem = models.TextField()
