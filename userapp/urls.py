@@ -26,15 +26,11 @@ urlpatterns = [
     path('Charging-Station/all-stations/',views.ChargingStationConsumer, name = 'Charging-Station-CLV'),
     path('Charge-Pooling/',views.ChargePooling,name = 'Charge-Pooling'),
     path('Route-Your-Way/',views.RouteYourWay, name = 'Route-Your-Way'),
-<<<<<<< HEAD
-    path('dashboard/',dash.as_view(),name='dashboard')
-] 
-=======
-    path('Maintenance-man/dashboard', views.MaintenanceDashboard, name = 'Maintenance-man-dashboard'),
+    path('dashboard/',dash.as_view(),name='dashboard'),
+   path('Maintenance-man/dashboard', views.MaintenanceDashboard, name = 'Maintenance-man-dashboard'),
     path('Maintenance-man/view-all', views.AllMaintenanceMan, name = 'All-Maintenance-Man'),
     path('Maintenance-man/complaints', views.PendingComplaints, name = 'Complaint-Dashboard'),
     ] 
->>>>>>> 25c3c48cd825375f27c2c0cd76f6690ca56282f9
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
