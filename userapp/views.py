@@ -40,7 +40,11 @@ def index(request):
             if Consumer.objects.get(user =  request.user):
                 pass
         except:
-            return redirect('registerConsumerSocial')
+            try:
+                if Provider.objects.get(user =  request.user):
+                    pass
+            except:
+                return redirect('registerConsumerSocial')
     return render(request,"userapp/index.html")
 
 def registerConsumerSocial(request):
