@@ -8,20 +8,20 @@
     html {
         scroll-behavior: smooth;
     }
-
+    
     .iconb {
         border: 2px solid #4c5760;
         border-radius: 3px;
         margin-right: 10px;
         padding: 5px;
     }
-
+    
     .title {
         padding: 2rem 1rem;
         margin-bottom: 2rem;
         border-radius: 0.3rem;
     }
-
+    
     .card_title {
         text-align: center;
         font-family: sans-serif;
@@ -29,13 +29,13 @@
         font-weight: 700;
         margin-top: -60px;
     }
-
+    
     .card_image {
         width: inherit;
         height: inherit;
         margin-top: 20px;
     }
-
+    
     a {
         text-decoration: none;
         color: black;
@@ -135,10 +135,8 @@
 <div class="container " id="charging" style="padding-left:60px">
     <div class="row top-buffer">
         <div class="col-lg-4">
-            <div class="card"
-                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image"
-                    style="width:200px;height:200px;margin-left:40px;margin-top:20px;margin-bottom:10px">
+            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:40px;margin-top:20px;margin-bottom:10px">
                 <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px">
                     <a href="{% url 'Charging-Station' %}">
                         <h4 class="card-title">Nearby Charging Stations</h4>
@@ -148,10 +146,8 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" id="route-the-way">
-            <div class="card"
-                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image"
-                    style="width:200px;height:185px;margin-left:50px;margin-top:25px;margin-bottom:20px">
+            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image" style="width:200px;height:185px;margin-left:50px;margin-top:25px;margin-bottom:20px">
                 <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px">
                     <h4 class="card-title">Route your way</h4>
                     <p class="card-text">Going Somewhere? Find the route to take your EV</p>
@@ -159,12 +155,9 @@
             </div>
         </div>
         <div class="col-lg-4 text-center " id="pool">
-            <div class="card"
-                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/route-way.png'%}" alt="Card image"
-                    style="width:200px;height:200px;margin-left:40px;margin-bottom:10px">
-                <div class="card-body"
-                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
+            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/route-way.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:40px;margin-bottom:10px">
+                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
                     <a href=# data-toggle="modal" data-target="#pooling">
                         <h4 class="card-title">Charge Pooling</h4>
                     </a>
@@ -173,22 +166,17 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="mechanic">
-            <div class="card"
-                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image"
-                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
-                <div class="card-body"
-                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
+            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
                     <h4 class="card-title">Hire Mechanic</h4>
                     <p class="card-text">Car broken?Need a checkup? We got you covered.</p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px">
-            <div class="card"
-                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image"
-                    style="width:200px;height:170px;margin-left:50px;margin-top:25px;margin-bottom:30px">
+            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image" style="width:200px;height:170px;margin-left:50px;margin-top:25px;margin-bottom:30px">
                 <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px">
                     <h4 class="card-title">Build your own Charging station</h4>
                     <p class="card-text">Want to be a service provider? We got you covered.</p>
@@ -196,12 +184,9 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="saleofev">
-            <div class="card"
-                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image"
-                    style="width:200px;height:175px;margin-left:50px;margin-top:50px">
-                <div class="card-body"
-                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px;margin-bottom:27px">
+            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image" style="width:200px;height:175px;margin-left:50px;margin-top:50px">
+                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px;margin-bottom:27px">
                     <h4 class="card-title">Sales</h4>
                     <p class="card-text">Wanna buy an EV? Find the best here.</p>
                 </div>
@@ -279,12 +264,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-                    <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is a
-                        Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
-                        Minneapolis, MN]
+                    <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is a Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis, MN]
                     </p>
-                    <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com"
-                            target="_blank">Sunlimetech</a></p>
+                    <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
                 </div>
                 </hr>
             </div>
@@ -294,8 +276,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="pooling" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="pooling" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">

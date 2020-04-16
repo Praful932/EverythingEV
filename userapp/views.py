@@ -174,7 +174,7 @@ def AddChargingStation(request):
 
 class ChargingStationProviderListView(LoginRequiredMixin,UserPassesTestMixin,ListView):
     model = ChargingStation
-    template_name = 'userapp/provider_charging_stations.html'
+    template_name = 'userapp/provider_stations.html'
     ordering = ['-created_at']
     context_object_name = 'cslist'
     paginate_by = 3
@@ -274,7 +274,7 @@ def ChargingStationAnalytics(request,pk):
         # how many consumers visited this charging station
         reportcount = ChargingStationRecord.objects.filter(cs=current_cs).count()
         # total charging station of the provider
-        cscount = ChargingStation.objects.filter(owner=request.user.provider).count()
+        count = ChargingStation.objects.filter(owner=request.user.provider).count()
         # find one sample csreport of current charging station
         report = CsReport.objects.filter(cs=current_cs)[0]
         allrecords = ChargingStationRecord.objects.filter(cs=current_cs)
@@ -304,12 +304,11 @@ def ChargingStationAnalytics(request,pk):
             wr.append(getattr(weekreport,'d'+str(i+1)))
         context = {
             'totalcount':reportcount,
-            'cscount': cscount,
             'freq': json.dumps(freq),
             'consumption':json.dumps(consumption),
             'wr':json.dumps(wr)
         }
-        return render(request,"userapp/analytics.html",context=context)
+        return render(request,"userapp/analytics_v2.html",context=context)
     return redirect('index')
 
 @login_required
@@ -333,7 +332,7 @@ def ChargingStationDashboard(request,pk):
         context = {
             'records':recorddata
         }
-        return render(request,"userapp/dashboard.html",context=context)
+        return render(request,"userapp/dash.html",context=context)
     return redirect('index')
 
 # def vehicledata_c(request):

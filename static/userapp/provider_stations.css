@@ -166,13 +166,14 @@ body {
 
 /* Pagination */
 
-.btn-danger {
+
+/* .btn-danger {
     cursor: pointer;
     background: transparent;
     border: 1px solid #dc3545;
     outline: none;
     transition: 1s ease-in-out;
-}
+} */
 
 svg {
     position: absolute;

@@ -9,7 +9,7 @@
     <script src="font awesome/js/all.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/00ddca2673.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'userapp/business.css'%}">
+    <link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
     <title>Dashboard</title>
 
 
@@ -76,7 +76,7 @@
                         </div>
                         <ul class="navbar-nav flex-column mt-5">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="index.html">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="{% url 'dashboard' %}">
                                     <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
                                 </a>
                             </li>
@@ -167,6 +167,10 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <div class="pt-4">
+                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}" class="btn btn-primary" role="button" aria-pressed="true">Dashboard</a>
+                                            <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button" aria-pressed="true">Remove</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -179,8 +183,7 @@
                                     <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1">First</a>
                                     <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a> {% endif %} {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
                                     <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a> {% elif num > page_obj.number|add:'-3' and num
-                                    < page_obj.number|add: '3' %} <a class="btn btn-outline-info mb-4" style="width:40px;"
-                                        href="?page={{ num }}">{{ num }}</a>
+                                    < page_obj.number|add: '3' %} <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
                                         {% endif %} {% endfor %} {% if page_obj.has_next %}
                                         <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
                                         <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a> {% endif %} {% endif %}
