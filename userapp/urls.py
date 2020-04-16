@@ -11,6 +11,7 @@ urlpatterns = [
     path('',views.index, name = 'index'),
     path('register/',views.register, name ='register'),
     path('registerConsumer/',views.registerConsumer, name = 'registerConsumer'),
+    path('registerConsumerSocial/',views.registerConsumerSocial, name = 'registerConsumerSocial'),
     path('registerProvider/',views.registerProvider, name = 'registerProvider'),
     path("loginf/", auth_views.LoginView.as_view(
         template_name='userapp/login.html'), name='login'),  

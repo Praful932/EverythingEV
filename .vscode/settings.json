@@ -1,7 +1,12 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\Shreyas Mahajan\\.virtualenvs\\s1\\Scripts\\python.exe"
 =======
     "python.pythonPath": "venv\\Scripts\\python.exe"
 >>>>>>> feaf9b32200dd84dd8b82ca86b100b62af8cae1f
+=======
+    "python.pythonPath": "e:\\Programs\\Github\\SIH-2020\\venv\\Scripts\\python.exe",
+    "workbench.editor.enablePreview": false
+>>>>>>> b669828c56e64cc7108d522a3a6948628f7b718d
 }

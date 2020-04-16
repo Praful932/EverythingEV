@@ -35,8 +35,35 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
     return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
 
 def index(request):
+    if request.user.is_authenticated :
+        try:
+            if Consumer.objects.get(user =  request.user):
+                pass
+        except:
+            try:
+                if Provider.objects.get(user =  request.user):
+                    pass
+            except:
+                return redirect('registerConsumerSocial')
     return render(request,"userapp/index.html")
 
+def registerConsumerSocial(request):
+    if request.method == 'POST':
+        consumerform = ConsumerSignUpForm(request.POST)
+        if consumerform.is_valid():
+            new_user = User.objects.get(username = request.user.username)
+            new_user.is_consumer = True
+            consumer = consumerform.save(commit = False)
+            consumer.user = new_user
+            new_user.save()
+            consumerform.save()
+            return redirect('index')
+    else:
+        consumerform = ConsumerSignUpForm()
+    context = {
+        'consumerform' : consumerform
+    }
+    return render(request, "userapp/registerConsumer.html", context = context)
 def register(request):
     return render(request,"userapp/registration_page.html")
 
