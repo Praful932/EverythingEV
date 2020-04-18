@@ -16,7 +16,7 @@
       <div class="card">
         <div class="card-body" id="Row1">
           <h3 class="card-title">Pending Complaints</h3>
-          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">4</p>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">{{count}}</p>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
       <div class="card">
         <div class="card-body" id="Row1">
           <h3 class="card-title">Complaints Solved</h3>
-          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">23<i class="fa fa-arrow-down" aria-hidden="true"></i></p>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">{{m.CompletedComplaints}}<i class="fa fa-arrow-down" aria-hidden="true"></i></p>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-body" id="Row1">
           <h3 class="card-title">Total Complaints</h3>
-          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">27</p>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">{{total}}</p>
         </div>
       </div>
     </div>
@@ -68,8 +68,12 @@
               <p>{{a.CsSelect.suburb}}</p>
               </details></td>
             <td>{{a.ph}}</td>
-            <td><button type="button" class="btn btn-success">Done</button>
+            <form action="" method="POST">
+              {% csrf_token %}
+            <td><button type="submit" value="{{a.pk}}" name="visited" class="btn btn-success">Visited</button>
             </td>
+    
+              </form>
           </tr>
           {%endfor%}
           

@@ -237,7 +237,7 @@ class MaintenanceManDetails(models.Model):
     OfficeAdd = models.TextField()
     AreaLocality = models.CharField(max_length = 30)
     City = models.CharField(max_length = 20)
-
+    CompletedComplaints= models.IntegerField(default=0,blank=True)
 
 class CsMaintenance(models.Model):
     Mm = models.ForeignKey(MaintenanceManDetails, on_delete=models.CASCADE,related_name="jobs")

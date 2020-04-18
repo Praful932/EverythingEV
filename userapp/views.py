@@ -433,26 +433,27 @@ class MaintenanceMan(CreateView):
         form.instance.own=self.request.user.provider
         return super().form_valid(form)
 
-
+@login_required
 def bookMaintenanceMan(request,pk):
     cscount = ChargingStation.objects.filter(owner=request.user.provider)
+    if request.user.is_provider:
 
-    if request.method == 'POST':
+        if request.method == 'POST':
 
-        if request.POST.get('problem'):
-            CsM=CsMaintenance()
-            # get the id from url for maintenanca
-            # get reueds .user.
-            # get descrip
-            CsM.csm = request.user.provider
-            CsM.Mm_id=pk
-            CsM.Problem = request.POST.get('problem')
-            CsM.ph =request.POST.get('phone')
-            cname= request.POST.get('Cs')
-            c = ChargingStation.objects.filter(name=cname)[0]
-            CsM.CsSelect = c
-            CsM.save()
-    return render(request,"booking.html",{'cs':cscount})
+            if request.POST.get('problem'):
+                CsM=CsMaintenance()
+                # get the id from url for maintenanca
+                # get reueds .user.
+                # get descrip
+                CsM.csm = request.user.provider
+                CsM.Mm_id=pk
+                CsM.Problem = request.POST.get('problem')
+                CsM.ph =request.POST.get('phone')
+                cname= request.POST.get('Cs')
+                c = ChargingStation.objects.filter(name=cname)[0]
+                CsM.CsSelect = c
+                CsM.save()
+        return render(request,"booking.html",{'cs':cscount})
 
 class SearchListView(ListView):
     model = MaintenanceManDetails
@@ -462,7 +463,9 @@ class SearchListView(ListView):
 
 
 def MaintenanceDashboard(request):
-    return render(request,"userapp/maintenance_dashboard.html")
+    if request.user.is_provider:
+
+        return render(request,"userapp/maintenance_dashboard.html")
 
 
 class ComplaintsListView(ListView):
@@ -478,8 +481,13 @@ def MaintenanceComplaint(request):
     # current_proviider = Provider.objects.get(user)
     m = MaintenanceManDetails.objects.get(own=request.user.provider)
     d = m.jobs.all()
-    print(d)
-    return render(request,"userapp/complaint_dashboard.html",{'d':d})
+    count = m.jobs.count()
+    if request.method == 'POST':
+        visited=request.POST.get('visited')
+        CsMaintenance.objects.get(pk=visited).delete()
+        m.CompletedComplaints=m.CompletedComplaints+1
+    total=count+m.CompletedComplaints
+    return render(request,"userapp/complaint_dashboard.html",{'d':d,'count':count,'m':m,'total':total})
     
 
 
