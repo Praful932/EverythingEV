@@ -12,11 +12,8 @@ urlpatterns = [
     path('register/',views.register, name ='register'),
     path('registerConsumer/',views.registerConsumer, name = 'registerConsumer'),
     path('registerConsumerSocial/',views.registerConsumerSocial, name = 'registerConsumerSocial'),
-    path('registerProvider/',views.registerProvider, name = 'registerProvider'),
-    path("loginf/", auth_views.LoginView.as_view(
-        template_name='userapp/login.html'), name='login'),  
+    path('registerProvider/',views.registerProvider, name = 'registerProvider'),  
     path("UpdateProfile/", views.UpdateProfile, name='UpdateProfile'),
-    path("logoutf/", views.logoutf, name='logout'),
     path('Charging-Station/',views.CS, name = 'Charging-Station'),
     path('Charging-Station/add/', views.AddChargingStation, name = 'AddChargingStation'),
     path('Charging-Station/my-stations/',ChargingStationProviderListView.as_view(),name='Charging-Station-PLV'),

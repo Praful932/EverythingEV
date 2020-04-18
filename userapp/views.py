@@ -78,7 +78,7 @@ def registerConsumer(request):
             new_user = signupform.save(commit = False)
             new_user.is_consumer = True
             new_user = signupform.save()
-            login(request,new_user)
+            login(request,new_user,backend='django.contrib.auth.backends.ModelBackend')
             consumer = consumerform.save(commit = False)
             consumer.user = new_user
             consumerform.save()
@@ -103,7 +103,7 @@ def registerProvider(request):
             new_user = signupform.save(commit = False)
             new_user.is_provider = True
             new_user = signupform.save()
-            login(request,new_user)
+            login(request,new_user,backend='django.contrib.auth.backends.ModelBackend')
             consumer = providerform.save(commit = False)
             consumer.user = new_user
             providerform.save()
@@ -460,13 +460,10 @@ class SearchListView(ListView):
     template_name='userapp/table.html'
     context_object_name='d'
 
-
-
 def MaintenanceDashboard(request):
     if request.user.is_provider:
 
         return render(request,"userapp/maintenance_dashboard.html")
-
 
 class ComplaintsListView(ListView):
     model = CsMaintenance
@@ -474,8 +471,6 @@ class ComplaintsListView(ListView):
     context_object_name='d'
     # def get_queryset(self):
     #     return CsMaintenance.objects.filter(Mm_own=self.request.user.provider)
-
-
 
 def MaintenanceComplaint(request):
     # current_proviider = Provider.objects.get(user)
@@ -489,12 +484,8 @@ def MaintenanceComplaint(request):
     total=count+m.CompletedComplaints
     return render(request,"userapp/complaint_dashboard.html",{'d':d,'count':count,'m':m,'total':total})
     
-
-
-
 def PendingComplaintsListView(request):
     return render(request,"userapp/complaint_dashboard.html")
-
 
 def test23(request):
     return (request,"analytics_v2.html",{})
