@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler
+from userapp.models import User, Consumer, Provider, Vehicle, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler,MaintenanceManDetails,CsMaintenance
 from urllib.request import urlopen
 from django.http import JsonResponse
 import json
@@ -68,7 +68,7 @@ def registerConsumer(request):
             new_user = signupform.save(commit = False)
             new_user.is_consumer = True
             new_user = signupform.save()
-            login(request,new_user)
+            login(request,new_user,backend='django.contrib.auth.backends.ModelBackend')
             consumer = consumerform.save(commit = False)
             consumer.user = new_user
             consumerform.save()
@@ -93,7 +93,7 @@ def registerProvider(request):
             new_user = signupform.save(commit = False)
             new_user.is_provider = True
             new_user = signupform.save()
-            login(request,new_user)
+            login(request,new_user,backend='django.contrib.auth.backends.ModelBackend')
             consumer = providerform.save(commit = False)
             consumer.user = new_user
             providerform.save()
@@ -429,11 +429,69 @@ def RouteYourWay(request):
 #         current_provider = Provider.objects.get(user=self.request.user)
 #         return ChargingStation.objects.filter(owner=current_provider)
 
-def MaintenanceDashboard(request):
-    return render(request,"userapp/maintenance_dashboard.html")
+class MaintenanceMan(CreateView):
+    model = MaintenanceManDetails
+    template_name='MaintenanceManForm.html'
+    fields = ['name','OrgName','ph1','ph2','OfficeAdd','City','AreaLocality']
+    def form_valid(self, form):
+        form.instance.own=self.request.user.provider
+        return super().form_valid(form)
 
-def AllMaintenanceMan(request):
-    return render(request,"userapp/table.html")
+@login_required
+def bookMaintenanceMan(request,pk):
+    cscount = ChargingStation.objects.filter(owner=request.user.provider)
+    if request.user.is_provider:
+
+        if request.method == 'POST':
+
+            if request.POST.get('problem'):
+                CsM=CsMaintenance()
+                # get the id from url for maintenanca
+                # get reueds .user.
+                # get descrip
+                CsM.csm = request.user.provider
+                CsM.Mm_id=pk
+                CsM.Problem = request.POST.get('problem')
+                CsM.ph =request.POST.get('phone')
+                cname= request.POST.get('Cs')
+                c = ChargingStation.objects.filter(name=cname)[0]
+                CsM.CsSelect = c
+                CsM.save()
+        return render(request,"booking.html",{'cs':cscount})
+
+class SearchListView(ListView):
+    model = MaintenanceManDetails
+    template_name='userapp/table.html'
+    context_object_name='d'
+
+def MaintenanceDashboard(request):
+    if request.user.is_provider:
+
+        return render(request,"userapp/maintenance_dashboard.html")
+
+class ComplaintsListView(ListView):
+    model = CsMaintenance
+    template_name='userapp/complaint_dashboard.html'
+    context_object_name='d'
+    # def get_queryset(self):
+    #     return CsMaintenance.objects.filter(Mm_own=self.request.user.provider)
+
+def MaintenanceComplaint(request):
+    # current_proviider = Provider.objects.get(user)
+    m = MaintenanceManDetails.objects.get(own=request.user.provider)
+    d = m.jobs.all()
+    count = m.jobs.count()
+    if request.method == 'POST':
+        visited=request.POST.get('visited')
+        CsMaintenance.objects.get(pk=visited).delete()
+        m.CompletedComplaints=m.CompletedComplaints+1
+    total=count+m.CompletedComplaints
+    return render(request,"userapp/complaint_dashboard.html",{'d':d,'count':count,'m':m,'total':total})
+    
+def PendingComplaintsListView(request):
+    return render(request,"userapp/complaint_dashboard.html")
 
 def PendingComplaints(request):
     return render(request,"userapp/complaint_dashboard.html")
+def test23(request):
+    return (request,"analytics_v2.html",{})

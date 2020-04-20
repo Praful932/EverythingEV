@@ -134,7 +134,7 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 # If accessing login Required page
-LOGIN_URL = 'login'
+LOGIN_URL = 'account_login'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -174,6 +174,8 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }   
+
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 
 ACCOUNT_LOGOUT_ON_GET = True
 

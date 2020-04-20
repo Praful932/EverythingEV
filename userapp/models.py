@@ -226,3 +226,22 @@ class ChargePooler(models.Model):
     cost = models.CharField(max_length= 25,default=price)
     normal_port = models.BooleanField(default= True)
     fast_port = models.BooleanField(default= False)
+
+
+class MaintenanceManDetails(models.Model):
+    own=models.OneToOneField(Provider,on_delete=models.CASCADE)
+    name = models.CharField(max_length = 50)
+    OrgName = models.CharField(max_length = 30)
+    ph1 = models.CharField(max_length = 14)
+    ph2 = models.CharField(max_length= 14)
+    OfficeAdd = models.TextField()
+    AreaLocality = models.CharField(max_length = 30)
+    City = models.CharField(max_length = 20)
+    CompletedComplaints= models.IntegerField(default=0,blank=True)
+
+class CsMaintenance(models.Model):
+    Mm = models.ForeignKey(MaintenanceManDetails, on_delete=models.CASCADE,related_name="jobs")
+    csm = models.OneToOneField(Provider, on_delete = models.CASCADE, primary_key=True)
+    CsSelect = models.OneToOneField(ChargingStation, on_delete = models.CASCADE)
+    ph=models.CharField(max_length=14)
+    Problem = models.TextField()

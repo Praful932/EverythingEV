@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    {%block body%}
+<body>
+
+<h2>HTML Forms</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="problem" value="John"><br>
+
+  <label for="cars">Choose a car:</label>
+
+  <select id="cars" name="Cs">
+    {%for d in cs%}
+     
+      
+   
+    <option value="{{d.name}}">{{d.name}}</option>
+    {%endfor%}
+  </select>
+  
+    
+
+    <input type="text" id="fuck" name="phone">
+    <input type="submit" value="Submit">
+    
+</form> 
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+
+</body>
+{%endblock body%}
+</html>

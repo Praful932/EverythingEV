@@ -48,3 +48,8 @@ class ChargingStationForm(forms.ModelForm):
             'closing_time' : 'Closing Time',
             'image' : 'Images'
         }
+
+# class MaintenanceManForm(forms.ModelForm):
+#     class Meta:
+#         model = MaintenanceManDetails
+#         fields = ['name','OrgName','ph1','ph2','OfficeAdd','AreaLocality']
