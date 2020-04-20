@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+{% extends "userapp/layout.html" %} {% load static %} 
+{% block head %}
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css'>
+{% endblock %}
 
-</head>
-<body>
+{% block body %}
 <!-- partial:index.partial.html -->
+<p style="margin-top: 200px;"></p>
+<body style="background-image: linear-gradient(#62C3C8, #37B9E9);"></body>
 <div class="container">
 <div class="row">
 <div class="col-lg-4 col-md-6" style="margin-top: 20px">
@@ -78,6 +78,4 @@
 </div>
 </div>
 <!-- partial -->
-  
-</body>
-</html>
+{% endblock body %}

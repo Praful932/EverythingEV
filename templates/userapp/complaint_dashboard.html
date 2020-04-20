@@ -1,15 +1,13 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
+{% extends "userapp/layout.html" %} {% load static %} 
+{% block head %}
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://npmcdn.com/flickity@2/dist/flickity.css'>
 <link rel="stylesheet" href="{%  static 'userapp/complaint_style.css' %}">
+{% endblock %}
 
-</head>
-<body>
-
+{% block body %}
+<p style="margin-top: 50px;"></p>
+<body style="background-image: linear-gradient(#62C3C8, #37B9E9);"></body>
 <div class="container-fluid"> 
   <div class="row">
     <div class="col-sm-4">
@@ -24,7 +22,7 @@
       <div class="card">
         <div class="card-body" id="Row1">
           <h3 class="card-title">Complaints Solved</h3>
-          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">{{m.CompletedComplaints}}<i class="fa fa-arrow-down" aria-hidden="true"></i></p>
+          <p class="card-text" style="font-size:6em;text-align:center;margin-top:-20px">{{m.CompletedComplaints}}</p>
         </div>
       </div>
     </div>
@@ -36,10 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6" >
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222956.1460761856!2d-82.29689329564486!3d29.173812511425073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e62b541cba3ce5%3A0xf5f53be4b1380536!2sOcala%2C+FL!5e0!3m2!1sen!2sus!4v1563387105323!5m2!1sen!2sus" width="100%" height="100%" frameborder="0" style="border:0" id="Row2" allowfullscreen></iframe>
-    </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <!-- <div class="table-wrapper-scroll-y my-custom-scrollbar"> -->
 
       <table class="table" id="Row2">
@@ -80,6 +75,38 @@
         </tbody>
       </table>
     </div>
+    <!--map-->
+    <div class="col-sm-12">
+      <div class="container">
+        <div class="main">
+          <div class="row">
+            <div class="col-sm-2">
+              <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a id="link1" href="#office" data-toggle="tab">Tab 1</a>
+                </li>
+                <li><a id="link2" href="#rnd" data-toggle="tab">Tab 2</a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="office">
+                   <h1>Contact 1</h1>
+                   <h4>Address 1</h4>
+                </div>
+                <div class="tab-pane" id="rnd">
+                   <h1>Contact 2</h1>
+                   <h4>Address 2</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <div id="map_canvas" style="height:250px; border: thin solid black;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  <!--map end-->
+    
+
    <div class="col-sm-12">
       <div class="carousel" data-flickity='{ "groupCells": true }'>
         {%for ad in d%}
@@ -91,5 +118,9 @@
 </div>
 <!-- partial -->
   <script src='https://npmcdn.com/flickity@2/dist/flickity.pkgd.js'></script>
-</body>
-</html>
+  <script src='https://maps.googleapis.com/maps/api/js'></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&callback=initMap">
+    </script>
+  <script  src="{%  static 'userapp/complaint_script.js' %}"></script>
+{% endblock body %}
