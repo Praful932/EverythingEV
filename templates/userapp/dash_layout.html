@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/00ddca2673.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'userapp/dash_style.css'%}"> {% block head %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+</head>
+
+<body>
+    <nav class="navbar-expand-md navbar-light">
+        <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- side nav -->
+                    <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+                        <a href="#" class="navbar-brand bottom-border text-white d-block ml-auto mr-auto py-3 text-center mb-4 font-weight-bold">EverythingEV</a>
+                        <div class="text-center bottom-border pb-2">
+                            <img src="images/iconfinder_user-id_285641.svg" class="icon" width="50">
+                            <a href="#" class="text-white">James Charles</a>
+                        </div>
+                        <ul class="navbar-nav flex-column mt-5">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" href=#>
+                                    <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" id="class" href="{% url 'Charging-Station-PLV' %}">
+                                    <i class="fas fa-briefcase text-white ml-2 fa-lg mr-3"></i> Business
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-chart-pie text-white ml-2 fa-lg mr-3"></i> Analytics
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-portrait text-white ml-2 fa-lg mr-3"></i> Profile
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-headset text-white ml-2 fa-lg mr-3"></i> Support
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- top nav -->
+                    <div class="col-xl-10 col-lg-9 col-md-8 ml-auto  fixed-top py-2 top-nav" style="background-color: #23a6d5;">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <h4 class="text-uppercase mb-0 font-weight-bold" style="color: ghostwhite;">Dashboard
+                                </h4>
+                            </div>
+                            <div class="col-md-5">
+
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="navbar-nav float-right">
+                                    <li class="nav-item icon-parent">
+                                        <a href="" class="nav-link icon-bullet"><i
+                                                class="fas fa-bell text-muted fa-lg"></i></a>
+                                    </li>
+                                    <li class="nav-item float-right ">
+                                        <a href="" class="nav-link" data-toggle="modal" data-target="#signout"><i
+                                                class="fas fa-sign-out-alt text-danger fa-lg"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border-width: 2 px;">
+                    <!--top nav end-->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="signout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Want to Leave?</h4>
+                </div>
+                <div class="modal-body">
+                    Press Logout to leave
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br> {% block body %} {% endblock %}
+
+
+    <!-- Script -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script>
+        console.log(window.location.href);
+
+        function changeclass() {
+            var url_window = {
+                {
+                    val
+                }
+            }
+            if (window.location.href == url_window)
+                document.getElementById("class").classList.add("current");
+
+        }
+    </script>
+
+    <!-- End of script -->
+
+    {% block script %} {% endblock %}
+</body>
+
+</html>

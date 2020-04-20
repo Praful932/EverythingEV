@@ -35,16 +35,6 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
     return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
 
 def index(request):
-    if request.user.is_authenticated :
-        try:
-            if Consumer.objects.get(user =  request.user):
-                pass
-        except:
-            try:
-                if Provider.objects.get(user =  request.user):
-                    pass
-            except:
-                return redirect('registerConsumerSocial')
     return render(request,"userapp/index.html")
 
 def registerConsumerSocial(request):
@@ -205,6 +195,7 @@ class ChargingStationProviderListView(LoginRequiredMixin,UserPassesTestMixin,Lis
     ordering = ['-created_at']
     context_object_name = 'cslist'
     paginate_by = 3
+    context = {'val':'1'}
 
     def test_func(self):
         if self.request.user.is_provider:
@@ -313,7 +304,7 @@ def ChargingStationAnalytics(request,pk):
         consumption = []
         sum = 0
         n = 0
-        for ele in wholecs:
+        for ele in wholecs  :
             n+=1
             sum+=ele.elec_consumption
         sum/=n
@@ -335,7 +326,7 @@ def ChargingStationAnalytics(request,pk):
             'consumption':json.dumps(consumption),
             'wr':json.dumps(wr)
         }
-        return render(request,"userapp/analytics_v2.html",context=context)
+        return render(request,"userapp/cs_analytics.html",context=context)
     return redirect('index')
 
 @login_required
@@ -359,7 +350,7 @@ def ChargingStationDashboard(request,pk):
         context = {
             'records':recorddata
         }
-        return render(request,"userapp/dash.html",context=context)
+        return render(request,"userapp/dash_welcome.html",context=context)
     return redirect('index')
 
 # def vehicledata_c(request):
@@ -422,23 +413,21 @@ def RouteYourWay(request):
         return render(request,"userapp/routeyourway.html",context=context)
     return redirect('index')
 
-class dash(LoginRequiredMixin,UserPassesTestMixin,ListView):
-    model = ChargingStation
-    template_name = 'userapp/business.html'
-    ordering = ['-created_at']
-    context_object_name = 'cslist'
-    paginate_by = 3
+# class dash(LoginRequiredMixin,UserPassesTestMixin,ListView):
+#     model = ChargingStation
+#     template_name = 'userapp/cs_analytics.html'
+#     ordering = ['-created_at']
+#     context_object_name = 'cslist'
+#     paginate_by = 3
 
-    def test_func(self):
-        if self.request.user.is_provider:
-            return True
-        return False
+#     def test_func(self):
+#         if self.request.user.is_provider:
+#             return True
+#         return False
     
-    def get_queryset(self):
-        current_provider = Provider.objects.get(user=self.request.user)
-        return ChargingStation.objects.filter(owner=current_provider)
-def temp(request):
-    return render(request,"userapp/dashboard.html")
+#     def get_queryset(self):
+#         current_provider = Provider.objects.get(user=self.request.user)
+#         return ChargingStation.objects.filter(owner=current_provider)
 
 def MaintenanceDashboard(request):
     return render(request,"userapp/maintenance_dashboard.html")

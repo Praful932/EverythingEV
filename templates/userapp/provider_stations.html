@@ -1,212 +1,71 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="font awesome/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/00ddca2673.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
-    <title>Dashboard</title>
+{% extends "userapp/dash_layout.html"%} {% load static %} {% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
+<title>Dashboard</title>
 
 
-</head>
-
-<body>
-    <nav class="navbar-expand-md navbar-dark" style="background-color:rgb(25, 25, 25)">
-        <div class="d-flex justify-content-between">
-            <h4 class="text-light mt-2 ml-2">EverythingEV</h4>
-            <button class="navbar-toggler ml-auto mb-2 bg-dark" type="button" data-toggle="collapse" data-target="#myNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- top nav -->
-                    <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-nav">
-                        <div class="row align-items-center">
-                            <div class="col-md-4">
-                                <h4 class="text-uppercase text-light mb-0">Dashboard</h4>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="input-group">
-                                    <input type="text" class="form-control search-input" placeholder="Search...">
-                                    <button class="btn btn-light search-button" type="button"><i
-                                            class="fas fa-search text-danger"></i></button>
+{% endblock %} {% block body %}
+<!-- Business -->
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                <div class="container">
+                    <div class="px-5 pt-0 text-center">
+                        <h2 class="text-center cs">Your Charging Stations</h2>
+                    </div>
+                    <div class="row ml-3">
+                        {% for cs in cslist %}
+                        <div class="col-xl-4 col-md-6 col-sm-6 p-2">
+                            <div class="card shadow" style="width:254px;">
+                                <div class="inner">
+                                    <img class="card-img-top" src="{%static 'userapp/1.jpeg'%}" alt="Card image cap">
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <ul class="navbar-nav">
-                                    <div class="row ml-auto pt-xs-4 pt-xl-0">
-                                        <div class="col-sm-4">
-                                            <li class="nav-item icon-parent">
-                                                <a href="" class="nav-link icon-bullet"><i
-                                                        class="fas fa-comments text-muted fa-lg"></i></a>
-                                            </li>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <li class="nav-item icon-parent">
-                                                <a href="" class="nav-link icon-bullet"><i
-                                                        class="fas fa-bell text-muted fa-lg"></i></a>
-                                            </li>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <li class="nav-item ml-md-auto">
-                                                <a href="" class="nav-link" data-toggle="modal" data-target="#signout"><i
-                                                        class="fas fa-sign-out-alt text-danger fa-lg"></i></a>
-                                            </li>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ cs.name }}</h5>
+                                    <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
+                                    <div class="justify-content-between mt-2">
+                                        <!-- <a href="#" class="btn btn-primary">Learn more</a> -->
+                                        <div class="ml-2">
+                                            <i class="fas fa-video fa-lg"></i>
+                                            <i class="fas fa-restroom fa-lg ml-2"></i>
+                                            <span class="ml-5">
+                                                <i class="fas fa-bolt text-warning fa-lg">10</i>
+                                                <i class="fas fa-bolt text-success fa-lg ml-2">8</i>
+                                            </span>
                                         </div>
                                     </div>
-                                </ul>
+                                    <div class="pt-4 ">
+                                        <div class="justify-content-between mb-2">
+                                            <a href=# class="btn btn-success mr-2" role="button" aria-pressed="true">Status</a>
+                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}" class="btn btn-primary" role="button" aria-pressed="true">Analytics</a>
+                                        </div>
+                                        <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button" aria-pressed="true">Remove</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    <!-- End of top nav -->
-                    <!-- side nav -->
-                    <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
-                        <a href="#" class="navbar-brand bottom-border text-white d-block ml-auto mr-auto py-3 text-center mb-4">EverythingEV</a>
-                        <div class="text-center bottom-border pb-2">
-                            <img src="images/iconfinder_user-id_285641.svg" class="icon" width="50">
-                            <a href="#" class="text-white">James Charles</a>
-                        </div>
-                        <ul class="navbar-nav flex-column mt-5">
-                            <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="{% url 'dashboard' %}">
-                                    <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white current" href="business.html">
-                                    <i class="fas fa-briefcase text-white ml-2 fa-lg mr-3"></i> Business
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
-                                    <i class="fas fa-chart-pie text-white ml-2 fa-lg mr-3"></i> Analytics
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
-                                    <i class="fas fa-portrait text-white ml-2 fa-lg mr-3"></i> Profile
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
-                                    <i class="fas fa-headset text-white ml-2 fa-lg mr-3"></i> Support
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End of side nav -->
+                    <footer style="align-content: center;margin-right: 70px;">
+                        <section>
+                            <div class="pagebtn">
+                                {% if is_paginated %} {% if page_obj.has_previous %}
+                                <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1">First</a>
+                                <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a> {% endif %} {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
+                                <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a> {% elif num > page_obj.number|add:'-3' and num
+                                < page_obj.number|add: '3' %} <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %} {% endfor %} {% if page_obj.has_next %}
+                                    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
+                                    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a> {% endif %} {% endif %}
+                            </div>
+                        </section>
+                    </footer>
                 </div>
             </div>
-        </div>
-    </nav>
 
-    <!-- Modal -->
-
-    <div class="modal fade" id="signout">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Want to Leave?</h4>
-                </div>
-                <div class="modal-body">
-                    Press Logout to leave
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Logout</button>
-                </div>
-            </div>
         </div>
     </div>
-
-    <!-- End of modal -->
-
-    <!-- Business -->
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                    <div class="container">
-                        <div class="px-5 pt-4 text-center">
-                            <h2 class="text-center cs">Your Charging Stations</h2>
-                        </div>
-                        <div class="row">
-                            {% for cs in cslist %}
-                            <div class="col-xl-4 col-md-6 col-sm-6 p-2">
-                                <div class="card shadow" style="width:254px;">
-                                    <div class="inner">
-                                        <img class="card-img-top" src="{%static 'userapp/1.jpeg'%}" alt="Card image cap">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ cs.name }}</h5>
-                                        <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
-                                        <div class="justify-content-between">
-                                            <!-- <a href="#" class="btn btn-primary">Learn more</a> -->
-                                            <div class="ml-2">
-                                                <i class="fas fa-video fa-lg"></i>
-                                                <i class="fas fa-restroom fa-lg ml-2"></i>
-                                                <span class="ml-5">
-                                                    <i class="fas fa-bolt text-warning fa-lg">10</i>
-                                                    <i class="fas fa-bolt text-success fa-lg ml-2">8</i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="pt-4">
-                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}" class="btn btn-primary" role="button" aria-pressed="true">Dashboard</a>
-                                            <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button" aria-pressed="true">Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <footer style="align-content: center;margin-right: 70px;">
-                            <section>
-                                <div class="pagebtn">
-                                    {% if is_paginated %} {% if page_obj.has_previous %}
-                                    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1">First</a>
-                                    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a> {% endif %} {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
-                                    <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a> {% elif num > page_obj.number|add:'-3' and num
-                                    < page_obj.number|add: '3' %} <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
-                                        {% endif %} {% endfor %} {% if page_obj.has_next %}
-                                        <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
-                                        <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a> {% endif %} {% endif %}
-                                </div>
-                            </section>
-                        </footer>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-    <!-- Script -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <!-- End of script -->
-</body>
-
-</html>
+</section>
+{% endblock %}
