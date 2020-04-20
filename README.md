@@ -33,6 +33,12 @@ All Set!
 
 `$ python manage.py runserver`
 
+Before you do a git add/commit make sure to check the code base for coding style/programming errors
+
+`$ flake8`
+
+Fix it then stage changes!
+
 To exit the environment
 
 `$ deactivate `
