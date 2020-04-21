@@ -3,6 +3,7 @@
 Smart India Hackathon 2020 Project
 
 ## Development
+Note : Make sure you have Python version 3.8+
 
 Environment Setup
 
@@ -18,9 +19,11 @@ Create a virtual environment
 
 `$ virtualenv venv`
 
-Activate the environment
+Activate the environment everytime you open the project
 
 `$ source venv/Scripts/activate`
+
+`$ git checkout dev`
 
 Install requirements
 
@@ -28,6 +31,15 @@ Install requirements
 
 All Set!
 
-`$ git checkout dev`
-
 `$ python manage.py runserver`
+
+Before you do a git add/commit make sure to check the code base for coding style/programming errors
+
+`$ flake8`
+
+Fix it then stage changes!
+
+To exit the environment
+
+`$ deactivate `
+
