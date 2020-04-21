@@ -479,19 +479,11 @@ def MaintenanceComplaint(request):
     if request.method == 'POST':
         visited = request.POST.get('visited')
         CsMaintenance.objects.get(pk=visited).delete()
-<<<<<<< HEAD
         m.CompletedComplaints=m.CompletedComplaints+1
 
     total=count+m.CompletedComplaints
     return render(request,"userapp/complaint_dashboard.html",{'d':d,'count':count,'m':m,'total':total,"my_data": json.dumps(js_data)})
     
-=======
-        m.CompletedComplaints = m.CompletedComplaints+1
-    total = count+m.CompletedComplaints
-    return render(request, "userapp/complaint_dashboard.html", {'d': d, 'count': count, 'm': m, 'total': total})
-
-
->>>>>>> 0198ff0fa4f13c96967371584d420f7f30d0c9fd
 def PendingComplaintsListView(request):
     return render(request, "userapp/complaint_dashboard.html")
 
