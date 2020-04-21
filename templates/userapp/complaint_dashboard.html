@@ -53,7 +53,7 @@
         <tbody>
           {%for a in d%}
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{a.CsSelect.id}}</th>
             <td>{{a.CsSelect.name}}</td>
             <td><details>
               <summary>Complaint</summary>
@@ -76,41 +76,38 @@
       </table>
     </div>
     <!--map-->
+    <b>Checkout the Locations......</b><br>
+    <div id="new">
+                  
+    </div>
     <div class="col-sm-12">
       <div class="container">
         <div class="main">
           <div class="row">
             <div class="col-sm-2">
               <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a id="link1" href="#office" data-toggle="tab">Tab 1</a>
-                </li>
-                <li><a id="link2" href="#rnd" data-toggle="tab">Tab 2</a>
-                </li>
+              
+                              
               </ul>
               <div class="tab-content">
-                <div class="tab-pane active" id="office">
-                   <h1>Contact 1</h1>
-                   <h4>Address 1</h4>
-                </div>
-                <div class="tab-pane" id="rnd">
-                   <h1>Contact 2</h1>
-                   <h4>Address 2</h4>
-                </div>
+                
               </div>
             </div>
+            
             <div class="col-sm-10">
               <div id="map_canvas" style="height:250px; border: thin solid black;"></div>
             </div>
           </div>
         </div>
       </div>
+      <br>
     </div>  <!--map end-->
     
 
    <div class="col-sm-12">
       <div class="carousel" data-flickity='{ "groupCells": true }'>
         {%for ad in d%}
-        <div class="carousel-cell"><p>{{ad.CsSelect.name}}<br>{{ad.CsSelect.suburb}}<br>click to see the directions</p></div>
+        <div class="carousel-cell"><p>{{ad.CsSelect.id}}.{{ad.CsSelect.name}}<br>Locality..{{ad.CsSelect.suburb}}<br>Ports available...{{ad.CsSelect.no_of_ports}}<br>Timings..{{ad.CsSelect.opening_time}}-{{ad.CsSelect.closing_time}}</p></div>
         {%endfor%}
       </div>
     </div>
@@ -122,5 +119,86 @@
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&callback=initMap">
     </script>
-  <script  src="{%  static 'userapp/complaint_script.js' %}"></script>
+
 {% endblock body %}
+{%block script%}
+<script>
+
+  var marker;
+  var map;
+  var my_data = JSON.parse('{{ my_data|safe }}');
+  console.log(my_data[0][2]); 
+  
+  for (var i = 0 ; i < my_data.length; i++) {
+  
+          var str1="#link";
+          var str2=i;
+          var a = document.createElement("a");
+          var text = document.createTextNode(my_data[i][2]+" "+my_data[i][3]+"     .     .");
+          a.appendChild(text);
+         // a.href="#rnd";
+          a.id=str1.concat(str2);
+          var x=my_data[i][0];
+          var y=my_data[i][1];
+          var passfoo = "myFunction(" + x + "," + y + ")";
+          a.setAttribute("onclick", passfoo);
+          a.setAttribute("data-toggle", "tab");
+          var element = document.getElementById("new");
+          element.appendChild(a);
+        
+  }  
+
+
+    function myFunction(x,y) {
+      changeMarkerPos(x,y);
+    }
+
+  
+  function initialize() {
+      var styles = [{
+          stylers: [{
+              saturation: -100
+          }]
+      }];
+      var styledMap = new google.maps.StyledMapType(styles, {
+          name: "Styled Map"
+      });
+      var mapProp = {
+          center: new google.maps.LatLng(19.261522, 75.194100),
+          zoom: 13,
+          panControl: false,
+          zoomControl: false,
+          mapTypeControl: false,
+          scaleControl: true,
+          streetViewControl: false,
+          overviewMapControl: false,
+          rotateControl: true,
+          scrollwheel: false,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("map_canvas"), mapProp);
+    
+      map.mapTypes.set('map_style', styledMap);
+      map.setMapTypeId('map_style')
+  
+      marker = new google.maps.Marker({
+          position: new google.maps.LatLng(19.261522, 75.194100),
+          animation: google.maps.Animation.DROP,
+          icon: 'https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-32.png',
+      });
+    
+      marker.setMap(map);
+      map.panTo(marker.position);
+  }
+  
+  function changeMarkerPos(lat, lon){
+      myLatLng = new google.maps.LatLng(lat, lon)
+      marker.setPosition(myLatLng);
+      map.panTo(myLatLng);
+  }
+  
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{%endblock%}

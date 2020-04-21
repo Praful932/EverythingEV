@@ -260,7 +260,7 @@ def ChargingStationConsumer(request):
             lngs_cleaned.append(float(cs.lng))  
             ports_cleaned.append(int(cs.no_of_ports))
             dc_cleaned.append(int(cs.fast_dc))
-            ac_cleaned.append(int(cs.slow_ac))
+            ac_cleaned.append(int(cs.slow_ac))  
             price_cleaned.append(float(cs.price_kwh))
             restroom_cleaned.append(int(cs.restroom))
             cctv_cleaned.append(int(cs.cctv))
@@ -480,13 +480,27 @@ def MaintenanceComplaint(request):
     # current_proviider = Provider.objects.get(user)
     m = MaintenanceManDetails.objects.get(own=request.user.provider)
     d = m.jobs.all()
+    locate = CsMaintenance.objects.filter(Mm=m.id)
     count = m.jobs.count()
+    lngs_cleaned = []
+    lats_cleaned = []
+    pk_cleaned= []
+    name_cleaned = []
+    for l in locate:
+        lats_cleaned.append(float(l.CsSelect.lat))     
+        lngs_cleaned.append(float(l.CsSelect.lng)) 
+        pk_cleaned.append(int(l.CsSelect.pk))
+        name_cleaned.append(str(l.CsSelect.name))
+    js_data = [list(x) for x in zip(
+        lats_cleaned,lngs_cleaned,pk_cleaned,name_cleaned
+    )]
     if request.method == 'POST':
         visited=request.POST.get('visited')
         CsMaintenance.objects.get(pk=visited).delete()
         m.CompletedComplaints=m.CompletedComplaints+1
+
     total=count+m.CompletedComplaints
-    return render(request,"userapp/complaint_dashboard.html",{'d':d,'count':count,'m':m,'total':total})
+    return render(request,"userapp/complaint_dashboard.html",{'d':d,'count':count,'m':m,'total':total,"my_data": json.dumps(js_data)})
     
 def PendingComplaintsListView(request):
     return render(request,"userapp/complaint_dashboard.html")

@@ -1,9 +1,23 @@
 var marker;
 var map;
+var my_data = JSON.parse('{{ my_data|safe }}');
+console.log(my_data[0][2]); 
 
-$("#link1").click(function(){
-    changeMarkerPos(3.165759, 101.611416);
-});
+for (var i = my_data[0][2] ; i < my_data[0][2]+my_data.length; i++) {
+
+        var str1="#link";
+        var str2=i;
+        var tag = document.createElement("li");
+        var text = document.createTextNode("link  ");
+        tag.appendChild(text);
+        var element = document.getElementById("new");
+        element.appendChild(tag);
+
+
+        $(str1.concat(str2)).click(function(){
+            changeMarkerPos(my_data[i][0],my_data[i][1] );
+        });
+    }
 $("#link2").click(function(){
     changeMarkerPos(3.165559, 101.612416);
 });
