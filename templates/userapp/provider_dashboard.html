@@ -1,11 +1,16 @@
-{% extends "userapp/dash_layout.html"%} {% load static %} {% block head %}
+{% extends "userapp/dash_layout.html"%}
+{% load static %}
+{% block head %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
-<title>Dashboard</title>
+{% endblock %}
 
+{% block title %}
+Dashboard
+{% endblock %}
 
-{% endblock %} {% block body %}
+{% block body %}
 <!-- Business -->
 <section>
     <div class="container-fluid">
@@ -38,10 +43,13 @@
                                     </div>
                                     <div class="pt-4 ">
                                         <div class="justify-content-between mb-2">
-                                            <a href=# class="btn btn-success mr-2" role="button" aria-pressed="true">Status</a>
-                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}" class="btn btn-primary" role="button" aria-pressed="true">Analytics</a>
+                                            <a href=# class="btn btn-success mr-2" role="button"
+                                                aria-pressed="true">Status</a>
+                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}"
+                                                class="btn btn-primary" role="button" aria-pressed="true">Analytics</a>
                                         </div>
-                                        <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button" aria-pressed="true">Remove</a>
+                                        <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button"
+                                            aria-pressed="true">Remove</a>
                                     </div>
                                 </div>
                             </div>
@@ -51,14 +59,30 @@
                     <footer style="align-content: center;margin-right: 70px;">
                         <section>
                             <div class="pagebtn">
-                                {% if is_paginated %} {% if page_obj.has_previous %}
-                                <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page=1">First</a>
-                                <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.previous_page_number}}">Previous</a> {% endif %} {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
-                                <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a> {% elif num > page_obj.number|add:'-3' and num
-                                < page_obj.number|add: '3' %} <a class="btn btn-outline-info mb-4" style="width:40px;" href="?page={{ num }}">{{ num }}</a>
-                                    {% endif %} {% endfor %} {% if page_obj.has_next %}
-                                    <a class="btn btn-outline-info mb-4" style="width:70px;" href="?page={{ page_obj.next_page_number }}">First</a>
-                                    <a class="btn btn-outline-info mb-4" style="width:100px;" href="?page={{ page.obj.paginator.num_pages }}">Previous</a> {% endif %} {% endif %}
+                                {% if is_paginated %}
+
+                                {% if page_obj.has_previous %}
+                                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                                <a class="btn btn-outline-info mb-4"
+                                    href="?page={{ page.obj.previous_page_number}}">Previous</a>
+                                {% endif  %}
+
+                                {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                <a class="btn btn-outline-info mb-4"
+                                    href="?page={{ page_obj.next_page_number }}">First</a>
+                                <a class="btn btn-outline-info mb-4"
+                                    href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
+                                {% endif  %}
+
+                                {% endif  %}
                             </div>
                         </section>
                     </footer>
@@ -68,4 +92,10 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.getElementById("dashboard").classList.add("sidebar-link");
+</script>
 {% endblock %}

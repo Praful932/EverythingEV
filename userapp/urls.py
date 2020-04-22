@@ -2,20 +2,20 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from userapp.views import (ChargingStationProviderListView, ChargingStationProviderDeleteView, MaintenanceMan,
+from userapp.views import (ProviderDashboard, ChargingStationProviderDeleteView, MaintenanceMan,
                            SearchListView)
 
 # ChargingStation - CS
 urlpatterns = [
     path('', views.index, name='index'),
+    path('check/', views.check, name='check'),
     path('register/', views.register, name='register'),
     path('registerConsumer/', views.registerConsumer, name='registerConsumer'),
     path('registerConsumerSocial/', views.registerConsumerSocial, name='registerConsumerSocial'),
     path('registerProvider/', views.registerProvider, name='registerProvider'),
     path("UpdateProfile/", views.UpdateProfile, name='UpdateProfile'),
-    path('Charging-Station/', views.CS, name='Charging-Station'),
     path('Charging-Station/add/', views.AddChargingStation, name='AddChargingStation'),
-    path('Charging-Station/my-stations/', ChargingStationProviderListView.as_view(), name='Charging-Station-PLV'),
+    path('Provider-Dashboard', ProviderDashboard.as_view(), name='Provider-Dashboard'),
     path('Charging-Station/analytics/<int:pk>', views.ChargingStationAnalytics, name='Charging-Station-Analytics'),
     path('Charging-Station/dashboard/<int:pk>', views.ChargingStationDashboard, name='Charging-Station-Dashboard'),
     path('station/<int:pk>/delete/', ChargingStationProviderDeleteView.as_view(), name='DeleteStation'),
