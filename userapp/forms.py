@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from userapp.models import Consumer, Provider, User, ChargingStation
+from userapp.models import (Consumer, Provider, User, ChargingStation,
+                           Support)
 
 
 class UserSignUpForm(UserCreationForm):
