@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,14 +57,14 @@
                         </ul>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white" href="{% url 'UpdateProfile' %}">
+                                <a class="nav-link p-3 mb-2 text-white" href="{% url 'Profile' %}">
                                     <i class="fas fa-portrait text-white ml-2 fa-lg mr-3"></i> Profile
                                 </a>
                             </li>
                         </ul>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white" href="#">
+                                <a class="nav-link p-3 mb-2 text-white" data-toggle="modal" data-target="#supportform">
                                     <i class="fas fa-headset text-white ml-2 fa-lg mr-3"></i> Support
                                 </a>
                             </li>
@@ -118,18 +119,25 @@
         </div>
     </div>
 
-    <div class="modal fade" id="support">
+    <div class="modal fade" id="supportform">
         <div class="modal-dialog">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Facing an Issue
-                </h4>
-            </div>
-            <div class="modal-body">
-                
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Your Issue</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ supportform|crispy }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
-    </>
+    </div>
     <br>
     <br> {% block body %} {% endblock %}
 

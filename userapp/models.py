@@ -132,7 +132,9 @@ class ChargingStation(models.Model):
 
     def __str__(self):
         return str(self.pk) + '. ' + self.owner.user.username + ' ' + self.city
-    # noofports,fast(dc),slow(ac),restroom,cctv,photos,opening time, closing time
+    
+    class Meta():
+        ordering = ['-created_at']
 
 
 def duration():

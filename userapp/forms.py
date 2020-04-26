@@ -56,7 +56,15 @@ class ChargingStationForm(forms.ModelForm):
             'image': 'Images'
         }
 
-# class MaintenanceManForm(forms.ModelForm):
-#     class Meta:
-#         model = MaintenanceManDetails
-#         fields = ['name','OrgName','ph1','ph2','OfficeAdd','AreaLocality']
+class SupportForm(forms.ModelForm):
+    class Meta:
+        model = Support
+        fields = ['subject','description']
+        labels = {
+            'subject' : 'Issue Title',
+            'description' : 'Issue Description'
+        }
+        
+        widgets = {
+            'description': forms.Textarea(attrs={'placeholder':'Describe your issue here(max 200 words)'})
+        }

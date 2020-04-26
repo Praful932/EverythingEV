@@ -5,11 +5,13 @@ from django import forms
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
-from userapp.forms import UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm, ChargingStationForm
+from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
+                           ChargingStationForm, SupportForm)
 from django.contrib.auth import logout, login
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
-                            ChargePooler, MaintenanceManDetails, CsMaintenance)
+                            ChargePooler, MaintenanceManDetails,Consumer, CsMaintenance)
 from urllib.request import urlopen
 import json
 import math
@@ -23,19 +25,24 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
         math.sin(d_lat / 2) ** 2
         + math.cos(lat_1)
         * math.cos(lat_2)
-        * math.sin(d_lng / 2) ** 2
+        * math.sin(d_lng / 2) ** 2  
     )
 
     return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
 
 
-def check(request):
-    if request.user.is_provider:
-        return redirect('Provider-Dashboard')
-
-
 def index(request):
-    return render(request, "userapp/index.html")
+    if request.user.is_authenticated :
+        try:
+            if Consumer.objects.get(user =  request.user):
+                pass
+        except:
+            try:
+                if Provider.objects.get(user =  request.user):
+                    pass
+            except:
+                return redirect('registerConsumerSocial')
+    return render(request,"userapp/index.html")
 
 
 def registerConsumerSocial(request):
@@ -186,21 +193,27 @@ def AddChargingStation(request):
     return render(request, "userapp/add_charging_station.html", context=context)
 
 
-class ProviderDashboard(LoginRequiredMixin, UserPassesTestMixin, ListView):
-    model = ChargingStation
-    template_name = 'userapp/provider_dashboard.html'
-    ordering = ['-created_at']
-    context_object_name = 'cslist'
-    paginate_by = 3
-
-    def test_func(self):
-        if self.request.user.is_provider:
-            return True
-        return False
-
-    def get_queryset(self):
-        current_provider = Provider.objects.get(user=self.request.user)
-        return ChargingStation.objects.filter(owner=current_provider)
+@login_required
+def ProviderDashboard(request):
+    if request.user.provider:
+        if request.method == 'GET':
+            current_provider = Provider.objects.get(user=request.user)
+            page = request.GET.get('page', 1)
+            paginator = Paginator(ChargingStation.objects.filter(owner=current_provider), 3)
+            try:
+                cslist = paginator.page(page)
+            except PageNotAnInteger:
+                cslist = paginator.page(1)
+            except EmptyPage:
+                cslist = paginator.page(paginator.num_pages)
+            supportform = SupportForm()
+            print(cslist)
+            context = {
+                'cslist': cslist,
+                'supportform': supportform
+            }
+            return render(request, "userapp/provider_dashboard.html", context=context)
+    return redirect('index')
 
 
 class ChargingStationProviderDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
