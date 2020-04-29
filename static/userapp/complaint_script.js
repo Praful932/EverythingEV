@@ -1,24 +1,24 @@
 var marker;
 var map;
 var my_data = JSON.parse('{{ my_data|safe }}');
-console.log(my_data[0][2]); 
+console.log(my_data[0][2]);
 
-for (var i = my_data[0][2] ; i < my_data[0][2]+my_data.length; i++) {
+for (var i = my_data[0][2]; i < my_data[0][2] + my_data.length; i++) {
 
-        var str1="#link";
-        var str2=i;
-        var tag = document.createElement("li");
-        var text = document.createTextNode("link  ");
-        tag.appendChild(text);
-        var element = document.getElementById("new");
-        element.appendChild(tag);
+    var str1 = "#link";
+    var str2 = i;
+    var tag = document.createElement("li");
+    var text = document.createTextNode("link  ");
+    tag.appendChild(text);
+    var element = document.getElementById("new");
+    element.appendChild(tag);
 
 
-        $(str1.concat(str2)).click(function(){
-            changeMarkerPos(my_data[i][0],my_data[i][1] );
-        });
-    }
-$("#link2").click(function(){
+    $(str1.concat(str2)).click(function() {
+        changeMarkerPos(my_data[i][0], my_data[i][1]);
+    });
+}
+$("#link2").click(function() {
     changeMarkerPos(3.165559, 101.612416);
 });
 
@@ -45,7 +45,7 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), mapProp);
-  
+
     map.mapTypes.set('map_style', styledMap);
     map.setMapTypeId('map_style')
 
@@ -54,12 +54,12 @@ function initialize() {
         animation: google.maps.Animation.DROP,
         icon: 'https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-32.png',
     });
-  
+
     marker.setMap(map);
     map.panTo(marker.position);
 }
 
-function changeMarkerPos(lat, lon){
+function changeMarkerPos(lat, lon) {
     myLatLng = new google.maps.LatLng(lat, lon)
     marker.setPosition(myLatLng);
     map.panTo(myLatLng);

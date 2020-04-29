@@ -27,7 +27,7 @@ urlpatterns = [
     path('Maintenance-man/view-all', SearchListView.as_view(), name='All-Maintenance-Man'),
     path('Maintenance-man/complaints', views.MaintenanceComplaint, name='Complaint-Dashboard'),
     path('book/<int:pk>', views.bookMaintenanceMan, name="bookingMm"),
-    path('test/', views.test23, name="test")
+    path('faq/',views.faq, name="faq")
 ]
 
 if settings.DEBUG:

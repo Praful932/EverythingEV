@@ -491,6 +491,5 @@ def PendingComplaintsListView(request):
 def PendingComplaints(request):
     return render(request, "userapp/complaint_dashboard.html")
 
-
-def test23(request):
-    return render(request, "analytics_v2.html", {})
+def faq(request):
+    return render(request, "userapp/FAQs.html")

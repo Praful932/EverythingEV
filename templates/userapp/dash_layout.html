@@ -33,15 +33,22 @@
                         </div>
                         <ul class="navbar-nav flex-column mt-5">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white" href=#>
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href=#>
                                     <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
                                 </a>
                             </li>
                         </ul>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white" id="class" href="{% url 'Charging-Station-PLV' %}">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" id="class" href="{% url 'Charging-Station-PLV' %}">
                                     <i class="fas fa-briefcase text-white ml-2 fa-lg mr-3"></i> Business
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-wrench text-white ml-2 fa-lg mr-3"></i> Mechanics
                                 </a>
                             </li>
                         </ul>
@@ -81,11 +88,11 @@
                                 <ul class="navbar-nav float-right">
                                     <li class="nav-item icon-parent">
                                         <a href="" class="nav-link icon-bullet"><i
-                                                class="fas fa-bell text-muted fa-lg"></i></a>
+                                                class="fas fa-bell text-black fa-lg"></i></a>
                                     </li>
-                                    <li class="nav-item float-right ">
+                                    <li class="nav-item float-right pl-4">
                                         <a href="" class="nav-link" data-toggle="modal" data-target="#signout"><i
-                                                class="fas fa-sign-out-alt text-danger fa-lg"></i></a>
+                                                class="fas fa-sign-out-alt text-black fa-lg"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -119,24 +126,8 @@
 
 
     <!-- Script -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <script>
-        console.log(window.location.href);
-
-        function changeclass() {
-            var url_window = {
-                {
-                    val
-                }
-            }
-            if (window.location.href == url_window)
-                document.getElementById("class").classList.add("current");
-
-        }
-    </script>
 
     <!-- End of script -->
 
