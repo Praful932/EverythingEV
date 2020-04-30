@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="{% static 'userapp/dash_style.css'%}"> {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
     </head>
-
 </head>
 
 <body>
@@ -29,18 +28,18 @@
                         <a href="#" class="navbar-brand bottom-border text-white d-block ml-auto mr-auto py-3 text-center mb-4 font-weight-bold">EverythingEV</a>
                         <div class="text-center bottom-border pb-2">
                             <img src="images/iconfinder_user-id_285641.svg" class="icon" width="50">
-                            <a href="#" class="text-white">James Charles</a>
+                            <a href="#" class="text-white">{{ request.user.username }}</a>
                         </div>
                         <ul class="navbar-nav flex-column mt-5">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href=#>
+                                <a class="nav-link p-3 mb-2 text-white" href=# id="dashboard">
                                     <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
                                 </a>
                             </li>
                         </ul>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" id="class" href="{% url 'Charging-Station-PLV' %}">
+                                <a class="nav-link p-3 mb-2 text-white" id="class" href="{% url 'Provider-Dashboard' %}">
                                     <i class="fas fa-briefcase text-white ml-2 fa-lg mr-3"></i> Business
                                 </a>
                             </li>
@@ -61,14 +60,14 @@
                         </ul>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                <a class="nav-link p-3 mb-2 text-white" href="{% url 'Profile' %}">
                                     <i class="fas fa-portrait text-white ml-2 fa-lg mr-3"></i> Profile
                                 </a>
                             </li>
                         </ul>
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                <a class="nav-link p-3 mb-2 text-white" data-toggle="modal" data-target="#supportform">
                                     <i class="fas fa-headset text-white ml-2 fa-lg mr-3"></i> Support
                                 </a>
                             </li>
@@ -121,15 +120,35 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="supportform">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Your Issue</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %} {{ supportform|crispy }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <br>
     <br> {% block body %} {% endblock %}
 
 
     <!-- Script -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-    <!-- End of script -->
+
 
     {% block script %} {% endblock %}
 </body>
