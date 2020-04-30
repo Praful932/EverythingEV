@@ -6,6 +6,10 @@ body {
     border-bottom: none;
 }
 
+.tabspace {
+    text-indent: 5em;
+}
+
 .nav-tabs>li>a {
     border: none;
     border-radius: 0;

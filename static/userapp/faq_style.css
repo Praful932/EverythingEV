@@ -50,7 +50,7 @@ h1 {
     background-color: transparent;
     border: 1px solid #9FA4A8;
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     position: relative;
     overflow: hidden;
     margin: 20px 0;
@@ -84,11 +84,13 @@ h1 {
 
 .faq-title {
     margin: 0 35px 0 0;
+    font-size: 20px;
 }
 
 .faq-text {
     display: none;
     margin: 30px 0 0;
+    font-size: 16px;
 }
 
 .faq.active .faq-text {
@@ -107,10 +109,10 @@ h1 {
     font-size: 16px;
     padding: 0;
     position: absolute;
-    top: 30px;
-    right: 30px;
-    height: 30px;
-    width: 30px;
+    top: 20px;
+    right: 20px;
+    height: 20px;
+    width: 20px;
 }
 
 .faq-toggle:focus {

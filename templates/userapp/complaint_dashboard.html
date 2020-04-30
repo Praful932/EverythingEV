@@ -1,5 +1,4 @@
 {% extends "userapp/dash_layout.html" %} {% load static %} {% block head %}
-<link rel='stylesheet' href='https://npmcdn.com/flickity@2/dist/flickity.css'>
 <link rel="stylesheet" href="{%  static 'userapp/complaint_style.css' %}"> {% endblock %} {% block body %}
 
 <section>
@@ -91,10 +90,11 @@
                             <div class="px-5 pb-1 pt-2 m-4 text-center">
                                 <h4 class="text-center font">View Locations on map</h4>
                             </div>
-                            <b>Checkout the Locations</b><br>
+                            <b>&emsp;&emsp;Checkout the Locations</b><br>
                             <div id="new">
 
                             </div>
+                            <br>
                             <div class="col-sm-12">
                                 <div class="container">
                                     <div class="main">
@@ -120,17 +120,6 @@
                         </div>
 
                     </div>
-                    <div class="row ml-auto">
-                        <div class="col-lg-9 col-sm-12 ml-auto">
-                            <div class="carousel" data-flickity='{ "groupCells": true }'>
-                                {%for ad in d%}
-                                <div class="carousel-cell">
-                                    <p>{{ad.CsSelect.name}}<br>{{ad.CsSelect.suburb}}<br>click to see the directions</p>
-                                </div>
-                                {%endfor%}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 </section>
@@ -142,7 +131,6 @@
 <!-- partial -->
 
 {% endblock body %} {% block script %}
-<script src='https://npmcdn.com/flickity@2/dist/flickity.pkgd.js'></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&">
 </script>
 <script>
@@ -156,7 +144,8 @@
         var str1 = "#link";
         var str2 = i;
         var a = document.createElement("a");
-        var text = document.createTextNode([i + 1] + "." + my_data[i][2] + " " + my_data[i][3] + "  " + "  " + "  ");
+        a.innerHTML = '&emsp;&emsp;&emsp;';
+        var text = document.createTextNode([i + 1] + "." + " " + my_data[i][2] + " " + my_data[i][3] + "  " + "  " + "  ");
         a.appendChild(text);
         // a.href="#rnd";
         a.id = str1.concat(str2);
@@ -168,7 +157,7 @@
         var element = document.getElementById("new");
         element.appendChild(a);
         var x = document.createElement("br");
-        a.appendChild(x)
+        a.appendChild(x);
 
     }
 
