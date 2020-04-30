@@ -132,7 +132,7 @@ class ChargingStation(models.Model):
 
     def __str__(self):
         return str(self.pk) + '. ' + self.owner.user.username + ' ' + self.city
-    
+
     class Meta():
         ordering = ['-created_at']
 
@@ -287,7 +287,8 @@ class CsMaintenance(models.Model):
     ph = models.CharField(max_length=14)
     Problem = models.TextField()
 
+
 class Support(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="support_requests")
-    subject = models.CharField(max_length = 20, verbose_name ="Title")
-    description = models.TextField(max_length=200, verbose_name = "Describe issue you are facing")
+    subject = models.CharField(max_length=20, verbose_name="Title")
+    description = models.TextField(max_length=200, verbose_name="Describe issue you are facing")

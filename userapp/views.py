@@ -11,7 +11,7 @@ from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
-                            ChargePooler, MaintenanceManDetails,Consumer, CsMaintenance)
+                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance)
 from urllib.request import urlopen
 import json
 import math
@@ -25,24 +25,24 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
         math.sin(d_lat / 2) ** 2
         + math.cos(lat_1)
         * math.cos(lat_2)
-        * math.sin(d_lng / 2) ** 2  
+        * math.sin(d_lng / 2) ** 2
     )
 
     return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
 
 
 def index(request):
-    if request.user.is_authenticated :
+    if request.user.is_authenticated:
         try:
-            if Consumer.objects.get(user =  request.user):
+            if Consumer.objects.get(user=request.user):
                 pass
         except:
             try:
-                if Provider.objects.get(user =  request.user):
+                if Provider.objects.get(user=request.user):
                     pass
             except:
                 return redirect('registerConsumerSocial')
-    return render(request,"userapp/index.html")
+    return render(request, "userapp/index.html")
 
 
 def registerConsumerSocial(request):
