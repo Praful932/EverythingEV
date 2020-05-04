@@ -8,6 +8,7 @@ from userapp.views import (ProviderDashboard, ChargingStationProviderDeleteView,
 # ChargingStation - CS
 urlpatterns = [
     path('', views.index, name='index'),
+    path('check/', views.check, name='check'),
     path('register/', views.register, name='register'),
     path('registerConsumer/', views.registerConsumer, name='registerConsumer'),
     path('registerConsumerSocial/', views.registerConsumerSocial, name='registerConsumerSocial'),
@@ -26,7 +27,7 @@ urlpatterns = [
     path('Maintenance-man/view-all', SearchListView.as_view(), name='All-Maintenance-Man'),
     path('Maintenance-man/complaints', views.MaintenanceComplaint, name='Complaint-Dashboard'),
     path('book/<int:pk>', views.bookMaintenanceMan, name="bookingMm"),
-    path('test/', views.test23, name="test")
+    path('ajax/supportrequest', views.SupportRequest, name="SupportRequest")
 ]
 
 if settings.DEBUG:

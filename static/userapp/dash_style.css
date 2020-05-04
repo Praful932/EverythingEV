@@ -31,7 +31,13 @@ body {
     transition: all .4s;
 }
 
-.sidebar-link{
+.sidebar-link:hover{
+    background-color: #444 !important;
+    border-radius: 5px !important;
+    cursor:pointer;
+}
+
+.sidebar-link-active{
     background-color: #444 !important;
     border-radius: 5px !important;
 }

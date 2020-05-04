@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from userapp.models import (Consumer, Provider, User, ChargingStation,
-                           Support)
+                            Support)
 
 
 class UserSignUpForm(UserCreationForm):
@@ -56,15 +56,16 @@ class ChargingStationForm(forms.ModelForm):
             'image': 'Images'
         }
 
+
 class SupportForm(forms.ModelForm):
     class Meta:
         model = Support
-        fields = ['subject','description']
+        fields = ['subject', 'description']
         labels = {
-            'subject' : 'Issue Title',
-            'description' : 'Issue Description'
+            'subject': 'Issue Title',
+            'description': 'Issue Description'
         }
-        
+
         widgets = {
-            'description': forms.Textarea(attrs={'placeholder':'Describe your issue here(max 200 words)'})
+            'description': forms.Textarea(attrs={'placeholder': 'Describe your issue here(max 200 words)'})
         }

@@ -1,0 +1,43 @@
+{% extends "userapp/dash_layout.html"%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
+{% endblock %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Your Profile</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ userform|crispy }}
+                        {{ fieldform|crispy }}
+                        <button class="btn btn-lg btn-primary" type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    document.getElementById("dashboard").classList.add("sidebar-link");
+    document.getElementById("support").classList.add("sidebar-link");
+    document.getElementById("analytics").classList.add("sidebar-link");
+    document.getElementById("profile").classList.add("sidebar-link-active");
+    document.getElementById("business").classList.add("sidebar-link")
+</script>
+{% endblock %}
