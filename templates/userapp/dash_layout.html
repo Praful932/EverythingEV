@@ -57,6 +57,16 @@
                                 </a>
                             </li>
                         </ul>
+                        {% if user.provider.maintenancemandetails %}
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" id="maintain"
+                                    href="{% url 'Maintenance-man-dashboard' %}">
+                                    <i class="fas fa-cog text-white ml-2 fa-lg mr-3"></i> Maintenance
+                                </a>
+                            </li>
+                        </ul>
+                        {% endif %}
                         <ul class="navbar-nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link p-3 mb-2 text-white" id="profile" href="{% url 'Profile' %}">
@@ -88,11 +98,11 @@
                                 <ul class="navbar-nav float-right">
                                     <li class="nav-item icon-parent">
                                         <a href="" class="nav-link icon-bullet"><i
-                                                class="fas fa-bell text-muted fa-lg"></i></a>
+                                                class="fas fa-bell text-black fa-lg"></i></a>
                                     </li>
-                                    <li class="nav-item float-right ">
+                                    <li class="nav-item float-right pl-4">
                                         <a href="" class="nav-link" data-toggle="modal" data-target="#signout"><i
-                                                class="fas fa-sign-out-alt text-danger fa-lg"></i></a>
+                                                class="fas fa-sign-out-alt text-black fa-lg"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -135,7 +145,6 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -195,7 +204,7 @@
                         console.log(response);
                     }
                 })
-                $("#supportmodal").hide();
+                $("#supportmodal").modal('hide');
                 $("#thankyou").modal();
             });
         });

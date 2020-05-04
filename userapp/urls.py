@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from userapp.views import (ProviderDashboard, ChargingStationProviderDeleteView, MaintenanceMan,
+from userapp.views import (ChargingStationProviderDeleteView, MaintenanceMan,
                            SearchListView)
 
 # ChargingStation - CS
@@ -27,7 +27,8 @@ urlpatterns = [
     path('Maintenance-man/view-all', SearchListView.as_view(), name='All-Maintenance-Man'),
     path('Maintenance-man/complaints', views.MaintenanceComplaint, name='Complaint-Dashboard'),
     path('book/<int:pk>', views.bookMaintenanceMan, name="bookingMm"),
-    path('ajax/supportrequest', views.SupportRequest, name="SupportRequest")
+    path('ajax/supportrequest', views.SupportRequest, name="SupportRequest"),
+    path('faqs/', views.faq, name="faqs")
 ]
 
 if settings.DEBUG:

@@ -45,11 +45,11 @@ def index(request):
         try:
             if Consumer.objects.get(user=request.user):
                 pass
-        except:
+        except Consumer.DoesNotExist:
             try:
                 if Provider.objects.get(user=request.user):
                     pass
-            except:
+            except Provider.DoesNotExist:
                 return redirect('registerConsumerSocial')
     return render(request, "userapp/index.html")
 
@@ -166,7 +166,6 @@ def UpdateProfile(request):
     if request.user.is_consumer:
         return render(request, "userapp/updateprofile.html", context=context)
     return render(request, "userapp/provider_profile.html", context=context)
-
 
 
 @login_required
@@ -516,13 +515,21 @@ def SupportRequest(request):
         subject = request.POST.get('subject', None)
         description = request.POST.get('description', None)
         support = {
-            'subject' : subject,
-            'description' : description
+            'subject': subject,
+            'description': description
         }
         support = json.dumps(support)
         send_mail(
             'Support Request', support,
-            EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently = False
+            EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False
         )
         return JsonResponse({"success": True}, status=200)
     return JsonResponse({"success": False}, status=400)
+
+
+def faq(request):
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/FAQs.html", context=context)

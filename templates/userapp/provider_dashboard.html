@@ -15,12 +15,12 @@ Dashboard
 <section>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                <div class="container">
+            <div class="container">
+                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
                     <div class="px-5 pt-0 text-center">
                         <h2 class="text-center cs">Your Charging Stations</h2>
                     </div>
-                    <div class="row ml-3">
+                    <div class="row">
                         {% for cs in cslist %}
                         <div class="col-xl-4 col-md-6 col-sm-6 p-2">
                             <div class="card shadow" style="width:254px;">
@@ -100,6 +100,7 @@ Dashboard
     document.getElementById("support").classList.add("sidebar-link");
     document.getElementById("analytics").classList.add("sidebar-link");
     document.getElementById("profile").classList.add("sidebar-link");
-    document.getElementById("business").classList.add("sidebar-link")
+    document.getElementById("business").classList.add("sidebar-link");
+    document.getElementById("maintain").classList.add("sidebar-link");
 </script>
 {% endblock %}

@@ -9,4 +9,6 @@
     "python.pythonPath": "e:\\Programs\\Github\\SIH-2020\\venv\\Scripts\\python.exe",
     "workbench.editor.enablePreview": false
 >>>>>>> b669828c56e64cc7108d522a3a6948628f7b718d
+ 
+"cornflakes.linter.executablePath": "path/to/venv/bin/flake8"
 }

@@ -1,81 +1,76 @@
-{% extends "userapp/layout.html" %} {% load static %} 
-{% block head %}
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css'>
-{% endblock %}
+{% extends "userapp/dash_layout.html" %} {% load static %} {% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+    }
+</style>
+{% endblock %} {% block body %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                <div class="container">
+                    <div class="px-5 pb-3 text-center">
+                        <h2 class="text-center font">Mechanics</h2>
+                    </div>
+                    <div class="row ml-3">
+                        <div class="col-lg-4 col-md-6" style="margin-top: 20px">
+                            <div class="card text-center px-0 py-0" style="height:18em;">
+                                <div class="border-primary">
+                                    <i class="fas fa-comments fa-5x p-4 text-danger"></i>
+                                    <div class="card-body p-4 font">
+                                        <h4>Complaint Dashboard</h4>
+                                    </div>
+                                </div>
+                                <a href="{% url 'Complaint-Dashboard' %}">
+                                    <div class="card-footer bg-light text-danger">
+                                        <span class="float-left">View all complaints</span>
+                                        <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
 
-{% block body %}
-<!-- partial:index.partial.html -->
-<p style="margin-top: 200px;"></p>
-<body style="background-image: linear-gradient(#62C3C8, #37B9E9);"></body>
-<div class="container">
-<div class="row">
-<div class="col-lg-4 col-md-6" style="margin-top: 20px">
-            <div class="card border-primary">
-                <div class="card-body bg-primary text-white">
-                    <div class="row">
-                        <div class="col-3">
-                            <i class="fas fa-comments fa-5x"></i>
+                        <div class="col-lg-4 col-md-6" style="margin-top: 20px">
+                            <div class="card text-center" style="height:18em;">
+                                <i class="fas fa-plus-circle fa-5x p-4 text-primary"></i>
+                                <div class="card-body p-4 font">
+                                    <h4>Add maintenance man</h4>
+                                </div>
+                                <a href="#">
+                                    <div class="card-footer bg-light text-primary">
+                                        <span class="float-left">New Mechanic</span>
+                                        <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                        <div class="col-9 text-right">
-                            <h4>Complaint Dashboard</h4>
+
+                        <div class="col-lg-4 col-md-6" style="margin-top: 20px">
+                            <div class="card text-center" style="height:18em;">
+                                <i class="fas fa-tools fa-5x p-4 text-success"></i>
+                                <div class="card-body p-4 font">
+                                    <h4>List of Mechanics</h4>
+                                </div>
+                                <a href="#">
+                                    <div class="card-footer bg-light text-success">
+                                        <span class="float-left">View all Mechanics</span>
+                                        <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'Complaint-Dashboard' %}">
-                    <div class="card-footer bg-light">
-                        <span class="float-left">View Complaints</span>
-                        <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
             </div>
         </div>
-        
-        <div class="col-lg-4 col-md-6" style="margin-top: 20px">
-            <div class="card border-success">
-                <div class="card-body bg-success text-white">
-                    <div class="row">
-                        <div class="col-3">
-                            <i class="fa fa-plus-circle fa-5x"></i>
-                        </div>
-                        <div class="col-9 text-right">
-                            <h4>Add Maintenance Man</h4>
-                        </div>
-                    </div>
-                </div>
-                <a href="#">
-                    <div class="card-footer bg-light text-success">
-                        <span class="float-left">New Mechanic</span>
-                        <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6" style="margin-top: 20px">
-            <div class="card border-danger">
-                <div class="card-body bg-danger text-white">
-                    <div class="row">
-                        <div class="col-3">
-                            <i class="fas fa-wrench fa-5x"></i>
-                        </div>
-                        <div class="col-9 text-right">
-                            <h4>All Mechanics List</h4>
-                        </div>
-                    </div>
-                </div>
-                <a href="{% url 'All-Maintenance-Man' %}">
-                    <div class="card-footer bg-light text-danger">
-                        <span class="float-left">View all Mechanics</span>
-                        <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
+        <div class="row">
+
         </div>
     </div>
-</div>
-</div>
-<!-- partial -->
-{% endblock body %}
+</section>
+{% endblock %}
