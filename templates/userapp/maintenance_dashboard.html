@@ -15,6 +15,7 @@
                         <h2 class="text-center font">Mechanics</h2>
                     </div>
                     <div class="row ml-3">
+                        {% if user.provider.maintenancemandetails %}
                         <div class="col-lg-4 col-md-6" style="margin-top: 20px">
                             <div class="card text-center px-0 py-0" style="height:18em;">
                                 <div class="border-primary">
@@ -32,14 +33,14 @@
                                 </a>
                             </div>
                         </div>
-
+                        {%endif%}
                         <div class="col-lg-4 col-md-6" style="margin-top: 20px">
                             <div class="card text-center" style="height:18em;">
                                 <i class="fas fa-plus-circle fa-5x p-4 text-primary"></i>
                                 <div class="card-body p-4 font">
                                     <h4>Add maintenance man</h4>
                                 </div>
-                                <a href="#">
+                                <a href="{%url 'registerMaintenance'%}">
                                     <div class="card-footer bg-light text-primary">
                                         <span class="float-left">New Mechanic</span>
                                         <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -55,7 +56,7 @@
                                 <div class="card-body p-4 font">
                                     <h4>List of Mechanics</h4>
                                 </div>
-                                <a href="#">
+                                <a href="{%url 'All-Maintenance-Man'%}">
                                     <div class="card-footer bg-light text-success">
                                         <span class="float-left">View all Mechanics</span>
                                         <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
