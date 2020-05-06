@@ -1,4 +1,6 @@
 {%block body%}
+<button onclick="goBack()">Go Back</button>
+
 <div class="container">  
   <form id="contact" action="" method="post">
     {% csrf_token %}
@@ -24,9 +26,15 @@
     <fieldset>
       <textarea placeholder="Type your Complaints here....(PROBLEM)" id="fname" name="problem" tabindex="5" required></textarea>
     </fieldset>
+    {%if cs%}
     <fieldset>
       <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
     </fieldset>
+    {% else %}
+    <fieldset>
+    <button style="padding: 20%;" id="contact-submit" data-submit="...Sending" onclick="goBack()">You Don't Have Charging Station Can't Book <br> "**Go Back**"</button>
+    </fieldset>
+    {%endif%}
     <p class="copyright">Designed by <a  target="_blank" title="Colorlib">Everything_EV</a></p>
   </form>
 </div>
@@ -330,6 +338,11 @@ fieldset {
   /*if the user clicks anywhere outside the select box,
   then close all select boxes:*/
   document.addEventListener("click", closeAllSelect);
+
+
+  function goBack() {
+    window.history.back();
+  }
 
 </script>
 {%endblock script%}

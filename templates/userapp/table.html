@@ -26,7 +26,7 @@
 			  	</div>
         </div>
         <div class="tb_search">
-<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search..City , Area, Name, Ph." class="form-control">
         </div>
       </div>
 <table class="table table-striped table-class" id= "table-id">
@@ -55,8 +55,7 @@
 				<summary>Complaint</summary>
 				<b>Address</b>
 				<p>{{ad.OfficeAdd}}</p>
-				<button type="button" class="btn btn-warning"><a href="{%url 'bookingMm' ad.id%}">BOOK</a></button>
-
+				<a href="{%url 'bookingMm' ad.id%}"><button type="button" class="btn btn-warning">BOOK</button></a>
 		  	</details>
 		</td>
 	</tr>
