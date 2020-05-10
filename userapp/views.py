@@ -440,6 +440,7 @@ class MaintenanceMan(CreateView):
 @login_required
 def bookMaintenanceMan(request, pk):
     cscount = ChargingStation.objects.filter(owner=request.user.provider)
+    record = CsMaintenance.objects.get(csm=request.user.provider)
     if request.user.is_provider:
         if request.method == 'POST':
             if request.POST.get('problem'):
@@ -455,7 +456,8 @@ def bookMaintenanceMan(request, pk):
                 c = ChargingStation.objects.filter(name=cname)[0]
                 CsM.CsSelect = c
                 CsM.save()
-        return render(request, "booking.html", {'cs': cscount})
+                return redirect('Provider-Dashboard')
+        return render(request, "booking.html", {'cs': cscount,'record':record})
 
 
 class SearchListView(ListView):

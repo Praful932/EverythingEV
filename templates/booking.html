@@ -2,6 +2,16 @@
 <button onclick="goBack()">Go Back</button>
 
 <div class="container">  
+  {%if record%}
+  <h1 style="color: rgb(247, 232, 35);"> You have Already Booked !!!</h1>
+  <br><br><br>
+  <h3 style="color: rgb(78, 67, 67);">1) Maintenance Man Name---<b>{{record.Mm.name}}</b></h3>
+  <h3 style="color: rgb(78, 67, 67);">2) Maintenance Man Phone 1---{{record.Mm.ph1}}</h3>
+  <h3 style="color: rgb(78, 67, 67);">3) Maintenance Man Phone 2---{{record.Mm.ph2}}</h3>
+  <h3 style="color: rgb(78, 67, 67);">4) Maintenance Man Office Address---{{record.Mm.OfficeAdd}}</h3>
+  <h3 style="color: rgb(78, 67, 67);">5) Maintenance Man Locality---{{record.Mm.AreaLocality}}</h3>
+
+  {%else%}
   <form id="contact" action="" method="post">
     {% csrf_token %}
     <h3>Booking Maintenance</h3>
@@ -37,6 +47,7 @@
     {%endif%}
     <p class="copyright">Designed by <a  target="_blank" title="Colorlib">Everything_EV</a></p>
   </form>
+  {%endif%}
 </div>
 
 {% endblock %}

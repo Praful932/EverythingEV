@@ -29,7 +29,7 @@
                 <div class="row">
                     <!-- side nav -->
                     <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
-                        <a href="#"
+                        <a href="{%url 'index'%}"
                             class="navbar-brand bottom-border text-white d-block ml-auto mr-auto py-3 text-center mb-4 font-weight-bold">EverythingEV</a>
                         <div class="text-center bottom-border pb-2">
                             <img src="images/iconfinder_user-id_285641.svg" class="icon" width="50">
@@ -126,7 +126,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Logout</button>
+                    {% if user.is_provider %}
+                    <a href="{%url 'account_logout'%}"><button type="button" class="btn btn-danger">Logout</button></a>
+                    {%endif%}
                 </div>
             </div>
         </div>
