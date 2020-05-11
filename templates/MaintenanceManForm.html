@@ -18,8 +18,7 @@
 </head>
 
 <body>
-    <form method="POST" style="width: 15cm; margin:auto; border: 3px solid rgb(59, 199, 241);  padding: 20px;
-    ">
+    <form method="POST" style="width: 15cm; margin:auto; border: 3px solid rgb(59, 199, 241);  padding: 20px; ">
         {% csrf_token %}
 
         {{form|crispy}}

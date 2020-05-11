@@ -1,24 +1,65 @@
-{% extends "userapp/layout.html" %} {% load static %} {% block head %}
+{% extends "userapp/layout.html" %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block head %}
 <link rel="stylesheet" href="{% static 'userapp/faq_style.css' %}">
-<title>FAQs</title> {% endblock %} {% block body %}
+<title>FAQs</title> 
+{% endblock %} 
+{% block body %}
+<div id="thankyou" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thank you!</h4>
+            </div>
+            <div class="modal-body">
+                <p>We will get back to you shortly</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="supportmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your Issue</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="supportform">
+                    {% csrf_token %}
+                    {{ supportform|crispy }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-success" value="Submit" form="supportform">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="jumbotron" style="margin-top:4em;">
     <div class="container">
         <h1 class="display-3">Frequently Asked Questions</h1>
     </div>
 </div>
-
 <div class="row justify-content-between">
     <div class="col-lg-3">
         <div class="nav nav-tabs">
-            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between text-success ml-4 mr-4" href="#vehicles" data-toggle="tab">
+            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between text-success ml-4 mr-4" href="#vehicles"
+                data-toggle="tab">
                 <h4 class="text-success size">Vehicles</h4>
             </a>
             <br />
-            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between ml-4 mr-4" href="#battery" data-toggle="tab">
+            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between ml-4 mr-4" href="#battery"
+                data-toggle="tab">
                 <h4 class="text-success size">Battery</h4>
             </a>
-            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between ml-4 mr-4" href="#charging" data-toggle="tab">
+            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between ml-4 mr-4" href="#charging"
+                data-toggle="tab">
                 <h4 class="text-success size">Charging</h4>
             </a>
         </div>
@@ -32,7 +73,9 @@
                         What is Hybrid Electric Vehicle?
                     </h3>
                     <p class="faq-text">
-                        Hybrid Electric Vehicles combine conventional internal combustion engine systems with electric propulsion systems. They use regenerative braking to convert energy that is normally wasted during braking/coasting into electricity. This electricity is stored
+                        Hybrid Electric Vehicles combine conventional internal combustion engine systems with electric
+                        propulsion systems. They use regenerative braking to convert energy that is normally wasted
+                        during braking/coasting into electricity. This electricity is stored
                         in a battery until it’s needed by the electric motor.
                     </p>
                     <button class="faq-toggle">
@@ -46,8 +89,11 @@
                         What is a Battery Electric Vehicle?
                     </h3>
                     <p class="faq-text">
-                        Battery Electric Vehicles use only electricity to power the vehicle. All the electricity comes from an electric charging source and regenerative braking (using the vehicle’s kinetic energy to recharge the battery). Examples of BEVs include the Chevrolet
-                        Bolt, Nissan Leaf and any of the Tesla models. There are many different BEV choices coming to market over the next few years.
+                        Battery Electric Vehicles use only electricity to power the vehicle. All the electricity comes
+                        from an electric charging source and regenerative braking (using the vehicle’s kinetic energy to
+                        recharge the battery). Examples of BEVs include the Chevrolet
+                        Bolt, Nissan Leaf and any of the Tesla models. There are many different BEV choices coming to
+                        market over the next few years.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -60,8 +106,12 @@
                         What types of electric cars are available?
                     </h3>
                     <p class="faq-text">
-                        There are primarily three types: All-electric cars that run on batteries and have to be recharged when the batteries run flat.Plug-in hybrids that rely on electricity from the wall and a gasoline engine. Extended-range electric vehicles, such as the Chevrolet
-                        Volt, that are a type of plug-in hybrid that runs purely on electricity, but when the battery runs out, an on-board engine recharges it. The gasoline engine acts only as a generator to provide electricity for longer trips, and
+                        There are primarily three types: All-electric cars that run on batteries and have to be
+                        recharged when the batteries run flat.Plug-in hybrids that rely on electricity from the wall and
+                        a gasoline engine. Extended-range electric vehicles, such as the Chevrolet
+                        Volt, that are a type of plug-in hybrid that runs purely on electricity, but when the battery
+                        runs out, an on-board engine recharges it. The gasoline engine acts only as a generator to
+                        provide electricity for longer trips, and
                         it does not directly drive the wheels.
                     </p>
                     <button class="faq-toggle justify-content-between">
@@ -75,7 +125,9 @@
                         How fast can an Electric Car/Bike go?
                     </h3>
                     <p class="faq-text">
-                        As fast as you like. Just like a petrol powered car/bike, you can modify and tune your EV to reach optimum levels of performance. While most EV’s are commuter cars, there are a few production cars that offer great performance.
+                        As fast as you like. Just like a petrol powered car/bike, you can modify and tune your EV to
+                        reach optimum levels of performance. While most EV’s are commuter cars, there are a few
+                        production cars that offer great performance.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -88,7 +140,9 @@
                         What Brands of Electric Vehicles are Available?
                     </h3>
                     <p class="faq-text">
-                        There are many types of Hybrid, Electric and Plug-In Hybrid vehicles either available now, or coming up in the near future. Check our models page to see a list of each model of car from each manufacturer to find the type of vehicle that suits your tastes.
+                        There are many types of Hybrid, Electric and Plug-In Hybrid vehicles either available now, or
+                        coming up in the near future. Check our models page to see a list of each model of car from each
+                        manufacturer to find the type of vehicle that suits your tastes.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -101,7 +155,9 @@
                         What is the Difference Between Electric, Hybrid and Plug-In Hybrid?
                     </h3>
                     <p class="faq-text">
-                        Most of us understand the difference between a full electric vehicle and a hybrid, which uses a combination of a battery powered electric motor and a gas engine to improve gas mileage and reduce harmful emissions. So what is the difference between a hybrid
+                        Most of us understand the difference between a full electric vehicle and a hybrid, which uses a
+                        combination of a battery powered electric motor and a gas engine to improve gas mileage and
+                        reduce harmful emissions. So what is the difference between a hybrid
                         and a plug-in hybrid? This page, should answer your questions succinctly.
                     </p>
                     <button class="faq-toggle">
@@ -115,7 +171,9 @@
                         What is a plug-in hybrid vehicle (PHEV)?
                     </h3>
                     <p class="faq-text">
-                        A PHEV is a car that can take both electricity (from plugging in) and gasoline. Usually, they run on electricity first and then drawn on gasoline later. That way, you are driving electric around town and only use gasoline for long trips.
+                        A PHEV is a car that can take both electricity (from plugging in) and gasoline. Usually, they
+                        run on electricity first and then drawn on gasoline later. That way, you are driving electric
+                        around town and only use gasoline for long trips.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -132,8 +190,12 @@
                         How long before we would need to change the battery pack on an EV?
                     </h3>
                     <p class="faq-text">
-                        Not for many years. Mahindra offer warranties covering 5 years of driving on the lithium-ion batteries in the e2o.Reva users have used batteries for more than 3 years.One simple technique that could be used to pay for the battery is to start an Recurring
-                        Deposit of Rs2000 per month for 3 years or more.Liquidate the RD after 3-4 years whenever the need arises to change the battery. Thus bank interest accumulation can partly help you fund your shiny new battery pack!
+                        Not for many years. Mahindra offer warranties covering 5 years of driving on the lithium-ion
+                        batteries in the e2o.Reva users have used batteries for more than 3 years.One simple technique
+                        that could be used to pay for the battery is to start an Recurring
+                        Deposit of Rs2000 per month for 3 years or more.Liquidate the RD after 3-4 years whenever the
+                        need arises to change the battery. Thus bank interest accumulation can partly help you fund your
+                        shiny new battery pack!
 
                     </p>
                     <button class="faq-toggle">
@@ -147,8 +209,12 @@
                         Can EV batteries be recycled?
                     </h3>
                     <p class="faq-text">
-                        Lithium, the main component in EV batteries, is highly recyclable and many manufacturers are creating programs to help customers recycle or repurpose batteries at the end of their useful life in a car. Once their life in a vehicle ends, batteries still
-                        have some usefulness left. For instance, someday these spent batteries could be used to store renewable power and reduce the impacts of intermittent solar or wind, or when combined, these batteries might take on a second life as
+                        Lithium, the main component in EV batteries, is highly recyclable and many manufacturers are
+                        creating programs to help customers recycle or repurpose batteries at the end of their useful
+                        life in a car. Once their life in a vehicle ends, batteries still
+                        have some usefulness left. For instance, someday these spent batteries could be used to store
+                        renewable power and reduce the impacts of intermittent solar or wind, or when combined, these
+                        batteries might take on a second life as
                         a backup power supply for PGE customers during an outage.
                     </p>
                     <button class="faq-toggle">
@@ -162,9 +228,14 @@
                         Where do batteries end up? In landfills? Or recycled?
                     </h3>
                     <p class="faq-text">
-                        Vehicle batteries have an excellent recycling record that will get even better with plug-in vehicles. Every car in the world has a lead-acid battery. Even with its low value as scrap, the national recycling rate for lead-acid batteries is about 98 percent.
-                        Plug-in vehicles mostly use lithium ion, which is much more valuable than lead. It’s illegal to dispose of these batteries in a landfill, and their inherent value will ensure that they are recycled. Some car makers are exploring
-                        “second-life” applications for used EV batteries as well. Learn more about batteries’ impact on the environment in our Ask the EV Experts video.
+                        Vehicle batteries have an excellent recycling record that will get even better with plug-in
+                        vehicles. Every car in the world has a lead-acid battery. Even with its low value as scrap, the
+                        national recycling rate for lead-acid batteries is about 98 percent.
+                        Plug-in vehicles mostly use lithium ion, which is much more valuable than lead. It’s illegal to
+                        dispose of these batteries in a landfill, and their inherent value will ensure that they are
+                        recycled. Some car makers are exploring
+                        “second-life” applications for used EV batteries as well. Learn more about batteries’ impact on
+                        the environment in our Ask the EV Experts video.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -181,7 +252,9 @@
                         Can electric vehicles self-charge?
                     </h3>
                     <p class="faq-text">
-                        No. Energy conversions are never 100 percent efficient, so every time we convert one form of energy to another, we lose some of that energy. Hybrids and EVs recapture some of their energy back into the batteries through regenerative braking.
+                        No. Energy conversions are never 100 percent efficient, so every time we convert one form of
+                        energy to another, we lose some of that energy. Hybrids and EVs recapture some of their energy
+                        back into the batteries through regenerative braking.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -194,9 +267,14 @@
                         How long does it take to charge a plug-in car?
                     </h3>
                     <p class="faq-text">
-                        How long does it take to charge your cell phone? Think about charging your car just like you think about charging your cell phone. Most people charge their cars at home or work, just like a cell phone. Plug it in when you arrive and it will be ready for
-                        you in the morning, or the end of the work day. The actual charging time depends on the size of your battery, how far you have driven, and the amperage of the charging system. Keep in mind that most of the time, the battery will
-                        not be empty when you plug in, just like your cell phone. Learn more about types of available charging stations on Plug In America’s accessories tracker.
+                        How long does it take to charge your cell phone? Think about charging your car just like you
+                        think about charging your cell phone. Most people charge their cars at home or work, just like a
+                        cell phone. Plug it in when you arrive and it will be ready for
+                        you in the morning, or the end of the work day. The actual charging time depends on the size of
+                        your battery, how far you have driven, and the amperage of the charging system. Keep in mind
+                        that most of the time, the battery will
+                        not be empty when you plug in, just like your cell phone. Learn more about types of available
+                        charging stations on Plug In America’s accessories tracker.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -209,7 +287,9 @@
                         Where do you recharge a plug-in vehicle?
                     </h3>
                     <p class="faq-text">
-                        Most people recharge overnight in their garage, carport or driveway or work, but there are many public chargers for electric cars as well. Find a public EV charging station here. An estimated 99 percent of all charging currently happens at home or work.
+                        Most people recharge overnight in their garage, carport or driveway or work, but there are many
+                        public chargers for electric cars as well. Find a public EV charging station here. An estimated
+                        99 percent of all charging currently happens at home or work.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -222,7 +302,9 @@
                         How much does it cost to charge a plug-in vehicle?
                     </h3>
                     <p class="faq-text">
-                        Much less than it costs to buy gasoline. Exactly how much depends on the vehicle and electricity rates. On average, it costs less than $1 to charge a plug-in hybrid and $2-$4 for an all-electric car. Your overall energy bill will be lowered by driving
+                        Much less than it costs to buy gasoline. Exactly how much depends on the vehicle and electricity
+                        rates. On average, it costs less than $1 to charge a plug-in hybrid and $2-$4 for an
+                        all-electric car. Your overall energy bill will be lowered by driving
                         with electricity.
                     </p>
                     <button class="faq-toggle">
@@ -236,8 +318,11 @@
                         Which charging station should I buy?
                     </h3>
                     <p class="faq-text">
-                        New plug-in vehicles come with cords to plug into standard 120-volt household outlets. For faster charging, many drivers will want to buy a charging station to plug into a 240-volt outlet. See our Accessory Tracker to compare charging station options.
-                        All 240-volt charging stations (Level 2 charging) come with the same “J connector” that should allow any plug-in vehicle to connect to any charging station.
+                        New plug-in vehicles come with cords to plug into standard 120-volt household outlets. For
+                        faster charging, many drivers will want to buy a charging station to plug into a 240-volt
+                        outlet. See our Accessory Tracker to compare charging station options.
+                        All 240-volt charging stations (Level 2 charging) come with the same “J connector” that should
+                        allow any plug-in vehicle to connect to any charging station.
                     </p>
                     <button class="faq-toggle">
                         <i class="fas fa-chevron-down"></i>
@@ -257,12 +342,12 @@
     </div>
 </div>
 
-<button class="floating-btn">
+<button class="floating-btn" id="supportbtn">
     Get in Touch
 </button>
+{% endblock %}
 
-
-<!-- partial -->
+{% block script %}
 <script>
     const faqs = document.querySelectorAll(".faq");
     let toggleDiv = function(evt) {
@@ -281,5 +366,34 @@
         faq.addEventListener("click", toggleDiv.bind(faq));
     });
 </script>
-
+<script>
+    $('#supportbtn').click(function () {
+        $("#supportmodal").modal('show');
+    });
+    $(document).ready(function () {
+        $("#supportform").submit(function (e) {
+            e.preventDefault();
+            var subject = $("#id_subject").val();
+            var description = $("#id_description").val();
+            $.ajax({
+                data: {
+                    'subject': subject,
+                    'description': description,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                url: "{% url 'SupportRequest' %}",
+                type: "POST",
+                success: function (response) {
+                    $("#supportform").trigger("reset");
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+            $("#supportmodal").modal('hide');
+            $("#thankyou").modal('show');
+        });
+    });
+</script>
 {% endblock %}

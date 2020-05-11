@@ -19,6 +19,8 @@ Dashboard
                 <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
                     <div class="px-5 pt-0 text-center">
                         <h2 class="text-center cs">Your Charging Stations</h2>
+                        <a href="{%url 'All-Maintenance-Man'%}"><button type="button" class="btn btn-warning">Hire Mechanic For Maintenance</button></a>
+
                     </div>
                     <div class="row">
                         {% for cs in cslist %}
@@ -96,6 +98,11 @@ Dashboard
 
 {% block script %}
 <script>
-    document.getElementById("dashboard").classList.add("sidebar-link");
+    document.getElementById("dashboard").classList.add("sidebar-link-active");
+    document.getElementById("support").classList.add("sidebar-link");
+    document.getElementById("analytics").classList.add("sidebar-link");
+    document.getElementById("profile").classList.add("sidebar-link");
+    document.getElementById("business").classList.add("sidebar-link");
+    document.getElementById("maintain").classList.add("sidebar-link");
 </script>
 {% endblock %}

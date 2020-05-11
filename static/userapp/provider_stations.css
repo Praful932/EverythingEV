@@ -55,20 +55,6 @@
 }
 
 
-/* End of Cards */
-
-
-/* Pagination */
-
-
-/* .btn-danger {
-    cursor: pointer;
-    background: transparent;
-    border: 1px solid #dc3545;
-    outline: none;
-    transition: 1s ease-in-out;
-} */
-
 svg {
     position: absolute;
     left: 0;
@@ -147,5 +133,56 @@ svg {
     height: 200px;
 }
 
+.container
+{
+    font-size: 20px;
+    opacity: 1.0;
+    position:relative;
+}
+.card
+{
+  color: #2b2b2b;
+  background:#f8f8f8d3;
+}
+  
+  .card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-signin .card-title {
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    font-weight: 300;
+    font-size: 1.3rem;
+  }
+  
+  .card-signin .card-body {
+    padding: 2rem;
+  }
+  
+  .form-signin {
+    width: 100%;
+  }
+  
+  .form-signin .btn {
+    font-size: 1rem;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+  }
 
-/* EOP */
+.col,.card,.card-body
+{
+  margin-top: 2px;
+  height: 90%;
+}
+
+.nav-tabs
+{
+    margin-left: 275px;
+
+}

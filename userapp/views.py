@@ -13,6 +13,9 @@ from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
                             ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance)
 from urllib.request import urlopen
+from django.http import JsonResponse
+from django.core.mail import send_mail
+from Sih.settings import EMAIL_HOST_USER
 import json
 import math
 
@@ -31,16 +34,22 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
     return 6373.0 * (2 * math.atan2(math.sqrt(temp), math.sqrt(1 - temp)))
 
 
+def check(request):
+    if request.user.is_provider:
+        return redirect('Provider-Dashboard')
+    return redirect('index')
+
+
 def index(request):
     if request.user.is_authenticated:
         try:
             if Consumer.objects.get(user=request.user):
                 pass
-        except:
+        except Consumer.DoesNotExist:
             try:
                 if Provider.objects.get(user=request.user):
                     pass
-            except:
+            except Provider.DoesNotExist:
                 return redirect('registerConsumerSocial')
     return render(request, "userapp/index.html")
 
@@ -135,9 +144,11 @@ def UpdateProfile(request):
         else:
             userform = UserUpdateForm(instance=request.user)
             fieldform = ProviderSignUpForm(instance=request.user.provider)
+            supportform = SupportForm()
         context = {
             'userform': userform,
-            'fieldform': fieldform
+            'fieldform': fieldform,
+            'supportform': supportform
         }
     else:
         if request.user.is_consumer:
@@ -151,8 +162,10 @@ def UpdateProfile(request):
         if userform.is_valid() and fieldform.is_valid():
             userform.save()
             fieldform.save()
-            return redirect('index')
-    return render(request, "userapp/updateprofile.html", context=context)
+            return redirect('Provider-Dashboard')
+    if request.user.is_consumer:
+        return render(request, "userapp/updateprofile.html", context=context)
+    return render(request, "userapp/provider_profile.html", context=context)
 
 
 @login_required
@@ -207,7 +220,6 @@ def ProviderDashboard(request):
             except EmptyPage:
                 cslist = paginator.page(paginator.num_pages)
             supportform = SupportForm()
-            print(cslist)
             context = {
                 'cslist': cslist,
                 'supportform': supportform
@@ -284,8 +296,6 @@ def ChargingStationConsumer(request):
     # to preserve order SO!
     preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(id_list)])
     cslist = ChargingStation.objects.filter(pk__in=id_list).order_by(preserved)
-
-    print(cslist)
     context = {
         'csdata': json.dumps(csdata),
         'cslist': cslist
@@ -353,7 +363,6 @@ def ChargingStationDashboard(request, pk):
             consumption_cleaned.append(int(record.elec_consumption))
         recorddata = [list(x) for x in zip(username_cleaned,
                                            vehicle_cleaned, duration_cleaned, consumption_cleaned)]
-        print(recorddata)
         context = {
             'records': recorddata
         }
@@ -431,6 +440,7 @@ class MaintenanceMan(CreateView):
 @login_required
 def bookMaintenanceMan(request, pk):
     cscount = ChargingStation.objects.filter(owner=request.user.provider)
+    record = CsMaintenance.objects.get(csm=request.user.provider)
     if request.user.is_provider:
         if request.method == 'POST':
             if request.POST.get('problem'):
@@ -446,7 +456,8 @@ def bookMaintenanceMan(request, pk):
                 c = ChargingStation.objects.filter(name=cname)[0]
                 CsM.CsSelect = c
                 CsM.save()
-        return render(request, "booking.html", {'cs': cscount})
+                return redirect('Provider-Dashboard')
+        return render(request, "booking.html", {'cs': cscount,'record':record})
 
 
 class SearchListView(ListView):
@@ -501,5 +512,26 @@ def PendingComplaints(request):
     return render(request, "userapp/complaint_dashboard.html")
 
 
+def SupportRequest(request):
+    if request.method == "POST" and request.is_ajax():
+        subject = request.POST.get('subject', None)
+        description = request.POST.get('description', None)
+        support = {
+            'subject': subject,
+            'description': description
+        }
+        support = json.dumps(support)
+        send_mail(
+            'Support Request', support,
+            EMAIL_HOST_USER, [EMAIL_HOST_USER], fail_silently=False
+        )
+        return JsonResponse({"success": True}, status=200)
+    return JsonResponse({"success": False}, status=400)
+
+
 def faq(request):
-    return render(request, "userapp/FAQs.html")
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/FAQs.html", context=context)

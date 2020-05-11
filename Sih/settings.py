@@ -130,7 +130,7 @@ USE_L10N = True
 USE_TZ = True
 
 # After login/logout
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'check'
 LOGOUT_REDIRECT_URL = 'index'
 
 # If accessing login Required page
@@ -184,5 +184,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('TEMP_EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('TEMP_PASS')
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS_EV')
