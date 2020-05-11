@@ -29,7 +29,7 @@
             <div class="faqs-container">
                 <div class="faq active">
                     <h3 class="faq-title">
-                        What is a Hybrid Electric Vehicle?
+                        What is Hybrid Electric Vehicle?
                     </h3>
                     <p class="faq-text">
                         Hybrid Electric Vehicles combine conventional internal combustion engine systems with electric propulsion systems. They use regenerative braking to convert energy that is normally wasted during braking/coasting into electricity. This electricity is stored
@@ -264,13 +264,22 @@
 
 <!-- partial -->
 <script>
-    const toggles = document.querySelectorAll('.faq-toggle');
-
-    toggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            toggle.parentNode.classList.toggle('active');
+    const faqs = document.querySelectorAll(".faq");
+    let toggleDiv = function(evt) {
+        const isActive = this.classList.contains("active");
+        /// reset all
+        faqs.forEach((x) => {
+            x.classList.remove("active");
         });
-    })
+        if (!isActive) {
+            this.classList.add("active");
+        } else {
+            this.classList.remove("active");
+        }
+    };
+    faqs.forEach((faq) => {
+        faq.addEventListener("click", toggleDiv.bind(faq));
+    });
 </script>
 
 {% endblock %}
