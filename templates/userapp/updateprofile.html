@@ -15,7 +15,7 @@ Update Profile
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Your Profile</h5>
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ userform|crispy }}
                         {{ fieldform|crispy }}
