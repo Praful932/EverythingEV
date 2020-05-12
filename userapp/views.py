@@ -106,8 +106,8 @@ def registerProvider(request):
     if request.user.is_authenticated:
         logout(request)
     if request.method == 'POST':
-        signupform = UserSignUpForm(request.POST, request.FILES)
-        providerform = ProviderSignUpForm(request.POST)
+        signupform = UserSignUpForm(request.POST)
+        providerform = ProviderSignUpForm(request.POST, request.FILES)
         if signupform.is_valid() and providerform.is_valid():
             new_user = signupform.save(commit=False)
             new_user.is_provider = True
@@ -158,7 +158,7 @@ def UpdateProfile(request):
         else:
             userform = UserUpdateForm(request.POST, instance=request.user)
             fieldform = ProviderSignUpForm(
-                request.POST, instance=request.user.provider)
+                request.POST, request.FILES, instance=request.user.provider)
         if userform.is_valid() and fieldform.is_valid():
             userform.save()
             fieldform.save()
@@ -195,7 +195,7 @@ def AddChargingStation(request):
                     except LookupError:
                         ob.suburb = location.raw['address']['town']
                 stationform.save()
-                return redirect('Charging-Station-PLV')
+                return redirect('Provider-Dashboard')
         else:
             stationform = ChargingStationForm()
             stationform.fields['lat'].widget = forms.HiddenInput()
@@ -230,7 +230,7 @@ def ProviderDashboard(request):
 
 class ChargingStationProviderDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = ChargingStation
-    success_url = reverse_lazy('Charging-Station-PLV')
+    success_url = reverse_lazy('Provider-Dashboard')
 
     # Check if current user is author
     def test_func(self):
@@ -453,9 +453,14 @@ def bookMaintenanceMan(request, pk):
                 CsM.ph = request.POST.get('phone')
                 cname = request.POST.get('Cs')
                 c = ChargingStation.objects.filter(name=cname)[0]
+                supportform = SupportForm()
+                context = {
+                    'cs': cscount,
+                    'supportform': supportform
+                }
                 CsM.CsSelect = c
                 CsM.save()
-        return render(request, "booking.html", {'cs': cscount})
+        return render(request, "booking.html", context=context)
 
 
 class SearchListView(ListView):
@@ -466,7 +471,11 @@ class SearchListView(ListView):
 
 def MaintenanceDashboard(request):
     if request.user.is_provider:
-        return render(request, "userapp/maintenance_dashboard.html")
+        supportform = SupportForm()
+        context = {
+         'supportform': supportform
+        }
+        return render(request, "userapp/maintenance_dashboard.html", context=context)
 
 
 class ComplaintsListView(ListView):
@@ -498,16 +507,26 @@ def MaintenanceComplaint(request):
         m.CompletedComplaints = m.CompletedComplaints+1
 
     total = count+m.CompletedComplaints
+    supportform = SupportForm()
     return render(request, "userapp/complaint_dashboard.html", {'d': d, 'count': count, 'm': m,
-                                                                'total': total, "my_data": json.dumps(js_data)})
+                                                                'total': total, "my_data": json.dumps(js_data),
+                                                                'supportform': supportform})
 
 
 def PendingComplaintsListView(request):
-    return render(request, "userapp/complaint_dashboard.html")
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/complaint_dashboard.html", context=context)
 
 
 def PendingComplaints(request):
-    return render(request, "userapp/complaint_dashboard.html")
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/complaint_dashboard.html", context=context)
 
 
 def SupportRequest(request):
