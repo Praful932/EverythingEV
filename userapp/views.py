@@ -440,7 +440,6 @@ class MaintenanceMan(CreateView):
 @login_required
 def bookMaintenanceMan(request, pk):
     cscount = ChargingStation.objects.filter(owner=request.user.provider)
-    record = CsMaintenance.objects.get(csm=request.user.provider)
     if request.user.is_provider:
         if request.method == 'POST':
             if request.POST.get('problem'):
