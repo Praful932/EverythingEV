@@ -20,7 +20,7 @@ Register - Provider
                         <img src="{% static 'userapp/user.png' %}" style="width: 100px;height:100px">
                     </div>
                     <h5 class="card-title text-center" style="font-weight: 700;font-size: xx-large;">Sign Up</h5>
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST" enctype= "multipart/form-data">
                         {% csrf_token %}
                         {{ signupform|crispy }}
                         {{ providerform|crispy }}
