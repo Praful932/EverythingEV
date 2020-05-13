@@ -28,7 +28,8 @@ urlpatterns = [
     path('Maintenance-man/complaints', views.MaintenanceComplaint, name='Complaint-Dashboard'),
     path('book/<int:pk>', views.bookMaintenanceMan, name="bookingMm"),
     path('ajax/supportrequest', views.SupportRequest, name="SupportRequest"),
-    path('faqs/', views.faq, name="faqs")
+    path('faqs/', views.faq, name="faqs"),
+    path('why-choose-ev/',views.WhyChooseEV,name="Why-Choose-EV")
 ]
 
 if settings.DEBUG:
