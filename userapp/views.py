@@ -553,5 +553,6 @@ def faq(request):
     }
     return render(request, "userapp/FAQs.html", context=context)
 
+
 def WhyChooseEV(request):
     return render(request, "userapp/why_choose_ev.html")
