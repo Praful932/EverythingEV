@@ -292,3 +292,11 @@ class Support(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="support_requests")
     subject = models.CharField(max_length=20, verbose_name="Title")
     description = models.TextField(max_length=200, verbose_name="Describe issue you are facing")
+
+class UserRecord(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="data_by")
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicles_charged")
+    start_time = models.DateTimeField(default=timezone.now)
+    stop_time = models.DateTimeField(default=timezone.now)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.00)
+    lng = models.DecimalField(max_digits=9, decimal_places=6, default=0.00)

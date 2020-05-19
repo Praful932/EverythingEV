@@ -1,0 +1,86 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+
+.container
+{
+    font-size: 20px;
+    opacity: 1.0;
+}
+.nav-item
+{
+  color:#2b2b2b !important;
+}
+.card
+{
+  color: #2b2b2b;
+  background:#f8f8f8d3;
+}
+a:hover
+{
+  color:rgba(0, 0, 0, 0.5) !important; 
+}
+
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: .75rem;
+  }
+  
+  .card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-signin .card-title {
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+    font-weight: 300;
+    font-size: 1.3rem;
+  }
+  
+  .card-signin .card-body {
+    padding: 2rem;
+  }
+  
+  .form-signin {
+    width: 100%;
+  }
+  
+  .form-signin .btn {
+    font-size: 1rem;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+  }
+
+.col,.card,.card-body,#map
+{
+  margin-top: 2px;
+  height: 90%;
+}
+#map
+{
+  height:500px;
+}
+
