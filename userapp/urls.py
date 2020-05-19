@@ -29,7 +29,12 @@ urlpatterns = [
     path('book/<int:pk>', views.bookMaintenanceMan, name="bookingMm"),
     path('ajax/supportrequest', views.SupportRequest, name="SupportRequest"),
     path('faqs/', views.faq, name="faqs"),
-    path('why-choose-ev/', views.WhyChooseEV, name="Why-Choose-EV")
+    path('why-choose-ev/', views.WhyChooseEV, name="Why-Choose-EV"),
+    path('sales-page/', views.salesPage, name="sales-page"),
+    path('sales-page/two-wheelers', views.twoWheelers, name="two-wheelers"),
+    path('sales-page/three-wheelers', views.threeWheelers, name="three-wheelers"),
+    path('sales-page/four-wheelers', views.fourWheelers, name="four-wheelers"),
+    path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles")
 ]
 
 if settings.DEBUG:

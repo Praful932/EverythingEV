@@ -556,3 +556,18 @@ def faq(request):
 
 def WhyChooseEV(request):
     return render(request, "userapp/why_choose_ev.html")
+
+def salesPage(request):
+    return render(request, "userapp/sales_page.html")
+
+def twoWheelers(request):
+    return render(request, "userapp/2w.html")
+
+def threeWheelers(request):
+    return render(request, "userapp/3w.html")
+
+def fourWheelers(request):
+    return render(request, "userapp/4w.html")
+
+def heavyVehicles(request):
+    return render(request, "userapp/heavy-vehicles.html")

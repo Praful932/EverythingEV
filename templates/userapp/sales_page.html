@@ -1,0 +1,111 @@
+{% extends "userapp/layout.html" %} {% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/sales_page.css' %}">
+    <title>
+        Sales Page
+    </title>
+    {% endblock %} 
+{% block body %}
+
+    <div class="photo">
+        <img src="{% static 'userapp/7.jpg' %}">
+        <input type="button1" value="read.." class="centerbutton">
+        <input type="button" value="read.." class="centerbutton1">
+        <div class="text-block ml-auto mr-auto">
+            <h1 class="text-dark">Interested in Buying an EV ?</h1>
+            <p class="text-dark">Check out some of the best EV's</p> 
+        </div>
+    </div>
+        
+
+    <!-- <div class="photo">
+        <img src="{% static 'userapp/5.jpg' %}">
+        
+
+    </div>
+ -->
+<div class="main">
+    <div class="cards">
+        <div class="image">
+            <img src="{% static 'userapp/6.jpg' %}">
+        </div>
+        <div class="title">
+            <h2>Two Wheelers</h2>
+            <button><a href="{% url 'two-wheelers' %}">Know more</a></button>
+        </div>
+    </div>
+    <div class="cards">
+        <div class="image">
+            <img src="{% static 'userapp/6.jpg' %}">
+        </div>
+        <div class="title">
+            <h2>Three Wheelers</h2>
+            <button><a href="{% url 'three-wheelers' %}">Know more</a></button>
+        </div>
+    </div>
+    <div class="cards">
+        <div class="image">
+            <img src="{% static 'userapp/6.jpg' %}">
+        </div>
+        <div class="title">
+            <h2>Four Wheelers</h2>
+            <button><a href="{% url 'four-wheelers' %}">Know more</a></button>
+        </div>
+    </div>
+    <div class="cards">
+        <div class="image">
+            <img src="{% static 'userapp/6.jpg' %}">
+        </div>
+        <div class="title">
+            <h2>Heavy Vehicles</h2>
+            <button><a href="{% url 'heavy-vehicles' %}">Know more</a></button>
+        </div>
+    </div>
+<footer>
+    <section id="footer">
+        <div class="container">
+            <div class="row text-center text-xs-center text-sm-left text-md-left mb-0 pb-0">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h3 class="text-white text-center">Quick links</h3>
+                    <ul class="list-unstyled quick-links text-center">
+                        <li><a href="{% url 'index' %}"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">Home</span></a></li>
+                        <li><a href="javascript:void();"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">About</span></a></li>
+                        <li><a href="{% url 'Why-Choose-EV' %}"><span
+                            style="font-family:Trebuchet MS; font-size: 18px">Why Choose EV</span></a></li>
+                        <li><a href="{% url 'faqs' %}"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">FAQ</span></a></li>
+                        <li><a href="javascript:void();"><span style="font-family:Trebuchet MS; font-size: 18px">Get
+                                    Started</span></a></li>
+                        <li><a href="javascript:void();"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">Videos</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+
+                </div>
+            </div>
+            <div class="row" style="padding-top:0px;">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
+                    <ul class="list-unstyled list-inline social text-center" style="text-align:center;">
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-envelope"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+{% endblock body %}
