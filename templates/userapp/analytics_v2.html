@@ -1,0 +1,494 @@
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/analytics1.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="https://cdn.corvidor.com/mdb4.5.0/css/bootstrap.css"> {% endcomment %}
+<link rel="stylesheet" type="text/css" href="https://cdn.corvidor.com/mdb4.5.0/css/mdb.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/00ddca2673.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/kamranahmedse/driver.js/master/dist/driver.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+<nav class="navbar-expand-md navbar-dark" style="background-color:rgb(25, 25, 25)">
+        <div class="d-flex justify-content-between">
+            <h4 class="text-light mt-2 ml-2">EverythingEV</h4>
+            <button class="navbar-toggler ml-auto mb-2 bg-dark" type="button" data-toggle="collapse" data-target="#myNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- top nav -->
+                    <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-nav">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <h4 class="text-uppercase text-light mb-0">Dashboard</h4>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control search-input" placeholder="Search...">
+                                    <button class="btn btn-light search-button" type="button"><i
+                                            class="fas fa-search text-danger"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="navbar-nav">
+                                    <div class="row ml-auto pt-xs-4 pt-xl-0">
+                                        <div class="col-sm-4">
+                                            <li class="nav-item icon-parent">
+                                                <a href="" class="nav-link icon-bullet"><i
+                                                        class="fas fa-comments text-muted fa-lg"></i></a>
+                                            </li>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <li class="nav-item icon-parent">
+                                                <a href="" class="nav-link icon-bullet"><i
+                                                        class="fas fa-bell text-muted fa-lg"></i></a>
+                                            </li>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <li class="nav-item ml-md-auto">
+                                                <a href="" class="nav-link" data-toggle="modal" data-target="#signout"><i
+                                                        class="fas fa-sign-out-alt text-danger fa-lg"></i></a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of top nav -->
+                    <!-- side nav -->
+                    <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+                        <a href="#" class="navbar-brand bottom-border text-white d-block ml-auto mr-auto py-3 text-center mb-4">EverythingEV</a>
+                        <div class="text-center bottom-border pb-2">
+                            <img src="images/iconfinder_user-id_285641.svg" class="icon" width="50">
+                            <a href="#" class="text-white">James Charles</a>
+                        </div>
+                        <ul class="navbar-nav flex-column mt-5">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="index.html">
+                                    <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white current" href="business.html">
+                                    <i class="fas fa-briefcase text-white ml-2 fa-lg mr-3"></i> Business
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-chart-pie text-white ml-2 fa-lg mr-3"></i> Analytics
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-portrait text-white ml-2 fa-lg mr-3"></i> Profile
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white sidebar-link" href="#">
+                                    <i class="fas fa-headset text-white ml-2 fa-lg mr-3"></i> Support
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End of side nav -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="signout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Want to Leave?</h4>
+                </div>
+                <div class="modal-body">
+                    Press Logout to leave
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of modal -->
+
+    <!-- Business -->
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                    <div class="container">
+                        <div class="px-5 pt-4 text-center">
+                            <div class="col-md-12">
+                                <p id="businessName" class="h1 animated fadeInLeft"><b>Statistics</b></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="animated fadeInLeft"><span class="font-weight-bold">Data Sources:</span><span>
+                                        Users</span>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="animated fadeInLeft text-right">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card green-chart mb-4 animated fadeInLeft card-body">
+                                    <p class="text-white font-weight-bold animated fadeInLeft">Total Users</p>
+                                    <p class="h3 text-white animated fadeInLeft">{{ totalcount }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card green-chart mb-4 animated fadeInLeft card-body">
+                                    <p class="text-white font-weight-bold animated fadeInLeft">Total Charging Stations
+                                    </p>
+                                    <p class="h3 text-white animated fadeInLeft">{{ cscount }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card green-chart mb-4 animated fadeInLeft card-body">
+                                    <p class="text-white font-weight-bold animated fadeInLeft">Total Electricity Consumed(Today)
+                                    </p>
+                                    <p class="h3 text-white animated fadeInLeft">12000 KWh</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card card-body animated fadeInLeft">
+                                    <p class="black-text font-weight-bold animated fadeInLeft">Total Charging Expenses
+                                    </p>
+                                    <p class="h3 black-text animated fadeInLeft">Rs 100</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-body animated fadeInLeft">
+                                    <p class="black-text font-weight-bold animated fadeInLeft">Total Savings</p>
+                                    <p class="h3 black-text animated fadeInLeft">Rs 2000</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="line-chart">
+                                    <div class="aspect-ratio">
+                                        <canvas id="chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="chartjs-wrapper">
+                                    <canvas class="chartjs-gauge"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container">
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
+                                        <!--       Chart.js Canvas Tag -->
+                                        <canvas id="barChart"></canvas>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10"><button type="button" class="btn btn-success btn-md" onclick="toggleChart();">Toggle Chart </button></div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}
+
+{% block script %}
+<!-- Script -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    {% comment %} <script src="script.js"></script> {% endcomment %}
+
+    <!-- Script for charts -->
+<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://codepen.io/grayghostvisuals/pen/a08e0d79c150ff5030f9b6afaa137749"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
+    <script>
+        var freq = JSON.parse('{{ freq|safe }}');
+        var consumption = JSON.parse('{{ consumption|safe }}');
+        var wr = JSON.parse('{{ wr|safe }}');
+        // ============================================
+        // As of Chart.js v2.5.0
+        // http://www.chartjs.org/docs
+        // ============================================
+
+        var chart = document.getElementById('chart').getContext('2d'),
+            gradient = chart.createLinearGradient(0, 0, 0, 450);
+
+        gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)');
+        gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+
+
+        var data = {
+            labels: ['00am', '01am', '02am', '03am', '04am', '05am', '06am', '07am', '08am', '09am', '10am', '11am', '12pm', '01pm', '02pm', '03pm', '04pm', '05pm', '06pm', '07pm', '08pm', '09pm', '10pm', '11pm'],
+            datasets: [{
+                label: 'Traffic at your Station (in hours)',
+                backgroundColor: gradient,
+                pointBackgroundColor: 'white',
+                borderWidth: 1,
+                borderColor: '#911215',
+                data: freq
+            }]
+        };
+
+
+        var options = {
+            responsive: true,
+            lable: 'todays consumptions',
+            maintainAspectRatio: true,
+            animation: {
+                easing: 'easeInOutQuad',
+                duration: 520
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        color: 'rgba(200, 200, 200, 0.05)',
+                        lineWidth: 1
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        color: 'rgba(200, 200, 200, 0.08)',
+                        lineWidth: 1
+                    }
+                }]
+            },
+            elements: {
+                line: {
+                    tension: 0.4
+                }
+            },
+            legend: {
+                display: false
+            },
+            point: {
+                backgroundColor: 'white'
+            },
+            tooltips: {
+                titleFontFamily: 'Open Sans',
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                titleFontColor: 'red',
+                caretSize: 5,
+                cornerRadius: 2,
+                xPadding: 10,
+                yPadding: 10
+            }
+        };
+
+
+        var chartInstance = new Chart(chart, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+
+        // Create chart
+        var ctx = document.getElementsByClassName("chartjs-gauge");
+        var chart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Red", "Blue"],
+                datasets: [{
+                    label: "Gauge",
+                    data: consumption,
+                    backgroundColor: [
+                        "rgb(255, 99, 132)",
+                        "rgb(54, 162, 235)",
+                        "rgb(255, 205, 86)"
+                    ]
+                }]
+            },
+            options: {
+                circumference: Math.PI,
+                rotation: Math.PI,
+                cutoutPercentage: 80, // precent
+                plugins: {
+                    datalabels: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        borderColor: '#ffffff',
+                        color: function(context) {
+                            return context.dataset.backgroundColor;
+                        },
+                        font: function(context) {
+                            var w = context.chart.width;
+                            return {
+                                size: w < 512 ? 18 : 20
+                            }
+                        },
+                        align: 'start',
+                        anchor: 'start',
+                        offset: 10,
+                        borderRadius: 4,
+                        borderWidth: 1,
+                        formatter: function(value, context) {
+                            var i = context.dataIndex;
+                            var len = context.dataset.data.length - 1;
+                            if (i == len) {
+                                return null;
+                            }
+                            return value + ' mph';
+                        }
+                    }
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: false
+                }
+            }
+        });
+
+
+        // DEMO Code: not relevant to example
+        function change_gauge(chart, label, data) {
+            chart.data.datasets.forEach((dataset) => {
+                if (dataset.label == label) {
+                    dataset.data = data;
+                }
+            });
+            chart.update();
+        }
+
+        var accelerating = false;
+
+        function accelerate() {
+            accelerating = false;
+
+
+            window.setTimeout(function() {
+                change_gauge(chart, "Gauge", [60, 140])
+            }, 2000);
+
+            window.setTimeout(function() {
+                change_gauge(chart, "Gauge", [100, 100])
+            }, 3000);
+
+        }
+
+        // Start sequence
+
+        var canvas = document.getElementById("barChart");
+        var ctx = canvas.getContext('2d');
+        // We are only changing the chart type, so let's make that a global variable along with the chart object:
+        var chartType = 'bar';
+        var myBarChart;
+
+        // Global Options:
+        Chart.defaults.global.defaultFontColor = 'grey';
+        Chart.defaults.global.defaultFontSize = 16;
+
+        var data = {
+            labels: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+            datasets: [{
+                label: "Electricity consumed within a week",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(0,255,0,0.4)",
+                borderColor: "green", // The main line color
+                borderCapStyle: 'square',
+                pointBorderColor: "white",
+                pointBackgroundColor: "green",
+                pointBorderWidth: 1,
+                pointHoverRadius: 8,
+                pointHoverBackgroundColor: "yellow",
+                pointHoverBorderColor: "green",
+                pointHoverBorderWidth: 2,
+                pointRadius: 4,
+                pointHitRadius: 10,
+                data: wr,
+                spanGaps: true,
+            }]
+        };
+
+        // Notice the scaleLabel at the same level as Ticks
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            title: {
+                fontSize: 18,
+                display: true,
+                text: '',
+                position: 'bottom'
+            }
+        };
+
+
+        // We add an init function down here after the chart options are declared.
+
+        init();
+
+        function init() {
+            // Chart declaration:
+            myBarChart = new Chart(ctx, {
+                type: chartType,
+                data: data,
+                options: options
+            })
+        }
+
+        function toggleChart() {
+            //destroy chart:
+            myBarChart.destroy();
+            //change chart type: 
+            this.chartType = (this.chartType == 'bar') ? 'line' : 'bar';
+            //restart chart:
+            init();
+        }
+    </script>
+{% endblock script %}

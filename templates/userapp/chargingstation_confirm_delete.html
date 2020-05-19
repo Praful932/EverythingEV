@@ -3,6 +3,26 @@
 {% block head %}
 {% load crispy_forms_tags %}
 <link rel="stylesheet" href="{% static 'userapp/rs.css'%}">
+<link href='https://fonts.googleapis.com/css?family=Andika' rel='stylesheet'>
+<style>
+   body{
+    height: 100vh;
+    background: linear-gradient(90deg, #23a6d5 10%, #23d5ab 100%);
+   
+}
+.cancel{
+    background-color: rgba(189, 195, 199, 1);
+    margin-left: 20px;
+    font-family: 'Andika';
+}
+.card-signin{
+        border-radius: 20px;
+        background-color:rgba(242, 241, 239, 0.9);
+    }
+.cancel:hover{
+    background-color: darkgrey;
+}
+</style>
 {% endblock %}
 
 {% block title %}
@@ -11,17 +31,24 @@ Delete Charging Station
 
 {% block body %}
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-5 mx-auto">
-            <div class="card card-signin my-5">
+<div class="container text-center">
+    <div class="row text-center">
+        <div class="col-md-5 mx-auto text-center" style="margin-top: 100px;">
+            <div class="card card-signin my-5" style="height: 300px;width: 500px;" >
                 <div class="card-body">
-                    <h5 class="card-title text-center">Delete Charging Station</h5>
+                    <h5 class="card-title text-center" style="font-family: 'Andika';font-size:30px;
+                    margin-top: 30px;">Delete Charging Station</h5>
                     <form method="POST">
                         {% csrf_token %}
+                        <div style="font-family: 'Andika';font-size:20px;">
                         Are You Sure you want to Delete Your Charging Station<br>
-                        <button class="btn btn-lg btn-danger" type="submit">Yes, Delete</button>
-                        <a href="{% url 'Charging-Station-PLV' %}" class="btn-lg ml-2 btn-secondary">Cancel</a>                
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                        <button class="btn btn-lg btn-danger" type="submit" style="margin-right: 20px;font-family: 'Andika'">Yes, Delete</button>
+                        
+                        <a href="{% url 'Provider-Dashboard' %}"><button class="btn btn-lg cancel " type="submit">Cancel</button></a>                
                     </form>
                 </div>
             </div>

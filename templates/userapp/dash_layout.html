@@ -1,0 +1,219 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
+        <script src="https://kit.fontawesome.com/00ddca2673.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'userapp/dash_style.css'%}">
+        {% block head %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+</head>
+
+<body>
+    <nav class="navbar-expand-md navbar-light">
+        <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse"
+            data-target="#myNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- side nav -->
+                    <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+                        <a href="#"
+                            class="navbar-brand bottom-border text-white d-block ml-auto mr-auto py-3 text-center mb-4 font-weight-bold">EverythingEV</a>
+                        <div class="text-center bottom-border pb-2">
+                            <div class="icon">
+                            <img src=https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png style="width: 80px;height:80px;">
+                        </div>
+                            <br>
+                            <a href="#" class="text-white" style="font-size: 30px;">{{ request.user.username }}</a>
+                        </div>
+                        <ul class="navbar-nav flex-column mt-5">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" href=# id="dashboard">
+                                    <i class="fas fa-home text-white ml-2 fa-lg mr-3"></i> Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" id="business"
+                                    href="{% url 'Provider-Dashboard' %}">
+                                    <i class="fas fa-briefcase text-white ml-2 fa-lg mr-3"></i> Business
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" id="analytics" href="#">
+                                    <i class="fas fa-chart-pie text-white ml-2 fa-lg mr-3"></i> Analytics
+                                </a>
+                            </li>
+                        </ul>
+                        {% if user.provider.maintenancemandetails %}
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" id="maintain"
+                                    href="{% url 'Maintenance-man-dashboard' %}">
+                                    <i class="fas fa-cog text-white ml-2 fa-lg mr-3"></i> Maintenance
+                                </a>
+                            </li>
+                        </ul>
+                        {% endif %}
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link p-3 mb-2 text-white" id="profile" href="{% url 'Profile' %}">
+                                    <i class="fas fa-portrait text-white ml-2 fa-lg mr-3"></i> Profile
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-lin   k p-3 mb-2 text-white" id="support" data-toggle="modal"
+                                    data-target="#supportmodal">
+                                    <i class="fas fa-headset text-white ml-2 fa-lg mr-3"></i> Support
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- top nav -->
+                    <div class="col-xl-10 col-lg-9 col-md-8 ml-auto  fixed-top py-2 top-nav"
+                        style="background-color: #23a6d5;">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <h4 class="text-uppercase mb-0 font-weight-bold" style="color: ghostwhite;">Dashboard
+                                </h4>
+                            </div>
+                            <div class="col-md-5">
+
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="navbar-nav float-right">
+                                    <li class="nav-item icon-parent">
+                                        <a href="" class="nav-link icon-bullet"><i
+                                                class="fas fa-bell text-black fa-lg"></i></a>
+                                    </li>
+                                    <li class="nav-item float-right pl-4">
+                                        <a href="" class="nav-link" data-toggle="modal" data-target="#signout"><i
+                                                class="fas fa-sign-out-alt text-black fa-lg"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border-width: 2 px;">
+                    <!--top nav end-->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="signout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Want to Leave?</h4>
+                </div>
+                <div class="modal-body">
+                    Press Logout to leave
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="thankyou" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thank you!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>We will get back to you shortly</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="supportmodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Your Issue</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="supportform">
+                        {% csrf_token %}
+                        {{ supportform|crispy }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-success" value="Submit" form="supportform">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br> {% block body %} {% endblock %}
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#supportform").submit(function (e) {
+                e.preventDefault();
+                var subject = $("#id_subject").val();
+                var description = $("#id_description").val();
+                $.ajax({
+                    data: {
+                        'subject': subject,
+                        'description': description,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    url: "{% url 'SupportRequest' %}",
+                    type: "POST",
+                    success: function (response) {
+                        $("#supportform").trigger("reset");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                })
+                $("#supportmodal").modal('hide');
+                $("#thankyou").modal();
+            });
+        });
+    </script>
+    {% block script %}
+    {% endblock %}
+</body>
+
+</html>

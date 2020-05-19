@@ -1,0 +1,101 @@
+/* Graphs */
+
+.grey-text-dark {
+    color: #858585 !important;
+}
+
+.green-chart {
+    background: linear-gradient(141deg, #56a924 0%, #24a935 50%, #24a978 100%);
+}
+
+.blue-chart {
+    background: linear-gradient(141deg, #317d8d 0%, #314f8d 50%, #41318d 100%);
+}
+
+.purple-chart {
+    background: linear-gradient(141deg, #3d2b8d 0%, #6E2B8D 50%, #8d2b7b 100%);
+}
+
+.industry-data {
+    background: linear-gradient(141deg, #64725b 0%, #5b725e 50%, #5b726a 100%);
+}
+
+.experian-data {
+    background: linear-gradient(141deg, #45217b 0%, #72217b 50%, #7b2157 100%);
+}
+
+.dnb-data {
+    background: linear-gradient(141deg, #30b491 0%, #3095b4 50%, #3053b4 100%);
+}
+
+.equifax-data {
+    background: linear-gradient(141deg, #981e6f 0%, #981e32 50%, #98471e 100%);
+}
+
+.ansonia-data {
+    background: linear-gradient(141deg, #108f99 0%, #104a99 50%, #1a1099 100%);
+}
+
+.average-data {
+    background: linear-gradient(141deg, #56a924 0%, #24a935 50%, #24a978 100%);
+}
+
+.bold-text {
+    font-weight: bold !important;
+}
+
+.btn-primary {
+    background-color: #314f8d !important;
+}
+
+.btn-success {
+    background-color: #24a935 !important;
+}
+
+.button-collapse {
+    display: flex;
+}
+
+.fa-bars {
+    color: #212529;
+}
+
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.line-chart {
+    animation: fadeIn 600ms cubic-bezier(.57, .25, .65, 1) 1 forwards;
+    opacity: 0;
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.aspect-ratio {
+    height: 0;
+    padding-bottom: 50%;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.chartjs-wrapper {
+    margin: 0 auto;
+    width: 32vw;
+    height: auto;
+    padding: 20px;
+}
+
+#barChart {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    /*   Check out the fancy shadow  on this one */
+}
+
+
+/* End of Charts */

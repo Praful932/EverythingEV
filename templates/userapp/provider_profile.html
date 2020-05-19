@@ -1,0 +1,61 @@
+{% extends "userapp/dash_layout.html"%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<style>
+    .move{
+        background-color: #31BAFD;
+        color: azure;
+    }
+    .move:hover{
+        background-color: #2B9ED8;
+        box-shadow: 0 10px 15px 0 rgba(0,0,0,0.24),0 10px 10px 0 rgba(0,0,0,0.19);
+        color: azure;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 mx-auto" style="padding-left: 200px;">
+            <div class="card card-signin my-5" style="background-color:rgba(232, 236, 241, 0.5);">
+                <div class="card-body">
+                    <div style="margin-top: -30px;">
+                    <h5 class="card-title text-center" style="font-family: 'Roboto', sans-serif;font-size: 30px;">Your Profile</h5>
+                    <div class="text-center">
+                        <img src=https://www.associazionecoach.com/wp-content/uploads/2019/03/coach.png style="width: 130px;height:130px">
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ userform|crispy }}
+                        {{ fieldform|crispy }}
+                        <button class="btn btn-lg  move"  type="submit">Update</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    document.getElementById("dashboard").classList.add("sidebar-link");
+    document.getElementById("support").classList.add("sidebar-link");
+    document.getElementById("analytics").classList.add("sidebar-link");
+    document.getElementById("profile").classList.add("sidebar-link-active");
+    document.getElementById("business").classList.add("sidebar-link")
+    document.getElementById("maintain").classList.add("sidebar-link");
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.tabspace {
+    text-indent: 5em;
+}
+
+.nav-tabs>li>a {
+    border: none;
+    border-radius: 0;
+    background-color: #eee;
+}
+
+.nav-tabs>li>a:hover {
+    background-color: #8845a6;
+    color: #fff;
+}
+
+.nav-tabs>li.active>a {
+    border: none;
+    background-color: #8845a6;
+    color: #fff;
+}
+
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    border: none;
+    background-color: #8845a6;
+    color: #fff;
+}

@@ -1,0 +1,108 @@
+{% extends "userapp/dash_layout.html"%}
+{% load static %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
+{% endblock %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block body %}
+<!-- Business -->
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                    <div class="px-5 pt-0 text-center">
+                        <h2 class="text-center cs">Your Charging Stations</h2>
+                        <a href="{%url 'All-Maintenance-Man'%}"><button type="button" class="btn btn-warning">Hire Mechanic For Maintenance</button></a>
+
+                    </div>
+                    <div class="row">
+                        {% for cs in cslist %}
+                        <div class="col-xl-4 col-md-6 col-sm-6 p-2">
+                            <div class="card shadow" style="width:254px;">
+                                <div class="inner">
+                                    <img class="card-img-top" src="{%static 'userapp/1.jpeg'%}" alt="Card image cap">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ cs.name }}</h5>
+                                    <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
+                                    <div class="justify-content-between mt-2">
+                                        <!-- <a href="#" class="btn btn-primary">Learn more</a> -->
+                                        <div class="ml-2">
+                                            <i class="fas fa-video fa-lg"></i>
+                                            <i class="fas fa-restroom fa-lg ml-2"></i>
+                                            <span class="ml-5">
+                                                <i class="fas fa-bolt text-warning fa-lg">10</i>
+                                                <i class="fas fa-bolt text-success fa-lg ml-2">8</i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 ">
+                                        <div class="justify-content-between mb-2">
+                                            <a href=# class="btn btn-success mr-2" role="button"
+                                                aria-pressed="true">Status</a>
+                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}"
+                                                class="btn btn-primary" role="button" aria-pressed="true">Analytics</a>
+                                        </div>
+                                        <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button"
+                                            aria-pressed="true">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <footer style="align-content: center;margin-right: 70px;">
+                        <section>
+                            <div class="pagebtn">
+                                {% if cslist.has_other_pages %}
+
+                                {% if cslist.has_previous %}
+                                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                                <a class="btn btn-outline-info mb-4"
+                                    href="?page={{ page.obj.previous_page_number}}">Previous</a>
+                                {% endif  %}
+
+                                {% for num in cslist.paginator.page_range %}
+                                {% if cslist.number == num %}
+                                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                {% elif num > cslist.number|add:'-3' and num < cslist.number|add:'3' %}
+                                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if cslist.has_next %}
+                                <a class="btn btn-outline-info mb-4"
+                                    href="?page={{ cslist.next_page_number }}">First</a>
+                                <a class="btn btn-outline-info mb-4"
+                                    href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
+                                {% endif  %}
+
+                                {% endif  %}
+                            </div>
+                        </section>
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.getElementById("dashboard").classList.add("sidebar-link-active");
+    document.getElementById("support").classList.add("sidebar-link");
+    document.getElementById("analytics").classList.add("sidebar-link");
+    document.getElementById("profile").classList.add("sidebar-link");
+    document.getElementById("business").classList.add("sidebar-link");
+    document.getElementById("maintain").classList.add("sidebar-link");
+</script>
+{% endblock %}

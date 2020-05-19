@@ -1,210 +1,221 @@
 {% extends "userapp/layout.html" %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'userapp/service_dashboard.css'%}">
+  <link rel="stylesheet" href="{% static 'userapp/service_dashboard.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%  static 'userapp/bootstrap.css' %}"> 
 <title>Place Searches</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,600" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"> 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.selectric/1.10.1/selectric.css"> 
-{% endblock %}
+<style>
+   body {
+margin: 0;
+width: 100%;
+height: 100%;
+font-family: "Exo", sans-serif;
+color: #fff;
+background-repeat: no-repeat;
+background-size: cover;
+background-image: url(https://cdn2.vectorstock.com/i/1000x1000/33/11/-green-triangle-shapes-background-vector-2153311.jpg);
+}
+  html{
+  scroll-behavior: smooth;
+}
+.my-custom-scrollbar {
+    position: relative;
+    height:65%;
+    width: 100%;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+</style>
+  {% endblock %}
 {% block body %}
 
+<div >
 
-<div class="card-list" style="padding:20px;background-color:#1b2431">
-    <div class="row">
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
-        <div class="card blue">
-          <div class="title">All Charging stations</div>
-          <div class="value"><b>Count</b> of stations</div>
-          <div class="stat"><b>Building New </b></div>
-        </div>
-      </div>
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
-        <div class="card green">
-          <div class="title">All customers</div>
-          <div class="value">customers<b> COUNT</b></div>
-          <div class="stat"><b>increase</b> in customers</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
-        <div class="card red">
-          <div class="title">Charges</div>
-          
-          <div style="line-height:1.2;margin-left: 12px">AC:<br>DC:</div>
-          <div class="stat">Hike or Reduction</div>
-        </div>
-      </div>
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
-        <div class="card red">
-          <div class="title">new customers</div>
-         
-          <div class="value">3</div>
-          <div class="stat"><b>13</b>% decrease</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="projects mb-4">
-    <div class="projects-inner">
-      <header class="projects-header">
-        <div class="title">Charging Station Information</div>
-        <div class="count">| charging Station 1</div>
-        
-      </header>
-      <table class="projects-table">
-        <thead>
-          
-        </thead>
-        <tr>
-          <td>
-            <p>Car name/model</p>
-            <p>Company</p>
-          </td>
-          <td>
-            <p>Date</p>
-            <p class="text-danger">Charging Time </p>
-            </td>
-          <td class="member">
-            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-            <div class="member-info">
-              <p>Customer name</p>
-              <p>Charging Type used</p>
-            </div>
-          </td>
-          <td>
-            <p>Charges</p>
-            <p>Paid Method</p>
-          </td>
-          <td class="status">
-            <span class="status-text status-orange">charging time   </span>
-          </td>
-          <!-- <td>
-            <form class="form" action="#" method="POST">f
-            </form>
-          </td> -->
-        </tr>
-        <tr class="danger-item">
-          <td>
-            <p>Car name/model</p>
-            <p>company</p>
-          </td>
-          <td>
-            <p>Date</p>
-            <p class="text-danger">charging time</p>
-          </td>
-          <td class="member">
-            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-            <div class="member-info">
-              <p>Customer name</p>
-              <p>Charging Type used</p>
-            </div>
-          </td>
-          <td>
-            <p>Charges</p>
-            <p>Paid Method</p>
-          </td>
-          <td class="status">
-            <span class="status-text status-red">Charging time</span>
-          </td>
-          <td>
-            <form class="form" action="#" method="POST">
-              
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Car name/model</p>
-            <p>Company</p>
-          </td>
-          <td>
-            <p>Date</p>
-            <p class="text-danger">Charging time</p>
-          </td>
-          <td class="member">
-            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-            <div class="member-info">
-              <p>Customer name</p>
-              <p>Charging Type used</p>
-            </div>
-          </td>
-          <td>
-            <p>Charges</p>
-            <p>Paid Method</p>
-          </td>
-          <td class="status">
-            <span class="status-text status-orange">Charging time</span>
-          </td>
-          <td>
-            <form class="form" action="#" method="POST">
-              
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Car name/model</p>
-            <p>company</p>
-          </td>
-          <td>
-            <p>Date</p>
-            <p class="text-danger">Charging time</p>
-          </td>
-          <td class="member">
-            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-            <div class="member-info">
-              <p>Customer Name</p>
-              <p>Charging Type used</p>
-            </div>
-          </td>
-          <td>
-            <p>Charges</p>
-            <p>Paid Method</p>
-          </td>
-          <td class="status">
-            <span class="status-text status-blue">Charging Time</span>
-          </td>
-          <td>
-            <form class="form" action="#" method="POST">
-            
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <p>Car name/model</p>
-            <p>Company</p>
-          </td>
-          <td>
-            <p>Date</p>
-            <p class="text-danger">Charging Time</p>
-          </td>
-          <td class="member">
-            <figure><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/people_8.png" /></figure>
-            <div class="member-info">
-              <p>Customer name</p>
-              <p>Charging Type used</p>
-            </div>
-          </td>
-          <td>
-            <p>Charges</p>
-            <p>Paid Method</p>
-          </td>
-          <td class="status">
-            <span class="status-text status-orange">Charging time</span>
-          </td>
-          <td>
-            <form class="form" action="#" method="POST">
-              
-            </form>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
+<br>
+
+</div>
+<div class="text-center" style=" height: 80px; padding-left: 100 px;">
+
+<h1 style="padding-top: 50px;color: whitesmoke ; font-weight: 500;font-family:'Segoe UI';font-size: 50px;"> DASHBOARD</div></h1>
+</div>
+
+<div class="card-list" style="padding:30px;padding-left: 100px;padding-right: 100px;">
+ 
+    
   
+      <header style="background-color: #7DBE2E;height: 50px;">
+        <div style="margin-top: 30px;">
+        <div class="title inner" ><h5 style="color: black;padding-left: 10px;padding-top: 10px;font-size: 30px;font-family:   sans-serif;" >Charging Station Information | charging Station 1</h5></div> 
+        
+    </div>
+
+      </header>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+        <table class="table table-bordered table-striped mb-0" style="background-color: azure;">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Vehicle</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Power consumed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">6</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">7</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">8</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">9</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">10</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+            <tr>
+              <th scope="row">11</th>
+              <td>Mark</td>
+              <td>vehicle</td>
+              <td>time</td>
+              <td>units</td>
+            </tr>
+           
+          </tbody>
+        </table>
+        </div> 
+      
+      
+      
+      </div>
+    </div>
+  </div>
+</div>
+</footer>
+<div>
+    <footer id="table">
+        <section id="footer">
+            <div class="container">
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <h6>Quick links:</h6>
+                        
+                        
+                        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+                          <a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home        </a>
+                            
+                          <a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About       </a>
+                            <a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ         </a>
+                            <a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a>
+                            
+                            
+                        
+                    </div>
+                   
+                   
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                        <ul class="list-unstyled list-inline social text-center">
+                            <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();"><i
+                                        class="fa fa-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();"><i
+                                        class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i
+                                        class="fa fa-envelope"></i></a></li>
+                        </ul>
+                    </div>
+                    </hr>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                        <p><u><a href="https://www.nationaltransaction.com/">National Transaction Corporation</a></u> is
+                            a
+                            Registered MSP/ISO of Elavon, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp,
+                            Minneapolis, MN]
+                        </p>
+                        <p class="h6">&copy All right Reversed.<a class="text-green ml-2"
+                                href="https://www.sunlimetech.com" target="_blank">Sunlimetech</a></p>
+                    </div>
+                    </hr>
+                </div>
+            </div>
+        </section>
+    </footer>
+</div>
            
           
     </div>

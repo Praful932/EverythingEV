@@ -1,0 +1,92 @@
+{% extends "userapp/dash_layout.html"%} 
+{% block title%}
+Dashboard
+{% endblock %}
+ {% block body %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 ml-auto">
+                <div class="row pt-5 mt-3 mb-5">
+                    <div class="col-sm-6 p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <i class="fas fa-shopping-cart fa-3x text-warning"></i>
+                                    <div class="text-right text-secondary">
+                                        <h5>Sales</h5>
+                                        <h4>$10,000</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer"
+                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
+                                <i class="fas fa-sync mr-4"></i>
+                                <span>Updated</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <i class="fas fa-money-bill-alt fa-3x text-success"></i>
+                                    <div class="text-right text-secondary">
+                                        <h5>Expenses</h5>
+                                        <h4>$9,000</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer"
+                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
+                                <i class="fas fa-sync mr-4"></i>
+                                <span>Updated</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <i class="fas fa-users fa-3x text-info"></i>
+                                    <div class="text-right text-secondary">
+                                        <h5>Customers</h5>
+                                        <h4>150</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer"
+                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
+                                <i class="fas fa-sync mr-4"></i>
+                                <span>Updated</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <i class="fas fa-hand-holding-usd fa-3x" style="color:green"></i>
+                                    <div class="text-right text-secondary">
+                                        <h5>Revenue</h5>
+                                        <h4>$1000</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer"
+                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
+                                <i class="fas fa-sync mr-4"></i>
+                                <span>Updated</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End of cards -->
+
+{% endblock %}

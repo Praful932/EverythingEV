@@ -1,0 +1,37 @@
+{% extends 'userapp/layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/rs_consumer.css'%}">
+{% endblock head %}
+
+{% block title %}
+Register - Customer
+{% endblock title %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-lg-9 mx-auto" >
+            <div class="card card-signin my-5" >
+                <div class="card-body"  >
+                    <div class="text-center">
+                    <img src="{% static 'userapp/user.png' %}" style="width: 100px;height:100px">
+                </div>
+                    <h5 class="card-title text-center" style="font-weight: 700;font-size: xx-large;">Sign Up</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ signupform|crispy }}
+                        {{ consumerform|crispy }}
+                        <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
