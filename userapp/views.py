@@ -571,3 +571,7 @@ def fourWheelers(request):
 
 def heavyVehicles(request):
     return render(request, "userapp/heavy-vehicles.html")
+
+
+def survey(request):
+    return render(request, "userapp/survey.html")

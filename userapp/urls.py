@@ -34,7 +34,8 @@ urlpatterns = [
     path('sales-page/two-wheelers', views.twoWheelers, name="two-wheelers"),
     path('sales-page/three-wheelers', views.threeWheelers, name="three-wheelers"),
     path('sales-page/four-wheelers', views.fourWheelers, name="four-wheelers"),
-    path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles")
+    path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles"),
+    path('survey/',views.survey,name="survey")
 ]
 
 if settings.DEBUG:
