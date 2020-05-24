@@ -1,4 +1,7 @@
-{% extends "userapp/layout.html" %} {% load static %} {% block head %}
+{% extends "userapp/layout.html" %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block head %}
 <link rel="stylesheet" href="{% static 'userapp/survey.css' %}">
 <title>
     Survey
@@ -58,4 +61,16 @@
         </div>
     </div>
 </div>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        {{ survey_form|crispy }}
+    </form>
+</div>
 {% endblock body %}
+
+{% block script %}
+    <script>
+        
+    </script>
+{% endblock script %}
