@@ -6,16 +6,16 @@ from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
-                           ChargingStationForm, SupportForm)
+                           ChargingStationForm, SupportForm, SurveyForm)
 from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
                             ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance)
-from urllib.request import urlopen
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from Sih.settings import EMAIL_HOST_USER
+from userapp.helper import get_user_location
 import json
 import math
 
@@ -242,12 +242,7 @@ class ChargingStationProviderDeleteView(LoginRequiredMixin, UserPassesTestMixin,
 
 @login_required
 def ChargingStationConsumer(request):
-    url = 'http://ipinfo.io/json'
-    response = urlopen(url)
-    data = json.load(response)
-    # Get User location(lat & lng)
-    lat_user = math.radians(float(data['loc'].split(',')[0]))
-    lng_user = math.radians(float(data['loc'].split(',')[1]))
+    lat_user, lng_user = get_user_location()
     cslist = ChargingStation.objects.all()
     distid_list = []
     for cs in cslist:
@@ -473,7 +468,7 @@ def MaintenanceDashboard(request):
     if request.user.is_provider:
         supportform = SupportForm()
         context = {
-         'supportform': supportform
+            'supportform': supportform
         }
         return render(request, "userapp/maintenance_dashboard.html", context=context)
 
@@ -554,20 +549,42 @@ def faq(request):
     return render(request, "userapp/FAQs.html", context=context)
 
 
+def survey(request):
+    lat_user, lng_user = get_user_location()
+    survey_form = SurveyForm()
+    survey_form.fields['lat'].widget = forms.HiddenInput()
+    survey_form.fields['lng'].widget = forms.HiddenInput()
+    survey_form.fields['vehicle'].widget = forms.HiddenInput()
+    survey_form.fields['port_type'].widget = forms.HiddenInput()
+    survey_form.fields['start_time'].widget = forms.HiddenInput()
+    survey_form.fields['stop_time'].widget = forms.HiddenInput()
+    context = {
+        'survey_form' : survey_form,
+        'lat_user' : lat_user,
+        'lng_user' : lng_user
+    }
+    return render(request, "userapp/survey.html", context=context)
+
+
 def WhyChooseEV(request):
     return render(request, "userapp/why_choose_ev.html")
+
 
 def salesPage(request):
     return render(request, "userapp/sales_page.html")
 
+
 def twoWheelers(request):
     return render(request, "userapp/2w.html")
+
 
 def threeWheelers(request):
     return render(request, "userapp/3w.html")
 
+
 def fourWheelers(request):
     return render(request, "userapp/4w.html")
+
 
 def heavyVehicles(request):
     return render(request, "userapp/heavy-vehicles.html")

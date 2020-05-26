@@ -1,0 +1,40 @@
+body {
+    width: 100%;
+}
+
+.question-section {
+    background: rgb(196, 226, 245);
+    height: 10rem;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.question-section:hover {
+    background: rgb(162, 210, 240);
+    transition: ease 0.3s;
+}
+
+.question {
+    margin-top: 10px;
+}
+
+.answers-section {
+    padding: 10px;
+}
+
+.answer {
+    background: white;
+    border: 2px groove rgb(175, 173, 173);
+    border-radius: 30px;
+    width: 120px;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 10px;
+}
+
+.answer:hover {
+    background: rgb(49, 49, 49);
+    color: white;
+    transition: ease 0.3s;
+}
