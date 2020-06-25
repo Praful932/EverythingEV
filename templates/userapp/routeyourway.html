@@ -1,17 +1,23 @@
-{% extends "userapp/layout.html" %} {% load static %} {% block head %}
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-<meta charset="utf-8">
-<link rel="stylesheet" href="{% static 'userapp/routeyourway.css' %}"> {% endblock %} {% block body %}
-<div class="row">
-    <div class="col-sm-12">
-        <div style="display: none">
-            <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location">
-            <input id="destination-input" class="controls" type="text" placeholder="Enter a destination location">
+{% extends "userapp/layout.html" %}
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/routeyourway.css' %}"> 
+{% endblock %} 
+{% block body %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">Find Charging Stations in your route</div>
+        <div class="card-body">
+            <div id="inputbox" style="display: none">
+                <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location">
+                <input id="destination-input" class="controls dest" type="text" placeholder="Enter a destination location">
+            </div>
+            <div id="map"></div>
         </div>
-        <div id="map"></div>
     </div>
 </div>
-{% endblock %} {% block script %}
+{% endblock %}
+{% block script %}
 <script>
     var latlang_cs = [];
     var infowindows_cs = [];
@@ -40,10 +46,10 @@
         map = new google.maps.Map(document.getElementById('map'), {
             mapTypeControl: false,
             center: {
-                lat: -33.8688,
-                lng: 151.2195
+                lat: 20.5937, 
+                lng: 78.9629
             },
-            zoom: 13
+            zoom: 6
         });
 
         new AutocompleteDirectionsHandler(map);
@@ -170,7 +176,7 @@
     function plot() {
         clearMarkers();
         for (var i = 0; i < latlang_cs.length; i++) {
-            addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 200);
+            addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 10);
         }
     };
 
