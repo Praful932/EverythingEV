@@ -6,7 +6,7 @@ from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
-                           ChargingStationForm, SupportForm, SurveyForm)
+                           ChargingStationForm, SupportForm, SurveyForm,CharpoolerForm)
 from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -373,7 +373,9 @@ def ChargePooling(request):
             'chargepoolers': chargepoolers
         }
         return render(request, "userapp/chargepoolerpage.html", context=context)
-    return redirect('index')
+    poolerform = CharpoolerForm()
+
+    return render(request,"chargepoolingform.html",{'form':poolerform})
 
 
 @login_required
@@ -450,12 +452,11 @@ def bookMaintenanceMan(request, pk):
                 c = ChargingStation.objects.filter(name=cname)[0]
                 supportform = SupportForm()
                 context = {
-                    'cs': cscount,
-                    'supportform': supportform
+                    
                 }
                 CsM.CsSelect = c
                 CsM.save()
-        return render(request, "booking.html", context=context)
+        return render(request, "booking.html", {'cs': cscount,})
 
 
 class SearchListView(ListView):
@@ -588,3 +589,7 @@ def fourWheelers(request):
 
 def heavyVehicles(request):
     return render(request, "userapp/heavy-vehicles.html")
+
+
+def BuildCs(request):
+    return render(request,"buildchargingstation.html",{})

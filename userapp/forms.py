@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from userapp.models import (Consumer, Provider, User, ChargingStation,
-                            Support, UserRecord)
+                            Support, UserRecord,ChargePooler)
 
 
 class UserSignUpForm(UserCreationForm):
@@ -77,3 +77,7 @@ class SurveyForm(forms.ModelForm):
         fields = ['start_time','stop_time','vehicle','port_type','lat','lng']
 
 
+class CharpoolerForm(forms.ModelForm):
+    class Meta:
+        model = ChargePooler
+        fields = ['city','local_area','ph_no','cost','normal_port','fast_port']
