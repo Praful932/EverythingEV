@@ -137,6 +137,7 @@ def logoutf(request):
 
 @login_required
 def UpdateProfile(request):
+    supportform = 0
     if request.method == "GET":
         if request.user.is_consumer:
             userform = UserUpdateForm(instance=request.user)
@@ -208,6 +209,7 @@ def AddChargingStation(request):
 
 @login_required
 def ProviderDashboard(request):
+    supportform = 0
     if request.user.provider:
         if request.method == 'GET':
             current_provider = Provider.objects.get(user=request.user)
