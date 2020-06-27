@@ -7,6 +7,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #959393;
 }
+.navbar{
+    position: fixed;
+    background-color: rgba(236, 236, 236, 0.7);
+}
 
 .photo {
     background-color: grey;
@@ -25,17 +29,18 @@ body {
 .image-head {
     position: relative;
     width: 100%;
+    height: 100%;
 }
 
 .centered {
     position: absolute;
-    top: 72%;
+    top: 30%;
     left: 43%;
     transform: translate(-40%, -40%);
     letter-spacing: -1px;
     background: rgb(255, 255, 255);
     /* fallback color */
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2);
     padding: 10px;
 }
 
@@ -84,6 +89,7 @@ body {
 }
 
 .main {
+    padding-top: 50px;
     background-color: white;
 }
 
@@ -108,13 +114,20 @@ body {
 
 .image img {
     width: 100%;
+    
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
 
 .title {
     text-align: center;
+    background-color: rgba(236, 236, 236, 0.7);
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
+
+
 
 button {
     margin-top: 10px;
@@ -124,9 +137,44 @@ button {
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
+    color: rgba(36, 37, 42, 1);
 }
 
 button:hover {
-    background-color: black;
-    color: white;
+    background-color: rgba(191, 191, 191, 1);
+    color: rgba(36, 37, 42, 1);
 }
+
+button>a{
+    color: rgba(36, 37, 42, 1);;
+}
+
+button>a:hover{
+    color: rgba(36, 37, 42, 1);;
+}
+
+.two{
+    height: 275px;
+    width: 100px;
+    padding: 40px;
+}
+
+.three{
+    height: 275px;
+    width: 100px;
+    padding: 40px;
+}
+.four{
+    height: 275px;
+    width: 100px;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+.heavy{
+    height: 275px;
+    width: 100px;
+    padding: 20px;
+    padding-top: 60px;
+}
+

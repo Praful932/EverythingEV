@@ -1,34 +1,45 @@
 {% extends "userapp/layout.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'userapp/sales_page.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 <title>
     Sales Page
 </title>
 {% endblock %} {% block body %}
 
-<div class="container-fluid bg">
-    <img src="{% static 'userapp/7.jpg' %}" alt="text" class="image-head">
-    <div class="centered">
+<div class="container-fluid bg text-center" >
+    <img src="{% static 'userapp/6.jpg' %}" alt="text" class="image-head">
+    <div class="centered"  style="font-family: 'Roboto Slab', serif;">
         <h1 class="display-4">Interested in Buying an EV?</h1>
-        <p style="font-size: 25px;">Check out some of the best EVs</p>
-        <input type="button1" value="read.." class="centerbutton">
-        <input type="button" value="read.." class="centerbutton1">
+        <p style="font-size: 30px;">Check out some of the best EVs</p>
+        <div>
+           <a href="#option">
+            <i class="fa fa-chevron-circle-down fa-2x" aria-hidden="true" style="color: black;"></i>
+           </a>
+        </div>
     </div>
+    
 </div>
 
-<div class="main">
-    <div class="card-container">
-        <div class="cards">
+
+<div class="main" id="option">
+    <div class="card-container text-center">
+        <div class="cards" >
             <div class="image">
-                <img src="{% static 'userapp/6.jpg' %}">
+                <img class="two" src="https://www.tvsmotor.com/iqube/-/media/Feature/EV-Carousel/side-view-2.png?h=410&w=406&la=en&hash=C358630A9FD7E5EF7E308F9CF3D270BC">
             </div>
             <div class="title">
                 <h2>Two Wheelers</h2>
-                <button><a href="{% url 'two-wheelers' %}">Know more</a></button>
+                <button  ><a href="{% url 'two-wheelers' %}">Know more</a></button>
             </div>
         </div>
         <div class="cards">
+            <div class="top">
+                
+            </div>
             <div class="image">
-                <img src="{% static 'userapp/6.jpg' %}">
+                <img class="three" src="https://lohiaauto.com/main/images/narayan/comfort-DLX-02.png">
             </div>
             <div class="title">
                 <h2>Three Wheelers</h2>
@@ -36,8 +47,9 @@
             </div>
         </div>
         <div class="cards">
+            
             <div class="image">
-                <img src="{% static 'userapp/6.jpg' %}">
+                <img class="four" src="https://i.pinimg.com/originals/92/14/c9/9214c93b5468364bbd4f6f809a95f11c.png">
             </div>
             <div class="title">
                 <h2>Four Wheelers</h2>
@@ -46,11 +58,11 @@
         </div>
         <div class="cards">
             <div class="image">
-                <img src="{% static 'userapp/6.jpg' %}">
+                <img class="heavy" src="https://etimg.etb2bimg.com/photo/69887195.cms">
             </div>
             <div class="title">
                 <h2>Heavy Vehicles</h2>
-                <button><a href="{% url 'heavy-vehicles' %}">Know more</a></button>
+                <button ><a href="{% url 'heavy-vehicles' %}">Know more</a></button>
             </div>
         </div>
     </div>
@@ -103,4 +115,7 @@
             </div>
         </section>
     </footer>
+
+
+    
     {% endblock body %}
