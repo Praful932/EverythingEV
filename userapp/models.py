@@ -156,7 +156,7 @@ def cost():
 
 
 class Vehicle(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     company = models.CharField(max_length=100)
     type4or2 = models.IntegerField()
@@ -297,33 +297,33 @@ class Support(models.Model):
 
 class UserRecord(models.Model):
     ports = (
-        ('Type1','Type1'),
-        ('Type2','Type2'),
-        ('Type3','Type3')
+        ('Type1', 'Type1'),
+        ('Type2', 'Type2'),
+        ('Type3', 'Type3')
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="data_by")
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicles_charged")
     start_time = models.DateTimeField(default=timezone.now)
     stop_time = models.DateTimeField(default=timezone.now)
-    port_type = models.CharField(max_length=20,choices=ports,default="")
+    port_type = models.CharField(max_length=20, choices=ports, default="")
     lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.00)
     lng = models.DecimalField(max_digits=9, decimal_places=6, default=0.00)
 
 
 class Survey(models.Model):
     travel_type = (
-        ('Personal','Personal'),
-        ('Ambulance','Ambulance'),
-        ('Private Authority','Private Authority'),
-        ('Goverment','Goverment'),
-        ('Tours and Travel','Tours and Travel'),
-        ('Goods Carrier','Goods Carrier')
+        ('Personal', 'Personal'),
+        ('Ambulance', 'Ambulance'),
+        ('Private Authority', 'Private Authority'),
+        ('Goverment', 'Goverment'),
+        ('Tours and Travel', 'Tours and Travel'),
+        ('Goods Carrier', 'Goods Carrier')
     )
-    consumer = models.ForeignKey(Consumer,on_delete=models.CASCADE,related_name="consumer_survey")
+    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE, related_name="consumer_survey")
     charging_time = models.IntegerField(default=0)
     slow_port = models.BooleanField(default=False)
     fast_port = models.BooleanField(default=False)
-    vehicle_name = models.ForeignKey(Vehicle,on_delete=models.CASCADE)
-    means_of_travel =models.CharField(max_length=20,choices=travel_type,default="")
+    vehicle_name = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    means_of_travel =models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
