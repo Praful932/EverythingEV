@@ -2,12 +2,28 @@
 {% block head %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Oxygen&display=swap" rel="stylesheet">
 <title>
     Sales Page - Heavy Vehicles
 </title>
 <style>
     html{
         scroll-behavior: smooth;
+    }
+    .card-img-top{
+        padding-top: 20px;
+    }
+    .bottom{
+        background-color: rgba(191, 191, 191, 0.6);
+        border-radius: 20px 20px 0px 0px;
+        padding: 15px;
+        
+    }
+    #top{
+        font-family: 'Noto Sans JP', sans-serif;
+    }
+    .card-title{
+        font-family: 'Oxygen', sans-serif;
     }
 </style>
 {% endblock %} 
@@ -23,35 +39,43 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
 <div class="card ml-auto mr-auto" style="width: 22rem;">
     <img class="card-img-top" src="https://images.newindianexpress.com/uploads/user/imagelibrary/2016/10/18/w600X300/Ashok.jpg" alt="Card image cap">
     <div class="card-body">
-      <h4 class="card-title mb-5 text-center"><b>Ashok Leyland - EV VERSA Bus</b></h4>
-      <p><b>Torque:</b> 600 Nm @ 500 rpm</p>
-      <p><b>Max Output ( HP):</b> 200 HP @ 500 rpm</p>
-      <p><b>Dimensions(Length/Width):</b> 11085/2500 mm</p>
-      <p><b>Seating Capacity(Excluding Driver):</b> 44 km</p>
-      <p><b>Speed Index:</b> 95</p>
-      <a href="https://www.ashokleyland.com/en/article/-/tag/press-release?article=1307119&title=Circuit-S-an-Electric-Bus-Powered-by-SUN-Mobility%E2%80%99s-Swappable-Smart-BatteryTM-unveiled-at-India-Auto-Expo-2018" target="_blank" class="btn btn-primary text-center">Know More</a>
+      <h4 class="card-title mb-5 text-center" style="padding-top:35px ;"><b>Ashok Leyland - EV VERSA Bus</b></h4>
+      <div class="bottom">
+        <p><b>Torque:</b> 600 Nm @ 500 rpm</p>
+        <p><b>Max Output ( HP):</b> 200 HP @ 500 rpm</p>
+        <p><b>Dimensions(Length/Width):</b> 11085/2500 mm</p>
+        <p><b>Seating Capacity(Excluding Driver):</b> 44 km</p>
+        <p><b>Speed Index:</b> 95</p>
+        <a href="https://www.ashokleyland.com/en/article/-/tag/press-release?article=1307119&title=Circuit-S-an-Electric-Bus-Powered-by-SUN-Mobility%E2%80%99s-Swappable-Smart-BatteryTM-unveiled-at-India-Auto-Expo-2018" target="_blank" class="btn btn-primary text-center">Know More</a>
+      </div>
     </div>
   </div>
   <div class="card ml-auto mr-auto" style="width: 22rem;">
     <img class="card-img-top" src="https://etimg.etb2bimg.com/photo/69887195.cms" alt="Card image cap">
     <div class="card-body">
       <h4 class="card-title mb-5 text-center"><b>Olectra K6</b></h4>
-      <p><b>Input voltage:</b> Three phase AC 380 V / 440 V</p>
+    <div class="bottom">
+        <p><b>Input voltage:</b> Three phase AC 380 V / 440 V</p>
       <p><b>Input current:</b> < 126A</p>
       <p><b>Length/Width/Height:</b> 690 mm /400 mm / 200 mm</p>
       <p><b>Battery Type:</b> Lead Acid, 48V</p>
       <a href="https://olectra.com/electric-bus-k6/" target="_blank" class="btn btn-primary text-center">Know More</a>
+
+    </div>  
+    
     </div>
   </div>
   <div class="card ml-auto mr-auto" style="width: 22rem;">
     <img class="card-img-top" src="https://etimg.etb2bimg.com/photo/69887195.cms" alt="Card image cap">
     <div class="card-body">
         <h4 class="card-title mb-5 text-center"><b>Olectra K9</b></h4>
-        <p><b>Input voltage:</b> Three phase AC 380 V / 440 V</p>
+        <div class="bottom">
+            <p><b>Input voltage:</b> Three phase AC 380 V / 440 V</p>
         <p><b>Input current:</b> < 126A</p>
         <p><b>Length/Width/Height:</b> 690 mm /400 mm / 200 mm</p>
         <p><b>Battery Type:</b> Lead Acid, 48V</p>
           <a href="https://olectra.com/electric-bus-k9/" target="_blank" class="btn btn-primary text-center" target="_blank">Know More</a>
+        </div>
       </div>
   </div>
 </div>

@@ -558,8 +558,6 @@ def survey(request):
     survey_form.fields['port_type'].widget = forms.HiddenInput()
     survey_form.fields['start_time'].widget = forms.HiddenInput()
     survey_form.fields['stop_time'].widget = forms.HiddenInput()
-
-
     context = {
         'survey_form': survey_form,
         'lat_user': lat_user,
@@ -577,7 +575,6 @@ def survey(request):
             user_survey.slow_port = True
         else:
             user_survey.fast_port = True
-
         user_survey.distance_travelled = 10
         user_survey.charging_time = 12
         user_survey.vehicle_name = Vehicle.objects.first()
