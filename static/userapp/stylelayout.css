@@ -10,6 +10,12 @@
     }
 }
 
+.smallsize {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white !important;
+}
+
 /* Footer */
 
 
