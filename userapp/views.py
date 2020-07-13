@@ -609,3 +609,6 @@ def heavyVehicles(request):
 
 def BuildCs(request):
     return render(request, "buildchargingstation.html")
+
+def dashwelcome(request):
+    return render(request, "userapp/dash_welcome.html")
