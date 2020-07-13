@@ -10,7 +10,7 @@
   html {
     scroll-behavior: smooth;
   }
-
+  
   input {
     background-color: rgba(232, 236, 241, 1);
     height: 40px;
@@ -29,6 +29,11 @@
     padding-bottom: 10px;
 
   }
+  .up{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    
+  }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -41,19 +46,22 @@
   <p class="text-center">____________________________________________________________</p>
   <br>
   <h2 class="text-center mb-3">Manufacturers</h2>
-  <nav class="navbar navbar-expand-lg navbar-info bg-secondary text-center">
-    <div style="margin-left: 350px;">
-      <a href="#Hero" class="btn btn-dark ml-3 mr-3">Hero</a>
-      <a href="#Indus" class="btn btn-dark ml-3 mr-3">Indus</a>
-      <a href="#Avon" class="btn btn-dark ml-3 mr-3">Avon</a>
-      <a href="#Okinawa" class="btn btn-dark ml-3 mr-3">Okinawa</a>
-      <a href="#Palatino" class="btn btn-dark ml-3 mr-3">Palatino</a>
-      <a href="#Lohia" class="btn btn-dark ml-3 mr-3">Lohia</a>
-      <a href="#Tork" class="btn btn-dark ml-3 mr-3">Tork</a>
-      <a href="#Ather" class="btn btn-dark ml-3 mr-3">Ather</a>
-      <a href="#Revolt" class="btn btn-dark ml-3 mr-3">Revolt</a>
-    </div>
-  </nav>
+  
+  <div class="container-fluid text-center bg-secondary">
+    <!--nav class="navbar navbar-expand-lg navbar-info bg-secondary text-center"-->
+      <div>
+        <a href="#Hero" class="btn btn-dark ml-3 mr-3 up">Hero</a>
+        <a href="#Indus" class="btn btn-dark ml-3 mr-3 up">Indus</a>
+        <a href="#Avon" class="btn btn-dark ml-3 mr-3 up">Avon</a>
+        <a href="#Okinawa" class="btn btn-dark ml-3 mr-3 up">Okinawa</a>
+        <a href="#Palatino" class="btn btn-dark ml-3 mr-3 up">Palatino</a>
+        <a href="#Lohia" class="btn btn-dark ml-3 mr-3 up">Lohia</a>
+        <a href="#Tork" class="btn btn-dark ml-3 mr-3 up">Tork</a>
+        <a href="#Ather" class="btn btn-dark ml-3 mr-3 up">Ather</a>
+        <a href="#Revolt" class="btn btn-dark ml-3 mr-3 up">Revolt</a>
+      </div>
+    <!--/nav-->
+  </div>
 
   <br>
   <!-- hero -->
@@ -486,23 +494,13 @@
               More</a>
           </div>
         </div>
+        </div>
+      </div>
         <br>
-        <!-- end Lohia -->
-        <!-- Tork -->
-        <br><br>
-        <p class=" text-center " id=" Tork ">____________________________________________________________</p>
-        <h3 class=" text-center ">Tork</h3>
-        <br><br>
-        <div class=" container row ml-auto mr-auto ">
-          <div class=" card ml-auto mr-auto " style=" width: 27rem; ">
-            <img class=" card-img-top "
-              src=" https://imgd.aeplcdn.com/1280x720/bw/models/tork-t6x.jpg?20190103151915&q=80 "
-              alt=" Card image cap ">
-            <div class=" card-body ">
-              <h4 class=" card-title mb-5 text-center "><b>Tork T6X</b></h4>
-
-              <br>
-              <!-- end Palatino -->
+        <!-- end Palatino -->
+        
+        
+              
               <!-- Lohia -->
               <br><br>
               <p class="text-center" id="Lohia">____________________________________________________________</p>
@@ -664,7 +662,7 @@
             </div>
             <br><br>
 
-            <footer>
+            <footer style="background-color:rgba(108, 122, 137, 1);">
               <section id=" footer ">
                 <div class=" container ">
                   <div class=" row text-center text-xs-center text-sm-left text-md-left mb-0 pb-0 ">
@@ -673,24 +671,20 @@
                     </div>
                     <div class=" col-xs-12 col-sm-4 col-md-4 ">
                       <h3 class=" text-white text-center ">Quick links</h3>
-                      <ul class=" list-unstyled quick-links text-center ">
+                      <ul class="text-white list-unstyled quick-links text-center ">
                         <li><a href=" {% url 'index' %} "><span
-                              style=" font-family:Trebuchet MS; font-size: 18px ">Home</span></a></li>
+                              style=" font-family:Trebuchet MS; font-size: 18px;color: azure; ">Home</span></a></li>
                         <li><a href=" javascript:void(); "><span
-                              style=" font-family:Trebuchet MS; font-size: 18px ">About</span></a>
+                              style=" font-family:Trebuchet MS; font-size: 18px;color: azure; ">About</span></a>
                         </li>
                         <li><a href=" {% url 'Why-Choose-EV' %} "><span
-                              style=" font-family:Trebuchet MS; font-size: 18px ">Why
+                              style=" font-family:Trebuchet MS; font-size: 18px ;color: azure;">Why
                               Choose
                               EV</span></a></li>
                         <li><a href=" {% url 'faqs' %} "><span
-                              style=" font-family:Trebuchet MS; font-size: 18px ">FAQ</span></a>
+                              style=" font-family:Trebuchet MS; font-size: 18px;color: azure; ">FAQ</span></a>
                         </li>
-                        <li><a href=" javascript:void(); "><span style=" font-family:Trebuchet MS; font-size: 18px ">Get
-                              Started</span></a></li>
-                        <li><a href=" javascript:void(); "><span
-                              style=" font-family:Trebuchet MS; font-size: 18px ">Videos</span></a>
-                        </li>
+                        
                       </ul>
                     </div>
                     <div class=" col-xs-12 col-sm-4 col-md-4 ">
@@ -699,7 +693,7 @@
                   </div>
                   <div class=" row " style=" padding-top:0px; ">
                     <div class=" col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1 ">
-                      <ul class=" list-unstyled list-inline social text-center " style=" text-align:center; ">
+                      <!--ul class=" list-unstyled list-inline social text-center " style=" text-align:center; ">
                         <li class=" list-inline-item "><a href=" javascript:void(); "><i
                               class=" fa fa-facebook "></i></a>
                         </li>
@@ -715,7 +709,7 @@
                         <li class=" list-inline-item "><a href=" javascript:void(); "><i
                               class=" fa fa-envelope "></i></a>
                         </li>
-                      </ul>
+                      </ul-->
                     </div>
                   </div>
                 </div>
