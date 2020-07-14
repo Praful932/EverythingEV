@@ -613,3 +613,5 @@ def BuildCs(request):
 def savingsCalculator(request):
     company = Vehicle.objects.all()
     return render(request, "userapp/savings_calculator.html", {"Vehicle": company})
+def dashwelcome(request):
+    return render(request, "userapp/dash_welcome.html")
