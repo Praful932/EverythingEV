@@ -162,7 +162,7 @@ class Vehicle(models.Model):
     type4or2 = models.IntegerField()
     horsepower = models.CharField(max_length=100)
     vehicle_range = models.IntegerField()
-    price = models.DecimalField(max_digits=9, decimal_places=6)
+    ConsumptionPerMin = models.DecimalField(max_digits=9, decimal_places=6)
     battery_type = models.CharField(max_length=100)
 
     def __str__(self):
