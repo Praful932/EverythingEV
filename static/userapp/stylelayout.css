@@ -1,8 +1,20 @@
 .navbar {
     font-size: 25px;
     font-weight: 900;
+    position: relative;
 }
 
+@media(max-width:600px) {
+    .navbar {
+        background-color: #363636 !important;
+    }
+}
+
+.smallsize {
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white !important;
+}
 
 /* Footer */
 
@@ -10,6 +22,7 @@
 /* Footer */
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
 section {
     padding: 30px 0;
 }

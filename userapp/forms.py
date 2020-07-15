@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from userapp.models import (Consumer, Provider, User, ChargingStation,
-                            Support)
+                            Support, UserRecord, ChargePooler)
 
 
 class UserSignUpForm(UserCreationForm):
@@ -69,3 +69,15 @@ class SupportForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'placeholder': 'Describe your issue here(max 200 words)'})
         }
+
+
+class SurveyForm(forms.ModelForm):
+    class Meta:
+        model = UserRecord
+        fields = ['start_time', 'stop_time', 'vehicle', 'port_type', 'lat', 'lng']
+
+
+class CharpoolerForm(forms.ModelForm):
+    class Meta:
+        model = ChargePooler
+        fields = ['city', 'local_area', 'ph_no', 'cost', 'normal_port', 'fast_port']

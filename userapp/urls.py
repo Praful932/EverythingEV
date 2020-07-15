@@ -2,8 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from userapp.views import (ChargingStationProviderDeleteView, MaintenanceMan,
-                           SearchListView)
+from userapp.views import (ChargingStationProviderDeleteView, MaintenanceMan, SearchListView, BuildCs)
 
 # ChargingStation - CS
 urlpatterns = [
@@ -34,7 +33,11 @@ urlpatterns = [
     path('sales-page/two-wheelers', views.twoWheelers, name="two-wheelers"),
     path('sales-page/three-wheelers', views.threeWheelers, name="three-wheelers"),
     path('sales-page/four-wheelers', views.fourWheelers, name="four-wheelers"),
-    path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles")
+    path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles"),
+    path('survey/', views.survey, name="survey"),
+    path('buildcs/', views.BuildCs, name="BuildCs"),
+    path('savings-calculator/', views.savingsCalculator, name="savings-calculator"),
+    path('dash-welcome/', views.dashwelcome, name="dash-layout")
 ]
 
 if settings.DEBUG:

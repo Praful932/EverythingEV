@@ -2,6 +2,7 @@
 {% block head %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Oxygen&display=swap" rel="stylesheet">
 <title>
     Sales Page - Three Wheelers
 </title>
@@ -9,13 +10,29 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
     html{
         scroll-behavior: smooth;
     }
+    img{
+        padding-top: 20px;
+    }
+    .card-title{
+        font-family: 'Oxygen', sans-serif;
+    }
+    #top{
+        font-family: 'Noto Sans JP', sans-serif;
+    }
+    .bottom{
+        background-color: rgba(191, 191, 191, 0.6);
+        border-radius: 20px 20px 0px 0px;
+        padding: 15px;
+        padding-bottom: 10px;
+       
+    }
 </style>
 {% endblock %} 
 {% block body %}
 <html>
 <div class="image-fluid" style="background-image: linear-gradient(to bottom right, rgb(0, 81, 255), rgb(0, 255, 136));">
     <br><br><br>  
-    <h1 class="text-center">Three Wheelers</h1>
+    <h1 class="text-center top">Three Wheelers</h1>
 <br>
 <p class="text-center">_________________________________________________________________________________</p>
 <br><br>
@@ -24,34 +41,40 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
     <img class="card-img-top" src="https://www.mahindrasmallcv.com/media/images/e-alfa.jpg" alt="Card image cap">
     <div class="card-body">
       <h4 class="card-title mb-5 text-center"><b>Mahindra Treo Yaari - HRT</b></h4>
-      <p><b>Capacity:</b> D+4</p>
-      <p><b>Price:</b> ₹ 1.36 to 2.22 Lac</p>
-      <p><b>Horse Power:</b> 1.96 kW</p>
-      <p><b>Range:</b> 85 km</p>
-      <p><b>Battery Type:</b> Lithium-ion, 48V</p>
-      <a href="https://www.mahindraelectric.com/vehicles/treo-electric-auto/" target="_blank" class="btn btn-primary text-center">Know More</a>
+      <div class="bottom">
+        <p><b>Capacity:</b> D+4</p>
+        <p><b>Price:</b> ₹ 1.36 to 2.22 Lac</p>
+        <p><b>Horse Power:</b> 1.96 kW</p>
+        <p><b>Range:</b> 85 km</p>
+        <p><b>Battery Type:</b> Lithium-ion, 48V</p>
+        <a href="https://www.mahindraelectric.com/vehicles/treo-electric-auto/" target="_blank" class="btn btn-primary text-center">Know More</a>
+      </div>
     </div>
   </div>
   <div class="card ml-auto mr-auto" style="width: 22rem;">
     <img class="card-img-top" src="https://www.mahindrasmallcv.com/media/images/e-alfa.jpg" alt="Card image cap">
     <div class="card-body">
       <h4 class="card-title mb-5 text-center"><b>Lohia Comfort Plus</b></h4>
-      <p><b>Capacity:</b> D+4</p>
-      <p><b>Price:</b> ₹ 1.49 Lac</p>
-      <p><b>Range:</b> 100 km</p>
-      <p><b>Battery Type:</b> Lead Acid, 48V</p>
-      <a href="https://lohiaauto.com/comfort-plus.php" target="_blank" class="btn btn-primary text-center">Know More</a>
+      <div class="bottom" style="padding-bottom: 50px;">
+        <p><b>Capacity:</b> D+4</p>
+        <p><b>Price:</b> ₹ 1.49 Lac</p>
+        <p><b>Range:</b> 100 km</p>
+        <p><b>Battery Type:</b> Lead Acid, 48V</p>
+        <a href="https://lohiaauto.com/comfort-plus.php" target="_blank" class="btn btn-primary text-center">Know More</a>
+      </div>
     </div>
   </div>
   <div class="card ml-auto mr-auto" style="width: 22rem;">
     <img class="card-img-top" src="https://www.mahindrasmallcv.com/media/images/e-alfa.jpg" alt="Card image cap">
     <div class="card-body">
         <h4 class="card-title mb-5 text-center"><b>Mahindra E-Alfa Mini</b></h4>
-        <p><b>Capacity:</b> D+4</p>
+        <div class="bottom" style="padding-bottom: 50px;">
+            <p><b>Capacity:</b> D+4</p>
         <p><b>Price:</b> ₹ 1.12 Lac</p>
         <p><b>Range:</b> 85 km</p>
         <p><b>Battery Type:</b> Lead Acid, 48V</p>
         <a href="https://www.mahindrasmallcv.com/e-alfa.html" target="_blank" class="btn btn-primary text-center" target="_blank">Know More</a>
+        </div>
       </div>
   </div>
 </div>
@@ -71,20 +94,21 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <h3 class="text-white text-center">Quick links</h3>
-                    <ul class="list-unstyled quick-links text-center">
-                        <li><a href="{% url 'index' %}"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Home</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">About</span></a></li>
-                        <li><a href="{% url 'Why-Choose-EV' %}"><span
-                            style="font-family:Trebuchet MS; font-size: 18px">Why Choose EV</span></a></li>
-                        <li><a href="{% url 'faqs' %}"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">FAQ</span></a></li>
-                        <li><a href="javascript:void();"><span style="font-family:Trebuchet MS; font-size: 18px">Get
-                                    Started</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Videos</span></a></li>
-                    </ul>
+                    <ul class="text-white list-unstyled quick-links text-center ">
+                        <li><a href=" {% url 'index' %} "><span
+                              style=" font-family:Trebuchet MS; font-size: 18px;color: azure; ">Home</span></a></li>
+                        <li><a href=" javascript:void(); "><span
+                              style=" font-family:Trebuchet MS; font-size: 18px;color: azure; ">About</span></a>
+                        </li>
+                        <li><a href=" {% url 'Why-Choose-EV' %} "><span
+                              style=" font-family:Trebuchet MS; font-size: 18px ;color: azure;">Why
+                              Choose
+                              EV</span></a></li>
+                        <li><a href=" {% url 'faqs' %} "><span
+                              style=" font-family:Trebuchet MS; font-size: 18px;color: azure; ">FAQ</span></a>
+                        </li>
+                        
+                      </ul>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
 
@@ -92,7 +116,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
             </div>
             <div class="row" style="padding-top:0px;">
                 <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
-                    <ul class="list-unstyled list-inline social text-center" style="text-align:center;">
+                    <!--ul class="list-unstyled list-inline social text-center" style="text-align:center;">
                         <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
@@ -103,7 +127,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
                         </li>
                         <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-envelope"></i></a>
                         </li>
-                    </ul>
+                    </ul-->
                 </div>
             </div>
         </div>

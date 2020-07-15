@@ -8,49 +8,17 @@
     html {
         scroll-behavior: smooth;
     }
-    
-    .iconb {
-        border: 2px solid #4c5760;
-        border-radius: 3px;
-        margin-right: 10px;
-        padding: 5px;
-    }
-    
-    .title {
-        padding: 2rem 1rem;
-        margin-bottom: 2rem;
-        border-radius: 0.3rem;
-    }
-    
-    .card_title {
-        text-align: center;
-        font-family: sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-        margin-top: -60px;
-    }
-    
-    .card_image {
-        width: inherit;
-        height: inherit;
-        margin-top: 20px;
-    }
-    
-    a {
-        text-decoration: none;
-        color: black;
-    }
 </style>
 {% endblock %} {% block body %}
 <div class="title text-center" style="padding-top:150px">
-    <h1 class="display-3" style="font-family: 'Roboto', sans-serif;font-weight: 700;">EverythingEV</h1>
+    <h1 class="display-3">EverythingEV</h1>
     <p>One stop solution for every effin EV problem.</p>
 </div>
-<div class="container" style="padding-right:60px">
+<div class="container all-cards">
     <div class="row top-buffer">
-        <div class="col-lg-2 col-sm-4 text-center">
+        <div class="col-lg-2 col-sm-4 text-center box">
             <a href="{% url 'Why-Choose-EV' %}">
-                <div class="cardicon">
+                <div class="cardicon mx-auto">
                     <div class="card_image">
                         <img src="{% static 'userapp/icons/pngwave.png' %}" style="width:100px;height:100px" />
                     </div>
@@ -61,9 +29,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-2 col-sm-4 text-center">
+        <div class="col-lg-2 col-sm-4 text-center box">
             <a href="#charging">
-                <div class="cardicon ">
+                <div class="cardicon mx-auto ">
                     <div class="card_image">
                         <img src="{% static 'userapp/icons/location.png' %}" style="width:100px;height:90px" />
                     </div>
@@ -73,9 +41,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-2 col-sm-4 text-center">
+        <div class="col-lg-2 col-sm-4 text-center box">
             <a href="#pool">
-                <div class="cardicon">
+                <div class="cardicon mx-auto">
                     <div class="card_image">
                         <img src="{% static 'userapp/route-way.png' %}" style="width:100px;height:100px" />
                     </div>
@@ -86,9 +54,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-2 col-sm-4 text-center">
+        <div class="col-lg-2 col-sm-4 text-center box">
             <a href="#route-the-way">
-                <div class="cardicon">
+                <div class="cardicon mx-auto">
                     <div class="card_image">
                         <img src="{% static 'userapp/icons/way.png' %}" style="width:100px;height:100px" />
                     </div>
@@ -99,9 +67,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-2 col-sm-4 text-center">
+        <div class="col-lg-2 col-sm-4 text-center box">
             <a href="#mechanic">
-                <div class="cardicon">
+                <div class="cardicon mx-auto">
                     <div class="card_image">
                         <img src="{% static 'userapp/icons/mechanic.png' %}" style="width:100px;height:100px" />
                     </div>
@@ -112,9 +80,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-lg-2 col-sm-4 text-center">
+        <div class="col-lg-2 col-sm-4 text-center box">
             <a href="#saleofev">
-                <div class="cardicon">
+                <div class="cardicon mx-auto">
                     <div class="card_image">
                         <img src="{%static 'userapp/icons/car-sales.png'%}" style="width:125px;height:110px" />
                     </div>
@@ -132,11 +100,13 @@
     <br>
     <br>
 </p>
-<div class="container " id="charging" style="padding-left:60px">
-    <div class="row top-buffer">
-        <div class="col-lg-4">
-            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:40px;margin-top:20px;margin-bottom:10px">
+<div class="container mx-auto mx-sm-auto" id="charging">
+    <div class="row top-buffer mx-auto">
+        <div class="col-lg-4" style="margin-top:60px">
+            <div class="card mx-auto"
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/location.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:40px;margin-top:20px;margin-bottom:10px">
                 <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px">
                     <a href="{% url 'Charging-Station-CLV' %}">
                         <h4 class="card-title">Nearby Charging Stations</h4>
@@ -145,21 +115,26 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 text-center" id="route-the-way">
-            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image" style="width:200px;height:185px;margin-left:50px;margin-top:25px;margin-bottom:20px">
+        <div class="col-lg-4 text-center" style="margin-top:60px" id="route-the-way">
+            <div class="card mx-auto"
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/way.png'%}" alt="Card image"
+                    style="width:200px;height:185px;margin-left:50px;margin-top:25px;margin-bottom:20px">
                 <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px">
                     <a href="{% url 'Route-Your-Way' %}">
-                    <h4 class="card-title">Route your way</h4>
+                        <h4 class="card-title">Route your way</h4>
                     </a>
                     <p class="card-text">Going Somewhere? Find the route to take your EV</p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 text-center " id="pool">
-            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/route-way.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:40px;margin-bottom:10px">
-                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
+        <div class="col-lg-4 text-center" style="margin-top:60px; margin-right:0px" id="pool">
+            <div class="card mx-auto"
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/route-way.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:40px;margin-bottom:10px">
+                <div class="card-body"
+                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
                     <a href="{% url 'Charge-Pooling' %}">
                         <h4 class="card-title">Charge Pooling</h4>
                     </a>
@@ -168,9 +143,12 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="mechanic">
-            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image" style="width:200px;height:200px;margin-left:50px;margin-top:25px">
-                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
+            <div class="card mx-auto"
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/mechanic.png'%}" alt="Card image"
+                    style="width:200px;height:200px;margin-left:50px;margin-top:25px">
+                <div class="card-body"
+                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-bottom:30px;margin-top:20px">
                     <h4 class="card-title">
                         <a href="{% url 'Maintenance-man-dashboard' %}">Hire a Mechanic
                         </a>
@@ -180,18 +158,23 @@
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px">
-            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image" style="width:200px;height:170px;margin-left:50px;margin-top:25px;margin-bottom:30px">
+            <div class="card mx-auto"
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/help.jpg'%}" alt="Card image"
+                    style="width:200px;height:170px;margin-left:50px;margin-top:25px;margin-bottom:30px">
                 <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px">
-                    <h4 class="card-title">Build your own Charging station</h4>
+                    <h4 class="card-title"><a href="{%url 'BuildCs'%}">Build your own Charging station</a></h4>
                     <p class="card-text">Want to be a service provider? We got you covered.</p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 text-center" style="margin-top:60px" id="saleofev">
-            <div class="card" style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
-                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image" style="width:200px;height:175px;margin-left:50px;margin-top:50px">
-                <div class="card-body" style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px;margin-bottom:27px">
+            <div class="card mx-auto"
+                style="padding:10px;width:300px;background-color:#ebf4ee;box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);">
+                <img class="card-img-top" src="{%static 'userapp/icons/sales.png'%}" alt="Card image"
+                    style="width:200px;height:175px;margin-left:50px;margin-top:50px">
+                <div class="card-body"
+                    style="border-top: 2px solid #a9a9a9; padding:25px;margin-top:20px;margin-bottom:27px">
                     <h4 class="card-title"><a href="{% url 'sales-page' %}">Sales</a></h4>
                     <p class="card-text">Wanna buy an EV? Find the best here.</p>
                 </div>
@@ -215,18 +198,46 @@
 </div>
 
 <!-- Footer -->
+
 <footer>
     <section id="footer">
         <div class="container">
-            <div class="row text-center text-xs-center text-sm-left text-md-left">
+            <div class="row text-center text-xs-center text-sm-left text-md-left mb-0 pb-0">
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h5>Quick links</h5>
-                    <ul class="list-unstyled quick-links">
-                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
-                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
-                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
-                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
-                        <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h3 class="text-white text-center">Quick links</h3>
+                    <ul class="list-unstyled quick-links text-center">
+                        <li><a href="javascript:void();"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">Home</span></a></li>
+                        <li><a href="javascript:void();"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">About</span></a></li>
+                        <li><a href="javascript:void();"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">FAQ</span></a></li>
+                        <li><a href="javascript:void();"><span style="font-family:Trebuchet MS; font-size: 18px">Get
+                                    Started</span></a></li>
+                        <li><a href="{%url 'savings-calculator'%}"><span
+                                    style="font-family:Trebuchet MS; font-size: 18px">Savings Calculator</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+
+                </div>
+            </div>
+            <div class="row" style="padding-top:0px;">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
+                    <ul class="list-unstyled list-inline social text-center" style="text-align:center;">
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-envelope"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -234,9 +245,9 @@
     </section>
 </footer>
 
-
 <!-- Modal -->
-<div class="modal fade" id="pooling" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="pooling" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
