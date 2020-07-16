@@ -5,13 +5,13 @@ from django import forms
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
-from django.utils import timezone
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
-                           ChargingStationForm, SupportForm, SurveyForm, CharpoolerForm)
+                           ChargingStationForm, SupportForm, CharpoolerForm)
 from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, UserRecord, Survey, Vehicle)
+from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
+                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle)
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from Sih.settings import EMAIL_HOST_USER
@@ -452,7 +452,6 @@ def bookMaintenanceMan(request, pk):
                 CsM.ph = request.POST.get('phone')
                 cname = request.POST.get('Cs')
                 c = ChargingStation.objects.filter(name=cname)[0]
-                supportform = SupportForm()
                 CsM.CsSelect = c
                 CsM.save()
         return render(request, "booking.html", {'cs': cscount})
@@ -549,40 +548,6 @@ def faq(request):
     return render(request, "userapp/FAQs.html", context=context)
 
 
-def survey(request):
-    lat_user, lng_user = get_user_location()
-    survey_form = SurveyForm()
-    survey_form.fields['lat'].widget = forms.HiddenInput()
-    survey_form.fields['lng'].widget = forms.HiddenInput()
-    survey_form.fields['vehicle'].widget = forms.HiddenInput()
-    survey_form.fields['port_type'].widget = forms.HiddenInput()
-    survey_form.fields['start_time'].widget = forms.HiddenInput()
-    survey_form.fields['stop_time'].widget = forms.HiddenInput()
-    context = {
-        'survey_form': survey_form,
-        'lat_user': lat_user,
-        'lng_user': lng_user,
-    }
-    user_survey = Survey()
-    vehicleobj = Vehicle.objects.filter(user=request.user)
-    if request.method == "POST":
-        port_type = request.POST.get('port_type')
-        stop_time = request.POST.get('duration')
-        vehicle = request.POST.get('vehicle')
-        distance = request.POST.get('distance')
-        user_survey.consumer = request.user.consumer
-        if port_type == "slow":
-            user_survey.slow_port = True
-        else:
-            user_survey.fast_port = True
-        user_survey.distance_travelled = 10
-        user_survey.charging_time = 12
-        user_survey.vehicle_name = Vehicle.objects.first()
-        user_survey.save()
-
-    return render(request, "userapp/survey.html", context=context)
-
-
 def WhyChooseEV(request):
     return render(request, "userapp/why_choose_ev.html")
 
@@ -607,11 +572,14 @@ def heavyVehicles(request):
     return render(request, "userapp/heavy-vehicles.html")
 
 
-def BuildCs(request):
+def BuildCs(request):   
     return render(request, "buildchargingstation.html")
+
 
 def savingsCalculator(request):
     company = Vehicle.objects.all()
     return render(request, "userapp/savings_calculator.html", {"Vehicle": company})
+
+
 def dashwelcome(request):
     return render(request, "userapp/dash_welcome.html")

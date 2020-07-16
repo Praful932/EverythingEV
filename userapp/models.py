@@ -295,6 +295,7 @@ class Support(models.Model):
     subject = models.CharField(max_length=20, verbose_name="Title")
     description = models.TextField(max_length=200, verbose_name="Describe issue you are facing")
 
+
 class UserRecord(models.Model):
     ports = (
         ('Type1', 'Type1'),
@@ -324,6 +325,6 @@ class Survey(models.Model):
     slow_port = models.BooleanField(default=False)
     fast_port = models.BooleanField(default=False)
     vehicle_name = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    means_of_travel =models.CharField(max_length=20, choices=travel_type, default="")
+    means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
