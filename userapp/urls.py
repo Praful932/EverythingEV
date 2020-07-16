@@ -36,7 +36,8 @@ urlpatterns = [
     path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles"),
     path('buildcs/', views.BuildCs, name="BuildCs"),
     path('savings-calculator/', views.savingsCalculator, name="savings-calculator"),
-    path('dash-welcome/', views.dashwelcome, name="dash-layout")
+    path('dash-welcome/', views.dashwelcome, name="dash-layout"),
+    path('live_data/', views.live_data, name="Live-Data")
 ]
 
 if settings.DEBUG:

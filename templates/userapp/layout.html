@@ -33,6 +33,9 @@
                 {% if user.is_provider %}
                 <a class="nav-item nav-link" href="{% url 'Provider-Dashboard' %}"
                     style="padding-right: 15px ; color:black;">Dashboard</a>
+                {% elif not user.is_provider and not user.is_consumer %}
+                <a class="nav-item nav-link" href="{% url 'Live-Data' %}"
+                    style="padding-right: 15px ; color:black;">Live Feed</a>    
                 {% else %}
                 <a class="nav-item nav-link" href="{% url 'Profile' %}"
                     style="padding-right: 15px ; color:black;">Profile</a>

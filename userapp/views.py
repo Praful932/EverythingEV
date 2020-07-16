@@ -42,8 +42,11 @@ def check(request):
 
 def index(request):
     if request.user.is_authenticated:
+        username = request.user.username
         try:
-            if Consumer.objects.get(user=request.user):
+            if username == "admin":
+                pass
+            elif Consumer.objects.get(user=request.user):
                 pass
         except Consumer.DoesNotExist:
             try:
@@ -54,6 +57,7 @@ def index(request):
     return render(request, "userapp/index.html")
 
 
+@login_required
 def registerConsumerSocial(request):
     if request.method == 'POST':
         consumerform = ConsumerSignUpForm(request.POST)
@@ -66,6 +70,8 @@ def registerConsumerSocial(request):
             consumerform.save()
             return redirect('index')
     else:
+        if not request.user.is_consumer and not request.user.is_provider:
+            redirect('index')
         consumerform = ConsumerSignUpForm()
     context = {
         'consumerform': consumerform
@@ -572,7 +578,7 @@ def heavyVehicles(request):
     return render(request, "userapp/heavy-vehicles.html")
 
 
-def BuildCs(request):   
+def BuildCs(request):
     return render(request, "buildchargingstation.html")
 
 
@@ -583,3 +589,10 @@ def savingsCalculator(request):
 
 def dashwelcome(request):
     return render(request, "userapp/dash_welcome.html")
+
+
+@login_required
+def live_data(request):
+    if not request.user.is_consumer and not request.user.is_provider:
+        return render(request, "userapp/live_data.html")
+    return redirect('index')
