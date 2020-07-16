@@ -160,10 +160,9 @@ class Vehicle(models.Model):
     name = models.CharField(max_length=30)
     company = models.CharField(max_length=100)
     type4or2 = models.IntegerField()
-    horsepower = models.CharField(max_length=100)
+    battery_capacity = models.CharField(max_length=100)
     vehicle_range = models.IntegerField()
-    ConsumptionPerMin = models.DecimalField(max_digits=9, decimal_places=6)
-    battery_type = models.CharField(max_length=100)
+    Charging_Rate = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
         return str(self.pk) + '. ' + self.company
@@ -328,3 +327,4 @@ class Survey(models.Model):
     means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
+
