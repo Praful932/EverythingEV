@@ -20,6 +20,8 @@
 {% block script %}
 <script>
     var latlang_cs = [];
+    // Origin & Dest
+    var lat1, lng1, lat2, lng2;
     var infowindows_cs = [];
     var content_cs = [];
     var csdata = JSON.parse('{{ csdata|safe }}');;
@@ -30,18 +32,6 @@
     // parameter when you first load the API. For example:
     // <script
     // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-    for (var i = 0; i < csdata.length; i++) {
-        latlang_cs.push({
-            lat: csdata[i][4],
-            lng: csdata[i][5]
-        });
-        content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> " +
-            csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>" + csdata[i][7] + "<br><b>Slow Ports:</b>" + csdata[i][8] +
-            "<br><b>Price/Kwh:</b>" + csdata[i][9] + "<br><b>Restroom:</b>" + csdata[i][10] + "<br><b>CCTV:</b>" + csdata[i][11] + "<br><b>Opening Time:</b>" + csdata[i][12] +
-            "<br><b>Closing Time:</b>" + csdata[i][13] + "</div>";
-    }
-
-
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             mapTypeControl: false,
@@ -125,7 +115,6 @@
         if (!this.originPlaceId || !this.destinationPlaceId) {
             return;
         }
-        var lat1, lng1, lat2, lng2;
         var me = this;
         var geocoder = new google.maps.Geocoder;
 
@@ -175,6 +164,17 @@
 
     function plot() {
         clearMarkers();
+        for (var i = 0; i < csdata.length; i++) {
+            latlang_cs.push({
+                lat: csdata[i][4],
+                lng: csdata[i][5]
+            });
+            var directionlink = "https://www.google.com/maps/dir/?api=1&origin=" + lat1 + "," + lng1 + "&destination="+ csdata[i][4] + "," + csdata[i][5];
+            content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> " +
+                csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>" + csdata[i][7] + "<br><b>Slow Ports:</b>" + csdata[i][8] +
+                "<br><b>Price/Kwh:</b>" + csdata[i][9] + "<br><b>Restroom:</b>" + csdata[i][10] + "<br><b>CCTV:</b>" + csdata[i][11] + "<br><b>Opening Time:</b>" + csdata[i][12] +
+                "<br><b>Closing Time:</b>" + csdata[i][13] + "<br><a href=" + directionlink +    ">Get Directions</a>" + "</div>";
+        }
         for (var i = 0; i < latlang_cs.length; i++) {
             addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 10);
         }
