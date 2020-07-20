@@ -4,9 +4,11 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'userapp/survey.css' %}">
 <title>
-    Survey
+    Survey 
 </title>
 {% endblock %} {% block body %}
+<form method="POST">
+    {% csrf_token %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4 font-weight-bold">Tell Us</h1>
@@ -20,12 +22,12 @@
             <h3>How much time did it take you to charge today?</h3>
         </div>
         <div class="answers-section justify-content-between">
-            <button class="answer">10 mins</button>
-            <button class="answer">20 mins</button>
-            <button class="answer">30 mins</button>
-            <button class="answer">40 mins</button>
-            <button class="answer">50 mins</button>
-            <button class="answer">1 hr</button>
+            <button class="answer" name="duration" value="10">10 mins</button>
+            <button class="answer" name="duration" value="20">20 mins</button>
+            <button class="answer" name="duration" value="30">30 mins</button>
+            <button class="answer" name="duration" value="40">40 mins</button>
+            <button class="answer" name="duration" value="50">50 mins</button>
+            <button class="answer" name="duration1" value="60">1 hr</button>
         </div>
     </div>
     <div class="container question-section">
@@ -33,8 +35,8 @@
             <h3>Did you use slow port or fast port?</h3>
         </div>
         <div class="answers-section justify-content-between">
-            <button class="answer">Slow</button>
-            <button class="answer">Fast</button>
+            <button class="answer" name="slow" value="slow">Slow</button>
+            <button class="answer" name="fast" value="fast">Fast</button>
         </div>
     </div>
     <div class="container question-section">
@@ -42,9 +44,8 @@
             <h3>Which vehicle did you use today?</h3>
         </div>
         <div class="answers-section justify-content-between">
-            <button class="answer">V1</button>
-            <button class="answer">V2</button>
-            <button class="answer">V3</button>
+            <button class="answer" name="vehicle" value="namr">name</button>
+            
         </div>
     </div>
     <div class="container question-section">
@@ -52,19 +53,20 @@
             <h3>How much distance you may have travelled today?</h3>
         </div>
         <div class="answers-section justify-content-between">
-            <button class="answer">10 km</button>
-            <button class="answer">20 km</button>
-            <button class="answer">30 km</button>
-            <button class="answer">40 km</button>
-            <button class="answer">50 km</button>
-            <button class="answer">60 km</button>
+            <button class="answer" name="distance" value="10">10 km</button>
+            <button class="answer" name="distance" value="20">20 km</button>
+            <button class="answer" name="distance" value="30">30 km</button>
+            <button class="answer" name="distance" value="40">40 km</button>
+            <button class="answer" name="distance" value="50">50 km</button>
+            <button class="answer" name="distance" value="60">60 km</button>
         </div>
     </div>
 </div>
 <div>
-    <form method="POST">
-        {% csrf_token %}
+   
         {{ survey_form|crispy }}
+        <button type="submit" class="btn btn-primary btn-lg ">Submit Response</button>
+
     </form>
 </div>
 {% endblock body %}
