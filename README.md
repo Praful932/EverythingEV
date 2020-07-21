@@ -29,6 +29,11 @@ Install requirements
 
 `$ pip install -r requirements.txt`
 
+To run alpr, Install alpr for your OS from [here](https://github.com/openalpr/openalpr) using the docs, preferrably use Ubuntu, then put this file - `alpr/main.py` where alpr is installed and make sure the videos, runtime and config paths in the script point to the path in your system. Then run the script to see the Live Feed
+
+`python3 main.py`
+
+
 All Set!
 
 `$ python manage.py runserver`
