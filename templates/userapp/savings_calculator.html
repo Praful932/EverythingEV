@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>
-    Monthly Savings Calculator
+    Monthly Savings and Mileage Calculator
 </title>
 {% endblock %} 
 {% block body %}
@@ -63,8 +63,50 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
     <div class="row col-md-10 text-center">
         <h3 class="col-md-12 mt-3 pt-2 pb-5">You save</h3><hr>
         <h5 class="col-md-6 text-center">₹ <span id='monthly_savings'>0</span> monthly</h5>           
-        <h5 class="col-md-6 text-center">₹ <span id='yearly_savings'>0</span> yearly</h5>           
+        <h5 class="col-md-6 text-center">₹ <span id='yearly_savings'>0</span> yearly</h5>  
     </div>
+
+    <div class="col-md-12" style="padding-bottom: 50px;"></div>
+    <!-- Mileage Calculator -->
+    <div class="col-md-2"></div>
+    <div class="col-md-10 row" style="background-color: #445552; border-radius: 10px;">
+        <h3 class="col-md-12 text-white text-center pb-3 mt-5">Want to know how much your EV can travel ? 🤔</h3>
+        <div class="col-md-1"></div>
+        <div class="col-md-4" style="background-color: white; border-radius: 10px;">
+            <h4 class="text-center">Step 1:</h4>
+            <div class="text-center mt-3">Choose the vehicle brand</div>
+            <div class="text-center mt-3">
+                <select name="" id="">
+                    <option selected disabled = "true">-- Select an EV --</option>
+                    {% for EV in Vehicle %}
+                        <option>{{ EV.company }}</option>
+                    {% endfor %}
+                </select>                
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4" style="background-color: white; border-radius: 10px;">
+            <h4 class="text-center">Step 2:</h4>
+            <div class="text-center mt-3">Enter the current charging status of your EV</div>
+            <div class="text-center mt-3 mb-3">
+                <input type='number' id='batteryPercent' aria-valuemin="0" aria-valuemax="100"> %
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-12 mt-5"></div>
+    </div>
+
+    <div class="col-md-2"></div>
+    <div class="row col-md-10">
+        <h3 class="col-md-12 text-center mt-3 mb-5 pb-3 pt-2">Distance you can travel with <span id="percentDisplay">0</span> % charge</h3>
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center" style="background-color: #F2F2F2;  border-radius: 10px;">
+            <h5 class="pb-3"><span id='mileage'>0</span> km(s)</h5>           
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    
+
 
     <div class="col-md-2"></div>
     <div class="row col-md-10 pt-5">
@@ -81,7 +123,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
     </div>
 </div>
 <br><br>
-<!-- Calculation Logic -->
+<!--Savings Calculation Logic -->
 <script>
 window.onload = function() {
 
@@ -107,6 +149,23 @@ window.onload = function() {
       document.getElementById('yearly_savings').innerHTML = yearly_savings;
     }
 }
+    var battery = document.getElementById('batteryPercent');
+    var avgRangeOfEV = 234.73;  // Average range of EV - Calculated from the list of vehicles in database
+    
+      update();
+      
+      setInterval(update, 100);
+      
+      function update() {
+        var batteryPercent = battery.value || 0;
+        document.getElementById('percentDisplay').innerHTML = batteryPercent;
+        var mileage = Math.round((avgRangeOfEV * batteryPercent)/100);
+        
+        if (batteryPercent > 0) {
+          document.getElementById('mileage').innerHTML = mileage;
+          }
+    }
+
 };
 </script>
 </body>
