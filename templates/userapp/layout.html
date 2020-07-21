@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{%  static 'userapp/sass/styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{%  static 'userapp/stylelayout.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
     {% block head %}{% endblock %}
 </head>
 
@@ -82,8 +85,16 @@
                 var ww = document.body.clientWidth;
                 if (ww < 600) {
                     $('.navbar').addClass('bg-dark');
+                    $('navbar-toggler-icon').css('color', 'white!important');
+                    $('.navbar-brand').addClass("text-white");
+                    $('.nav-item').removeAttr('style');
+                    $('.nav-item').addClass("text-white");
+                    $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
                 } else if (ww >= 601) {
                     $('.navbar').removeClass('bg-dark');
+                    $('.navbar-brand').removeClass("text-white");
+                    $('.nav-item').removeClass("text-white");
+                    $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
                 };
             };
             $(window).resize(function () {
