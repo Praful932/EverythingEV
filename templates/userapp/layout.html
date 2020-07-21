@@ -127,25 +127,22 @@
         }
         </style>
 <body>
-    <img src="{% static 'userapp/chatbot.png' %}" style="width: 150px; height: 150px" alt="chatbot" class="open-button animate__animated animate__bounce animate__infinite" onclick="openForm()">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <style>
+    
+    df-messenger {
+     --df-messenger-send-icon: #20bd0b;
+     --df-messenger-button-titlebar-color: #20bd0b;
 
-<div class="chat-popup" id="myForm">
-  <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/348918d8-72c3-486c-88b3-17ea3047c1f6"></iframe>
-  <form action="" class="form-container">
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
-
-<script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
-
+    }
+  </style>
+  <df-messenger
+    intent="WELCOME"
+    chat-title="EverythingEV chatbot"
+    agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+    language-code="en"
+    chat-icon="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-4/177800/156-512.png"
+  ></df-messenger>
 </body>        
 
 
