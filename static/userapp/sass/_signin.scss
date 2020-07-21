@@ -1,0 +1,115 @@
+main {
+    .signinForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        margin: 30px auto 50px auto;
+        background-color: #EEE8A9;
+        padding: 30px;
+        border-radius: 20px;
+
+        form {
+            .oauth {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                p {
+                    font-size: 2rem;
+                    color: #535353;
+                    margin: 5px;
+                    font-weight: bold;
+                }
+
+                i {
+                    margin-top: 10px;
+                    padding: 10px 14px;
+                    background-color: white;
+                    color: #535353;
+                    border-radius: 5px;
+                    transition: all .15s ease-in-out;
+                }
+
+                i:hover {
+                    background-color: #535353;
+                    color: white;
+                }
+            }
+
+            .inputSignin {
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+                margin-top: 20px;
+
+                input {
+                    height: 40px;
+                    font-size: 1.3rem;
+                    border-radius: 5px;
+                    margin: 10px;
+                    height: 35px;
+                }
+
+                .loginButton {
+                    padding: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .login {
+                        text-decoration: none;
+                        color: white;
+                        background-color: #0DBA47;
+                        font-size: 2rem;
+                        padding: 8px 20px;
+                    }
+                }
+
+                .links {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .forgot {
+                        text-decoration: none;
+                        color: #535353;
+                        font-size: 1.4rem;
+                        margin: 20px 0px;
+                    }
+
+                    .create {
+                        text-decoration: none;
+                        color: #535353;
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+@media(max-width:800px) {
+    main {
+        .signinForm {
+            width: 90vw;
+        }
+    }
+}
+
+@media(max-width:600px) {
+    main {
+        .signinForm {
+            width: 90vw;
+            padding: 30px 0px 30px 0px;
+        }
+    }
+}
+
+
+// footer 

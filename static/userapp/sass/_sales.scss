@@ -1,0 +1,48 @@
+main {
+    .salesBanner {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: #d2f2ed;
+        height: 300px;
+
+        img {
+            width: 500;
+            height: 300px;
+        }
+
+        .text {
+            h2 {
+                font-size: 3rem;
+                margin-bottom: 15px;
+                width: 667px;
+            }
+
+            p {
+                font-size: 1.8rem;
+                margin-right: 20px;
+                width: 600px;
+            }
+
+        }
+    }
+
+    .vehicle-types {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: row wrap;
+        width: 100%;
+        margin: 50px auto;
+
+        img {
+            width: 230px;
+            height: 280px;
+            transition: .15s all ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+    }
+}

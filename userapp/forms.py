@@ -1,13 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-<<<<<<< HEAD
-from userapp.models import (Consumer, Provider, User, ChargingStation, 
-                            Support, UserRecord, ChargePooler)
-=======
 from userapp.models import (Consumer, Provider, User, ChargingStation,
                             Support, UserRecord, ChargePooler)
 
->>>>>>> bb748a998094247d61726531f5644434d752294a
 
 class UserSignUpForm(UserCreationForm):
     class Meta():
