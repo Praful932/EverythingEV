@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="218" height="218" viewBox="0 0 218 218">
+  <g id="Group_158" data-name="Group 158" transform="translate(-1436 -821)">
+    <g id="Rectangle_12" data-name="Rectangle 12" transform="translate(1436 821)" fill="#fff" stroke="#2d677a" stroke-width="4">
+      <rect width="218" height="218" rx="33" stroke="none"/>
+      <rect x="2" y="2" width="214" height="214" rx="31" fill="none"/>
+    </g>
+    <g id="Layer_2" data-name="Layer 2" transform="translate(1490 863)">
+      <g id="Layer_1" data-name="Layer 1" transform="translate(0 0)">
+        <path id="Path_12" data-name="Path 12" d="M10.237,26.564H90.806a1.767,1.767,0,1,0,0-3.534H10.237a1.767,1.767,0,1,0,0,3.534Z" transform="translate(4.776 12.985)" fill="#2d677a"/>
+        <path id="Path_13" data-name="Path 13" d="M109.062,44.257,104.5,37.079l-1.7-6.865h3.691a1.767,1.767,0,1,0,0-3.534h-4.566L97.224,8.194A11.2,11.2,0,0,0,86.824,0H23.77A11.2,11.2,0,0,0,13.293,8.194L8.679,26.679H4.113a1.767,1.767,0,1,0,0,3.534H7.819L6.1,37.079,1.564,44.257A11.307,11.307,0,0,0,0,49.542V75.064a1.783,1.783,0,0,0,1.767,1.767h.579V89.764a1.767,1.767,0,0,0,1.767,1.751H22.691a1.767,1.767,0,0,0,1.767-1.752v-7.6a1.767,1.767,0,1,0-3.534,0V88H5.88V76.878h98.9V88H89.67V82.164a1.767,1.767,0,0,0-3.534,0v7.6A1.767,1.767,0,0,0,87.9,91.516h18.578a1.767,1.767,0,0,0,1.767-1.752V76.878h.579a1.783,1.783,0,0,0,1.767-1.814V49.542a11.306,11.306,0,0,0-1.564-5.286ZM3.534,49.542a7.819,7.819,0,0,1,.985-3.394l4.692-7.428a1.564,1.564,0,0,0,.235-.516L16.717,9.039a7.819,7.819,0,0,1,7.053-5.5H86.824a7.819,7.819,0,0,1,7.006,5.5L101.086,38.2a1.564,1.564,0,0,0,.235.516l4.692,7.428A7.819,7.819,0,0,1,107,49.542v23.8H80.772L76.5,62.679a1.751,1.751,0,0,0-1.564-1.11h-39.1a1.751,1.751,0,0,0-1.564,1.11L29.822,73.344H3.534Zm73.5,23.8H33.622l3.3-8.241h36.75l3.3,8.241Z" transform="translate(0 0)" fill="#2d677a"/>
+        <path id="Path_14" data-name="Path 14" d="M6.277,48.129h6.646a9.539,9.539,0,1,0,0-19.079H7.591a1.767,1.767,0,0,0,0,3.534h5.333a6.005,6.005,0,0,1,0,12.01H6.277a1.767,1.767,0,0,0,0,3.534Z" transform="translate(2.543 16.379)" fill="#2d677a"/>
+        <path id="Path_15" data-name="Path 15" d="M54.73,38.589a9.555,9.555,0,0,0,9.539,9.539h6.646a1.767,1.767,0,0,0,0-3.534H64.269a6.005,6.005,0,0,1,0-12.01H69.6a1.767,1.767,0,0,0,0-3.534H64.269A9.555,9.555,0,0,0,54.73,38.589Z" transform="translate(30.859 16.379)" fill="#2d677a"/>
+        <rect id="Rectangle_14" data-name="Rectangle 14" width="55.031" height="21.941" rx="1.39" transform="translate(27.789 9.461)" fill="#2d677a" stroke="#2d677a" stroke-miterlimit="10" stroke-width="1"/>
+        <text id="For_Sale" data-name="For Sale" transform="translate(34.905 23.651)" fill="#fcfcfc" font-size="12" font-family="Cabin-Regular, Cabin"><tspan x="0" y="0" letter-spacing="-0.04em">F</tspan><tspan y="0">or Sale</tspan></text>
+      </g>
+    </g>
+    <text id="Sales" transform="translate(1518 1006)" fill="#2d677a" stroke="#2d677a" stroke-width="1" font-size="21" font-family="Montserrat-Medium, Montserrat" font-weight="500"><tspan x="0" y="0">Sales</tspan></text>
+  </g>
+</svg>

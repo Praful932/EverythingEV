@@ -160,10 +160,9 @@ class Vehicle(models.Model):
     name = models.CharField(max_length=30)
     company = models.CharField(max_length=100)
     type4or2 = models.IntegerField()
-    horsepower = models.CharField(max_length=100)
+    battery_capacity = models.CharField(max_length=100)
     vehicle_range = models.IntegerField()
-    price = models.DecimalField(max_digits=9, decimal_places=6)
-    battery_type = models.CharField(max_length=100)
+    Charging_Rate = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
         return str(self.pk) + '. ' + self.company
@@ -295,6 +294,7 @@ class Support(models.Model):
     subject = models.CharField(max_length=20, verbose_name="Title")
     description = models.TextField(max_length=200, verbose_name="Describe issue you are facing")
 
+
 class UserRecord(models.Model):
     ports = (
         ('Type1', 'Type1'),
@@ -324,6 +324,7 @@ class Survey(models.Model):
     slow_port = models.BooleanField(default=False)
     fast_port = models.BooleanField(default=False)
     vehicle_name = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    means_of_travel =models.CharField(max_length=20, choices=travel_type, default="")
+    means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
+

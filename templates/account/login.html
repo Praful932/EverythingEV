@@ -1,49 +1,36 @@
 {% extends "userapp/layout.html" %}
 {% load static %}
-{% block head %} 
+{% block head %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load account socialaccount %}
 {% get_providers as socialaccount_providers %}
-<link rel="stylesheet" href="{% static 'userapp/login_style.css'%}"> {% endblock %} {% block title %} Login
-{% endblock %} {% block body %}
-<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+{% endblock %}
+{% block body %}
 
-<div class="container" style="border-radius: 20px; margin-top:20px;!important">
-    <div class="row" style="border-radius: 20px;">
-        <div class="col-md-5 mx-auto" style="border-radius: 20px;">
-            <div class="card card-signin my-5" style="border-radius: 20px;background-color: rgba(238, 238, 238, 0.6);">
-                <div class="card-body" style="border-radius: 20px;">
-                    <h2 class="card-title text-center" style="margin-top: 20px;"><b>Login</b></h2>
-                    <form method="POST" action="{% url 'account_login' %}">
-                        {% csrf_token %} {{ form|crispy }}
-                        <div class=" text-center">
-
-                            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-
-                            <br>
-                            <small class="text-muted">
-                                <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
-                                <br>
-                            </small><br>
-                            <a class="btn  btn-info mt-2" href="#">New Here? Sign Up</a>
-                            <a class="btn  btn-info mt-2" href="{% provider_login_url 'google' %}">Sign up with
-                                Google</a>
-                        </div>
-                    </form>
-
-
-                </div>
+<main>
+    <div class="signinForm">
+        <form method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %} {{ form|crispy }}
+            <div class="oauth">
+                <p>Sign Up</p>
+                <a href="{% provider_login_url 'google' %}"><i class="fa fa-3x fa-google"></i></a>
+                <p>OR</p>
             </div>
-        </div>
+            <div class="inputSignin">
+                <input type="email" id="email" placeholder="Username or Email">
+                <input type="password" id="password" placeholder="Password">
+                <div class="loginButton">
+                    <a href="#" class="login">Log in</a>
+                </div>
+                <div class="links">
+                    <a href="{% url 'account_reset_password' %}" class="forgot">Forgot Password?</a>
+                    <a href="#" class="create">Create New Account</a>
+                </div>
+        </form>
     </div>
-    <!-- <canvas class="background"></canvas>
-    <script src="{% static 'userapp/particles.min.js' %}"></script>
-    <script>
-        window.onload = function() {
-            Particles.init({
-                selector: '.background'
-            });
-        };
-    </script> -->
-    {% endblock %}
+    </div>
+
+</main>
+
+{% endblock body %}

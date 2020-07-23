@@ -1,0 +1,13 @@
+<svg id="Component_6_1" data-name="Component 6 – 1" xmlns="http://www.w3.org/2000/svg" width="218" height="218" viewBox="0 0 218 218">
+  <g id="Rectangle_11" data-name="Rectangle 11" fill="#fff" stroke="#2d677a" stroke-width="4">
+    <rect width="218" height="218" rx="33" stroke="none"/>
+    <rect x="2" y="2" width="214" height="214" rx="31" fill="none"/>
+  </g>
+  <g id="Layer_2" data-name="Layer 2" transform="translate(52.5 28.23)">
+    <g id="Layer_1" data-name="Layer 1" transform="translate(1.5 -1.23)">
+      <circle id="Ellipse_25" data-name="Ellipse 25" cx="55.001" cy="55.001" r="55.001" transform="translate(0 6.236)" fill="none" stroke="#2d677a" stroke-miterlimit="10" stroke-width="3"/>
+      <text id="_" data-name="?" transform="translate(27.341 97)" fill="#2d677a" font-size="100" font-family="Montserrat-Medium, Montserrat" font-weight="500"><tspan x="0" y="0">?</tspan></text>
+    </g>
+  </g>
+  <text id="Why_Choose_EV_" data-name="Why Choose EV?" transform="translate(19 185)" fill="#2d677a" stroke="#2d677a" stroke-width="1" font-size="21" font-family="Montserrat-Medium, Montserrat" font-weight="500"><tspan x="0" y="0">Why Choose EV?</tspan></text>
+</svg>

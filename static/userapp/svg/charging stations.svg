@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="218" height="218" viewBox="0 0 218 218">
+  <g id="Group_154" data-name="Group 154" transform="translate(-500 -821)">
+    <g id="Rectangle_12" data-name="Rectangle 12" transform="translate(500 821)" fill="#fff" stroke="#2d677a" stroke-width="4">
+      <rect width="218" height="218" rx="33" stroke="none"/>
+      <rect x="2" y="2" width="214" height="214" rx="31" fill="none"/>
+    </g>
+    <g id="Layer_2" data-name="Layer 2" transform="translate(570.44 853.435)">
+      <g id="Layer_1" data-name="Layer 1" transform="translate(1.56 1.565)">
+        <path id="Path_8" data-name="Path 8" d="M75.991,38.983a37.428,37.428,0,0,1-1.806,11.194L73.633,51.9c-.807,1.784-1.954,4.1-2.549,5.162L65.6,66.682,43.3,105.916a5.2,5.2,0,0,1-4.588,3.165,5.438,5.438,0,0,1-4.248-3.165l-20.6-36.387L6.743,56.889A35.6,35.6,0,0,1,3.684,51.2a8.242,8.242,0,0,0-.319-.765v-.255A44.034,44.034,0,0,1,1.56,38.706a37.28,37.28,0,0,1,74.559.276Z" transform="translate(-1.56 -1.565)" fill="none" stroke="#2d677a" stroke-miterlimit="10" stroke-width="5"/>
+        <circle id="Ellipse_18" data-name="Ellipse 18" cx="18.99" cy="18.99" r="18.99" transform="translate(18.502 20.382)" fill="none" stroke="#2d677a" stroke-miterlimit="10" stroke-width="5"/>
+      </g>
+    </g>
+    <text id="Charging_Stations" data-name="Charging Stations" transform="translate(513 1006)" fill="#2d677a" stroke="#2d677a" stroke-width="1" font-size="21" font-family="Montserrat-Medium, Montserrat" font-weight="500"><tspan x="0" y="0">Charging Stations</tspan></text>
+  </g>
+</svg>

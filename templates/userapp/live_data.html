@@ -1,0 +1,80 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block title %}
+Charging data
+{% endblock %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+<script type="text/javascript" src="{% static 'userapp/papaparse.min.js' %}"></script>
+{% endblock %}
+{% block body %}
+  <h1 class="text-center" style="margin-top: 7%;font-family: 'Roboto';">Live Feed</h1>
+  <div id="data-table">
+  
+  </div>
+  {% endblock %}
+
+{% block script %}
+<script>
+  setInterval(getdata,5000);
+  $(document).ready(function()
+  {
+    getdata();
+  });
+  function getdata()
+  {
+     $.ajax({
+         url: "https://docs.google.com/spreadsheets/d/1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU/export?format=csv&id=1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU&gid=0",
+         dataType:"text",
+         success:function(data)
+         {
+           var records = data.split(/\r?\n|\r/);
+           var table_data = '<table class="table table-bordered table-striped">';
+           for(var count=0;count< records.length; count++)             
+           {
+             var cell_data = records[count].split(",");
+             table_data += '<tr>';
+             // Skip Lic Plates
+             for(var cell_count = 1;cell_count<cell_data.length; cell_count++)
+             {
+               if(count === 0)
+               {
+                  table_data += '<th>' + cell_data[cell_count] + '</th>';
+               }
+               else
+               {
+                  table_data  += '<td>' + cell_data[cell_count] + '</td>';
+               }
+             }
+             table_data += '</tr>';
+           }
+           table_data += '</table>';
+           $('#data-table').html(table_data);
+         }
+       });
+  }
+</script>
+{% endblock %}
