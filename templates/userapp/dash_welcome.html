@@ -1,92 +1,95 @@
-{% extends "userapp/dash_layout.html"%} 
-{% block title%}
-Dashboard
-{% endblock %}
- {% block body %}
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 ml-auto">
-                <div class="row pt-5 mt-3 mb-5">
-                    <div class="col-sm-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <i class="fas fa-shopping-cart fa-3x text-warning"></i>
-                                    <div class="text-right text-secondary">
-                                        <h5>Sales</h5>
-                                        <h4>$10,000</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer"
-                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
-                                <i class="fas fa-sync mr-4"></i>
-                                <span>Updated</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <i class="fas fa-money-bill-alt fa-3x text-success"></i>
-                                    <div class="text-right text-secondary">
-                                        <h5>Expenses</h5>
-                                        <h4>$9,000</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer"
-                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
-                                <i class="fas fa-sync mr-4"></i>
-                                <span>Updated</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <i class="fas fa-users fa-3x text-info"></i>
-                                    <div class="text-right text-secondary">
-                                        <h5>Customers</h5>
-                                        <h4>150</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer"
-                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
-                                <i class="fas fa-sync mr-4"></i>
-                                <span>Updated</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                    <i class="fas fa-hand-holding-usd fa-3x" style="color:green"></i>
-                                    <div class="text-right text-secondary">
-                                        <h5>Revenue</h5>
-                                        <h4>$1000</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer"
-                                style="border-radius: 10px 10px 0px 0px; background-color: #CACACA;">
-                                <i class="fas fa-sync mr-4"></i>
-                                <span>Updated</span>
-                            </div>
-                        </div>
-                    </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{%  static 'userapp/dashboard_home.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="layout">
+            <div class="dashboardSidebar" id="sidebar">
+                <div class="upperSidebar">
+                    <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    <a href="#"><i class="fa fa-bell fa-lg"></i></a>
+                    <i class="fa fa-times" id="close"></i>
+                </div>
+                <div class="lowerSidebar">
+                    <div class="user">
+                        <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
+                        <h4>Hello, ABC</h4>
+                        <hr>
+                    </div>
+                    <div class="links">
+                        <a href="#" class="active"><i class="fa fa-home"></i>Home</a>
+                        <a href="{% url 'Provider-Dashboard' %}"><i class="fa fa-briefcase"></i>Business</a>
+                        <a href="{% url 'Complaint-Dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
+                        <a href="#"><i class="fa fa-headphones"></i>Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboardContent">
+                <div class="upperContent">
+                    <a href="#">Logout</a>
+                    <div id="button"><i class="fa fa-bars"></i></div>
+                </div>
+                <div class="lowerContent">
+                    <h1>This Month's Statistics</h1>
+                    <div class="cardgrid">
+                        <div class="card yellow">
+                            <i class="fa fa-shopping-cart fa-3x"></i>
+                            <div class="text">
+                                <p class="value">$10000</p>
+                                <p class="label">Sales</p>
+                            </div>
+                        </div>
+                        <div class="card green">
+                            <i class="fa fa-money"></i>
+                            <div class="text">
+                                <p class="value">$15000</p>
+                                <p class="label">Expense</p>
+                            </div>
+                        </div>
+                        <div class="card blue">
+                            <i class="fa fa-users fa-3x"></i>
+                            <div class="text">
+                                <p class="value">1500</p>
+                                <p class="label">Customers</p>
+                            </div>
+                        </div>
+                        <div class="card grey">
+                            <img src="{% static 'userapp/icons/revenue.svg' %}" alt="revenue">
+                            <div class="text">
+                                <p class="value">$5000</p>
+                                <p class="label">Revenue</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </main>
 
-<!-- End of cards -->
 
-{% endblock %}
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('button');
+        const close = document.getElementById('close');
+        button.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+        close.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+    </script>
+</body>
+
+</html>

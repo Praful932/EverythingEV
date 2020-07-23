@@ -33,9 +33,10 @@
                 <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
                 {% endif %}
                 <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
-                {% endif %}
+                {% else %}
                 <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
                 <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+                {% endif %}
             </ul>
         </nav>
         <div class="clearfix"></div>

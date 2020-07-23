@@ -1,216 +1,209 @@
-{% extends "userapp/dash_layout.html" %} {% load static %} {% block head %}
-<link rel="stylesheet" href="{%  static 'userapp/complaint_style.css' %}"> {% endblock %} {% block body %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container">
-                <div class="col-lg-9 ml-auto">
-                    <div class="px-5 pb-3 pt-0 text-center">
-                        <h2 class="text-center font">Mechanics</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mb-4 ml-md-auto">
-                            <div class="card" style="background-color:aquamarine;height:15em;">
-                                <div class="card-body text-center">
-                                    <h4>Pending Complaints</h4>
-                                    <h2 style="font-size:6em;">{{count}}</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mb-4">
-                            <div class="card" style="background-color:aquamarine;height:15em;">
-                                <div class="card-body text-center">
-                                    <h4>Solved<br> Complaints</h4>
-                                    <h2 style="font-size:6em;">{{m.CompletedComplaints}}</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-8 col-sm-12 ml-auto mb-4">
-                            <div class="card" style="background-color:aquamarine;height:15em;">
-                                <div class="card-body text-center">
-                                    <h4>Total<br> Complaints</h4>
-                                    <h2 style="font-size:6em;">{{total}}</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'userapp/dashboard_home.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="layout">
+            <div class="dashboardSidebar" id="sidebar">
+                <div class="upperSidebar">
+                    <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    <a href="#"><i class="fa fa-bell fa-lg"></i></a>
+                    <i class="fa fa-times" id="close"></i>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-9 ml-auto">
-                        <div class="px-5 pb-1 pt-2 m-4 text-center">
-                            <h3 class="text-center font">Pending Complaint Details</h3>
-                        </div>
-                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table mb-4">
-                                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Id</th>
-                                            <th scope="col">ChargingStation Name</th>
-                                            <th scope="col">Details</th>
-                                            <th scope="col">Contact No.</th>
-                                            <th scope="col">To Visit</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {%for a in d%}
-                                        <tr>
-                                            <th scope="row">{{a.CsSelect.id}}</th>
-                                            <td>{{a.CsSelect.name}}</td>
-                                            <td>
-                                                <details>
-                                                    <summary>Complaint</summary>
-                                                    <b>Problem</b>
-                                                    <p>{{a.Problem}}</p>
-                                                    <b>Address</b>
-                                                    <p>{{a.CsSelect.suburb}}</p>
-                                                </details>
-                                            </td>
-                                            <td>{{a.ph}}</td>
-                                            <form action="" method="POST">
-                                                {% csrf_token %}
-                                                <td><button type="submit" value="{{a.pk}}" name="visited" class="btn btn-success">Visited</button>
-                                                </td>
-
-                                            </form>
-                                        </tr>
-                                        {%endfor%}
-
-                                    </tbody>
-                            </table>
-                            </div>
-                        </div>
+                <div class="lowerSidebar">
+                    <div class="user">
+                        <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
+                        <h4>Hello, ABC</h4>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col-lg-9 ml-auto">
-                            <div class="px-5 pb-1 pt-2 m-4 text-center">
-                                <h4 class="text-center font">View Locations on map</h4>
-                            </div>
-                            <b>&emsp;&emsp;Checkout the Locations</b><br>
-                            <div id="new">
-
-                            </div>
-                            <br>
-                            <div class="col-sm-12">
-                                <div class="container">
-                                    <div class="main">
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <ul class="nav nav-tabs" id="myTab">
-
-
-                                                </ul>
-                                                <div class="tab-content">
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-12" style="max-height:100%">
-                                                <div id="map_canvas" style="height:250px; border: thin solid black;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
-                        </div>
-
+                    <div class="links">
+                        <a href="#"><i class="fa fa-home"></i>Home</a>
+                        <a href="#"><i class="fa fa-briefcase"></i>Business</a>
+                        <a href="#" class="active"><i class="fa fa-cogs"></i>Maintenance</a>
+                        <a href="#"><i class="fa fa-headphones"></i>Support</a>
                     </div>
                 </div>
             </div>
-</section>
+            <div class="dashboardContent">
+                <div class="upperContent">
+                    <a href="#">Logout</a>
+                    <div id="button"><i class="fa fa-bars"></i></div>
+                </div>
+                <div class="lowerContent">
+                    <div class="title">
+                        <h1>Maintenance</h1>
+                        <p></p>
+                    </div>
+                    <div class="statCards">
+                        <div class="pending">
+                            <p class="card-name">Pending Complaints</p>
+                            <p class="value">1500</p>
+                        </div>
+                        <div class="solved">
+                            <p class="card-name">Solved Complaints</p>
+                            <p class="value">1500</p>
+                        </div>
+                        <div class="total">
+                            <p class="card-name">Total Complaints</p>
+                            <p class="value">1500</p>
+                        </div>
+                    </div>
+                    <h3>Pending Complaint Details</h3>
+                    <div class="complaints_table">
+                        <table class="table">
+                            <thead>
+                                <th>Sr.</th>
+                                <th>Shop Name</th>
+                                <th>Mechanic Name</th>
+                                <th>Contact</th>
+                                <th>Resolved</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Sr.">1</td>
+                                    <td data-label="Shop Name">ABC</td>
+                                    <td data-label="Mechanic Name">ABC</td>
+                                    <td data-label="Contact">123456</td>
+                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Sr.">1</td>
+                                    <td data-label="Shop Name">ABC</td>
+                                    <td data-label="Mechanic Name">ABC</td>
+                                    <td data-label="Contact">123456</td>
+                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Sr.">1</td>
+                                    <td data-label="Shop Name">ABC</td>
+                                    <td data-label="Mechanic Name">ABC</td>
+                                    <td data-label="Contact">123456</td>
+                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Sr.">1</td>
+                                    <td data-label="Shop Name">ABC</td>
+                                    <td data-label="Mechanic Name">ABC</td>
+                                    <td data-label="Contact">123456</td>
+                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3>View On Map</h3>
+                        <div class="map" id="map_canvas">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
 
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('button');
+        const close = document.getElementById('close');
+        button.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+        close.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&">
+    </script>
+    <script>
+        var marker;
+        var map;
+        var my_data = JSON.parse('{{ my_data|safe }}');
+        console.log(my_data[0][2]);
 
-</div>
-</div>
-<!-- partial -->
+        for (var i = 0; i < my_data.length; i++) {
 
-{% endblock body %} {% block script %}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&">
-</script>
-<script>
-    var marker;
-    var map;
-    var my_data = JSON.parse('{{ my_data|safe }}');
-    console.log(my_data[0][2]);
+            var str1 = "#link";
+            var str2 = i;
+            var a = document.createElement("a");
+            a.innerHTML = '&emsp;&emsp;&emsp;';
+            var text = document.createTextNode([i + 1] + "." + " " + my_data[i][2] + " " + my_data[i][3] + "  " + "  " + "  ");
+            a.appendChild(text);
+            // a.href="#rnd";
+            a.id = str1.concat(str2);
+            var x = my_data[i][0];
+            var y = my_data[i][1];
+            var passfoo = "myFunction(" + x + "," + y + ")";
+            a.setAttribute("onclick", passfoo);
+            a.setAttribute("data-toggle", "tab");
+            var element = document.getElementById("new");
+            element.appendChild(a);
+            var x = document.createElement("br");
+            a.appendChild(x);
 
-    for (var i = 0; i < my_data.length; i++) {
-
-        var str1 = "#link";
-        var str2 = i;
-        var a = document.createElement("a");
-        a.innerHTML = '&emsp;&emsp;&emsp;';
-        var text = document.createTextNode([i + 1] + "." + " " + my_data[i][2] + " " + my_data[i][3] + "  " + "  " + "  ");
-        a.appendChild(text);
-        // a.href="#rnd";
-        a.id = str1.concat(str2);
-        var x = my_data[i][0];
-        var y = my_data[i][1];
-        var passfoo = "myFunction(" + x + "," + y + ")";
-        a.setAttribute("onclick", passfoo);
-        a.setAttribute("data-toggle", "tab");
-        var element = document.getElementById("new");
-        element.appendChild(a);
-        var x = document.createElement("br");
-        a.appendChild(x);
-
-    }
+        }
 
 
-    function myFunction(x, y) {
-        changeMarkerPos(x, y);
-    }
+        function myFunction(x, y) {
+            changeMarkerPos(x, y);
+        }
 
 
-    function initialize() {
-        var styles = [{
-            stylers: [{
-                saturation: -100
-            }]
-        }];
-        var styledMap = new google.maps.StyledMapType(styles, {
-            name: "Styled Map"
-        });
-        var mapProp = {
-            center: new google.maps.LatLng(19.261522, 75.194100),
-            zoom: 13,
-            panControl: false,
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: true,
-            streetViewControl: false,
-            overviewMapControl: false,
-            rotateControl: true,
-            scrollwheel: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById("map_canvas"), mapProp);
+        function initialize() {
+            var styles = [{
+                stylers: [{
+                    saturation: -100
+                }]
+            }];
+            var styledMap = new google.maps.StyledMapType(styles, {
+                name: "Styled Map"
+            });
+            var mapProp = {
+                center: new google.maps.LatLng(19.261522, 75.194100),
+                zoom: 13,
+                panControl: false,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: true,
+                streetViewControl: false,
+                overviewMapControl: false,
+                rotateControl: true,
+                scrollwheel: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("map_canvas"), mapProp);
 
-        map.mapTypes.set('map_style', styledMap);
-        map.setMapTypeId('map_style')
+            map.mapTypes.set('map_style', styledMap);
+            map.setMapTypeId('map_style')
 
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(19.261522, 75.194100),
-            animation: google.maps.Animation.DROP,
-            icon: 'https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-32.png',
-        });
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(19.261522, 75.194100),
+                animation: google.maps.Animation.DROP,
+                icon: 'https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-32.png',
+            });
 
-        marker.setMap(map);
-        map.panTo(marker.position);
-    }
+            marker.setMap(map);
+            map.panTo(marker.position);
+        }
 
-    function changeMarkerPos(lat, lon) {
-        myLatLng = new google.maps.LatLng(lat, lon)
-        marker.setPosition(myLatLng);
-        map.panTo(myLatLng);
-    }
+        function changeMarkerPos(lat, lon) {
+            myLatLng = new google.maps.LatLng(lat, lon)
+            marker.setPosition(myLatLng);
+            map.panTo(myLatLng);
+        }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 
-{% endblock %}
+</body>
+
+</html>

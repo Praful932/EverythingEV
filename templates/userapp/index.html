@@ -13,12 +13,17 @@
         </div>
     </div>
     <div class="service-row">
-        <a href="#"><img src="{% static 'userapp/svg/why choose ev.svg' %}" alt="why choose ev"></a>
-        <a href="#"><img src="{% static 'userapp/svg/charging stations.svg' %}" alt="charging stations"></a>
-        <a href="#"><img src="{% static 'userapp/svg/Charge Pooling.svg' %}" alt="charge pooling"></a>
-        <a href="#"><img src="{% static 'userapp/svg/route your way.svg' %}" alt="route your way"></a>
-        <a href="#"><img src="{% static 'userapp/svg/savings calculator.svg' %}" alt="savings calculator"></a>
-        <a href="#"><img src="{% static 'userapp/svg/sales.svg' %}" alt="sales"></a>
+        <a href="{% url 'Why-Choose-EV' %}"><img src="{% static 'userapp/svg/why choose ev.svg' %}"
+                alt="why choose ev"></a>
+        <a href="{% url 'Charging-Station-CLV' %}"><img src="{% static 'userapp/svg/charging stations.svg' %}"
+                alt="charging stations"></a>
+        <a href="{% url 'Charge-Pooling' %}"><img src="{% static 'userapp/svg/Charge Pooling.svg' %}"
+                alt="charge pooling"></a>
+        <a href="{% url 'Route-Your-Way' %}"><img src="{% static 'userapp/svg/route your way.svg' %}"
+                alt="route your way"></a>
+        <a href="{% url 'savings-calculator' %}"><img src="{% static 'userapp/svg/savings calculator.svg' %}"
+                alt="savings calculator"></a>
+        <a href="{% url 'sales-page' %}"><img src="{% static 'userapp/svg/sales.svg' %}" alt="sales"></a>
     </div>
     <div class="banner-row">
         <div class="banner-grid">
