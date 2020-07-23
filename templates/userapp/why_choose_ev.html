@@ -1,5 +1,8 @@
 {% extends 'userapp/layout.html' %} {% load static %} {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'userapp/evstyle.css' %}">{% endblock %}{% block title %}Why
+<link rel="stylesheet" type="text/css" href="{% static 'userapp/evstyle.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}{% block title %}Why
 Choose EV? {% endblock %} {% block body %}
 <br>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -184,50 +187,5 @@ Choose EV? {% endblock %} {% block body %}
         </section>
     </div>
 </section>
-<!-- End of Features -->
-<footer>
-    <section id="footer">
-        <div class="container">
-            <div class="row text-center text-xs-center text-sm-left text-md-left mb-0 pb-0">
-                <div class="col-xs-12 col-sm-4 col-md-4">
 
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h3 class="text-white text-center">Quick links</h3>
-                    <ul class="list-unstyled quick-links text-center">
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Home</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">About</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">FAQ</span></a></li>
-                        <li><a href="javascript:void();"><span style="font-family:Trebuchet MS; font-size: 18px">Get
-                                    Started</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Videos</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-
-                </div>
-            </div>
-            <div class="row" style="padding-top:0px;">
-                <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
-                    <ul class="list-unstyled list-inline social text-center" style="text-align:center;">
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-envelope"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-</footer>
 {% endblock %}

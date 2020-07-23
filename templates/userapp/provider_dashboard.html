@@ -1,108 +1,124 @@
-{% extends "userapp/dash_layout.html"%}
 {% load static %}
-{% block head %}
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
-Dashboard
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{%  static 'userapp/dashboard_home.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-{% block body %}
-<!-- Business -->
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container">
-                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                    <div class="px-5 pt-0 text-center">
-                        <h2 class="text-center cs">Your Charging Stations</h2>
-                        <a href="{%url 'All-Maintenance-Man'%}"><button type="button" class="btn btn-warning">Hire Mechanic For Maintenance</button></a>
-
+<body>
+    <main>
+        <div class="layout">
+            <div class="dashboardSidebar" id="sidebar">
+                <div class="upperSidebar">
+                    <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    <a href="#"><i class="fa fa-bell fa-lg"></i></a>
+                    <i class="fa fa-times" id="close"></i>
+                </div>
+                <div class="lowerSidebar">
+                    <div class="user">
+                        <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
+                        <h4>Hello, ABC</h4>
+                        <hr>
                     </div>
-                    <div class="row">
+                    <div class="links">
+                        <a href="#"><i class="fa fa-home"></i>Home</a>
+                        <a href="#" class="active"><i class="fa fa-briefcase"></i>Business</a>
+                        <a href="#"><i class="fa fa-cogs"></i>Maintenance</a>
+                        <a href="#"><i class="fa fa-headphones"></i>Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboardContent">
+                <div class="upperContent">
+                    <a href="#">Logout</a>
+                    <div id="button"><i class="fa fa-bars"></i></div>
+                </div>
+                <div class="lowerContent">
+                    <div class="title">
+                        <h1>Your Shops</h1>
+                        <a href="#">Add New Shop</a>
+                    </div>
+                    <div class="shops">
                         {% for cs in cslist %}
-                        <div class="col-xl-4 col-md-6 col-sm-6 p-2">
-                            <div class="card shadow" style="width:254px;">
-                                <div class="inner">
-                                    <img class="card-img-top" src="{%static 'userapp/1.jpeg'%}" alt="Card image cap">
+                        <div class="shopcard">
+                            <img src="{% static 'userapp/station-pic.jpg' %}" alt="shop_image">
+                            <div class="card-body">
+                                <h3 class="name">{{ cs.name }}</h3>
+                                <p class="location">{{ cs.suburb }}<br>{{ cs.city }}</p>
+                                <div class="icon-grid">
+                                    <div class="slow">
+                                        <img src="{% static 'userapp/icons/slow charge.svg' %}" alt="slow">
+                                        <p>8</p>
+                                    </div>
+                                    <div class="fast">
+                                        <img src="{% static 'userapp/icons/fast charge.svg' %}" alt="slow">
+                                        <p>4</p>
+                                    </div>
+                                    <div class="cctv">
+                                        <img src="{% static 'userapp/icons/cctv.svg' %}" alt="">
+                                        <p>Yes</p>
+                                    </div>
+                                    <div class="washroom">
+                                        <img src="{% static 'userapp/icons/washroom.svg' %}" alt="">
+                                        <p>No</p>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ cs.name }}</h5>
-                                    <span>{{ cs.suburb }}<br>{{ cs.city }}</span>
-                                    <div class="justify-content-between mt-2">
-                                        <!-- <a href="#" class="btn btn-primary">Learn more</a> -->
-                                        <div class="ml-2">
-                                            <i class="fas fa-video fa-lg"></i>
-                                            <i class="fas fa-restroom fa-lg ml-2"></i>
-                                            <span class="ml-5">
-                                                <i class="fas fa-bolt text-warning fa-lg">10</i>
-                                                <i class="fas fa-bolt text-success fa-lg ml-2">8</i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pt-4 ">
-                                        <div class="justify-content-between mb-2">
-                                            <a href=# class="btn btn-success mr-2" role="button"
-                                                aria-pressed="true">Status</a>
-                                            <a href="{% url 'Charging-Station-Analytics' cs.id %}"
-                                                class="btn btn-primary" role="button" aria-pressed="true">Analytics</a>
-                                        </div>
-                                        <a href="{% url 'DeleteStation' cs.id %}" class="btn btn-danger" role="button"
-                                            aria-pressed="true">Remove</a>
-                                    </div>
+                                <div class="buttons">
+                                    <a href="{% url 'Charging-Station-Analytics' cs.id %}" class="green">Statistics</a>
+                                    <a href="{% url 'DeleteStation' cs.id %}" class="red">Remove</a>
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
-                    <footer style="align-content: center;margin-right: 70px;">
-                        <section>
-                            <div class="pagebtn">
-                                {% if cslist.has_other_pages %}
+                    <div class="pagination">
+                        {% if cslist.has_other_pages %}
 
-                                {% if cslist.has_previous %}
-                                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-                                <a class="btn btn-outline-info mb-4"
-                                    href="?page={{ page.obj.previous_page_number}}">Previous</a>
-                                {% endif  %}
+                        {% if cslist.has_previous %}
+                        <a href="?page=1">First</a>
+                        <a href="?page={{ page.obj.previous_page_number}}">Previous</a>
+                        {% endif  %}
 
-                                {% for num in cslist.paginator.page_range %}
-                                {% if cslist.number == num %}
-                                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% elif num > cslist.number|add:'-3' and num < cslist.number|add:'3' %}
-                                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% endif %}
-                                {% endfor %}
+                        {% for num in cslist.paginator.page_range %}
+                        {% if cslist.number == num %}
+                        <a href="?page={{ num }}">{{ num }}</a>
+                        {% elif num > cslist.number|add:'-3' and num < cslist.number|add:'3' %}
+                        <a href="?page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
 
-                                {% if cslist.has_next %}
-                                <a class="btn btn-outline-info mb-4"
-                                    href="?page={{ cslist.next_page_number }}">First</a>
-                                <a class="btn btn-outline-info mb-4"
-                                    href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
-                                {% endif  %}
+                        {% if cslist.has_next %}
+                        <a href="?page={{ cslist.next_page_number }}">First</a>
+                        <a href="?page={{ page.obj.paginator.num_pages }}">Previous</a>
+                        {% endif  %}
 
-                                {% endif  %}
-                            </div>
-                        </section>
-                    </footer>
+                        {% endif  %}
+                    </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
-{% endblock %}
+    </main>
 
-{% block script %}
-<script>
-    document.getElementById("dashboard").classList.add("sidebar-link-active");
-    document.getElementById("support").classList.add("sidebar-link");
-    document.getElementById("analytics").classList.add("sidebar-link");
-    document.getElementById("profile").classList.add("sidebar-link");
-    document.getElementById("business").classList.add("sidebar-link");
-    document.getElementById("maintain").classList.add("sidebar-link");
-</script>
-{% endblock %}
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('button');
+        const close = document.getElementById('close');
+        button.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+        close.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+    </script>
+</body>
+
+</html>
