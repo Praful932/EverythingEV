@@ -8,8 +8,8 @@
 <main>
     <h1>Sign Up</h1>
     <div class="signupOptions">
-        <a href="#"><img src="{% static 'userapp/svg/consumer_art.svg' %}" src="consumer"></a>
-        <a href="#"><img src="{% static 'userapp/svg/provider_art.svg' %}" alt="provider"></a>
+        <a href="{% url 'registerConsumer' %}"><img src="{% static 'userapp/svg/consumer_art.svg' %}" src="consumer"></a>
+        <a href="{% url 'registerProvider' %}"><img src="{% static 'userapp/svg/provider_art.svg' %}" alt="provider"></a>
     </div>
 
     <p>Already have account? <span><a href="{% url 'account_login' %}">Log in</a></span> instead.</p>

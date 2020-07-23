@@ -327,4 +327,3 @@ class Survey(models.Model):
     means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
-

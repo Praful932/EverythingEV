@@ -5,7 +5,6 @@ from django import forms
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
-from django.utils import timezone
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
                            ChargingStationForm, SupportForm, CharpoolerForm)
 from django.contrib.auth import logout, login
@@ -560,7 +559,7 @@ def WhyChooseEV(request):
 
 
 def salesPage(request):
-    return render(request, "userapp/sales_page.html")
+    return render(request, "userapp/sales_home.html")
 
 
 def twoWheelers(request):

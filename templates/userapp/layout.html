@@ -20,22 +20,25 @@
 <body>
     <header>
         <div class="logo">
-            <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+            <a href="{% url 'index' %}"><img src="{% static 'userapp/svg/logo.svg' %}" alt="logo"></a>
         </div>
         <div class="menu-toggle"></div>
         <nav>
             <ul class="nav-links">
                 <li><a href="{%  url 'index' %}" class="active">Home</a></li>
                 {% if user.is_authenticated %}
-                {% if user.is_provider %}
-                <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+                    {% if user.is_provider %}
+                    <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+                    {% elif not user.is_provider and not user.is_consumer %}
+                    <li><a href="{% url 'Live-Data' %}" role="button">Live Feed</a></li>
+                    {% else %}
+                    <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
                 {% else %}
-                <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
-                {% endif %}
-                <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
-                {% endif %}
                 <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
                 <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+                {% endif %}
             </ul>
         </nav>
         <div class="clearfix"></div>
