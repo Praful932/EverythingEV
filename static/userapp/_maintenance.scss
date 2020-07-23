@@ -243,24 +243,6 @@ main {
         }
     }
 
-    .line-chart {
-        animation: fadeIn 600ms cubic-bezier(.57, .25, .65, 1) 1 forwards;
-        opacity: 0;
-        max-width: 640px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .aspect-ratio {
-        height: 0;
-        padding-bottom: 50%;
-    }
-
-    #barChart {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 6px;
-        /*   Check out the fancy shadow  on this one */
-    }
 
     @media(max-width:1024px) {
         main {
