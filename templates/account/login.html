@@ -1,4 +1,3 @@
-{% extends "userapp/layout.html" %}
 {% load static %}
 {% block head %}
 {% load crispy_forms_tags %}
@@ -7,10 +6,33 @@
 {% get_providers as socialaccount_providers %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
 <link rel="stylesheet" href="{% static 'userapp/login_style.css'%}"> {% endblock %} {% block title %} Login
 {% endblock %} {% block body %}
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+<header>
+    <div class="logo">
+        <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+    </div>
+    <div class="menu-toggle"></div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="{%  url 'index' %}" class="active">Home</a></li>
+            {% if user.is_authenticated %}
+            {% if user.is_provider %}
+            <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+            {% else %}
+            <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+            {% endif %}
+            <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+            {% else %}
+            <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
+            <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="clearfix"></div>
+</header>
 
 <div class="container" style="border-radius: 20px; margin-top:20px!important;">
     <div class="row" style="border-radius: 20px;">
@@ -40,13 +62,7 @@
             </div>
         </div>
     </div>
-    <!-- <canvas class="background"></canvas>
-    <script src="{% static 'userapp/particles.min.js' %}"></script>
-    <script>
-        window.onload = function() {
-            Particles.init({
-                selector: '.background'
-            });
-        };
-    </script> -->
+
+
+
     {% endblock %}
