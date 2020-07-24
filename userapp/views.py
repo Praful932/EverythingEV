@@ -36,7 +36,7 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
 
 def check(request):
     if request.user.is_provider:
-        return redirect('Provider-Dashboard')
+        return redirect('dash-welcome')
     return redirect('index')
 
 
@@ -339,11 +339,13 @@ def ChargingStationAnalytics(request, pk):
         wr = []
         for i in range(7):
             wr.append(getattr(weekreport, 'd'+str(i+1)))
+        supportform = SupportForm()
         context = {
             'totalcount': reportcount,
             'freq': json.dumps(freq),
             'consumption': json.dumps(consumption),
-            'wr': json.dumps(wr)
+            'wr': json.dumps(wr),
+            'supportform': supportform,
         }
         return render(request, "userapp/cs_analytics.html", context=context)
     return redirect('index')
@@ -366,8 +368,10 @@ def ChargingStationDashboard(request, pk):
             consumption_cleaned.append(int(record.elec_consumption))
         recorddata = [list(x) for x in zip(username_cleaned,
                                            vehicle_cleaned, duration_cleaned, consumption_cleaned)]
+        supportform = SupportForm()
         context = {
-            'records': recorddata
+            'records': recorddata,
+            'supportform': supportform,
         }
         return render(request, "userapp/dash_welcome.html", context=context)
     return redirect('index')
@@ -460,6 +464,7 @@ def bookMaintenanceMan(request, pk):
                 c = ChargingStation.objects.filter(name=cname)[0]
                 CsM.CsSelect = c
                 CsM.save()
+                return redirect('dash-welcome')
         return render(request, "booking.html", {'cs': cscount})
 
 
@@ -592,7 +597,11 @@ def savingsCalculator(request):
 
 
 def dashwelcome(request):
-    return render(request, "userapp/dash_welcome.html")
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/dash_welcome.html", context=context)
 
 
 @login_required
