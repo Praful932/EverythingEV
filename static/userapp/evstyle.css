@@ -1,4 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Amaranth:400,400i,700|Artifika');
+.head img {
+    width: 100%;
+    height:28vw;
+  }
+  .head .centered {
+      position: absolute;
+      top: 30%;
+      left: 46%;
+      transform: translate(-40%, -40%);
+      letter-spacing: -1px;
+      padding: 10px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 5vw;
+      color: black;
+  }
+  .head .red{
+      color: #FD2F2F;
+      font-size: 1.7rem;
+  }
+
+
 section.about_com {
     padding: 80px 0;
     background: #fff;
@@ -166,4 +187,221 @@ section.services {
 
 .colouts:hover .col_info {
     background: #27363b;
+}
+
+
+.width {
+    max-width: 30%;
+}
+
+.sidenav {
+    width: 130px;
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+.sidenav a:hover {
+    color: #064579;
+}
+
+h1 {
+    margin: 50px 0 30px;
+    text-align: center;
+}
+
+.faqs-container {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.faq {
+    background-color: transparent;
+    border: 1px solid #9FA4A8;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+    transition: 0.3s ease;
+}
+
+.faq.active {
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faq.active::after,
+.faq.active::before {
+    color: #2ecc71;
+    content: '\f075';
+    font-family: 'Font Awesome 5 Free';
+    font-size: 7rem;
+    position: absolute;
+    opacity: 0.2;
+    top: 20px;
+    left: 20px;
+    z-index: 0;
+}
+
+.faq.active::before {
+    color: #3498db;
+    top: -10px;
+    left: -30px;
+    transform: rotateY(180deg);
+}
+
+.faq-title {
+    margin: 0 35px 0 0;
+    font-size: 20px;
+}
+
+.faq-text {
+    display: none;
+    margin: 30px 0 0;
+    font-size: 16px;
+}
+
+.faq.active .faq-text {
+    display: block;
+}
+
+.faq-toggle {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+}
+
+.faq-toggle:focus {
+    outline: none;
+}
+
+.faq.active .faq-toggle {
+    background-color: #9FA4A8;
+}
+
+.faq-toggle .fa-times {
+    display: none;
+}
+
+.faq.active .faq-toggle .fa-times {
+    display: block;
+}
+
+.faq-toggle .fa-chevron-down {
+    color: #83888E;
+}
+
+.faq.active .faq-toggle .fa-chevron-down {
+    display: none;
+}
+
+
+/* chatbot CSS */
+
+.chatbot-container {
+    position: fixed;
+    right: 0;
+    bottom: 80px;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.floating-btn {
+    border-radius: 26.5px;
+    background-color: #001F61;
+    border: 1px solid #001F61;
+    box-shadow: 0 16px 22px -17px #03153B;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 12px 20px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.floating-btn:hover {
+    background-color: #ffffff;
+    color: #001F61;
+}
+
+.floating-btn:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 480px) {
+    .chatbot-container.visible {
+        transform: translateX(0px);
+    }
+    .floating-btn {
+        right: 10px;
+    }
+}
+
+.btn-group button {
+    background-color: #4CAF50;
+    /* Green background */
+    border: 1px solid green;
+    /* Green border */
+    color: white;
+    /* White text */
+    padding: 10px 24px;
+    /* Some padding */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    width: 50%;
+    /* Set a width if needed */
+    display: block;
+    /* Make the buttons appear below each other */
+}
+
+.btn-group button:not(:last-child) {
+    border-bottom: none;
+    /* Prevent double borders */
+}
+
+
+/* Add a background color on hover */
+
+.btn-group button:hover {
+    background-color: #3e8e41;
+}
+
+.split {
+    height: auto;
+    width: 70%;
+    position: absolute;
+    z-index: 1;
+    top: auto;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+    /* background-color: #111; */
+}
+
+.right {
+    right: 0;
+    /* background-color: red; */
 }

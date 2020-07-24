@@ -18,7 +18,9 @@
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">
-                    <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    </a>
                     <a href="#"><i class="fa fa-bell fa-lg"></i></a>
                     <i class="fa fa-times" id="close"></i>
                 </div>
@@ -29,7 +31,7 @@
                         <hr>
                     </div>
                     <div class="links">
-                        <a href="#"><i class="fa fa-home"></i>Home</a>
+                        <a href="#" ><i class="fa fa-home"></i>Home</a>
                         <a href="#" class="active"><i class="fa fa-briefcase"></i>Business</a>
                         <a href="#"><i class="fa fa-cogs"></i>Maintenance</a>
                         <a href="#"><i class="fa fa-headphones"></i>Support</a>
@@ -38,7 +40,7 @@
             </div>
             <div class="dashboardContent">
                 <div class="upperContent">
-                    <a href="#">Logout</a>
+                    <a href="{% url 'account_logout' %}" style="z-index: 1000 !important;">Logout</a>
                     <div id="button"><i class="fa fa-bars"></i></div>
                 </div>
                 <div class="lowerContent">

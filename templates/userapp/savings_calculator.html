@@ -14,7 +14,7 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
         <h1 class="col-md-6" style="padding-left: 45%;">Savings</h1>
         <h1 class="col-md-6" style="padding-left: 45%;">Calculator</h1>
     </div>
-    <img class="col-md-6" src="https://www.svgrepo.com/show/272153/savings.svg" alt="savings" style="width: fit-content; height:fit-content; ">  
+    <img class="col-md-6" src="{% static 'userapp/svg/savings_art.svg' %}" alt="savings" style="width: fit-content; height:fit-content; ">  
 </div>
 <br>
 <div class="row container">
@@ -123,98 +123,52 @@ integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9If
     </div>
 </div>
 <br><br>
+</body>
+{% endblock body %}
+{% block script %}
 <!--Savings Calculation Logic -->
 <script>
-window.onload = function() {
-
-  var nameField = document.getElementById('nameField');
-  var perKmPetrolCost = 3.4;  // Average value of petrol per km in last 10 years
-  var kWh = 0.2; // Average kwh of an EV
-
-  updateNameDisplay();
-  
-  setInterval(updateNameDisplay, 100);
-  
-  function updateNameDisplay() {
-    var kms = nameField.value || 0;
-    var total_cost_of_FV_per_month = Math.round(perKmPetrolCost * kms * 30);
-    var total_cost_of_EV_per_month = Math.round(kWh * kms * 30);
-    var monthly_savings = Math.round(total_cost_of_FV_per_month - total_cost_of_EV_per_month);
-    var yearly_savings = Math.round(monthly_savings * 12);
-
-    if (kms > 0) {
-      document.getElementById('nameDisplay').innerHTML = total_cost_of_FV_per_month;
-      document.getElementById('EV').innerHTML = total_cost_of_EV_per_month;
-      document.getElementById('monthly_savings').innerHTML = monthly_savings;
-      document.getElementById('yearly_savings').innerHTML = yearly_savings;
-    }
-}
-    var battery = document.getElementById('batteryPercent');
-    var avgRangeOfEV = 234.73;  // Average range of EV - Calculated from the list of vehicles in database
+    window.onload = function() {
     
-      update();
+      var nameField = document.getElementById('nameField');
+      var perKmPetrolCost = 3.4;  // Average value of petrol per km in last 10 years
+      var kWh = 0.2; // Average kwh of an EV
+    
+      updateNameDisplay();
       
-      setInterval(update, 100);
+      setInterval(updateNameDisplay, 100);
       
-      function update() {
-        var batteryPercent = battery.value || 0;
-        document.getElementById('percentDisplay').innerHTML = batteryPercent;
-        var mileage = Math.round((avgRangeOfEV * batteryPercent)/100);
-        
-        if (batteryPercent > 0) {
-          document.getElementById('mileage').innerHTML = mileage;
-          }
+      function updateNameDisplay() {
+        var kms = nameField.value || 0;
+        var total_cost_of_FV_per_month = Math.round(perKmPetrolCost * kms * 30);
+        var total_cost_of_EV_per_month = Math.round(kWh * kms * 30);
+        var monthly_savings = Math.round(total_cost_of_FV_per_month - total_cost_of_EV_per_month);
+        var yearly_savings = Math.round(monthly_savings * 12);
+    
+        if (kms > 0) {
+          document.getElementById('nameDisplay').innerHTML = total_cost_of_FV_per_month;
+          document.getElementById('EV').innerHTML = total_cost_of_EV_per_month;
+          document.getElementById('monthly_savings').innerHTML = monthly_savings;
+          document.getElementById('yearly_savings').innerHTML = yearly_savings;
+        }
     }
-
-};
-</script>
-</body>
-
-<footer>
-    <section id="footer">
-        <div class="container">
-            <div class="row text-center text-xs-center text-sm-left text-md-left mb-0 pb-0">
-                <div class="col-xs-12 col-sm-4 col-md-4">
-
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h3 class="text-white text-center">Quick links</h3>
-                    <ul class="list-unstyled quick-links text-center">
-                        <li><a href="{% url 'index' %}"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Home</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">About</span></a></li>
-                        <li><a href="{% url 'Why-Choose-EV' %}"><span
-                            style="font-family:Trebuchet MS; font-size: 18px">Why Choose EV</span></a></li>
-                        <li><a href="{% url 'faqs' %}"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">FAQ</span></a></li>
-                        <li><a href="javascript:void();"><span style="font-family:Trebuchet MS; font-size: 18px">Get
-                                    Started</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Videos</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-
-                </div>
-            </div>
-            <div class="row" style="padding-top:0px;">
-                <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
-                    <ul class="list-unstyled list-inline social text-center" style="text-align:center;">
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-envelope"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-</footer>
-{% endblock body %}
+        var battery = document.getElementById('batteryPercent');
+        var avgRangeOfEV = 234.73;  // Average range of EV - Calculated from the list of vehicles in database
+        
+          update();
+          
+          setInterval(update, 100);
+          
+          function update() {
+            var batteryPercent = battery.value || 0;
+            document.getElementById('percentDisplay').innerHTML = batteryPercent;
+            var mileage = Math.round((avgRangeOfEV * batteryPercent)/100);
+            
+            if (batteryPercent > 0) {
+              document.getElementById('mileage').innerHTML = mileage;
+              }
+        }
+    
+    };
+    </script> 
+{% endblock script %}
