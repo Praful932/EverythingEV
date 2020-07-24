@@ -555,7 +555,11 @@ def faq(request):
 
 
 def WhyChooseEV(request):
-    return render(request, "userapp/why_choose_ev.html")
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/why_choose_ev.html", context=context)
 
 
 def salesPage(request):

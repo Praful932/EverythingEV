@@ -1,47 +1,42 @@
-{% extends 'userapp/layout.html' %} {% load static %} {% block head %}
+{% extends 'userapp/layout.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'userapp/evstyle.css' %}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-{% endblock %}{% block title %}Why
-Choose EV? {% endblock %} {% block body %}
+{% endblock %}
+{% block title %}
+Why Choose EV?
+{% endblock %}
+{% block body %}
 <br>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{% static 'userapp/3-01.jpeg' %}" class="d-block w-100" height="400px" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'userapp/airr-02.jpeg' %}" class="d-block w-100" height="400px" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="{% static 'userapp/noise123-01.jpeg' %}" class="d-block w-100" height="400px" alt="...">
+<!-- Head -->
+<div class="head">
+    <div class="imghead">
+        <img src="{% static 'userapp/bg.png' %}" alt="text" width="460" height="345">
+        <div class="centered">
+            Why Choose EV?
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+    <div style="background-color: #2D677A;height:50%;">
+        <p
+            style="margin: -1px 10% 0% 10%;padding: 3% 0% 3% 0%;height: 50%;font-family: 'Noto Sans JP', sans-serif;color: azure;font-size: 2rem;">
+            Electric vehicles are one solution to the negative environmental impact of
+            conventional vehicles. However, they have also proven to have many more
+            benefits to society. The advent of electric vehicles has called for an
+            improvement in overall energy usage and generation. They have shown
+            how important it is to find alternate sources of fuel and they can positively
+            affect the environment and society as a whole.
+        </p>
+
+    </div>
 </div>
+
+<!-- Why EV -->
 <section class="about_com" style="padding-bottom:0px;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h2 class="mb-4">WHY CHOOSE ELECTRIC VEHICLES?</h2>
-                <p class="size">Electric vehicles are one solution to the negative environmental impact of conventional
-                    vehicles. However, they have also proven to have many more benefits to society.The advent of
-                    electric vehicles has called for an improvement in overall
-                    energy usage and generation. They have shown how important it is to find alternate sources of fuel
-                    and they can positively affect the environment and society as a whole.</p>
-            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="info_gra">
@@ -99,93 +94,386 @@ Choose EV? {% endblock %} {% block body %}
     </div>
 </section>
 
-<!-- Features -->
-<section>
-    <div class="container">
-        <div>
-            <h2 class="text-danger text-center" style="margin-bottom: 50px;">We've got you covered for all the services
-                regarding EVs.</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="colouts">
-                    <img src="{% static 'userapp/nearby.jpg' %}">
-                    <div class="col_info">
-                        <h3>Charging Stations</h3>
-                        <p>With this feature, user can find the nearest availabe charging station, thus reduces the
-                            problem of Range Anxiety among most Electric Vehicle Users.</p>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="colouts">
-                    <img src="{% static 'userapp/pooling.jpg' %}">
-                    <div class="col_info">
-                        <h3>Charge Pooling</h3>
-                        <p>User can connect with other users who reside there and have installed charging stations at
-                            their places, thus charging at that place.</p>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="colouts">
-                    <img src="{% static 'userapp/way.jpg' %}">
-                    <div class="col_info">
-                        <h3>Route your Way</h3>
-                        <p>This platform will provide multiple routes to destination based on factors like range of
-                            vehicle, availability of charging stations on the way.</p>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="colouts">
-                    <img src="{% static 'userapp/maintenance.jpg' %}">
-                    <div class="col_info">
-                        <h3>Hire a Maintenance Man</h3>
-                        <p>User can view nearby electric vehicle maintenance locations and get directions & can book
-                            appointments for vehicle check up. Also a mechanic can be called in case of emergency.
-                        </p>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="colouts">
-                    <img src="{% static 'userapp/analytics.jpg' %}">
-                    <div class="col_info">
-                        <h3>Sales</h3>
-                        <p>Lorem At amet quae. Esse tempore quo similique esse odio. Est quo autem odio quia enim. Et
-                            dignissimos incidunt tempore. Ad et alias molestiae quasi dolor eum a.</p>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="colouts">
-                    <img src="https://image.ibb.co/jEbtyG/service_6.jpg">
-                    <div class="col_info">
-                        <h3>Lorem ipsum</h3>
-                        <p>
-                            Officiis itaque aut ab accusamus harum voluptas et. Fuga ipsum enim. Nam nobis enim
-                            consequatur sit eaque repellendus tempore voluptas inventore. Ratione magnam quis corporis
-                            porro et iure voluptas tempore nesciunt.
-                        </p>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <section>
-            <h3 class="text-danger ml-4">Still have some questions? Check out <u><a href="{% url 'faqs' %}"
-                        class="text-">Frequently Asked
-                        Questions(FAQs).</a></u></h3>
-        </section>
-    </div>
-</section>
+<div id="thankyou" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thank you!</h4>
+            </div>
+            <div class="modal-body">
+                <p>We will get back to you shortly</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="supportmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Your Issue</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="supportform">
+                    {% csrf_token %}
+                    {{ supportform|crispy }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-success" value="Submit" form="supportform">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron" style="margin-top:4em;">
+    <div class="container">
+        <h1 class="display-3">Frequently Asked Questions</h1>
+    </div>
+</div>
+<div class="row justify-content-between">
+    <div class="col-lg-3">
+        <div class="nav nav-tabs">
+            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between text-success ml-4 mr-4" href="#vehicles"
+                data-toggle="tab">
+                <h4 class="text-success size">Vehicles</h4>
+            </a>
+            <br />
+            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between ml-4 mr-4" href="#battery"
+                data-toggle="tab">
+                <h4 class="text-success size">Battery</h4>
+            </a>
+            <a class="nav-link p-3 mb-2 sidebar-link justify-content-between ml-4 mr-4" href="#charging"
+                data-toggle="tab">
+                <h4 class="text-success size">Charging</h4>
+            </a>
+        </div>
+    </div>
+
+    <div class="tab-content  col-lg-9">
+        <div class="tab-pane active" id="vehicles">
+            <div class="faqs-container">
+                <div class="faq active">
+                    <h3 class="faq-title">
+                        What is Hybrid Electric Vehicle?
+                    </h3>
+                    <p class="faq-text">
+                        Hybrid Electric Vehicles combine conventional internal combustion engine systems with electric
+                        propulsion systems. They use regenerative braking to convert energy that is normally wasted
+                        during braking/coasting into electricity. This electricity is stored
+                        in a battery until it’s needed by the electric motor.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        What is a Battery Electric Vehicle?
+                    </h3>
+                    <p class="faq-text">
+                        Battery Electric Vehicles use only electricity to power the vehicle. All the electricity comes
+                        from an electric charging source and regenerative braking (using the vehicle’s kinetic energy to
+                        recharge the battery). Examples of BEVs include the Chevrolet
+                        Bolt, Nissan Leaf and any of the Tesla models. There are many different BEV choices coming to
+                        market over the next few years.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        What types of electric cars are available?
+                    </h3>
+                    <p class="faq-text">
+                        There are primarily three types: All-electric cars that run on batteries and have to be
+                        recharged when the batteries run flat.Plug-in hybrids that rely on electricity from the wall and
+                        a gasoline engine. Extended-range electric vehicles, such as the Chevrolet
+                        Volt, that are a type of plug-in hybrid that runs purely on electricity, but when the battery
+                        runs out, an on-board engine recharges it. The gasoline engine acts only as a generator to
+                        provide electricity for longer trips, and
+                        it does not directly drive the wheels.
+                    </p>
+                    <button class="faq-toggle justify-content-between">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        How fast can an Electric Car/Bike go?
+                    </h3>
+                    <p class="faq-text">
+                        As fast as you like. Just like a petrol powered car/bike, you can modify and tune your EV to
+                        reach optimum levels of performance. While most EV’s are commuter cars, there are a few
+                        production cars that offer great performance.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        What Brands of Electric Vehicles are Available?
+                    </h3>
+                    <p class="faq-text">
+                        There are many types of Hybrid, Electric and Plug-In Hybrid vehicles either available now, or
+                        coming up in the near future. Check our models page to see a list of each model of car from each
+                        manufacturer to find the type of vehicle that suits your tastes.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        What is the Difference Between Electric, Hybrid and Plug-In Hybrid?
+                    </h3>
+                    <p class="faq-text">
+                        Most of us understand the difference between a full electric vehicle and a hybrid, which uses a
+                        combination of a battery powered electric motor and a gas engine to improve gas mileage and
+                        reduce harmful emissions. So what is the difference between a hybrid
+                        and a plug-in hybrid? This page, should answer your questions succinctly.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        What is a plug-in hybrid vehicle (PHEV)?
+                    </h3>
+                    <p class="faq-text">
+                        A PHEV is a car that can take both electricity (from plugging in) and gasoline. Usually, they
+                        run on electricity first and then drawn on gasoline later. That way, you are driving electric
+                        around town and only use gasoline for long trips.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="battery">
+            <div class="faqs-container">
+                <div class="faq active">
+                    <h3 class="faq-title">
+                        How long before we would need to change the battery pack on an EV?
+                    </h3>
+                    <p class="faq-text">
+                        Not for many years. Mahindra offer warranties covering 5 years of driving on the lithium-ion
+                        batteries in the e2o.Reva users have used batteries for more than 3 years.One simple technique
+                        that could be used to pay for the battery is to start an Recurring
+                        Deposit of Rs2000 per month for 3 years or more.Liquidate the RD after 3-4 years whenever the
+                        need arises to change the battery. Thus bank interest accumulation can partly help you fund your
+                        shiny new battery pack!
+
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        Can EV batteries be recycled?
+                    </h3>
+                    <p class="faq-text">
+                        Lithium, the main component in EV batteries, is highly recyclable and many manufacturers are
+                        creating programs to help customers recycle or repurpose batteries at the end of their useful
+                        life in a car. Once their life in a vehicle ends, batteries still
+                        have some usefulness left. For instance, someday these spent batteries could be used to store
+                        renewable power and reduce the impacts of intermittent solar or wind, or when combined, these
+                        batteries might take on a second life as
+                        a backup power supply for PGE customers during an outage.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        Where do batteries end up? In landfills? Or recycled?
+                    </h3>
+                    <p class="faq-text">
+                        Vehicle batteries have an excellent recycling record that will get even better with plug-in
+                        vehicles. Every car in the world has a lead-acid battery. Even with its low value as scrap, the
+                        national recycling rate for lead-acid batteries is about 98 percent.
+                        Plug-in vehicles mostly use lithium ion, which is much more valuable than lead. It’s illegal to
+                        dispose of these batteries in a landfill, and their inherent value will ensure that they are
+                        recycled. Some car makers are exploring
+                        “second-life” applications for used EV batteries as well. Learn more about batteries’ impact on
+                        the environment in our Ask the EV Experts video.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="charging">
+            <div class="faqs-container">
+                <div class="faq active">
+                    <h3 class="faq-title">
+                        Can electric vehicles self-charge?
+                    </h3>
+                    <p class="faq-text">
+                        No. Energy conversions are never 100 percent efficient, so every time we convert one form of
+                        energy to another, we lose some of that energy. Hybrids and EVs recapture some of their energy
+                        back into the batteries through regenerative braking.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        How long does it take to charge a plug-in car?
+                    </h3>
+                    <p class="faq-text">
+                        How long does it take to charge your cell phone? Think about charging your car just like you
+                        think about charging your cell phone. Most people charge their cars at home or work, just like a
+                        cell phone. Plug it in when you arrive and it will be ready for
+                        you in the morning, or the end of the work day. The actual charging time depends on the size of
+                        your battery, how far you have driven, and the amperage of the charging system. Keep in mind
+                        that most of the time, the battery will
+                        not be empty when you plug in, just like your cell phone. Learn more about types of available
+                        charging stations on Plug In America’s accessories tracker.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        Where do you recharge a plug-in vehicle?
+                    </h3>
+                    <p class="faq-text">
+                        Most people recharge overnight in their garage, carport or driveway or work, but there are many
+                        public chargers for electric cars as well. Find a public EV charging station here. An estimated
+                        99 percent of all charging currently happens at home or work.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        How much does it cost to charge a plug-in vehicle?
+                    </h3>
+                    <p class="faq-text">
+                        Much less than it costs to buy gasoline. Exactly how much depends on the vehicle and electricity
+                        rates. On average, it costs less than $1 to charge a plug-in hybrid and $2-$4 for an
+                        all-electric car. Your overall energy bill will be lowered by driving
+                        with electricity.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="faq">
+                    <h3 class="faq-title">
+                        Which charging station should I buy?
+                    </h3>
+                    <p class="faq-text">
+                        New plug-in vehicles come with cords to plug into standard 120-volt household outlets. For
+                        faster charging, many drivers will want to buy a charging station to plug into a 240-volt
+                        outlet. See our Accessory Tracker to compare charging station options.
+                        All 240-volt charging stations (Level 2 charging) come with the same “J connector” that should
+                        allow any plug-in vehicle to connect to any charging station.
+                    </p>
+                    <button class="faq-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="floating-btn" id="supportbtn">
+    Get in Touch
+</button>
+{% endblock %}
+
+{% block script %}
+<script>
+    const faqs = document.querySelectorAll(".faq");
+    let toggleDiv = function(evt) {
+        const isActive = this.classList.contains("active");
+        /// reset all
+        faqs.forEach((x) => {
+            x.classList.remove("active");
+        });
+        if (!isActive) {
+            this.classList.add("active");
+        } else {
+            this.classList.remove("active");
+        }
+    };
+    faqs.forEach((faq) => {
+        faq.addEventListener("click", toggleDiv.bind(faq));
+    });
+</script>
+<script>
+    $('#supportbtn').click(function () {
+        $("#supportmodal").modal('show');
+    });
+    $(document).ready(function () {
+        $("#supportform").submit(function (e) {
+            e.preventDefault();
+            var subject = $("#id_subject").val();
+            var description = $("#id_description").val();
+            $.ajax({
+                data: {
+                    'subject': subject,
+                    'description': description,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                url: "{% url 'SupportRequest' %}",
+                type: "POST",
+                success: function (response) {
+                    $("#supportform").trigger("reset");
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+            $("#supportmodal").modal('hide');
+            $("#thankyou").modal('show');
+        });
+    });
+</script>
 {% endblock %}
