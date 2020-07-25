@@ -1,7 +1,19 @@
 {% extends 'userapp/layout.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'userapp/rs.css'%}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+  .card-body{
+    height : 550px;
+  }
+
+  #map
+  {
+    height: 100%;
+  }
+  
+</style>
 {% endblock head %}
 
 {% block title %}
@@ -41,7 +53,6 @@ Add Charging Station
 
 {% block script %}
 <script>
-
     var finallat;
     var finallng;
     var location;
@@ -146,7 +157,6 @@ Add Charging Station
   
     }
   
-    google.maps.event.addDomListener(window, 'load', initialize);
   
     function submitloc() {
       //finallat = marker.position.lat();
@@ -159,6 +169,5 @@ Add Charging Station
     }
   </script>
   <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"
-  async defer></script>
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
 {% endblock %}
