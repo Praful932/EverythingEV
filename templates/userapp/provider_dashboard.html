@@ -102,19 +102,27 @@
                                 <div class="icon-grid">
                                     <div class="slow">
                                         <img src="{% static 'userapp/icons/slow charge.svg' %}" alt="slow">
-                                        <p>8</p>
+                                        <p>{{ cs.slow_ac }}</p>
                                     </div>
                                     <div class="fast">
                                         <img src="{% static 'userapp/icons/fast charge.svg' %}" alt="slow">
-                                        <p>4</p>
+                                        <p>{{ cs.fast_dc }}</p>
                                     </div>
                                     <div class="cctv">
-                                        <img src="{% static 'userapp/icons/cctv.svg' %}" alt="">
-                                        <p>Yes</p>
+                                        <img src="{% static 'userapp/icons/cctv.svg' %}" alt="cctv">
+                                        {% if cs.cctv %}
+                                            <p style="color:green">Yes</p>
+                                        {% else %}
+                                            <p style="color:red">No</p>
+                                        {% endif %}
                                     </div>
                                     <div class="washroom">
-                                        <img src="{% static 'userapp/icons/washroom.svg' %}" alt="">
-                                        <p>No</p>
+                                        <img src="{% static 'userapp/icons/washroom.svg' %}" alt="washroom">
+                                        {% if cs.restroom %}
+                                            <p style="color:green">Yes</p>
+                                        {% else %}
+                                            <p style="color:red">No</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="buttons">

@@ -92,29 +92,29 @@
                         <div class="card yellow">
                             <i class="fa fa-shopping-cart fa-3x"></i>
                             <div class="text">
-                                <p class="value">$10000</p>
-                                <p class="label">Sales</p>
+                                <p class="value">&#8377;{{ total_revenue }}</p>
+                                <p class="label">Total Revenue</p>
                             </div>
                         </div>
                         <div class="card green">
                             <i class="fa fa-money"></i>
                             <div class="text">
-                                <p class="value">$15000</p>
-                                <p class="label">Expense</p>
+                                <p class="value">{{ total_consumption }} kWh</p>
+                                <p class="label">Total Electricity Consumption</p>
                             </div>
                         </div>
                         <div class="card blue">
                             <i class="fa fa-users fa-3x"></i>
                             <div class="text">
-                                <p class="value">1500</p>
-                                <p class="label">Customers</p>
+                                <p class="value">{{ total_visits }}</p>
+                                <p class="label">Total Visits</p>
                             </div>
                         </div>
                         <div class="card grey">
                             <img src="{% static 'userapp/icons/revenue.svg' %}" alt="revenue">
                             <div class="text">
-                                <p class="value">$5000</p>
-                                <p class="label">Revenue</p>
+                                <p class="value">{{ best_cs }} - &#8377; {{ best_revenue }}</p>
+                                <p class="label">Best Charging Station</p>
                             </div>
                         </div>
                     </div>
