@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <style>
-        .fas{
+        .fas {
             font-family: 'FontAwesome' !important;
         }
     </style>
@@ -32,14 +32,14 @@
             <ul class="nav-links">
                 <li><a href="{%  url 'index' %}" class="active">Home</a></li>
                 {% if user.is_authenticated %}
-                    {% if user.is_provider %}
-                    <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
-                    {% elif not user.is_provider and not user.is_consumer %}
-                    <li><a href="{% url 'Live-Data' %}" role="button">Live Feed</a></li>
-                    {% else %}
-                    <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+                {% if user.is_provider %}
+                <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+                {% elif not user.is_provider and not user.is_consumer %}
+                <li><a href="{% url 'Live-Data' %}" role="button">Live Feed</a></li>
+                {% else %}
+                <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'account_logout' %}" role="button" class="login">Log out</a></li>
                 {% else %}
                 <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
                 <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
@@ -85,9 +85,15 @@
 
 
     <!-- JS, Popper.js, and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
     <script>
         jQuery(document).ready(function ($) {

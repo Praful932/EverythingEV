@@ -8,6 +8,7 @@
   <title>Charging Stations</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/d17fc40e8a.js"></script>
   <link rel="stylesheet" href="{% static 'userapp/uc.css'%}">
 </head>
 
@@ -19,7 +20,7 @@
     <div class="menu-toggle"></div>
     <nav>
       <ul class="nav-links">
-        <li><a href="{%  url 'index' %}" class="active">Home</a></li>
+        <li><a href="{%  url 'index' %}">Home</a></li>
         {% if user.is_authenticated %}
         {% if user.is_provider %}
         <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
@@ -36,7 +37,7 @@
     <div class="clearfix"></div>
   </header>
   <img id="img" style="display: none;" />
-  <div class="row">
+  <div class="row main">
     <div class="column left">
       {% for cs in cslist %}
       <div class="card">
@@ -70,7 +71,7 @@
               </div>
               {% if cs.cctv %}
               <div>
-                <i class="fa fa-video-camera mt-2" aria-hidden="true"></i>
+                <i class="fas fa-video mt-2" aria-hidden="true"></i>
               </div>
               {% endif %}
               {% if cs.restroom %}
@@ -82,7 +83,7 @@
           </div>
         </div>
         <div class="general">
-          <h4>{{ cs.name }}</h4>
+          <h4 style="font-size: 2.5rem !important;">{{ cs.name }}</h4>
           <p>City : {{ cs.city }}<br>
             Suburb : {{ cs.suburb }}
           </p>
@@ -102,6 +103,37 @@
     </div>
   </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      var alterClass = function () {
+        var ww = document.body.clientWidth;
+        if (ww < 600) {
+          $('.navbar').addClass('bg-dark');
+          $('navbar-toggler-icon').css('color', 'white!important');
+          $('.navbar-brand').addClass("text-white");
+          $('.nav-item').removeAttr('style');
+          $('.nav-item').addClass("text-white");
+          $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
+        } else if (ww >= 601) {
+          $('.navbar').removeClass('bg-dark');
+          $('.navbar-brand').removeClass("text-white");
+          $('.nav-item').removeClass("text-white");
+          $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
+        };
+      };
+      $(window).resize(function () {
+        alterClass();
+      });
+      //Fire it when the page first loads:
+      alterClass();
+    });
+  </script>
+
+
   <script>
     // Convert to String to Array Object
     var csdata = JSON.parse('{{ csdata|safe }}');

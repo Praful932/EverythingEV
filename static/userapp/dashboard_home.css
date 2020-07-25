@@ -1454,6 +1454,10 @@ main .layout .dashboardContent .lowerContent .cardgrid {
   width: 100%;
   margin: 20px auto;
   grid-auto-rows: minmax(200px, auto);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
 }
 
 main .layout .dashboardContent .lowerContent .cardgrid .yellow {
