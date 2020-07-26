@@ -1,248 +1,302 @@
-{% extends "userapp/layout.html" %}
 {% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'userapp/uc.css'%}">
-{% endblock %}
-{% block body %}
-<img id="img" style="display: none;" />
-<div class="row">
-  <div class="column left">
-    {% for cs in cslist %}
-    <div class="card">
-      <div class="additional">
-        <div class="user-card">
-          <div class="level center" id="av_ports{{ cs.pk }}">
-            Ports Available :
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charging Stations</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://use.fontawesome.com/d17fc40e8a.js"></script>
+  <link rel="stylesheet" href="{% static 'userapp/uc.css'%}">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+    </div>
+    <div class="menu-toggle"></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{%  url 'index' %}">Home</a></li>
+        {% if user.is_authenticated %}
+        {% if user.is_provider %}
+        <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+        {% else %}
+        <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+        {% endif %}
+        <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
+        <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </header>
+  <img id="img" style="display: none;" />
+  <div class="row main">
+    <div class="column left">
+      {% for cs in cslist %}
+      <div class="card">
+        <div class="additional">
+          <div class="user-card">
+            <div class="level center" id="av_ports{{ cs.pk }}">
+              Ports Available :
+            </div>
+            <div class="points center" onclick="foo('{{cs.pk}}')">
+              Update
+            </div>
           </div>
-          <div class="points center"  onclick="foo('{{cs.pk}}')">
-            Update 
+          <div class="more-info">
+            <h3>{{ cs.name }}</h3>
+            <div class="coords">
+              <span>Owner : {{ cs.owner.user.username }}</span>
+              <span>{{ cs.opening_time }} - {{ cs.closing_time }}</span>
+            </div>
+            <div class="coords">
+              <span>Price/KwH : &#x20b9;{{ cs.price_kwh }}</span>
+              <span>{{ cs.suburb }}, {{ cs.city }}</span>
+            </div>
+            <div class="stats">
+              <div>
+                <div class="title">Fast</div>
+                <div class="value">{{cs.fast_dc}}</div>
+              </div>
+              <div>
+                <div class="title">Slow</div>
+                <div class="value">{{cs.slow_ac}}</div>
+              </div>
+              {% if cs.cctv %}
+              <div>
+                <i class="fas fa-video mt-2" aria-hidden="true"></i>
+              </div>
+              {% endif %}
+              {% if cs.restroom %}
+              <div>
+                <i class="fas fa-restroom mt-2" aria-hidden="true"></i>
+              </div>
+              {% endif %}
+            </div>
           </div>
         </div>
-        <div class="more-info">
-          <h3>{{ cs.name }}</h3>
-          <div class="coords">
-            <span>Owner : {{ cs.owner.user.username }}</span>
-            <span>{{ cs.opening_time }} - {{ cs.closing_time }}</span>
-          </div>
-          <div class="coords">
-            <span>Price/KwH : &#x20b9;{{ cs.price_kwh }}</span>
-            <span>{{ cs.suburb }}, {{ cs.city }}</span>
-          </div>
-          <div class="stats">
-            <div>
-              <div class="title">Fast</div>
-              <div class="value">{{cs.fast_dc}}</div>
-            </div>
-            <div>
-              <div class="title">Slow</div>
-              <div class="value">{{cs.slow_ac}}</div>
-            </div>
-            {% if cs.cctv %}
-            <div>
-              <i class="fa fa-video-camera mt-2" aria-hidden="true"></i>
-            </div>
-            {% endif %}
-            {% if cs.restroom %}
-            <div>
-              <i class="fas fa-restroom mt-2" aria-hidden="true"></i>
-            </div>
-            {% endif %}
-          </div>
+        <div class="general">
+          <h4 style="font-size: 2.5rem !important;">{{ cs.name }}</h4>
+          <p>City : {{ cs.city }}<br>
+            Suburb : {{ cs.suburb }}
+          </p>
+          <span class="more">Hover over the card for more info</span>
         </div>
       </div>
-      <div class="general">
-        <h4>{{ cs.name }}</h4>
-        <p>City : {{ cs.city }}<br>
-          Suburb : {{ cs.suburb }}
-        </p>
-        <span class="more">Hover over the card for more info</span>
+      {% endfor %}
+    </div>
+    <div class="column right">
+      <div class="card bg-light" style="height: 500px; width:800px;">
+        <div class="card-header">
+          <input type="text" class="form-control float-right" style="width:300px;" id="location-text-box"
+            placeholder="Enter place to search">
+        </div>
+        <div id="map"></div>
       </div>
     </div>
-    {% endfor %}
   </div>
-  <div class="column right">
-    <div class="card bg-light" style="height: 500px; width:800px;">
-      <div class="card-header">
-        <input type="text" class="form-control float-right" style="width:300px;" id="location-text-box"
-          placeholder="Enter place to search">
-      </div>
-      <div id="map"></div>
-    </div>
   </div>
-</div>
-</div>
 
-{% endblock %}
-
-{% block script %}
-<script>
-  // Convert to String to Array Object
-  var csdata = JSON.parse('{{ csdata|safe }}');
-</script>
-<script>
-  document.getElementById('location-text-box').value = '';
-  var i;
-  // If you're adding a number of markers, you may want to drop them on the map
-  // consecutively rather than all at once. This example shows how to use
-  // window.setTimeout() to space your markers' animation.
-
-  var latlang_cs = [];
-  var infowindows_cs = [];
-  var content_cs = [];
-  // Construct Array of Objects
-  for (var i = 0; i < csdata.length; i++) {
-    latlang_cs.push(
-      {
-        lat: csdata[i][4],
-        lng: csdata[i][5]
-      }
-    );
-    content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> "
-      + csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>" + csdata[i][7] + "<br><b>Slow Ports:</b>" + csdata[i][8]
-      + "<br><b>Price/Kwh:</b>" + csdata[i][9] + "<br><b>Restroom:</b>" + csdata[i][10] + "<br><b>CCTV:</b>" + csdata[i][11] + "<br><b>Opening Time:</b>" + csdata[i][12]
-      + "<br><b>Closing Time:</b>" + csdata[i][13] + "</div>";
-  }
-  var markers = [];
-  var markers_cs = [];
-  var map;
-
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: { lat: 20.5937, lng: 78.9629 }
-    });
-    var input = /** @type {HTMLInputElement} */
-      (
-        document.getElementById('location-text-box'));
-
-
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.bindTo('bounds', map);
-
-    var infowindow = new google.maps.InfoWindow();
-    marker = new google.maps.Marker({
-      map: map,
-      anchorPoint: new google.maps.Point(0, -29),
-      draggable: true
-    });
-
-    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-      infowindow.close();
-      marker.setVisible(false);
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-        return;
-      }
-
-      // If the place has a geometry, then present it on a map.
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17); // Why 17? Because it looks good.
-      }
-
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
-
-      var address = '';
-      if (place.address_components) {
-        address = [
-          (place.address_components[0] && place.address_components[0].short_name || ''), (place.address_components[1] && place.address_components[1].short_name || ''), (place.address_components[2] && place.address_components[2].short_name || '')
-        ].join(' ');
-      }
-
-    });
-  }
-
-  window.onload = function () {
-    clearMarkers();
-    for (var i = 0; i < latlang_cs.length; i++) {
-      addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 200);
-    }
-  };
-
-  var prev_infowindow = false;
-
-  function addMarkerWithTimeout(position, html, timeout) {
-    window.setTimeout(function () {
-      var data = position;
-      var markerd = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: data.name,
-        animation: google.maps.Animation.DROP
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      var alterClass = function () {
+        var ww = document.body.clientWidth;
+        if (ww < 600) {
+          $('.navbar').addClass('bg-dark');
+          $('navbar-toggler-icon').css('color', 'white!important');
+          $('.navbar-brand').addClass("text-white");
+          $('.nav-item').removeAttr('style');
+          $('.nav-item').addClass("text-white");
+          $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
+        } else if (ww >= 601) {
+          $('.navbar').removeClass('bg-dark');
+          $('.navbar-brand').removeClass("text-white");
+          $('.nav-item').removeClass("text-white");
+          $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
+        };
+      };
+      $(window).resize(function () {
+        alterClass();
       });
-      markers.push(markerd);
-      var infowindow = new google.maps.InfoWindow(
+      //Fire it when the page first loads:
+      alterClass();
+    });
+  </script>
+
+
+  <script>
+    // Convert to String to Array Object
+    var csdata = JSON.parse('{{ csdata|safe }}');
+  </script>
+  <script>
+    document.getElementById('location-text-box').value = '';
+    var i;
+    // If you're adding a number of markers, you may want to drop them on the map
+    // consecutively rather than all at once. This example shows how to use
+    // window.setTimeout() to space your markers' animation.
+
+    var latlang_cs = [];
+    var infowindows_cs = [];
+    var content_cs = [];
+    // Construct Array of Objects
+    for (var i = 0; i < csdata.length; i++) {
+      latlang_cs.push(
         {
-          content: html,
-        });
-      google.maps.event.addListener(markerd, 'click', (function (markerd, html) {
-        console.log("1");
-        return function () {
-          if (this.getMap()) {
-            if (prev_infowindow) {
-              prev_infowindow.close();
-            }
-            infowindow.open(this.getMap(), this);
-          }
-          prev_infowindow = infowindow;
+          lat: csdata[i][4],
+          lng: csdata[i][5]
         }
-      })(markerd, html));
-
-    }, timeout);
-  }
-
-  function clearMarkers() {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
+      );
+      content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> "
+        + csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>" + csdata[i][7] + "<br><b>Slow Ports:</b>" + csdata[i][8]
+        + "<br><b>Price/Kwh:</b>" + csdata[i][9] + "<br><b>Restroom:</b>" + csdata[i][10] + "<br><b>CCTV:</b>" + csdata[i][11] + "<br><b>Opening Time:</b>" + csdata[i][12]
+        + "<br><b>Closing Time:</b>" + csdata[i][13] + "</div>";
     }
-    markers_cs = [];
-  }
+    var markers = [];
+    var markers_cs = [];
+    var map;
 
-
-
-</script>
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
-<!-- async defer -->
-<script>
-  function foo(pk) {
-    //console.log(pk);
-    $.updateport(pk);
-  }
-  const imageBase = '{%  static "userapp/cars/" %}';
-  $.updateport = function (pk) 
-  {
-    var no = Math.floor(Math.random() *  25) + 1;
-    const a=imageBase + no + ".jpg";
-    document.getElementById('img').setAttribute("src",a);
-    let count = 0;
-    const img = document.getElementById('img');
-    // Load the model.
-    cocoSsd.load().then(model => {
-      // detect objects in the image.
-      model.detect(img).then(predictions => {
-        for (let i = 0; i < predictions.length; i++) {
-          if (predictions[i].class = "car")
-            count++;
-        }
-            console.log(count);
-
-        $("#av_ports"+pk).text("Available Ports: "+count);
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: { lat: 20.5937, lng: 78.9629 }
       });
-    });
-  }
-</script>
-<!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
-<!-- Load the coco-ssd model. -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
-
-<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
-
-<!-- Place your code in the script tag below. You can also use an external .js file -->
+      var input = /** @type {HTMLInputElement} */
+        (
+          document.getElementById('location-text-box'));
 
 
-{% endblock %}
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.bindTo('bounds', map);
+
+      var infowindow = new google.maps.InfoWindow();
+      marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29),
+        draggable: true
+      });
+
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          return;
+        }
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17); // Why 17? Because it looks good.
+        }
+
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        var address = '';
+        if (place.address_components) {
+          address = [
+            (place.address_components[0] && place.address_components[0].short_name || ''), (place.address_components[1] && place.address_components[1].short_name || ''), (place.address_components[2] && place.address_components[2].short_name || '')
+          ].join(' ');
+        }
+
+      });
+    }
+
+    window.onload = function () {
+      clearMarkers();
+      for (var i = 0; i < latlang_cs.length; i++) {
+        addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 200);
+      }
+    };
+
+    var prev_infowindow = false;
+
+    function addMarkerWithTimeout(position, html, timeout) {
+      window.setTimeout(function () {
+        var data = position;
+        var markerd = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: data.name,
+          animation: google.maps.Animation.DROP
+        });
+        markers.push(markerd);
+        var infowindow = new google.maps.InfoWindow(
+          {
+            content: html,
+          });
+        google.maps.event.addListener(markerd, 'click', (function (markerd, html) {
+          console.log("1");
+          return function () {
+            if (this.getMap()) {
+              if (prev_infowindow) {
+                prev_infowindow.close();
+              }
+              infowindow.open(this.getMap(), this);
+            }
+            prev_infowindow = infowindow;
+          }
+        })(markerd, html));
+
+      }, timeout);
+    }
+
+    function clearMarkers() {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+      markers_cs = [];
+    }
+
+
+
+  </script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
+  <!-- async defer -->
+  <script>
+    function foo(pk) {
+      //console.log(pk);
+      $.updateport(pk);
+    }
+    const imageBase = '{%  static "userapp/cars/" %}';
+    $.updateport = function (pk) {
+      var no = Math.floor(Math.random() * 25) + 1;
+      const a = imageBase + no + ".jpg";
+      document.getElementById('img').setAttribute("src", a);
+      let count = 0;
+      const img = document.getElementById('img');
+      // Load the model.
+      cocoSsd.load().then(model => {
+        // detect objects in the image.
+        model.detect(img).then(predictions => {
+          for (let i = 0; i < predictions.length; i++) {
+            if (predictions[i].class = "car")
+              count++;
+          }
+          console.log(count);
+
+          $("#av_ports" + pk).text("Available Ports: " + count);
+        });
+      });
+    }
+  </script>
+  <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+  <!-- Load the coco-ssd model. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+</body>
+
+</html>

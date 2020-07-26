@@ -488,8 +488,13 @@ class ComplaintsListView(ListView):
     template_name = 'userapp/complaint_dashboard.html'
     context_object_name = 'd'
 
-
+@login_required
 def MaintenanceComplaint(request):
+    if request.method == 'POST':
+        visited = request.POST.get('visited')
+        CsMaintenance.objects.get(pk=visited).delete()
+        m.CompletedComplaints += 1
+        return redirect('dash-welcome')
     m = MaintenanceManDetails.objects.get(own=request.user.provider)
     d = m.jobs.all()
     locate = CsMaintenance.objects.filter(Mm=m.id)
@@ -506,10 +511,6 @@ def MaintenanceComplaint(request):
     js_data = [list(x) for x in zip(
         lats_cleaned, lngs_cleaned, pk_cleaned, name_cleaned
     )]
-    if request.method == 'POST':
-        visited = request.POST.get('visited')
-        CsMaintenance.objects.get(pk=visited).delete()
-        m.CompletedComplaints = m.CompletedComplaints+1
 
     total = count+m.CompletedComplaints
     supportform = SupportForm()
@@ -599,35 +600,39 @@ def savingsCalculator(request):
 @login_required
 def dashwelcome(request):
     if request.user.is_provider:
-        current_provider = request.user.provider
-        total_visits = 0
-        total_consumption = 0
-        total_revenue = 0
-        all_cs = current_provider.ownerof.all()
-        best_revenue = 0
-        best_cs = ""
-        for cs in all_cs:
-            all_record_cs = cs.csrecord.all()
-            consumption_cs = 0
-            for record in all_record_cs:
-                total_visits += 1
-                consumption_cs += float(record.vehicle.charging_rate) * (record.duration/60)
-            currentcs_revenue = float(cs.price_kwh) * consumption_cs
-            if currentcs_revenue > best_revenue:
-                best_cs = cs.name
-                best_revenue = currentcs_revenue
-            total_revenue += currentcs_revenue
-            total_consumption += consumption_cs
-        supportform = SupportForm()
-        context = {
-            'supportform': supportform,
-            'total_visits': total_visits,
-            'total_revenue': round(total_revenue, 2),
-            'total_consumption': round(total_consumption, 2),
-            'best_revenue': round(best_revenue, 2),
-            'best_cs': best_cs
-        }
-        return render(request, "userapp/dash_welcome.html", context=context)
+        try:
+            if request.user.provider.maintenancemandetails:
+                return redirect('Complaint-Dashboard')
+        except MaintenanceManDetails.DoesNotExist:
+            current_provider = request.user.provider
+            total_visits = 0
+            total_consumption = 0
+            total_revenue = 0
+            all_cs = current_provider.ownerof.all()
+            best_revenue = 0
+            best_cs = ""
+            for cs in all_cs:
+                all_record_cs = cs.csrecord.all()
+                consumption_cs = 0
+                for record in all_record_cs:
+                    total_visits += 1
+                    consumption_cs += float(record.vehicle.charging_rate) * (record.duration/60)
+                currentcs_revenue = float(cs.price_kwh) * consumption_cs
+                if currentcs_revenue > best_revenue:
+                    best_cs = cs.name
+                    best_revenue = currentcs_revenue
+                total_revenue += currentcs_revenue
+                total_consumption += consumption_cs
+            supportform = SupportForm()
+            context = {
+                'supportform': supportform,
+                'total_visits': total_visits,
+                'total_revenue': round(total_revenue, 2),
+                'total_consumption': round(total_consumption, 2),
+                'best_revenue': round(best_revenue, 2),
+                'best_cs': best_cs
+            }
+            return render(request, "userapp/dash_welcome.html", context=context)
     else:
         # To Meme
         redirect('index')

@@ -1,52 +1,136 @@
-{% extends "userapp/layout.html" %}
 {% load static %}
-{% block head %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% load account socialaccount %}
 {% get_providers as socialaccount_providers %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
 
-<link rel="stylesheet" href="{% static 'userapp/login_style.css'%}"> {% endblock %} {% block title %} Login
-{% endblock %} {% block body %}
-<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'userapp/login_style.css'%}">
+</head>
 
-<div class="container" style="border-radius: 20px; margin-top:20px!important;">
-    <div class="row" style="border-radius: 20px;">
-        <div class="col-md-5 mx-auto" style="border-radius: 20px;">
-            <div class="card card-signin my-5" style="border-radius: 20px;background-color: rgba(238, 238, 238, 0.6);">
-                <div class="card-body" style="border-radius: 20px;">
-                    <h2 class="card-title text-center" style="margin-top: 20px;"><b>Login</b></h2>
-                    <form method="POST" action="{% url 'account_login' %}">
-                        {% csrf_token %} {{ form|crispy }}
-                        <div class=" text-center">
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+        </div>
+        <div class="menu-toggle"></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%  url 'index' %}" class="active">Home</a></li>
+                {% if user.is_authenticated %}
+                {% if user.is_provider %}
+                <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+                {% else %}
+                <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+                {% else %}
+                <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
+                <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
 
-                            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-
-                            <br>
-                            <small class="text-muted">
-                                <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+    <div class="container" style="border-radius: 20px; margin-top:20px!important;">
+        <div class="row" style="border-radius: 20px;">
+            <div class="col-md-5 mx-auto" style="border-radius: 20px;">
+                <div class="card card-signin my-5"
+                    style="border-radius: 20px;background-color: rgba(238, 238, 238, 0.6);">
+                    <div class="card-body" style="border-radius: 20px;">
+                        <h1 class="card-title text-center" style="margin-top: 20px;"><b>Login</b></h1>
+                        <form method="POST" action="{% url 'account_login' %}">
+                            {% csrf_token %} {{ form|crispy }}
+                            <div class=" text-center">
+                                <button class="btn btn-lg btn-primary" style="font-size: large;" type="submit">Sign
+                                    in</button>
                                 <br>
-                            </small><br>
-                            <a class="btn  btn-info mt-2" href="#">New Here? Sign Up</a>
-                            <a class="btn  btn-info mt-2" href="{% provider_login_url 'google' %}">Sign up with
-                                Google</a>
-                        </div>
-                    </form>
-
-
+                                <small class="text-muted">
+                                    <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+                                    <br>
+                                </small><br>
+                                <a class="btn btn-lg btn-info mt-2" href="#">New Here? Sign Up</a>
+                                <a class="btn btn-lg btn-info mt-2" href="{% provider_login_url 'google' %}">Sign up
+                                    with
+                                    Google</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <canvas class="background"></canvas>
-    <script src="{% static 'userapp/particles.min.js' %}"></script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="column-1">
+                <img src="{% static 'userapp/svg/logo-white.svg' %}" alt="logo">
+                <div class="links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Terms and Conditions</a>
+                </div>
+            </div>
+            <div class="column-2">
+                <p>Subscribe to our Newsletter</p>
+                <div class="subscribe-group">
+                    <input type="email" name="newsletter" placeholder="Email Address">
+                    <div class="submit"><a href="#">OK</a></div>
+                </div>
+            </div>
+            <div class="social">
+                <i class="fa fa-2x fa-facebook-f"></i>
+                <i class="fa fa-2x fa-instagram"></i>
+                <i class="fa fa-2x fa-twitter"></i>
+            </div>
+            <div class="address">
+                <h3>Address:<br></h3>
+                <p>Chicken Dinner Road,<br>Canyon Country,<br>Idaho,<br>USA.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="margin-bottom:0px">&copy;Rinovation, Inc.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
     <script>
-        window.onload = function() {
-            Particles.init({
-                selector: '.background'
+        jQuery(document).ready(function ($) {
+            var alterClass = function () {
+                var ww = document.body.clientWidth;
+                if (ww < 600) {
+                    $('.navbar').addClass('bg-dark');
+                    $('navbar-toggler-icon').css('color', 'white!important');
+                    $('.navbar-brand').addClass("text-white");
+                    $('.nav-item').removeAttr('style');
+                    $('.nav-item').addClass("text-white");
+                    $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
+                } else if (ww >= 601) {
+                    $('.navbar').removeClass('bg-dark');
+                    $('.navbar-brand').removeClass("text-white");
+                    $('.nav-item').removeClass("text-white");
+                    $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
+                };
+            };
+            $(window).resize(function () {
+                alterClass();
             });
-        };
-    </script> -->
-    {% endblock %}
+            //Fire it when the page first loads:
+            alterClass();
+        });
+    </script>
+
+
+</body>
+
+</html>

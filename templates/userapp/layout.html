@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <style>
-        .fas{
+        .fas {
             font-family: 'FontAwesome' !important;
         }
     </style>
@@ -32,14 +32,14 @@
             <ul class="nav-links">
                 <li><a href="{%  url 'index' %}" class="active">Home</a></li>
                 {% if user.is_authenticated %}
-                    {% if user.is_provider %}
-                    <li><a href="{% url 'dash-welcome' %}" role="button">Dashboard</a></li>
-                    {% elif not user.is_provider and not user.is_consumer %}
-                    <li><a href="{% url 'Live-Data' %}" role="button">Live Feed</a></li>
-                    {% else %}
-                    <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+                {% if user.is_provider %}
+                <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+                {% elif not user.is_provider and not user.is_consumer %}
+                <li><a href="{% url 'Live-Data' %}" role="button">Live Feed</a></li>
+                {% else %}
+                <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'account_logout' %}" role="button" class="login">Log out</a></li>
                 {% else %}
                 <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
                 <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
@@ -93,35 +93,35 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
-    <script>
-        jQuery(document).ready(function ($) {
-            var alterClass = function () {
-                var ww = document.body.clientWidth;
-                if (ww < 600) {
-                    $('.navbar').addClass('bg-dark');
-                    $('navbar-toggler-icon').css('color', 'white!important');
-                    $('.navbar-brand').addClass("text-white");
-                    $('.nav-item').removeAttr('style');
-                    $('.nav-item').addClass("text-white");
-                    $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
-                } else if (ww >= 601) {
-                    $('.navbar').removeClass('bg-dark');
-                    $('.navbar-brand').removeClass("text-white");
-                    $('.nav-item').removeClass("text-white");
-                    $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
-                };
-            };
-            $(window).resize(function () {
-                alterClass();
-            });
-            //Fire it when the page first loads:
-            alterClass();
-        });
-    </script>
-    {% block script %}
+        <script>
+                jQuery(document).ready(function ($) {
+                    var alterClass = function () {
+                        var ww = document.body.clientWidth;
+                        if (ww < 600) {
+                            $('.navbar').addClass('bg-dark');
+                            $('navbar-toggler-icon').css('color', 'white!important');
+                            $('.navbar-brand').addClass("text-white");
+                            $('.nav-item').removeAttr('style');
+                            $('.nav-item').addClass("text-white");
+                            $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
+                        } else if (ww >= 601) {
+                            $('.navbar').removeClass('bg-dark');
+                            $('.navbar-brand').removeClass("text-white");
+                            $('.nav-item').removeClass("text-white");
+                            $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
+                        };
+                    };
+                    $(window).resize(function () {
+                        alterClass();
+                    });
+                    //Fire it when the page first loads:
+                    alterClass();
+                });
+        </script>
+        {% block script %}
 
 
-    {% endblock %}
+        {% endblock %}
 </body>
 
 </html>

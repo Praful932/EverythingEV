@@ -1,9 +1,17 @@
 html {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 62.5%;
   font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth;
+}
+
+main {
+  min-height: 52vh;
+}
+
+input[type="text"] {
+  border: 1px black solid;
 }
 
 *,
@@ -12,7 +20,7 @@ html {
   margin: 0px;
   border: 0px;
   -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 header {
@@ -37,14 +45,14 @@ nav ul {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 nav ul li {
   list-style: none;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 nav ul li a {
@@ -57,8 +65,8 @@ nav ul li a {
   font-weight: 500;
   font-family: 'Roboto', sans-serif;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 nav ul li .active {
@@ -92,19 +100,23 @@ nav ul li .signup {
     font-size: 30px;
     color: #0DBA47;
   }
+
   .menu-toggle::before {
     content: '\f0c9';
     font-family: fontAwesome;
     line-height: 40px;
   }
+
   .menu-toggle.active::before {
     content: '\f00d';
     font-family: fontAwesome;
     line-height: 40px;
   }
+
   nav {
     display: none;
   }
+
   nav.active {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -116,21 +128,25 @@ nav ul li .signup {
     block-size: -moz-fit-content;
     block-size: fit-content;
   }
+
   nav.active li {
     text-align: center;
   }
+
   nav.active ul {
     display: block;
     block-size: -webkit-fit-content;
     block-size: -moz-fit-content;
     block-size: fit-content;
     -webkit-writing-mode: horizontal-tb;
-        -ms-writing-mode: lr-tb;
-            writing-mode: horizontal-tb;
+    -ms-writing-mode: lr-tb;
+    writing-mode: horizontal-tb;
   }
+
   .login .signup {
     padding: 0;
   }
+
   .nav-links {
     padding: 5px;
   }
@@ -142,17 +158,17 @@ main .chargePooling {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   border: 1px solid #535353;
   border-radius: 10px;
   width: 800px;
   margin: 30px auto;
   padding: 30px;
   -webkit-box-shadow: 0 0 5px #535353;
-          box-shadow: 0 0 5px #535353;
+  box-shadow: 0 0 5px #535353;
 }
 
 main .chargePooling h1 {
@@ -164,11 +180,11 @@ main .chargePooling .location {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin: 20px 0px;
 }
 
@@ -183,8 +199,8 @@ main .chargePooling .location span {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-left: 5px;
   padding: 7.5px;
   background-color: white;
@@ -234,23 +250,28 @@ main .chargePooling .chargers_table tbody tr:nth-child(even) {
   main .chargePooling {
     width: 90vw;
   }
+
   main .chargePooling .chargers_table .table thead {
     display: none;
   }
+
   main .chargePooling .chargers_table .table tbody,
   main .chargePooling .chargers_table .table tr,
   main .chargePooling .chargers_table .table td {
     display: block;
     width: 100%;
   }
+
   main .chargePooling .chargers_table .table tr {
     margin-bottom: 15px;
   }
+
   main .chargePooling .chargers_table .table td {
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
+
   main .chargePooling .chargers_table .table td::before {
     content: attr(data-label);
     position: absolute;
@@ -269,15 +290,15 @@ footer {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
   height: 200px;
   background-color: #09232c;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: white;
   padding: 1rem;
 }
@@ -295,21 +316,21 @@ footer .footer-content .social,
 footer .footer-content .links,
 footer .footer-content .address {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   font-size: 1.5rem;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: left;
-      -ms-flex-align: left;
-          align-items: left;
+  -ms-flex-align: left;
+  align-items: left;
 }
 
 footer .footer-content .col-1 {
   -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
+  -ms-flex-pack: left;
+  justify-content: left;
   padding-left: 2rem;
 }
 
@@ -325,8 +346,8 @@ footer .footer-content .col-1 .links {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-flow: column wrap;
-          flex-flow: column wrap;
+  -ms-flex-flow: column wrap;
+  flex-flow: column wrap;
 }
 
 footer .footer-content .col-1 .links a {
@@ -337,11 +358,11 @@ footer .footer-content .col-1 .links a {
 footer .footer-content .col-2 {
   padding: 10px 5px;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 footer .footer-content .col-2 p {
@@ -383,10 +404,10 @@ footer .footer-content .col-2 .input-group input::placeholder {
 footer .footer-content .col-2 .input-group .submit {
   text-align: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -ms-flex-line-pack: center;
-      align-content: center;
+  align-content: center;
   background-color: white;
   display: inline-block;
   width: 30px;
@@ -422,6 +443,7 @@ footer .footer-bottom {
   footer {
     height: auto;
   }
+
   footer .footer-content .col-1,
   footer .footer-content .col-2,
   footer .footer-content .social,
@@ -429,100 +451,116 @@ footer .footer-bottom {
   footer .footer-content .address {
     font-size: 1.1rem;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: left;
-        -ms-flex-align: left;
-            align-items: left;
+    -ms-flex-align: left;
+    align-items: left;
   }
+
   footer .footer-content .col-1 {
     -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left;
+    -ms-flex-pack: left;
+    justify-content: left;
     padding-left: 1.8rem;
   }
+
   footer .footer-content .col-1 img {
     width: 100px;
     height: 30px;
     margin-bottom: 12px;
   }
+
   footer .footer-content .col-1 .links {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column wrap;
-            flex-flow: column wrap;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap;
   }
+
   footer .footer-content .col-1 .links a {
     text-decoration: none;
     color: white;
   }
+
   footer .footer-content .col-2 {
     padding: 10px 5px;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
+
   footer .footer-content .col-2 p {
     font-size: 1.5rem;
     margin-bottom: 8px;
   }
+
   footer .footer-content .col-2 .input-group input {
     background: none;
     border: 0.5px whitesmoke solid;
     width: 180px;
     height: 30px;
   }
+
   footer .footer-content .col-2 .input-group input::-webkit-input-placeholder {
     color: white;
     opacity: 1;
     padding-left: 2px;
   }
+
   footer .footer-content .col-2 .input-group input:-ms-input-placeholder {
     color: white;
     opacity: 1;
     padding-left: 2px;
   }
+
   footer .footer-content .col-2 .input-group input::-ms-input-placeholder {
     color: white;
     opacity: 1;
     padding-left: 2px;
   }
+
   footer .footer-content .col-2 .input-group input::placeholder {
     color: white;
     opacity: 1;
     padding-left: 2px;
   }
+
   footer .footer-content .col-2 .input-group .submit {
     text-align: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -ms-flex-line-pack: center;
-        align-content: center;
+    align-content: center;
     background-color: white;
     display: block;
     width: 50px;
     height: 30px;
     padding-top: 7px;
   }
+
   footer .footer-content .col-2 .input-group .submit a {
     display: inline-block;
     text-decoration: none;
     color: #2699fb;
   }
+
   footer .footer-content .social {
     text-align: center;
   }
+
   footer .footer-content .social i {
     margin: 10px;
     padding-bottom: 30px;
   }
+
   footer .footer-content .address {
     font-size: 1.2rem;
     padding: 30px;
@@ -535,25 +573,30 @@ footer .footer-bottom {
     height: 30px;
     margin-bottom: 10px;
   }
+
   footer .footer-content .col-1 a {
     margin-bottom: 5px;
   }
+
   footer .footer-content .social {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
   }
+
   footer .footer-content .social i {
     margin: 5px;
     padding-bottom: 5px;
   }
+
   footer .footer-content .address {
     font-size: 1.1rem;
   }
+
   footer .footer-bottom {
     margin-top: 20px;
   }
@@ -562,50 +605,60 @@ footer .footer-bottom {
 @media (max-width: 592px) {
   footer {
     -ms-flex-line-pack: center;
-        align-content: center;
+    align-content: center;
   }
+
   footer .footer-content {
     height: auto;
     display: -ms-grid;
     display: grid;
     -ms-grid-rows: auto;
-        grid-template-rows: auto;
+    grid-template-rows: auto;
   }
+
   footer .footer-content .col-1,
   footer .footer-content .col-2,
   footer .footer-content .social,
   footer .footer-content .address {
     height: auto;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
+
   footer .footer-content .col-1 {
     padding-left: 0.5rem;
   }
+
   footer .footer-content .col-1 img {
     width: 80px;
     height: 30px;
     margin-bottom: 10px;
   }
+
   footer .footer-content .col-1 a {
     margin-bottom: 5px;
   }
+
   footer .footer-content .col-2 .input-group .submit {
     display: inline-block;
   }
+
   footer .footer-content .social {
     display: inline-block;
     text-align: left;
     padding-top: 2rem;
   }
+
   footer .footer-content .social i {
     padding: 10px;
   }
+
   footer .footer-content .address {
     padding: 10px;
     font-size: 1.1rem;
   }
+
   footer .footer-bottom {
     margin-top: 20px;
   }
@@ -614,4 +667,5 @@ footer .footer-bottom {
 .clearfix {
   clear: both;
 }
+
 /*# sourceMappingURL=charge_pooling.css.map */

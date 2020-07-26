@@ -162,6 +162,8 @@ main {
                     width: 100%;
                     margin: 20px auto;
                     grid-auto-rows: minmax(200px, auto);
+                    align-items: center;
+                    justify-items: center;
 
                     .yellow {
                         border-bottom: 25px #EDD853 solid;
