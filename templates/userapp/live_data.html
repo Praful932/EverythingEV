@@ -31,50 +31,51 @@ Charging data
 <script type="text/javascript" src="{% static 'userapp/papaparse.min.js' %}"></script>
 {% endblock %}
 {% block body %}
-  <h1 class="text-center" style="margin-top: 7%;font-family: 'Roboto';">Live Feed</h1>
-  <div id="data-table">
-  
-  </div>
-  {% endblock %}
+<h1 class="text-center" style="margin-top: 7%;font-family: 'Roboto';">Live Feed</h1>
+<div id="data-table">
+
+</div>
+{% endblock %}
 
 {% block script %}
 <script>
-  setInterval(getdata,5000);
-  $(document).ready(function()
-  {
+  $(document).ready(function () {
+    $('.menu-toggle').click(function () {
+      $('.menu-toggle').toggleClass('active');
+      $('nav').toggleClass('active');
+    })
+  })
+</script>
+<script>
+  setInterval(getdata, 5000);
+  $(document).ready(function () {
     getdata();
   });
-  function getdata()
-  {
-     $.ajax({
-         url: "https://docs.google.com/spreadsheets/d/1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU/export?format=csv&id=1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU&gid=0",
-         dataType:"text",
-         success:function(data)
-         {
-           var records = data.split(/\r?\n|\r/);
-           var table_data = '<table class="table table-bordered table-striped">';
-           for(var count=0;count< records.length; count++)             
-           {
-             var cell_data = records[count].split(",");
-             table_data += '<tr>';
-             // Skip Lic Plates
-             for(var cell_count = 1;cell_count<cell_data.length; cell_count++)
-             {
-               if(count === 0)
-               {
-                  table_data += '<th>' + cell_data[cell_count] + '</th>';
-               }
-               else
-               {
-                  table_data  += '<td>' + cell_data[cell_count] + '</td>';
-               }
-             }
-             table_data += '</tr>';
-           }
-           table_data += '</table>';
-           $('#data-table').html(table_data);
-         }
-       });
+  function getdata() {
+    $.ajax({
+      url: "https://docs.google.com/spreadsheets/d/1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU/export?format=csv&id=1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU&gid=0",
+      dataType: "text",
+      success: function (data) {
+        var records = data.split(/\r?\n|\r/);
+        var table_data = '<table class="table table-bordered table-striped">';
+        for (var count = 0; count < records.length; count++) {
+          var cell_data = records[count].split(",");
+          table_data += '<tr>';
+          // Skip Lic Plates
+          for (var cell_count = 1; cell_count < cell_data.length; cell_count++) {
+            if (count === 0) {
+              table_data += '<th>' + cell_data[cell_count] + '</th>';
+            }
+            else {
+              table_data += '<td>' + cell_data[cell_count] + '</td>';
+            }
+          }
+          table_data += '</tr>';
+        }
+        table_data += '</table>';
+        $('#data-table').html(table_data);
+      }
+    });
   }
 </script>
 {% endblock %}
