@@ -17,6 +17,18 @@
 </head>
 
 <body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #e0f8dd;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en"
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
     <main>
         <div id="thankyou" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -73,7 +85,7 @@
                         <a href="{% url 'dash-welcome' %}"><i class="fa fa-home"></i>Home</a>
                         <a href="{% url 'Provider-Dashboard' %}" class="active"><i
                                 class="fa fa-briefcase"></i>Business</a>
-                        {% if request.user.provider.MaintenanceManDetails %}
+                        {% if request.user.provider.maintenancemandetails %}
                         <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
                         {% else %}
                         <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
@@ -102,19 +114,27 @@
                                 <div class="icon-grid">
                                     <div class="slow">
                                         <img src="{% static 'userapp/icons/slow charge.svg' %}" alt="slow">
-                                        <p>8</p>
+                                        <p>{{ cs.slow_ac }}</p>
                                     </div>
                                     <div class="fast">
                                         <img src="{% static 'userapp/icons/fast charge.svg' %}" alt="slow">
-                                        <p>4</p>
+                                        <p>{{ cs.fast_dc }}</p>
                                     </div>
                                     <div class="cctv">
-                                        <img src="{% static 'userapp/icons/cctv.svg' %}" alt="">
-                                        <p>Yes</p>
+                                        <img src="{% static 'userapp/icons/cctv.svg' %}" alt="cctv">
+                                        {% if cs.cctv %}
+                                            <p style="color:green">Yes</p>
+                                        {% else %}
+                                            <p style="color:red">No</p>
+                                        {% endif %}
                                     </div>
                                     <div class="washroom">
-                                        <img src="{% static 'userapp/icons/washroom.svg' %}" alt="">
-                                        <p>No</p>
+                                        <img src="{% static 'userapp/icons/washroom.svg' %}" alt="washroom">
+                                        {% if cs.restroom %}
+                                            <p style="color:green">Yes</p>
+                                        {% else %}
+                                            <p style="color:red">No</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="buttons">

@@ -23,6 +23,18 @@
 </head>
 
 <body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #e0f8dd;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en"
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
     <header>
         <div class="logo">
             <a href="{% url 'index' %}"><img src="{% static 'userapp/svg/logo.svg' %}" alt="logo"></a>
@@ -85,51 +97,26 @@
 
 
     <!-- JS, Popper.js, and jQuery -->
-    <<<<<<< HEAD <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"=======<script
-            src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6">>>>>>> 12ecbd0985f1f66947cddd6cc94b1c000d16f724
-                crossorigin = "anonymous" ></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
-        <script>
-                jQuery(document).ready(function ($) {
-                    var alterClass = function () {
-                        var ww = document.body.clientWidth;
-                        if (ww < 600) {
-                            $('.navbar').addClass('bg-dark');
-                            $('navbar-toggler-icon').css('color', 'white!important');
-                            $('.navbar-brand').addClass("text-white");
-                            $('.nav-item').removeAttr('style');
-                            $('.nav-item').addClass("text-white");
-                            $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
-                        } else if (ww >= 601) {
-                            $('.navbar').removeClass('bg-dark');
-                            $('.navbar-brand').removeClass("text-white");
-                            $('.nav-item').removeClass("text-white");
-                            $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
-                        };
-                    };
-                    $(window).resize(function () {
-                        alterClass();
-                    });
-                    //Fire it when the page first loads:
-                    alterClass();
-                });
-        </script>
-        {% block script %}
+    <script>
+        $(document).ready(function () {
+            $('.menu-toggle').click(function () {
+                $('.menu-toggle').toggleClass('active');
+                $('nav').toggleClass('active');
+            })
+        })
+    </script>
+    {% block script %}
 
 
-        {% endblock %}
+    {% endblock %}
 </body>
 
 </html>

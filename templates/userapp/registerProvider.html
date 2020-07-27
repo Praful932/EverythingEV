@@ -15,6 +15,18 @@
 </head>
 
 <body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #e0f8dd;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en"
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
     <header>
         <div class="logo">
             <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
@@ -98,29 +110,12 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
     <script>
-        jQuery(document).ready(function ($) {
-            var alterClass = function () {
-                var ww = document.body.clientWidth;
-                if (ww < 600) {
-                    $('.navbar').addClass('bg-dark');
-                    $('navbar-toggler-icon').css('color', 'white!important');
-                    $('.navbar-brand').addClass("text-white");
-                    $('.nav-item').removeAttr('style');
-                    $('.nav-item').addClass("text-white");
-                    $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
-                } else if (ww >= 601) {
-                    $('.navbar').removeClass('bg-dark');
-                    $('.navbar-brand').removeClass("text-white");
-                    $('.nav-item').removeClass("text-white");
-                    $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
-                };
-            };
-            $(window).resize(function () {
-                alterClass();
-            });
-            //Fire it when the page first loads:
-            alterClass();
-        });
+        $(document).ready(function () {
+            $('.menu-toggle').click(function () {
+                $('.menu-toggle').toggleClass('active');
+                $('nav').toggleClass('active');
+            })
+        })
     </script>
 </body>
 

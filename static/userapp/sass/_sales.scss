@@ -46,3 +46,69 @@ main {
         }
     }
 }
+
+@media(max-width:800px) {
+    main {
+        .salesBanner {
+            .text {
+                h2 {
+                    font-size: 2rem;
+                    width: 70vw;
+                }
+
+                p {
+                    font-size: 1.5rem;
+                    margin-right: 20px;
+                    width: 60vw;
+                }
+
+            }
+        }
+    }
+}
+
+@media(max-width:675px) {
+    main {
+        .salesBanner {
+            img {
+                width: 90%;
+                height: 90%;
+            }
+
+            .text {
+                h2 {
+                    font-size: 2rem;
+                    width: 60vw;
+                }
+
+                p {
+                    font-size: 1.5rem;
+                    margin-right: 20px;
+                    width: 50vw;
+                }
+
+            }
+        }
+
+    }
+}
+
+@media(max-width:600px) {
+    main {
+        .salesBanner {
+            img {
+                display: none;
+            }
+
+            .text {
+                h2 {
+                    width: 75vw;
+                }
+
+                p {
+                    width: 75vw;
+                }
+            }
+        }
+    }
+}
