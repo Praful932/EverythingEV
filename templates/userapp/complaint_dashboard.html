@@ -17,39 +17,39 @@
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <style>
         df-messenger {
-            --df-messenger-send-icon: #20bd0b;
-            --df-messenger-button-titlebar-color: #20bd0b;
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #e0f8dd;
 
         }
     </style>
     <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
         language-code="en"
-        chat-icon="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-4/177800/156-512.png">
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
     </df-messenger>
     <main>
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">
-                    <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    </a>
                     <a href="#"><i class="fa fa-bell fa-lg"></i></a>
                     <i class="fa fa-times" id="close"></i>
                 </div>
                 <div class="lowerSidebar">
                     <div class="user">
                         <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
-                        <h4>Hello, ABC</h4>
+                        <h4>Hello, {{ request.user.username }}</h4>
                     </div>
                     <div class="links">
-                        <a href="#"><i class="fa fa-home"></i>Home</a>
-                        <a href="#"><i class="fa fa-briefcase"></i>Business</a>
-                        <a href="#" class="active"><i class="fa fa-cogs"></i>Maintenance</a>
-                        <a href="#"><i class="fa fa-headphones"></i>Support</a>
+                        <a href="{% url 'dash-welcome' %}"><i class="fa fa-home"></i>Home</a>
+                        <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>
                     </div>
                 </div>
             </div>
             <div class="dashboardContent">
                 <div class="upperContent">
-                    <a href="#">Logout</a>
+                    <a href="{% url 'account_logout' %}">Logout</a>
                     <div id="button"><i class="fa fa-bars"></i></div>
                 </div>
                 <div class="lowerContent">
@@ -60,63 +60,84 @@
                     <div class="statCards">
                         <div class="pending">
                             <p class="card-name">Pending Complaints</p>
-                            <p class="value">1500</p>
+                            <p class="value">{{ count }}</p>
                         </div>
                         <div class="solved">
                             <p class="card-name">Solved Complaints</p>
-                            <p class="value">1500</p>
+                            <p class="value">{{m.CompletedComplaints}}</p>
                         </div>
                         <div class="total">
                             <p class="card-name">Total Complaints</p>
-                            <p class="value">1500</p>
+                            <p class="value">{{total}}</p>
                         </div>
                     </div>
+                    {% if count %}
                     <h3>Pending Complaint Details</h3>
                     <div class="complaints_table">
                         <table class="table">
                             <thead>
                                 <th>Sr.</th>
-                                <th>Shop Name</th>
-                                <th>Mechanic Name</th>
+                                <th>ChargingStation Name</th>
+                                <th>Details</th>
                                 <th>Contact</th>
-                                <th>Resolved</th>
+                                <th>To Visit</th>
                             </thead>
                             <tbody>
+                                {%for a in d%}
                                 <tr>
-                                    <td data-label="Sr.">1</td>
-                                    <td data-label="Shop Name">ABC</td>
-                                    <td data-label="Mechanic Name">ABC</td>
-                                    <td data-label="Contact">123456</td>
-                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{a.CsSelect.name}}</td>
+                                    <td style="cursor: pointer;">
+                                        <details>
+                                            <summary>Complaint</summary>
+                                            <b>Problem</b>
+                                            <p>{{a.Problem}}</p>
+                                            <b>Address</b>
+                                            <p>{{a.CsSelect.suburb}}</p>
+                                        </details>
+                                    </td>
+                                    <td>{{a.ph}}</td>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <td><button style="cursor: pointer;" type="submit" value="{{a.pk}}" name="visited"
+                                                class="btn btn-success">Click to Mark Visited</button>
+                                        </td>
+
+                                    </form>
                                 </tr>
-                                <tr>
-                                    <td data-label="Sr.">1</td>
-                                    <td data-label="Shop Name">ABC</td>
-                                    <td data-label="Mechanic Name">ABC</td>
-                                    <td data-label="Contact">123456</td>
-                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Sr.">1</td>
-                                    <td data-label="Shop Name">ABC</td>
-                                    <td data-label="Mechanic Name">ABC</td>
-                                    <td data-label="Contact">123456</td>
-                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
-                                </tr>
-                                <tr>
-                                    <td data-label="Sr.">1</td>
-                                    <td data-label="Shop Name">ABC</td>
-                                    <td data-label="Mechanic Name">ABC</td>
-                                    <td data-label="Contact">123456</td>
-                                    <td data-label="Resolved"><a href="#">Resolved</a></td>
-                                </tr>
+                                {%endfor%}
                             </tbody>
                         </table>
                         <h3>View On Map</h3>
-                        <div class="map" id="map_canvas">
-
+                        <div class="row">
+                            <div class="col-lg-9 ml-auto">
+                                <br>
+                                <div id="new" style="text-align:left; font-size:1.5em; cursor:pointer;">
+                                </div>
+                                <br>
+                                <div class="col-sm-12">
+                                    <div class="container">
+                                        <div class="main">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <ul class="nav nav-tabs" id="myTab">
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12" style="max-height:100%">
+                                                    <div id="map_canvas"
+                                                        style="height:250px; border: thin solid black;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -140,7 +161,6 @@
         var marker;
         var map;
         var my_data = JSON.parse('{{ my_data|safe }}');
-        console.log(my_data[0][2]);
 
         for (var i = 0; i < my_data.length; i++) {
 

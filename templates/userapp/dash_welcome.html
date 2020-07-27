@@ -18,52 +18,17 @@
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <style>
         df-messenger {
-            --df-messenger-send-icon: #20bd0b;
-            --df-messenger-button-titlebar-color: #20bd0b;
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #e0f8dd;
 
         }
     </style>
     <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
         language-code="en"
-        chat-icon="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-4/177800/156-512.png">
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
     </df-messenger>
     <main>
-        <div id="thankyou" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Thank you!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>We will get back to you shortly</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="supportmodal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Your Issue</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" id="supportform">
-                            {% csrf_token %}
-                            {{ supportform|crispy }}
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-success" value="Submit" form="supportform">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">
@@ -102,29 +67,29 @@
                         <div class="card yellow">
                             <i class="fa fa-shopping-cart fa-3x"></i>
                             <div class="text">
-                                <p class="value">$10000</p>
-                                <p class="label">Sales</p>
+                                <p class="value">&#8377;{{ total_revenue }}</p>
+                                <p class="label">Total Revenue</p>
                             </div>
                         </div>
                         <div class="card green">
                             <i class="fa fa-money"></i>
                             <div class="text">
-                                <p class="value">$15000</p>
-                                <p class="label">Expense</p>
+                                <p class="value">{{ total_consumption }} kWh</p>
+                                <p class="label">Total Electricity Consumption</p>
                             </div>
                         </div>
                         <div class="card blue">
                             <i class="fa fa-users fa-3x"></i>
                             <div class="text">
-                                <p class="value">1500</p>
-                                <p class="label">Customers</p>
+                                <p class="value">{{ total_visits }}</p>
+                                <p class="label">Total Visits</p>
                             </div>
                         </div>
                         <div class="card grey">
                             <img src="{% static 'userapp/icons/revenue.svg' %}" alt="revenue">
                             <div class="text">
-                                <p class="value">$5000</p>
-                                <p class="label">Revenue</p>
+                                <p class="value">{{ best_cs }} - &#8377; {{ best_revenue }}</p>
+                                <p class="label">Best Charging Station</p>
                             </div>
                         </div>
                     </div>

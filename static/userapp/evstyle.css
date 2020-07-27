@@ -608,7 +608,6 @@ h1 {
 
 
 footer {
-    margin-top: auto !important;
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;

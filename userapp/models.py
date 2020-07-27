@@ -162,7 +162,7 @@ class Vehicle(models.Model):
     type4or2 = models.IntegerField()
     battery_capacity = models.CharField(max_length=100)
     vehicle_range = models.IntegerField()
-    Charging_Rate = models.DecimalField(max_digits=9, decimal_places=6)
+    charging_rate = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
         return str(self.pk) + '. ' + self.company
@@ -171,7 +171,7 @@ class Vehicle(models.Model):
 class ChargingStationRecord(models.Model):
     # Records for ChargingStation arrivals of vehicle
     # time start-end, elec reqd
-    cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE)
+    cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE, related_name="csrecord")
     consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE, related_name="recordof")
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="csvehicles")
     duration = models.IntegerField(default=duration)
@@ -205,6 +205,7 @@ def randomdate():
 
 
 class CsReport(models.Model):
+    """ Model Denoting Frequency of vehicle recorded at each hour of a particular day"""
     cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE)
     time = models.DateField(default=randomdate)
     t0 = models.IntegerField(default=randomvehicles)

@@ -37,9 +37,6 @@
 
                 </div>
             </div>
-            <div class="submitInput">
-                <a role="button" href="#results">Calculate</a>
-            </div>
         </div>
     </div>
 
@@ -154,7 +151,6 @@
 
         function update() {
             var batteryPercent = battery.value || 0;
-            document.getElementById('percentDisplay').innerHTML = batteryPercent;
             var mileage = Math.round((avgRangeOfEV * batteryPercent) / 100);
 
             if (batteryPercent > 0) {
