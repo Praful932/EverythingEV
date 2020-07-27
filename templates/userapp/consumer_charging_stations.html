@@ -46,7 +46,7 @@
             <div class="level center" id="av_ports{{ cs.pk }}">
               Ports Available :
             </div>
-            <div class="points center" onclick="foo('{{cs.pk}}')">
+            <div class="points center" style="cursor:pointer" onclick="foo('{{cs.pk}}')">
               Update
             </div>
           </div>
@@ -108,31 +108,13 @@
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
   <script>
-    jQuery(document).ready(function ($) {
-      var alterClass = function () {
-        var ww = document.body.clientWidth;
-        if (ww < 600) {
-          $('.navbar').addClass('bg-dark');
-          $('navbar-toggler-icon').css('color', 'white!important');
-          $('.navbar-brand').addClass("text-white");
-          $('.nav-item').removeAttr('style');
-          $('.nav-item').addClass("text-white");
-          $('.nav-item').css({ "font-weight": "600", "font-size": "20px" })
-        } else if (ww >= 601) {
-          $('.navbar').removeClass('bg-dark');
-          $('.navbar-brand').removeClass("text-white");
-          $('.nav-item').removeClass("text-white");
-          $('.nav-item').css({ "padding-right": "15px", "color": "black", "font-weight": "900", "font-size": "25px" });
-        };
-      };
-      $(window).resize(function () {
-        alterClass();
-      });
-      //Fire it when the page first loads:
-      alterClass();
-    });
+    $(document).ready(function () {
+      $('.menu-toggle').click(function () {
+        $('.menu-toggle').toggleClass('active');
+        $('nav').toggleClass('active');
+      })
+    })
   </script>
-
 
   <script>
     // Convert to String to Array Object

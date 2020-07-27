@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{%  static 'userapp/dashboard_home.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
@@ -18,42 +18,7 @@
 
 <body>
     <main>
-        <div id="thankyou" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Thank you!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>We will get back to you shortly</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="supportmodal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Your Issue</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" id="supportform">
-                            {% csrf_token %}
-                            {{ supportform|crispy }}
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-success" value="Submit" form="supportform">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">

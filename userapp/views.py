@@ -488,14 +488,15 @@ class ComplaintsListView(ListView):
     template_name = 'userapp/complaint_dashboard.html'
     context_object_name = 'd'
 
+
 @login_required
 def MaintenanceComplaint(request):
+    m = MaintenanceManDetails.objects.get(own=request.user.provider)
     if request.method == 'POST':
         visited = request.POST.get('visited')
         CsMaintenance.objects.get(pk=visited).delete()
         m.CompletedComplaints += 1
         return redirect('dash-welcome')
-    m = MaintenanceManDetails.objects.get(own=request.user.provider)
     d = m.jobs.all()
     locate = CsMaintenance.objects.filter(Mm=m.id)
     count = m.jobs.count()
