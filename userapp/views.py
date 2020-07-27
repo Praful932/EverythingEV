@@ -253,6 +253,10 @@ def ChargingStationConsumer(request):
     lat_user, lng_user = get_user_location()
     cslist = ChargingStation.objects.all()
     distid_list = []
+    pkid = []
+    for ids in cslist:
+        pkid.append(ids.pk)
+    
     for cs in cslist:
         # Convert degree to radians
         lat_cs, lng_cs = map(math.radians, [float(cs.lat), float(cs.lng)])
@@ -301,7 +305,8 @@ def ChargingStationConsumer(request):
     cslist = ChargingStation.objects.filter(pk__in=id_list).order_by(preserved)
     context = {
         'csdata': json.dumps(csdata),
-        'cslist': cslist
+        'cslist': cslist,
+        'pkid': json.dumps(pkid)
     }
     return render(request, 'userapp/consumer_charging_stations.html', context=context)
     return redirect('index')
