@@ -31,6 +31,18 @@ Charging data
 <script type="text/javascript" src="{% static 'userapp/papaparse.min.js' %}"></script>
 {% endblock %}
 {% block body %}
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<style>
+  df-messenger {
+    --df-messenger-send-icon: #20bd0b;
+    --df-messenger-button-titlebar-color: #20bd0b;
+
+  }
+</style>
+<df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+  language-code="en"
+  chat-icon="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-4/177800/156-512.png">
+</df-messenger>
 <h1 class="text-center" style="margin-top: 7%;font-family: 'Roboto';">Live Feed</h1>
 <div id="data-table">
 

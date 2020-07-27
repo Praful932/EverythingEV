@@ -39,14 +39,14 @@ main {
 
         .input-group {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 0.5fr;
+            grid-template-columns: 1fr 1fr 0.5fr;
             justify-content: center;
 
             .brand,
-            .model,
             .distance {
                 height: 150px;
                 margin: 10px;
+                width: 100%;
 
                 h3 {
                     font-size: 2rem;
@@ -59,7 +59,7 @@ main {
                     padding-top: 25px;
                     background-color: white;
                     height: 14rem;
-                    width: 14rem;
+                    width: 80%;
                     text-align: center;
                     border-radius: 10px;
 
@@ -74,18 +74,6 @@ main {
                     }
 
                     select {
-                        width: 8rem;
-                        border: 0.5px black solid;
-                    }
-                }
-
-                .step2 {
-                    p {
-                        margin: 15px 0;
-                    }
-
-                    select {
-                        width: 8rem;
                         border: 0.5px black solid;
                     }
                 }
@@ -95,9 +83,10 @@ main {
                         margin-bottom: 10px;
 
                         input {
-                            width: 40px;
+                            width: 60px;
                             height: 25px;
                             border: 0.5px black solid;
+                            font-size: 2rem;
                         }
 
                         select {
@@ -135,7 +124,7 @@ main {
         justify-content: space-around;
         height: 250px;
         width: 800px;
-        margin: 80px auto;
+        margin: 40px auto;
         align-content: center;
 
         .numeric {
@@ -143,16 +132,37 @@ main {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 250px;
-            height: 200px;
+            width: 300px;
+            height: 250px;
             border: 0.5px #535353 solid;
             border-radius: 5px;
             margin-top: 20px;
+            padding: 20px;
+            padding-bottom: 0px;
 
             .title {
-                font-size: 1.5rem;
+                font-size: 2rem;
                 color: #535353;
                 margin-bottom: 10px;
+            }
+
+            .costings {
+                .cars {
+                    display: block;
+                    font-size: 2rem;
+                    font-weight: 500;
+
+                    .cost {
+                        font-size: 3rem;
+                        font-weight: bold;
+                    }
+
+                    .per {
+                        font-weight: 400;
+                        display: inline;
+                        font-size: 1rem;
+                    }
+                }
             }
 
             .perMonth,

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/d17fc40e8a.js"></script>
+    <link rel="stylesheet" href="{% static 'userapp/modal.css' %}">
+    <title>Modal</title>
+</head>
+
+<body>
+
+    <button id="modalBtn">Click Here</button>
+    <div id="simpleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="heading">Warning</h1>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the charging station?</p>
+                <div class="btnflex">
+                    <button type="submit" class="close-modal">Yes</button>
+                    <button type="reset" class="close-modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var modal = document.getElementById("simpleModal");
+        var modalBtn = document.getElementById("modalBtn");
+        var closeBtn = document.getElementsByClassName("close-modal")[0];
+        var yesBtn = document.getElementsByClassName("close-modal")[1];
+        var noBtn = document.getElementsByClassName("close-modal")[2];
+        modalBtn.addEventListener("click", openModal);
+        function openModal() {
+            modal.style.display = "block";
+        }
+        closeBtn.addEventListener("click", close);
+        yesBtn.addEventListener("click", close);
+        noBtn.addEventListener("click", close);
+        function close() {
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
