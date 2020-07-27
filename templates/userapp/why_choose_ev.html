@@ -14,6 +14,18 @@
 </head>
 
 <body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #e0f8dd;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en"
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
     <header>
         <div class="logo">
             <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
@@ -501,9 +513,9 @@
             </div>
         </footer>
 
-        <button class="floating-btn" id="supportbtn">
+        <!-- <button class="floating-btn" id="supportbtn">
             Get in Touch
-        </button>
+        </button> -->
 
         <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

@@ -598,22 +598,21 @@ main .calculate h2 {
 main .calculate .input-group {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 0.5fr;
-      grid-template-columns: 1fr 1fr 1fr 0.5fr;
+  -ms-grid-columns: 1fr 1fr 0.5fr;
+      grid-template-columns: 1fr 1fr 0.5fr;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
 main .calculate .input-group .brand,
-main .calculate .input-group .model,
 main .calculate .input-group .distance {
   height: 150px;
   margin: 10px;
+  width: 100%;
 }
 
 main .calculate .input-group .brand h3,
-main .calculate .input-group .model h3,
 main .calculate .input-group .distance h3 {
   font-size: 2rem;
 }
@@ -621,9 +620,6 @@ main .calculate .input-group .distance h3 {
 main .calculate .input-group .brand .step1,
 main .calculate .input-group .brand .step2,
 main .calculate .input-group .brand .step3,
-main .calculate .input-group .model .step1,
-main .calculate .input-group .model .step2,
-main .calculate .input-group .model .step3,
 main .calculate .input-group .distance .step1,
 main .calculate .input-group .distance .step2,
 main .calculate .input-group .distance .step3 {
@@ -631,7 +627,7 @@ main .calculate .input-group .distance .step3 {
   padding-top: 25px;
   background-color: white;
   height: 14rem;
-  width: 14rem;
+  width: 80%;
   text-align: center;
   border-radius: 10px;
 }
@@ -639,9 +635,6 @@ main .calculate .input-group .distance .step3 {
 main .calculate .input-group .brand .step1 p,
 main .calculate .input-group .brand .step2 p,
 main .calculate .input-group .brand .step3 p,
-main .calculate .input-group .model .step1 p,
-main .calculate .input-group .model .step2 p,
-main .calculate .input-group .model .step3 p,
 main .calculate .input-group .distance .step1 p,
 main .calculate .input-group .distance .step2 p,
 main .calculate .input-group .distance .step3 p {
@@ -649,53 +642,34 @@ main .calculate .input-group .distance .step3 p {
 }
 
 main .calculate .input-group .brand .step1 p,
-main .calculate .input-group .model .step1 p,
 main .calculate .input-group .distance .step1 p {
   margin: 15px 0;
 }
 
 main .calculate .input-group .brand .step1 select,
-main .calculate .input-group .model .step1 select,
 main .calculate .input-group .distance .step1 select {
-  width: 8rem;
-  border: 0.5px black solid;
-}
-
-main .calculate .input-group .brand .step2 p,
-main .calculate .input-group .model .step2 p,
-main .calculate .input-group .distance .step2 p {
-  margin: 15px 0;
-}
-
-main .calculate .input-group .brand .step2 select,
-main .calculate .input-group .model .step2 select,
-main .calculate .input-group .distance .step2 select {
-  width: 8rem;
   border: 0.5px black solid;
 }
 
 main .calculate .input-group .brand .step3 .selection,
-main .calculate .input-group .model .step3 .selection,
 main .calculate .input-group .distance .step3 .selection {
   margin-bottom: 10px;
 }
 
 main .calculate .input-group .brand .step3 .selection input,
-main .calculate .input-group .model .step3 .selection input,
 main .calculate .input-group .distance .step3 .selection input {
-  width: 40px;
+  width: 60px;
   height: 25px;
   border: 0.5px black solid;
+  font-size: 2rem;
 }
 
 main .calculate .input-group .brand .step3 .selection select,
-main .calculate .input-group .model .step3 .selection select,
 main .calculate .input-group .distance .step3 .selection select {
   border: 0.5px black solid;
 }
 
 main .calculate .input-group .brand .step3 p,
-main .calculate .input-group .model .step3 p,
 main .calculate .input-group .distance .step3 p {
   margin-bottom: 10px;
 }
@@ -730,7 +704,7 @@ main .result-group {
       justify-content: space-around;
   height: 250px;
   width: 800px;
-  margin: 80px auto;
+  margin: 40px auto;
   -ms-flex-line-pack: center;
       align-content: center;
 }
@@ -749,17 +723,36 @@ main .result-group .numeric {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 250px;
-  height: 200px;
+  width: 300px;
+  height: 250px;
   border: 0.5px #535353 solid;
   border-radius: 5px;
   margin-top: 20px;
+  padding: 20px;
+  padding-bottom: 0px;
 }
 
 main .result-group .numeric .title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #535353;
   margin-bottom: 10px;
+}
+
+main .result-group .numeric .costings .cars {
+  display: block;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+main .result-group .numeric .costings .cars .cost {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+main .result-group .numeric .costings .cars .per {
+  font-weight: 400;
+  display: inline;
+  font-size: 1rem;
 }
 
 main .result-group .numeric .perMonth .value,
