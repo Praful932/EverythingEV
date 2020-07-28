@@ -21,9 +21,9 @@
     <div class="vehicle-types">
         <a href="{% url 'two-wheelers' %}"><img src="{% static 'userapp/svg/two_wheelers.svg' %}"
                 alt="two wheelers"></a>
-        <a href="#"><img src="{% static 'userapp/svg/three_wheelers.svg' %}" alt="three wheelers"></a>
-        <a href="#"><img src="{% static 'userapp/svg/four_wheelers.svg' %}" alt="four wheelers"></a>
-        <a href="#"><img src="{% static 'userapp/svg/heavy_vehicles.svg' %}" alt="heavy vehicles"></a>
+        <a href="{% url 'three-wheelers' %}"><img src="{% static 'userapp/svg/three_wheelers.svg' %}" alt="three wheelers"></a>
+        <a href="{% url 'four-wheelers' %}"><img src="{% static 'userapp/svg/four_wheelers.svg' %}" alt="four wheelers"></a>
+        <a href="{% url 'heavy-vehicles' %}"><img src="{% static 'userapp/svg/heavy_vehicles.svg' %}" alt="heavy vehicles"></a>
     </div>
 </main>
 {% endblock body %}

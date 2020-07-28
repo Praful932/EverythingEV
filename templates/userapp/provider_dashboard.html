@@ -13,7 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     <style>
         df-messenger {
             --df-messenger-send-icon: #1eff00;
-            --df-messenger-button-titlebar-color: #e0f8dd;
+            --df-messenger-button-titlebar-color: #90ff82;
 
         }
     </style>
@@ -88,6 +88,9 @@
                         {% if request.user.provider.maintenancemandetails %}
                         <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
                         {% else %}
+                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide Maintenance</a>
+                        {% endif %}
+                        {% if cslist %}
                         <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
                         {% endif %}
                         <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>

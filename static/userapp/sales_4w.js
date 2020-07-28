@@ -104,7 +104,7 @@ const Tata = [
         range: ' 200 km per Charge',
         link: 'https://www.tatamotors.com/blog/tag/tigor-ev/',
         name: 'Tata Tigor EV 2019',
-        src: 'https://nexonev.tatamotors.com/wp-content/themes/tata-nexon/images/design/nexon-signature-teal-blue.png'
+        src: 'https://imgd.aeplcdn.com/1200x900/n/cw/ec/40451/tata-tigor-ev-exterior-1.jpeg?q=85'
     },
     {
         power: ' 129 W',
@@ -120,7 +120,7 @@ const Tata = [
         range: ' 250 km per Charge',
         link: 'https://nexonev.tatamotors.com/',
         name: 'Tata Altroz',
-        src: 'https://nexonev.tatamotors.com/wp-content/themes/tata-nexon/images/design/nexon-signature-teal-blue.png'
+        src: 'https://imgd.aeplcdn.com/664x374/n/cw/ec/46800/tata-altroz-ev-left-side-view5.jpeg'
     }]
 
 function cardTemplate(vehicle) {
@@ -130,7 +130,6 @@ function cardTemplate(vehicle) {
         <div class="card-body">
             <p><span>Range</span>${vehicle.range}</p>
             <p><span>Price</span>:${vehicle.price}</p>
-            <p><span>Max Speed</span>:${vehicle.speed}</p>
             <p><span>Engine power</span>:${vehicle.power}</p>
             <div class="link">
                 <a href="${vehicle.link}" role="button">Know More</a>

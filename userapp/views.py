@@ -253,6 +253,10 @@ def ChargingStationConsumer(request):
     lat_user, lng_user = get_user_location()
     cslist = ChargingStation.objects.all()
     distid_list = []
+    pkid = []
+    for ids in cslist:
+        pkid.append(ids.pk)
+
     for cs in cslist:
         # Convert degree to radians
         lat_cs, lng_cs = map(math.radians, [float(cs.lat), float(cs.lng)])
@@ -301,7 +305,8 @@ def ChargingStationConsumer(request):
     cslist = ChargingStation.objects.filter(pk__in=id_list).order_by(preserved)
     context = {
         'csdata': json.dumps(csdata),
-        'cslist': cslist
+        'cslist': cslist,
+        'pkid': json.dumps(pkid)
     }
     return render(request, 'userapp/consumer_charging_stations.html', context=context)
     return redirect('index')
@@ -319,22 +324,22 @@ def ChargingStationAnalytics(request, pk):
         for i in range(24):
             # getattr to access changing field anme
             freq.append(getattr(report, 't'+str(i)))
-        wholecs = ChargingStationRecord.objects.all()
+        wholecs = ChargingStationRecord.objects.filter(cs=current_cs)
         consumption = []
-        sum = 0
-        n = 0
+        total_consumption = 0
+        total_revenue = 0
         for ele in wholecs:
-            n += 1
-            sum += ele.elec_consumption
-        sum /= n
-        consumption.append(sum)
+            total_consumption += float(ele.vehicle.charging_rate) * (ele.duration/60)
+        print(current_cs.price_kwh)
+        total_consumption = round(total_consumption, 2)
+        total_revenue = round(total_consumption * float(current_cs.price_kwh), 2)
         csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
-        sum = 0
+        s = 0
         n = 0
         for cs in csrecord:
             n += 1
-            sum = sum + cs.elec_consumption
-        consumption.append(sum)
+            s = s + cs.elec_consumption
+        consumption.append(s)
         weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
         wr = []
         for i in range(7):
@@ -346,6 +351,8 @@ def ChargingStationAnalytics(request, pk):
             'consumption': json.dumps(consumption),
             'wr': json.dumps(wr),
             'supportform': supportform,
+            'total_revenue': round(total_revenue, 2),
+            'total_consumption': total_consumption
         }
         return render(request, "userapp/cs_analytics.html", context=context)
     return redirect('index')
@@ -470,7 +477,7 @@ def bookMaintenanceMan(request, pk):
 
 class SearchListView(ListView):
     model = MaintenanceManDetails
-    template_name = 'userapp/table.html'
+    template_name = 'userapp/MaintainManTable.html'
     context_object_name = 'd'
 
 
@@ -601,42 +608,46 @@ def savingsCalculator(request):
 @login_required
 def dashwelcome(request):
     if request.user.is_provider:
+        current_provider = request.user.provider
+        all_cs = current_provider.ownerof.all()
         try:
             if request.user.provider.maintenancemandetails:
-                return redirect('Complaint-Dashboard')
+                pass
         except MaintenanceManDetails.DoesNotExist:
-            current_provider = request.user.provider
-            total_visits = 0
-            total_consumption = 0
-            total_revenue = 0
-            all_cs = current_provider.ownerof.all()
-            best_revenue = 0
-            best_cs = ""
-            for cs in all_cs:
-                all_record_cs = cs.csrecord.all()
-                consumption_cs = 0
-                for record in all_record_cs:
-                    total_visits += 1
-                    consumption_cs += float(record.vehicle.charging_rate) * (record.duration/60)
-                currentcs_revenue = float(cs.price_kwh) * consumption_cs
-                if currentcs_revenue > best_revenue:
-                    best_cs = cs.name
-                    best_revenue = currentcs_revenue
-                total_revenue += currentcs_revenue
-                total_consumption += consumption_cs
-            supportform = SupportForm()
-            context = {
-                'supportform': supportform,
-                'total_visits': total_visits,
-                'total_revenue': round(total_revenue, 2),
-                'total_consumption': round(total_consumption, 2),
-                'best_revenue': round(best_revenue, 2),
-                'best_cs': best_cs
-            }
-            return render(request, "userapp/dash_welcome.html", context=context)
+            pass
+        # If only Maintainance not CS Owner
+        if not all_cs:
+            return redirect('Complaint-Dashboard')
+        total_visits = 0
+        total_consumption = 0
+        total_revenue = 0
+        best_revenue = 0
+        best_cs = ""
+        for cs in all_cs:
+            all_record_cs = cs.csrecord.all()
+            consumption_cs = 0
+            for record in all_record_cs:
+                total_visits += 1
+                consumption_cs += float(record.vehicle.charging_rate) * (record.duration/60)
+            currentcs_revenue = float(cs.price_kwh) * consumption_cs
+            if currentcs_revenue > best_revenue:
+                best_cs = cs.name
+                best_revenue = currentcs_revenue
+            total_revenue += currentcs_revenue
+            total_consumption += consumption_cs
+        supportform = SupportForm()
+        context = {
+            'supportform': supportform,
+            'total_visits': total_visits,
+            'total_revenue': round(total_revenue, 2),
+            'total_consumption': round(total_consumption, 2),
+            'best_revenue': round(best_revenue, 2),
+            'best_cs': best_cs
+        }
+        return render(request, "userapp/dash_welcome.html", context=context)
     else:
         # To Meme
-        redirect('index')
+        return redirect('index')
 
 
 @login_required
