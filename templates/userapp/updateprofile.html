@@ -1,5 +1,7 @@
 {% extends 'userapp/layout.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'app/rs.css'%}">
 {% endblock head %}
@@ -7,13 +9,13 @@
 {% block title %}
 Update Profile
 {% endblock title %}
-{% load crispy_forms_tags %}
 {% block body %}
 <div class="container">
     <div class="row">
         <div class="col-lg-9 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
+                    <div style="text-align: center; font-size:20px">
                     <h5 class="card-title text-center">Your Profile</h5>
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -21,6 +23,7 @@ Update Profile
                         {{ fieldform|crispy }}
                         <button class="btn btn-lg btn-primary" type="submit">Update</button>
                     </form>
+                </div>
                 </div>
             </div>
         </div>
