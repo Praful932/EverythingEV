@@ -18,7 +18,7 @@
     <style>
         df-messenger {
             --df-messenger-send-icon: #1eff00;
-            --df-messenger-button-titlebar-color: #e0f8dd;
+            --df-messenger-button-titlebar-color: #90ff82;
 
         }
     </style>
@@ -28,7 +28,7 @@
     </df-messenger>
     <header>
         <div class="logo">
-            <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+            <a href="{%url 'index'%}"><img src="{% static 'userapp/svg/logo.svg' %}" alt="logo"></a>
         </div>
         <div class="menu-toggle"></div>
         <nav>
@@ -54,8 +54,8 @@
     <div class="head">
         <div class="imghead">
             <img src="{% static 'userapp/bg.png' %}" alt="text" width="460" height="345">
-            <div class="centered">
-                Why Choose EV?
+            <div class="centered" style="margin-top: 10vw;">
+               Why Choose EV?
             </div>
         </div>
         <div style="background-color: #2D677A;height:50%;">
@@ -480,11 +480,10 @@
                 </div>
             </div>
         </div>
-        </div>
-<br>
-<br>
-        <footer>
-            <div class="footer-content" style="width: 100%;">
+        
+
+        <footer style="margin-top: 2%;width: 100%;">
+            <div class="footer-content" >
                 <div class="column-1">
                     <img src="{% static 'userapp/svg/logo-white.svg' %}" alt="logo">
                     <div class="links">

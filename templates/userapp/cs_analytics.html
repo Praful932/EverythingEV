@@ -24,7 +24,7 @@
     <style>
         df-messenger {
             --df-messenger-send-icon: #1eff00;
-            --df-messenger-button-titlebar-color: #e0f8dd;
+            --df-messenger-button-titlebar-color: #90ff82;
 
         }
     </style>
@@ -116,11 +116,11 @@
                         </div>
                         <div class="revenue">
                             <p class="card-name">Total Revenue</p>
-                            <p class="value">$1500</p>
+                            <p class="value">&#8377; {{ total_revenue }}</p>
                         </div>
                         <div class="consumption">
                             <p class="card-name">Electricity Consumption</p>
-                            <p class="value">1500kWh</p>
+                            <p class="value">{{ total_consumption }} kWh</p>
                         </div>
                     </div>
                     <h3>Graphical Representation</h3>

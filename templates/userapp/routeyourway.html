@@ -17,7 +17,7 @@
     <style>
         df-messenger {
             --df-messenger-send-icon: #1eff00;
-            --df-messenger-button-titlebar-color: #e0f8dd;
+            --df-messenger-button-titlebar-color: #90ff82;
 
         }
     </style>
@@ -27,7 +27,7 @@
     </df-messenger>
     <header>
         <div class="logo">
-            <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+            <a href="{%url 'index'%}"><img src="{% static 'userapp/svg/logo.svg' %}" alt="logo"></a>
         </div>
         <div class="menu-toggle"></div>
         <nav>
@@ -228,7 +228,7 @@
                 content_cs[i] = "<div><b>Station Name:</b> " + csdata[i][0] + " <br><b>City:</b> " + csdata[i][1] + " <br><b>Suburb:</b> " + csdata[i][2] + " <br><b>Owner: </b> " +
                     csdata[i][3] + "<br><b>Total Ports:</b>" + csdata[i][6] + "<br><b>Fast Ports:</b>" + csdata[i][7] + "<br><b>Slow Ports:</b>" + csdata[i][8] +
                     "<br><b>Price/Kwh:</b>" + csdata[i][9] + "<br><b>Restroom:</b>" + csdata[i][10] + "<br><b>CCTV:</b>" + csdata[i][11] + "<br><b>Opening Time:</b>" + csdata[i][12] +
-                    "<br><b>Closing Time:</b>" + csdata[i][13] + "<br><a href=" + directionlink + ">Get Directions</a>" + "</div>";
+                    "<br><b>Closing Time:</b>" + csdata[i][13] + "<br><a href=" + directionlink + " target='_blank'>Get Directions</a>" + "</div>";
             }
             for (var i = 0; i < latlang_cs.length; i++) {
                 addMarkerWithTimeout(latlang_cs[i], content_cs[i], i * 10);
