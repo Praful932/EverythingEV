@@ -7,13 +7,14 @@
 <link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <style>
-    .move{
+    .move {
         background-color: #31BAFD;
         color: azure;
     }
-    .move:hover{
+
+    .move:hover {
         background-color: #2B9ED8;
-        box-shadow: 0 10px 15px 0 rgba(0,0,0,0.24),0 10px 10px 0 rgba(0,0,0,0.19);
+        box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.24), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
         color: azure;
     }
 </style>
@@ -30,17 +31,19 @@ Dashboard
             <div class="card card-signin my-5" style="background-color:rgba(232, 236, 241, 0.5);">
                 <div class="card-body">
                     <div style="margin-top: -30px;">
-                    <h5 class="card-title text-center" style="font-family: 'Roboto', sans-serif;font-size: 30px;">Your Profile</h5>
-                    <div class="text-center">
-                        <img src=https://www.associazionecoach.com/wp-content/uploads/2019/03/coach.png style="width: 130px;height:130px">
+                        <h5 class="card-title text-center" style="font-family: 'Roboto', sans-serif;font-size: 30px;">
+                            Your Profile</h5>
+                        <div class="text-center">
+                            <img src=https://www.associazionecoach.com/wp-content/uploads/2019/03/coach.png
+                                style="width: 130px;height:130px">
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ userform|crispy }}
+                            {{ fieldform|crispy }}
+                            <button class="btn btn-lg  move" type="submit">Update</button>
+                        </form>
                     </div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ userform|crispy }}
-                        {{ fieldform|crispy }}
-                        <button class="btn btn-lg  move"  type="submit">Update</button>
-                    </form>
-                </div>
                 </div>
             </div>
         </div>
