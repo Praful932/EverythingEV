@@ -1,4 +1,16 @@
+const Ashok = [
+    {
+        src: "https://images.newindianexpress.com/uploads/user/imagelibrary/2016/10/18/w600X300/Ashok.jpg",
+        name: "Ashok Leyland - EV VERSA Bus",
+        torque: "600 Nm @ 500 rpm",
+        max_op: "200 HP @ 500 rpm",
+        dimensions: "11085/2500 mm",
+        capacity: 44,
+        Speed: 95,
+        link: "https://www.ashokleyland.com/en/article/-/tag/press-release?article=1307119&title=Circuit-S-an-Electric-Bus-Powered-by-SUN-Mobility%E2%80%99s-Swappable-Smart-BatteryTM-unveiled-at-India-Auto-Expo-2018"
 
+    }
+]
 
 document.getElementById('container').innerHTML = `
     ${Tata.map(cardTemplate).join("")}

@@ -392,3 +392,131 @@ main {
         }
     }
 }
+
+#modalBtn {
+    margin: 200px 200px;
+    padding: 1em 2em;
+    font-size: 2rem;
+    font-weight: 500;
+    color: white;
+    background-color: #0DBA47;
+    transition: 0.1s all ease-in-out;
+}
+
+#modalBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 5px #0DBA47;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+
+    .modal-content {
+        background-color: #f4f4f4;
+        margin: 10% auto auto auto;
+        width: fit-content;
+        box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+        animation-name: modalopen;
+        animation-duration: 0.5s;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        .modal-header {
+            border-bottom: 0.5px solid #ccc;
+            background: #428bca;
+            padding: 15px;
+            color: #fff;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+
+            h1 {
+                display: inline-block;
+                font-size: 2.5rem;
+                font-weight: 700;
+            }
+
+
+            span {
+                float: right;
+                cursor: pointer;
+                font-size: 3rem;
+                transition: 0.1s all ease-in-out;
+            }
+
+            span:hover,
+            span:focus {
+                transform: scale(1.1);
+                text-decoration: none;
+            }
+        }
+
+        .modal-body {
+            height: 100%;
+            padding: 20px 20px 8px 20px;
+
+            p {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+
+            .btnflex {
+                display: flex;
+                justify-content: flex-end;
+
+                button[type="submit"],
+                button[type="reset"] {
+                    font-size: 2.2rem;
+                    font-weight: 500;
+                    padding: 8px 20px;
+                    color: white;
+                    border-radius: 5px;
+                    margin: 2rem 0.5rem 0.5rem 2rem;
+                    cursor: pointer;
+                }
+
+                button[type="submit"] {
+                    background-color: rgb(204, 49, 49);
+                }
+
+                button[type="reset"] {
+                    background-color: #0DBA47;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width:515px) {
+    .modal {
+        .modal-content {
+            width: 100vw;
+        }
+    }
+}
+
+.requiredField {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+input[type="text"] {
+    font-size: 1.6rem;
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}

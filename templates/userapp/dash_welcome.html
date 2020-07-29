@@ -28,7 +28,38 @@
         language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
     </df-messenger>
     <main>
-
+        <div id="thankyou" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Thank You!</h1>
+                    <span class="close-message">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>We Will get back to you shortly!</p>
+                    <div class="btnflex">
+                        <button type="submit" class="close-message">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="supportmodal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Your Issue</h1>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="supportform">
+                        {% csrf_token %}
+                        {{ supportform|crispy }}
+                    </form>
+                    <div class="btnflex">
+                        <button type="submit" class="close-modal" value="Submit" form="supportform">Submit</button>
+                        <button type="reset" class="close-modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">
@@ -121,6 +152,26 @@
         close.addEventListener('click', () => {
             sidebar.classList.toggle('open');
         })
+    </script>
+    <script>
+        var modal = document.getElementById("supportmodal");
+        var message = document.getElementById("thankyou");
+        var closemessage = document.getElementsByClassName("close-message")[0];
+        var closebutton = document.getElementsByClassName("close-message")[1];
+        var closeBtn = document.getElementsByClassName("close-modal")[0];
+        var yesBtn = document.getElementsByClassName("close-modal")[1];
+        var noBtn = document.getElementsByClassName("close-modal")[2];
+        closeBtn.addEventListener("click", closemodal);
+        yesBtn.addEventListener("click", closemodal);
+        noBtn.addEventListener("click", closemodal);
+        closemessage.addEventListener("click", messageclose);
+        closebutton.addEventListener("click", messageclose);
+        function closemodal() {
+            modal.style.display = "none";
+        }
+        function messageclose() {
+            message.style.display = "none";
+        }
     </script>
     <script>
         $('#supportbtn').click(function () {

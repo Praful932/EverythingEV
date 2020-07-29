@@ -7,13 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{%  static 'userapp/dashboard_home.css' %}">
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
         rel="stylesheet">
-        <script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,46 +24,42 @@
         }
     </style>
     <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
-        language-code="en"
-        chat-icon="https://www.synaptive.com/img/chatbot.png">
+        language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
     </df-messenger>
     <main>
-        <div id="thankyou" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Thank you!</h4>
+        <div id="thankyou" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Thank You!</h1>
+                    <span class="close-message">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>We Will get back to you shortly!</p>
+                    <div class="btnflex">
+                        <button type="submit" class="close-message">Close</button>
                     </div>
-                    <div class="modal-body">
-                        <p>We will get back to you shortly</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+        <div id="supportmodal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Your Issue</h1>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="supportform">
+                        {% csrf_token %}
+                        {{ supportform|crispy }}
+                    </form>
+                    <div class="btnflex">
+                        <button type="submit" class="close-modal" value="Submit" form="supportform">Submit</button>
+                        <button type="reset" class="close-modal">Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="supportmodal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Your Issue</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" id="supportform">
-                            {% csrf_token %}
-                            {{ supportform|crispy }}
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-success" value="Submit" form="supportform">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">
@@ -88,11 +82,13 @@
                         {% if request.user.provider.maintenancemandetails %}
                         <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
                         {% else %}
-                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide Maintenance</a>
+                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide
+                            Maintenance</a>
                         {% endif %}
                         {% if cslist %}
                         <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
                         {% endif %}
+                        <a href="{% url 'Profile' %}" id="profile"><i class="fa fa-user"></i>Profile</a>
                         <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>
                     </div>
                 </div>
@@ -126,17 +122,17 @@
                                     <div class="cctv">
                                         <img src="{% static 'userapp/icons/cctv.svg' %}" alt="cctv">
                                         {% if cs.cctv %}
-                                            <p style="color:green">Yes</p>
+                                        <p style="color:green">Yes</p>
                                         {% else %}
-                                            <p style="color:red">No</p>
+                                        <p style="color:red">No</p>
                                         {% endif %}
                                     </div>
                                     <div class="washroom">
                                         <img src="{% static 'userapp/icons/washroom.svg' %}" alt="washroom">
                                         {% if cs.restroom %}
-                                            <p style="color:green">Yes</p>
+                                        <p style="color:green">Yes</p>
                                         {% else %}
-                                            <p style="color:red">No</p>
+                                        <p style="color:red">No</p>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -194,6 +190,26 @@
         close.addEventListener('click', () => {
             sidebar.classList.toggle('open');
         })
+    </script>
+    <script>
+        var modal = document.getElementById("supportmodal");
+        var message = document.getElementById("thankyou");
+        var closemessage = document.getElementsByClassName("close-message")[0];
+        var closebutton = document.getElementsByClassName("close-message")[1];
+        var closeBtn = document.getElementsByClassName("close-modal")[0];
+        var yesBtn = document.getElementsByClassName("close-modal")[1];
+        var noBtn = document.getElementsByClassName("close-modal")[2];
+        closeBtn.addEventListener("click", closemodal);
+        yesBtn.addEventListener("click", closemodal);
+        noBtn.addEventListener("click", closemodal);
+        closemessage.addEventListener("click", messageclose);
+        closebutton.addEventListener("click", messageclose);
+        function closemodal() {
+            modal.style.display = "none";
+        }
+        function messageclose() {
+            message.style.display = "none";
+        }
     </script>
     <script>
         $('#supportbtn').click(function () {

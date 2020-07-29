@@ -1,5 +1,5 @@
 {% extends "userapp/layout.html" %} {% load static %}
-{% block head %}<title>EverythingEV</title>{% endblock head %}
+{% block head %}<title>{% block title %}EverythingEV{% endblock title %}</title>{% endblock head %}
 {% block body %}
 
 <main>
@@ -9,7 +9,7 @@
             <p class="tagline">One stop solution for all your EV needs!</p>
         </div>
         <div class="art">
-            <img src="{% static 'userapp/svg/front illustration.svg' %}" alt="concept art" >
+            <img src="{% static 'userapp/svg/front illustration.svg' %}" alt="concept art">
         </div>
     </div>
     <div class="service-row">
@@ -31,7 +31,7 @@
                 <h2>What if my car's battery goes down in the middle?<br>Are EVs high maintenance?</h2>
                 <p>For these and a lot more questions,<br>head to our page, Why Choose EV.</p>
             </section>
-            <img class="img1" src="{% static 'userapp/svg/why choose ev_art.svg' %}" style="margin-right: 50%;"> 
+            <img class="img1" src="{% static 'userapp/svg/why choose ev_art.svg' %}" style="margin-right: 50%;">
         </div>
         <div class="banner-grid">
             <img class="img2" src="{% static 'userapp/svg/charging stations_art.svg' %}" style="margin-left: 30%;">
