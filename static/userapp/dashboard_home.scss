@@ -217,11 +217,12 @@ main {
                             font-weight: 500;
 
                             .value {
-                                font-size: 3rem;
+                                font-size: 2.2rem;
+                                margin-bottom: 5px;
                             }
 
                             .label {
-                                font-size: 2rem;
+                                font-size: 1.8rem;
                                 float: right;
                             }
                         }
@@ -266,11 +267,13 @@ main {
                                 padding: 15px;
 
                                 .value {
-                                    font-size: 2.5rem;
+                                    font-size: 2rem;
+                                    margin-bottom: 5px;
                                 }
 
                                 .label {
-                                    font-size: 1.8rem;
+                                    font-size: 1.6rem;
+                                    float: right;
                                 }
                             }
 
@@ -286,6 +289,31 @@ main {
     }
 }
 
+
+@media only screen and (max-width:700px) {
+    main {
+        .layout {
+            .dashboardContent {
+                .lowerContent {
+                    .cardgrid div:nth-child(4) {
+                        .text {
+                            padding-left: 0px;
+                            padding-right: 0px;
+
+                            .value {
+                                font-size: 1.6rem;
+                            }
+
+                            .label {
+                                font-size: 1.3rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 @media only screen and (max-width:600px) {
     main {

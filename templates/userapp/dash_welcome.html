@@ -25,11 +25,10 @@
         }
     </style>
     <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
-        language-code="en"
-        chat-icon="https://www.synaptive.com/img/chatbot.png">
+        language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
     </df-messenger>
     <main>
-        
+
         <div class="layout">
             <div class="dashboardSidebar" id="sidebar">
                 <div class="upperSidebar">
@@ -47,16 +46,17 @@
                     </div>
                     <div class="links">
                         <a href="{% url 'dash-welcome' %}" class="active"><i class="fa fa-home"></i>Home</a>
-                        <a href="{% url 'Provider-Dashboard' %}"><i
-                                class="fa fa-briefcase"></i>Business</a>
+                        <a href="{% url 'Provider-Dashboard' %}"><i class="fa fa-briefcase"></i>Business</a>
                         {% if request.user.provider.maintenancemandetails %}
                         <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
                         {% else %}
-                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide Maintenance</a>
+                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide
+                            Maintenance</a>
                         {% endif %}
                         {% if cslist %}
                         <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
                         {% endif %}
+                        <a href="{% url 'Profile' %}" id="profile"><i class="fa fa-user"></i>Profile</a>
                         <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="card green">
                             <i class="fa fa-money"></i>
-                            <div class="text">
+                            <div class="text" style="padding-left: 0px;">
                                 <p class="value">{{ total_consumption }} kWh</p>
                                 <p class="label">Total Electricity Consumption</p>
                             </div>
@@ -93,7 +93,7 @@
                         <div class="card grey">
                             <img src="{% static 'userapp/icons/revenue.svg' %}" alt="revenue">
                             <div class="text">
-                                <p class="value">{{ best_cs }} - &#8377; {{ best_revenue }}</p>
+                                <p class="value">{{ best_cs }} <br> &#8377; {{ best_revenue }}</p>
                                 <p class="label">Best Charging Station</p>
                             </div>
                         </div>
