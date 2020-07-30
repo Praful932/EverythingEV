@@ -169,7 +169,7 @@ def UpdateProfile(request):
         if userform.is_valid() and fieldform.is_valid():
             userform.save()
             fieldform.save()
-            return redirect('Provider-Dashboard')
+            return redirect('index')
     if request.user.is_consumer:
         return render(request, "userapp/updateprofile.html", context=context)
     return render(request, "userapp/provider_profile.html", context=context)
