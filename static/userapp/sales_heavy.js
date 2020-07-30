@@ -1,103 +1,44 @@
-const Ashok = [
+const Olectra = [
     {
-        src: "https://images.newindianexpress.com/uploads/user/imagelibrary/2016/10/18/w600X300/Ashok.jpg",
-        name: "Ashok Leyland - EV VERSA Bus",
-        torque: "600 Nm @ 500 rpm",
-        max_op: "200 HP @ 500 rpm",
-        dimensions: "11085/2500 mm",
-        capacity: 44,
-        Speed: 95,
-        link: "https://www.ashokleyland.com/en/article/-/tag/press-release?article=1307119&title=Circuit-S-an-Electric-Bus-Powered-by-SUN-Mobility%E2%80%99s-Swappable-Smart-BatteryTM-unveiled-at-India-Auto-Expo-2018"
-
+        src: "https://etimg.etb2bimg.com/photo/69887195.cms",
+        name: "Olectra Electric Bus K6",
+        capacity: "D+22",
+        power: "180kW",
+        battery: "Li-ion Phosphate",
+        link: "https://olectra.com/electric-bus-k6/",
+        range: "200km",
+        time: "3-4 hrs"
+    },
+    {
+        src: "https://olectra.com/wp-content/uploads/k9-small.jpg",
+        name: "Olectra Electric Bus K9",
+        capacity: "D+39",
+        power: "180kW",
+        battery: "Li-ion Phosphate",
+        link: "https://olectra.com/electric-bus-k9/",
+        range: "300km",
+        time: "4-5 hrs"
     }
 ]
 
+function cardTemplate(vehicle) {
+    return `<div class="displayCard">
+        <p class="vehicleName">${vehicle.name}</p>
+        <img src="${vehicle.src}">
+        <div class="card-body">
+            <p><span>Range</span>${vehicle.range}</p>
+            <p><span>Price</span>:${vehicle.price}</p>
+            <p><span>Capacity</span>:${vehicle.capacity}</p>
+            <p><span>Engine power</span>:${vehicle.power}</p>
+            <p><span>Battery Type</span>:${vehicle.battery}</p>
+            <div class="link">
+                <a href="${vehicle.link}" role="button">Know More</a>
+            </div>
+        </div>
+    </div> `
+}
+
 document.getElementById('container').innerHTML = `
-    ${Tata.map(cardTemplate).join("")}
+    ${Olectra.map(cardTemplate).join("")}
 `;
 
-
-
-function changeContent(evt, company) {
-    if (company == 'Tata') {
-        document.getElementById('container').innerHTML = `
-    ${Tata.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'Mahindra') {
-        document.getElementById('container').innerHTML = `
-    ${Mahindra.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'Hyundai') {
-        document.getElementById('container').innerHTML = `
-    ${Hyundai.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'Kia') {
-        document.getElementById('container').innerHTML = `
-    ${Kia.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'Ford') {
-        document.getElementById('container').innerHTML = `
-    ${Ford.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'MG') {
-        document.getElementById('container').innerHTML = `
-    ${MG.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'Nissan') {
-        document.getElementById('container').innerHTML = `
-    ${Nissan.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'Renault') {
-        document.getElementById('container').innerHTML = `
-    ${Renault.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-    else if (company == 'MarutiSuzuki') {
-        document.getElementById('container').innerHTML = `
-    ${MarutiSuzuki.map(cardTemplate).join("")}`;
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        evt.currentTarget.className += " active";
-    }
-}
