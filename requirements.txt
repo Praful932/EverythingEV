@@ -13,6 +13,7 @@ et-xmlfile==1.0.1
 flake8==3.7.9
 geographiclib==1.50
 geopy==1.21.0
+gunicorn==20.0.4
 idna==2.9
 jdcal==1.4.1
 MarkupPy==1.14
