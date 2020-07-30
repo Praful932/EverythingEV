@@ -1,29 +1,107 @@
 {% extends 'userapp/layout.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'app/rs.css'%}">
+<style>
+    h3 {
+        margin: 10px;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: 0px 0px 5px #717171;
+        width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    @media only screen and (max-width: 510px) {
+        .form {
+            width: 90%;
+        }
+
+        input {
+            width: 250px !important;
+        }
+    }
+
+    .text-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form {
+        margin: 1.5rem auto 0px auto;
+        padding: 20px;
+    }
+
+    .form-group {
+        text-align: left;
+    }
+
+    small {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        color: red;
+    }
+
+    label {
+        font-size: 1.3rem !important;
+    }
+
+    input,
+    select {
+        font-size: 1.6rem;
+        border: 0.5px solid #b4b4b4;
+        border-radius: 2px;
+        margin-bottom: 10px;
+    }
+
+    input {
+        line-height: 25px;
+        width: 400px;
+    }
+
+    input:focus {
+        box-shadow: 0px 0px 5px #2196f3;
+    }
+
+    button[type="submit"] {
+        font-size: 2rem;
+        font-weight: 500;
+        padding: 8px 20px;
+        color: white;
+        border-radius: 5px;
+        margin: 1rem 0rem 0rem 0rem;
+        cursor: pointer;
+        background-color: #2b9ed8;
+    }
+</style>
 {% endblock head %}
 
 {% block title %}
 Update Profile
 {% endblock title %}
-{% load crispy_forms_tags %}
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Your Profile</h5>
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ userform|crispy }}
-                        {{ fieldform|crispy }}
-                        <button class="btn btn-lg btn-primary" type="submit">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="form">
+    <h3>Your Profile</h3>
+    <i class="fa fa-user" style="font-size: 13rem;"></i>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ userform|crispy }}
+        {{ fieldform|crispy }}
+        <button type="submit">Update</button>
+    </form>
 </div>
 {% endblock body %}

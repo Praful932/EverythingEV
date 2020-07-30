@@ -1,37 +1,273 @@
-{% load crispy_forms_tags %}
 {% load static %}
-{% block head %}
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  
-{% endblock %}
-{% block body%}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Register</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{%  static 'userapp/dashboard_home.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
+    <style>
+        h3 {
+            margin: 10px;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px #717171;
+            width: 600px;
+            margin: 0px auto;
+            padding: 20px;
+        }
+
+        .text-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (max-width: 510px) {
+            .form {
+                width: 93%;
+            }
+
+            input,
+            textarea {
+                width: 200px !important;
+            }
+        }
+
+        form {
+            margin: 1.5rem auto 0px auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        small {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: red;
+        }
+
+        label {
+            font-size: 1.3rem !important;
+        }
+
+        input,
+        textarea {
+            font-size: 1.6rem;
+            border: 0.5px solid #b4b4b4;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            line-height: 25px;
+            width: 400px;
+        }
+
+        input:focus {
+            box-shadow: 0px 0px 5px #2196f3;
+        }
+
+        button[type="submit"] {
+            font-size: 2rem;
+            font-weight: 500;
+            padding: 8px 20px;
+            color: white;
+            border-radius: 5px;
+            margin: 1rem 0rem 0rem 0rem;
+            cursor: pointer;
+            background-color: #2b9ed8;
+        }
+    </style>
 </head>
 
 <body>
-    <form method="POST" style="width: 15cm; margin:auto; border: 3px solid rgb(59, 199, 241);  padding: 20px; ">
-        {% csrf_token %}
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #90ff82;
 
-        {{form|crispy}}
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
+    <main>
+        <div id="thankyou" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Thank You!</h1>
+                    <span class="close-message">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>We Will get back to you shortly!</p>
+                    <div class="btnflex">
+                        <button type="submit" class="close-message">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="supportmodal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Your Issue</h1>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="supportform">
+                        {% csrf_token %}
+                        {{ supportform|crispy }}
+                    </form>
+                    <div class="btnflex">
+                        <button type="submit" class="close-modal" value="Submit" form="supportform">Submit</button>
+                        <button type="reset" class="close-modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <button class="btn btn-lg btn-primary" type="submit">Set</button>
+        <div class="layout">
+            <div class="dashboardSidebar" id="sidebar">
+                <div class="upperSidebar">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    </a>
+                    <a href="#"><i class="fa fa-bell fa-lg"></i></a>
+                    <i class="fa fa-times" id="close"></i>
+                </div>
+                <div class="lowerSidebar">
+                    <div class="user">
+                        <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
+                        <h4>Hello, {{ request.user.username }}</h4>
+                        <hr>
+                    </div>
+                    <div class="links">
+                        <a href="{% url 'dash-welcome' %}"><i class="fa fa-home"></i>Home</a>
+                        <a href="{% url 'Provider-Dashboard' %}"><i class="fa fa-briefcase"></i>Business</a>
+                        {% if request.user.provider.maintenancemandetails %}
+                        <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
+                        {% else %}
+                        <a href="{% url 'Register-As-Maintenance' %}" class="active"><i
+                                class="fas fa-user-cog"></i>Provide
+                            Maintenance</a>
+                        {% endif %}
+                        {% if cslist %}
+                        <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
+                        {% endif %}
+                        <a href="{% url 'Profile' %}" id="profile"><i class="fa fa-user"></i>Profile</a>
+                        <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboardContent">
+                <div class="upperContent">
+                    <a href="{% url 'account_logout' %}">Logout</a>
+                    <div id="button"><i class="fa fa-bars"></i></div>
+                </div>
+                <div class="lowerContent">
+                    <div class="form">
+                        <h3>Register as a Maintenance Person</h3>
+                        <img src="{% static 'userapp/register.png' %}" alt="register" style="width:140px;height:130px">
+                        <form method="POST">
+                            {% csrf_token %}
 
-    </form>
+                            {{form|crispy}}
+
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('button');
+        const close = document.getElementById('close');
+        button.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+        close.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+    </script>
+    <script>
+        var modal = document.getElementById("supportmodal");
+        var message = document.getElementById("thankyou");
+        var closemessage = document.getElementsByClassName("close-message")[0];
+        var closebutton = document.getElementsByClassName("close-message")[1];
+        var closeBtn = document.getElementsByClassName("close-modal")[0];
+        var yesBtn = document.getElementsByClassName("close-modal")[1];
+        var noBtn = document.getElementsByClassName("close-modal")[2];
+        closeBtn.addEventListener("click", closemodal);
+        yesBtn.addEventListener("click", closemodal);
+        noBtn.addEventListener("click", closemodal);
+        closemessage.addEventListener("click", messageclose);
+        closebutton.addEventListener("click", messageclose);
+        function closemodal() {
+            modal.style.display = "none";
+        }
+        function messageclose() {
+            message.style.display = "none";
+        }
+    </script>
+    <script>
+        $('#supportbtn').click(function () {
+            $("#supportmodal").modal('show');
+        });
+        $(document).ready(function () {
+            $("#supportform").submit(function (e) {
+                e.preventDefault();
+                var subject = $("#id_subject").val();
+                var description = $("#id_description").val();
+                $.ajax({
+                    data: {
+                        'subject': subject,
+                        'description': description,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    url: "{% url 'SupportRequest' %}",
+                    type: "POST",
+                    success: function (response) {
+                        $("#supportform").trigger("reset");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                })
+                $("#supportmodal").modal('hide');
+                $("#thankyou").modal();
+            });
+        });
+    </script>
 </body>
 
 </html>
-{% endblock %}
-
-{% block script %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-{%endblock%}

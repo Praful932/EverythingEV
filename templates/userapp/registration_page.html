@@ -1,56 +1,18 @@
 {% extends 'userapp/layout.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'userapp/registration_page.css'%}">
+<title>Sign Up</title>
 {% endblock head %}
-
-{% block title %}
-Registration Page
-{% endblock title %}
-
 {% block body %}
-<br>
-<br>
-<br>
-<div class="row" style="margin-left: 200px; margin-right: 200px;margin-top: 100pxz; opacity: 0.9; ">
-<!--user-->
-  <div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px; border-radius: 10px;">
-      <img src="{% static 'userapp/user_register.png' %}"alt="Man with backpack"
-          class="d-block w-full">
-          <br>
-        <div class="px-2 py-2">
-            <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25; ">
-                User Registration
-            </h1>
-            <p class="mb-1">
-                <br><br>
-            </p>
-        </div>
-      <div class="text-center " style="margin-bottom: 25px; margin-top: -40;">
-      <a class="btn  btn-info mt-2 text-center " style="width: 150px;height:40px ;line-height: 1.25;
-      font-size: larger;    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);" href="{% url 'registerConsumer' %}">Register</a>
-      </div>
-    </div>
-<!--provider-->
-    <div class="my-2 mx-auto p-relative bg-white shadow-1 blue-hover" style="width: 400px; border-radius: 10px;">
-      <img src="{% static 'userapp/provider_register.png' %}"alt="Man with backpack"
-          class="d-block w-full">
-          <br>
-        <div class="px-2 py-2">
-            <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1 text-center" style="line-height: 1.25; ">
-                Provider Registration
-            </h1>
-            <p class="mb-1">
-                <br><br>
-            </p>
-        </div>
-      <div class="text-center " style="margin-bottom: 25px; margin-top: -40;">
-      <a class="btn  btn-info mt-2 text-center " style="width: 150px;height:40px ;line-height: 1.25;
-      font-size: larger;    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);" href="{% url 'registerProvider' %}">Register</a>
-      </div>
+
+<main>
+    <h1>Sign Up</h1>
+    <div class="signupOptions">
+        <a href="{% url 'registerConsumer' %}"><img src="{% static 'userapp/svg/consumer_art.svg' %}" src="consumer"></a>
+        <a href="{% url 'registerProvider' %}"><img src="{% static 'userapp/svg/provider_art.svg' %}" alt="provider"></a>
     </div>
 
-    
-</div>
-<br>
+    <p>Already have account? <span><a href="{% url 'account_login' %}">Log in</a></span> instead.</p>
+</main>
+
 {% endblock body %}

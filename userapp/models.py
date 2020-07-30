@@ -160,10 +160,9 @@ class Vehicle(models.Model):
     name = models.CharField(max_length=30)
     company = models.CharField(max_length=100)
     type4or2 = models.IntegerField()
-    horsepower = models.CharField(max_length=100)
+    battery_capacity = models.CharField(max_length=100)
     vehicle_range = models.IntegerField()
-    price = models.DecimalField(max_digits=9, decimal_places=6)
-    battery_type = models.CharField(max_length=100)
+    charging_rate = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
         return str(self.pk) + '. ' + self.company
@@ -172,7 +171,7 @@ class Vehicle(models.Model):
 class ChargingStationRecord(models.Model):
     # Records for ChargingStation arrivals of vehicle
     # time start-end, elec reqd
-    cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE)
+    cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE, related_name="csrecord")
     consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE, related_name="recordof")
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="csvehicles")
     duration = models.IntegerField(default=duration)
@@ -206,6 +205,7 @@ def randomdate():
 
 
 class CsReport(models.Model):
+    """ Model Denoting Frequency of vehicle recorded at each hour of a particular day"""
     cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE)
     time = models.DateField(default=randomdate)
     t0 = models.IntegerField(default=randomvehicles)
@@ -295,6 +295,7 @@ class Support(models.Model):
     subject = models.CharField(max_length=20, verbose_name="Title")
     description = models.TextField(max_length=200, verbose_name="Describe issue you are facing")
 
+
 class UserRecord(models.Model):
     ports = (
         ('Type1', 'Type1'),
@@ -324,6 +325,6 @@ class Survey(models.Model):
     slow_port = models.BooleanField(default=False)
     fast_port = models.BooleanField(default=False)
     vehicle_name = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    means_of_travel =models.CharField(max_length=20, choices=travel_type, default="")
+    means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)

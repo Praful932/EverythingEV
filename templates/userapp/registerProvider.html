@@ -1,36 +1,122 @@
-{% extends 'userapp/layout.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'userapp/rs_provider.css'%}">
-{% endblock head %}
-
-{% block title %}
-Register - Provider
-{% endblock title %}
 {% load crispy_forms_tags %}
-{% block body %}
-<div class="container">
-    <br>
-    <div class="row">
-        <div class="col-lg-9 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <div class="text-center">
-                        <img src="{% static 'userapp/user.png' %}" style="width: 100px;height:100px">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'userapp/rs_provider.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #90ff82;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en"
+        chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
+    <header>
+        <div class="logo">
+            <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+        </div>
+        <div class="menu-toggle"></div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%  url 'index' %}" class="active">Home</a></li>
+                {% if user.is_authenticated %}
+                {% if user.is_provider %}
+                <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+                {% else %}
+                <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+                {% else %}
+                <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
+                <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="{% static 'userapp/user.png' %}" style="width: 100px;height:100px">
+                        </div>
+                        <h5 class="card-title text-center" style="font-weight: 700;font-size: xx-large;">Sign Up</h5>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ signupform|crispy }}
+                            {{ providerform|crispy }}
+                            <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
+                        </form>
+
+
                     </div>
-                    <h5 class="card-title text-center" style="font-weight: 700;font-size: xx-large;">Sign Up</h5>
-                    <form method="POST" enctype= "multipart/form-data">
-                        {% csrf_token %}
-                        {{ signupform|crispy }}
-                        {{ providerform|crispy }}
-                        <button class="btn btn-lg btn-primary" type="submit">Sign up</button>
-                    </form>
-
-
                 </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock body %}
+
+    <footer>
+        <div class="footer-content">
+            <div class="column-1">
+                <img src="{% static 'userapp/svg/logo-white.svg' %}" alt="logo">
+                <div class="links">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Terms and Conditions</a>
+                </div>
+            </div>
+            <div class="column-2">
+                <p>Subscribe to our Newsletter</p>
+                <div class="subscribe-group">
+                    <input type="email" name="newsletter" placeholder="Email Address">
+                    <div class="submit"><a href="#">OK</a></div>
+                </div>
+            </div>
+            <div class="social">
+                <i class="fa fa-2x fa-facebook-f"></i>
+                <i class="fa fa-2x fa-instagram"></i>
+                <i class="fa fa-2x fa-twitter"></i>
+            </div>
+            <div class="address">
+                <h3>Address:<br></h3>
+                <p>Chicken Dinner Road,<br>Canyon Country,<br>Idaho,<br>USA.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="margin-bottom:0px">&copy;Rinovation, Inc.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('.menu-toggle').click(function () {
+                $('.menu-toggle').toggleClass('active');
+                $('nav').toggleClass('active');
+            })
+        })
+    </script>
+</body>
+
+</html>

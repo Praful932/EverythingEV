@@ -1,0 +1,67 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+{% block head %}
+<title>Live Feed</title>
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/sass/live_data.css' %}">
+<style>
+  .fas {
+    font-family: 'FontAwesome' !important;
+  }
+</style>
+{% endblock head %}
+{% block body %}
+<main>
+  <div id="live-div">
+    <h1>Live Feed</h1>
+    <div id="data-table">
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(document).ready(function () {
+    $('.menu-toggle').click(function () {
+      $('.menu-toggle').toggleClass('active');
+      $('nav').toggleClass('active');
+    })
+  })
+</script>
+<script>
+  setInterval(getdata, 5000);
+  $(document).ready(function () {
+    getdata();
+  });
+  function getdata() {
+    $.ajax({
+      url: "https://docs.google.com/spreadsheets/d/1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU/export?format=csv&id=1Y1kj1Deo64_1vfPrxoNzmV0PfXkVr4Oi9bERY_PdTpU&gid=0",
+      dataType: "text",
+      success: function (data) {
+        var records = data.split(/\r?\n|\r/);
+        var table_data = '<table style="margin:20px auto; width:100%; border-collapse:collapse" id="table01">';
+        for (var count = 0; count < records.length; count++) {
+          var cell_data = records[count].split(",");
+          if (count % 2)
+            table_data += '<tr>';
+          else
+            table_data += '<tr style="background-color: #dadada;">';
+          // Skip Lic Plates
+          for (var cell_count = 1; cell_count < cell_data.length; cell_count++) {
+            if (count === 0) {
+              table_data += '<th style="padding:12px 15px; border: 1px solid #3a3a3a; text-align: center; font-size: 1.6rem; background-color: #20AAAA; color: black;">' + cell_data[cell_count] + '</th>';
+            }
+            else {
+              table_data += '<td style="padding:12px 15px; border: 1px solid #3a3a3a; text-align: center; font-size: 1.6rem;">' + cell_data[cell_count] + '</td>';
+            }
+          }
+          table_data += '</tr>';
+        }
+        table_data += '</table>';
+
+        $('#data-table').html(table_data);
+      }
+    });
+  }
+</script>
+{% endblock %}

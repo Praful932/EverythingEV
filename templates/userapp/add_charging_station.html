@@ -1,67 +1,161 @@
-{% extends 'userapp/layout.html' %}
 {% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'userapp/rs.css'%}">
-{% endblock head %}
-
-{% block title %}
-Add Charging Station
-{% endblock title %}
 {% load crispy_forms_tags %}
-{% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col ml-10">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Charging Station</h5>                    
-                    <form method="POST" enctype="multipart/form-data" id="form1" >
-                        {% csrf_token %}
-                        {{ stationform|crispy }}
-                        <button type="submit" class="btn btn-info" onclick="submitloc()">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col ml-10">
-            <div class="card card-signin my-5">
-                <span class="card-header cmap">
-                    <h4 style="float: left;">Add Charging Station</h4>
-                    <input type="text" class="form-control" style="float:right; width: 235px;" id="location-text-box"
-                    placeholder="Enter place to search">
-                    </span>
-                <div class="card-body">
-                    <div id="map"></div>
-                </div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location</title>
+  <link rel="stylesheet" href="{% static 'userapp/add_charging_station.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    .card-body {
+      height: 550px;
+    }
+
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <style>
+    df-messenger {
+      --df-messenger-send-icon: #1eff00;
+      --df-messenger-button-titlebar-color: #90ff82;
+
+    }
+  </style>
+  <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+    language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
+  </df-messenger>
+  <header>
+    <div class="logo">
+      <a href="{% url 'index' %}"><img src="{% static 'userapp/svg/logo.svg' %}" alt="logo"></a>
     </div>
-</div>
-{% endblock body %}
+    <div class="menu-toggle"></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="{%  url 'index' %}" class="active">Home</a></li>
+        {% if user.is_authenticated %}
+        {% if user.is_provider %}
+        <li><a href="{% url 'Provider-Dashboard' %}" role="button">Dashboard</a></li>
+        {% elif not user.is_provider and not user.is_consumer %}
+        <li><a href="{% url 'Live-Data' %}" role="button">Live Feed</a></li>
+        {% else %}
+        <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
+        {% endif %}
+        <li><a href="{% url 'account_logout' %}" role="button" class="login">Log out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
+        <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+  </header>
 
-{% block script %}
-<script>
+  <div class="container" style="font-size: 100%;margin-bottom: 20px;">
+    <div class="row">
+      <div class="col ml-10">
+        <div class="card card-signin my-5">
+          <div class="card-body input-form">
+            <h3 class="card-title text-center">Charging Station</h3>
+            <div class="card-header cmap mobile">
+              <h4 style="float: left;">Location</h4>
+              <input type="text" class="form-control" style="float:right; width: 235px;" id="location-text-box"
+                placeholder="Enter place to search">
+            </div>
+            <form method="POST" enctype="multipart/form-data" id="form1">
+              {% csrf_token %}
+              {{ stationform|crispy }}
+              <button type="submit" class="btn btn-lg btn-info" onclick="submitloc()">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col ml-10 card-map">
+        <div class="card card-signin my-5">
+          <span class="card-header cmap">
+            <h4 style="float: left;">Location</h4>
+            <input type="text" class="form-control" style="float:right; width: 235px;" id="location-text-box"
+              placeholder="Enter place to search">
+          </span>
+          <div class="card-body location">
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-content">
+      <div class="column-1">
+        <img src="{% static 'userapp/svg/logo-white.svg' %}" alt="logo">
+        <div class="links">
+          <a href="#">About Us</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Terms and Conditions</a>
+        </div>
+      </div>
+      <div class="column-2">
+        <p>Subscribe to our Newsletter</p>
+        <div class="subscribe-group">
+          <input type="email" name="newsletter" placeholder="Email Address">
+          <div class="submit"><a href="#">OK</a></div>
+        </div>
+      </div>
+      <div class="social">
+        <i class="fa fa-2x fa-facebook-f"></i>
+        <i class="fa fa-2x fa-instagram"></i>
+        <i class="fa fa-2x fa-twitter"></i>
+      </div>
+      <div class="address">
+        <h3>Address:<br></h3>
+        <p>Chicken Dinner Road,<br>Canyon Country,<br>Idaho,<br>USA.</p>
+      </div>
+    </div>
+    <div class="footer-end">
+      <p style="margin-bottom:0px">&copy;Rinovation, Inc.</p>
+    </div>
+  </footer>
 
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('.menu-toggle').click(function () {
+        $('.menu-toggle').toggleClass('active');
+        $('nav').toggleClass('active');
+      })
+    })
+  </script>
+  <script>
     var finallat;
     var finallng;
     var location;
     document.getElementById('location-text-box').value = '';
     var map;
     var marker;
-  
+
     function initMap() {
       var mapOptions = {
         zoom: 12
       };
       map = new google.maps.Map(document.getElementById('map'),
         mapOptions);
-  
+
       // Get GEOLOCATION
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
           var pos = new google.maps.LatLng(position.coords.latitude,
             position.coords.longitude);
-  
+
           map.setCenter(pos);
           marker = new google.maps.Marker({
             position: pos,
@@ -75,45 +169,45 @@ Add Charging Station
         // Browser doesn't support Geolocation
         handleNoGeolocation(false);
       }
-  
+
       function handleNoGeolocation(errorFlag) {
         if (errorFlag) {
           var content = 'Error: The Geolocation service failed.';
         } else {
           var content = 'Error: Your browser doesn\'t support geolocation.';
         }
-  
+
         var options = {
           map: map,
           position: new google.maps.LatLng(60, 105),
           content: content
         };
-  
+
         map.setCenter(options.position);
         marker = new google.maps.Marker({
           position: options.position,
           map: map,
           draggable: true
         });
-  
+
       }
-  
+
       // get places auto-complete when user type in location-text-box
       var input = /** @type {HTMLInputElement} */
         (
           document.getElementById('location-text-box'));
-  
-  
+
+
       var autocomplete = new google.maps.places.Autocomplete(input);
       autocomplete.bindTo('bounds', map);
-  
+
       var infowindow = new google.maps.InfoWindow();
       marker = new google.maps.Marker({
         map: map,
         anchorPoint: new google.maps.Point(0, -29),
         draggable: true
       });
-  
+
       google.maps.event.addListener(autocomplete, 'place_changed', function () {
         infowindow.close();
         marker.setVisible(false);
@@ -121,7 +215,7 @@ Add Charging Station
         if (!place.geometry) {
           return;
         }
-  
+
         // If the place has a geometry, then present it on a map.
         if (place.geometry.viewport) {
           map.fitBounds(place.geometry.viewport);
@@ -129,25 +223,24 @@ Add Charging Station
           map.setCenter(place.geometry.location);
           map.setZoom(17); // Why 17? Because it looks good.
         }
-  
+
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
-  
+
         var address = '';
         if (place.address_components) {
           address = [
             (place.address_components[0] && place.address_components[0].short_name || ''), (place.address_components[1] && place.address_components[1].short_name || ''), (place.address_components[2] && place.address_components[2].short_name || '')
           ].join(' ');
         }
-  
+
       });
-  
-  
-  
+
+
+
     }
-  
-    google.maps.event.addDomListener(window, 'load', initialize);
-  
+
+
     function submitloc() {
       //finallat = marker.position.lat();
       //finallng = marker.position.lng();
@@ -159,6 +252,8 @@ Add Charging Station
     }
   </script>
   <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"
-  async defer></script>
-{% endblock %}
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
+
+</body>
+
+</html>

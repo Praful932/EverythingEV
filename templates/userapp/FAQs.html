@@ -1,10 +1,14 @@
-{% extends "userapp/layout.html" %} 
-{% load static %} 
+{% extends "userapp/layout.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'userapp/faq_style.css' %}">
-<title>FAQs</title> 
-{% endblock %} 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<title>FAQs</title>
+{% endblock %}
 {% block body %}
 <div id="thankyou" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -350,7 +354,7 @@
 {% block script %}
 <script>
     const faqs = document.querySelectorAll(".faq");
-    let toggleDiv = function(evt) {
+    let toggleDiv = function (evt) {
         const isActive = this.classList.contains("active");
         /// reset all
         faqs.forEach((x) => {

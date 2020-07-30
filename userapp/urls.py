@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from userapp.views import (ChargingStationProviderDeleteView, MaintenanceMan, SearchListView, BuildCs)
+from userapp.views import (ChargingStationProviderDeleteView, MaintenanceMan, SearchListView)
 
 # ChargingStation - CS
 urlpatterns = [
@@ -21,7 +21,7 @@ urlpatterns = [
     path('Charging-Station/all-stations/', views.ChargingStationConsumer, name='Charging-Station-CLV'),
     path('Charge-Pooling/', views.ChargePooling, name='Charge-Pooling'),
     path('Route-Your-Way/', views.RouteYourWay, name='Route-Your-Way'),
-    path('registerMaintenance/', MaintenanceMan.as_view(), name="registerMaintenance"),
+    path('registerMaintenance/', MaintenanceMan.as_view(), name="Register-As-Maintenance"),
     path('Maintenance-man/dashboard', views.MaintenanceDashboard, name='Maintenance-man-dashboard'),
     path('Maintenance-man/view-all', SearchListView.as_view(), name='All-Maintenance-Man'),
     path('Maintenance-man/complaints', views.MaintenanceComplaint, name='Complaint-Dashboard'),
@@ -34,10 +34,10 @@ urlpatterns = [
     path('sales-page/three-wheelers', views.threeWheelers, name="three-wheelers"),
     path('sales-page/four-wheelers', views.fourWheelers, name="four-wheelers"),
     path('sales-page/heavy-vehicles', views.heavyVehicles, name="heavy-vehicles"),
-    path('survey/', views.survey, name="survey"),
     path('buildcs/', views.BuildCs, name="BuildCs"),
     path('savings-calculator/', views.savingsCalculator, name="savings-calculator"),
-    path('dash-welcome/', views.dashwelcome, name="dash-layout")
+    path('dash-welcome/', views.dashwelcome, name="dash-welcome"),
+    path('live_data/', views.live_data, name="Live-Data")
 ]
 
 if settings.DEBUG:

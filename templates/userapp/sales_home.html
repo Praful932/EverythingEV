@@ -1,0 +1,29 @@
+{% extends "userapp/layout.html" %}
+{% load static %}
+<title>Sales</title>
+{% block head %}
+<link rel="stylesheet" href="{% static 'userapp/sass/sales_home.cs' %}">
+{% endblock head %}
+
+{% block body %}
+<main>
+    <div class="salesBanner">
+        <img src="{% static 'userapp/svg/sales_home_art.svg' %}">
+        <section class="text">
+            <h2>Looking For EVs with all the details?
+                <br>You are in the right place.</h2>
+            <p>Get all the information regarding various EV models
+                at a single place. Find nearby sellers and directly
+                book the test ride!
+            </p>
+        </section>
+    </div>
+    <div class="vehicle-types">
+        <a href="{% url 'two-wheelers' %}"><img src="{% static 'userapp/svg/two_wheelers.svg' %}"
+                alt="two wheelers"></a>
+        <a href="{% url 'three-wheelers' %}"><img src="{% static 'userapp/svg/three_wheelers.svg' %}" alt="three wheelers"></a>
+        <a href="{% url 'four-wheelers' %}"><img src="{% static 'userapp/svg/four_wheelers.svg' %}" alt="four wheelers"></a>
+        <a href="{% url 'heavy-vehicles' %}"><img src="{% static 'userapp/svg/heavy_vehicles.svg' %}" alt="heavy vehicles"></a>
+    </div>
+</main>
+{% endblock body %}

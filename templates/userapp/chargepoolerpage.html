@@ -1,99 +1,87 @@
 {% extends "userapp/layout.html" %}
 {% load static %}
 {% block head %}
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
-integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+<title>EverythingEV</title>
+<link rel="stylesheet" type="text/css" href="{%  static 'userapp/sass/charge_pooling.css' %}">
 <style>
- body{
-   background-image: url(https://cdn.pixabay.com/photo/2019/06/23/08/35/electric-car-4293130_1280.jpg);
-    background-repeat: no-repeat;
-   background-size: cover;
-   
- } 
- .navbar {
-  background-color:rgba(108, 122, 137, 0.6);
-  position: fixed;
-}
-h1{
-  font-family: 'Merriweather', serif;
-   font-weight: 700;
-   color: #0C0F2F;
-}
-
+  .fas {
+    font-family: 'FontAwesome' !important;
+  }
 </style>
-{% endblock %}
+{% endblock head %}
 {% block body %}
 
-<div class="container text-center" style="margin-top: 100px;">
-  <div style="height: 160px; width: 100%;background-color: rgba(232, 236, 241, 0.5); border-radius: 10px;"> 
- <div style="padding-top: 1px;">
-  <h1 >Find a Charge Pooler</h1>
-    <p style="font-size: 20px;">Type place where you want to search in the input box below</p> 
-    <div style="padding-left: 16%;">
-    <input class="form-control" id="myInput" style="width: 80%;padding-left: 20px;" type="text" placeholder="Search for City or Region..">
-  </div> 
-</div> 
-</div>  
-    <br>
-   
-    <table class="table table-bordered table-striped", id="table01", style="display: none;
-    background-color:rgba(108, 122, 137, 0.9);font-family: 'Rubik', sans-serif;">
-      <thead style="background-color: rgba(108, 122, 137, 0.7);">
-        <tr style="color:#0C0F2F; ">
+<main>
+  <div class="chargePooling">
+    <h1>Charge Pooling</h1>
+    <div class="location">
+      <input class="form-control" id="myInput" type="text" placeholder="Enter place to search">
+      <span>Location<i class="fa fa-compass"></i></span>
+    </div>
+    <h3>Available Chargers:</h3>
+    <div class="chargers_table">
+      <table class="table" id="table01" style="display: none;">
+        <thead>
           <th>Where</th>
           <th>Contact</th>
           <th>Normal Charger</th>
           <th>Fast Charger</th>
           <th>Cost per Kwh</th>
-        </tr>
-      </thead>
-      <tbody id="myTable" style="color:#0C0F2F; ">
-        {% for chargepooler in chargepoolers %}
-        <tr>
-          <td>{{ chargepooler.local_area|title }}, {{ chargepooler.city|title }}</td>
-          <td>{{ chargepooler.ph_no }}</td>
-          <td>{% if chargepooler.normal_port %}<i class="fas fa-check"></i>
-            {% else %}<i class="fas fa-times"></i>{% endif%}</td>
-          <td>{% if chargepooler.fast_port %}<i class="fas fa-check"></i>
-            {% else %}<i class="fas fa-times"></i> {% endif%}</td>
-          <td>{{ chargepooler.cost }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    </b>
+        </thead>
+        <tbody id="myTable">
+          {% for chargepooler in chargepoolers %}
+          <tr>
+            <td>{{ chargepooler.local_area|title }}, {{ chargepooler.city|title }}</td>
+            <td><a href="tel: +91{{chargepooler.ph_no}}">{{ chargepooler.ph_no }}</a></td>
+            <td>{% if chargepooler.normal_port %}<i class="fas fa-check"></i>
+              {% else %}<i class="fas fa-times"></i>{% endif%}</td>
+            <td>{% if chargepooler.fast_port %}<i class="fas fa-check"></i>
+              {% else %}<i class="fas fa-times"></i> {% endif%}</td>
+            <td>{{ chargepooler.cost }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
-  
-  
+</main>
 
 {% endblock body %}
 
-
 {% block script %}
 <script>
-      $(document).ready(function(){
-        
-        $("#myInput").on("keyup", function() {
-          if($(this).val().length==0)
-            $("#table01").hide();
-          else
-          {
-          $("#table01").show();
-          var value = $(this).val().toLowerCase();
-          $("#myTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-          });
-        }
+  $(document).ready(function () {
+
+    $("#myInput").on("keyup", function () {
+      if ($(this).val().length == 0)
+        $("#table01").hide();
+      else {
+        $("#table01").show();
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
-      });
+      }
+    });
+  });
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-{% endblock %}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.menu-toggle').click(function () {
+      $('.menu-toggle').toggleClass('active');
+      $('nav').toggleClass('active');
+    })
+  })
+</script>
+<script>
+  $(document).ready(function () {
+    $('.menu-toggle').click(function () {
+      $('.menu-toggle').toggleClass('active');
+      $('nav').toggleClass('active');
+    })
+  })
+</script>
+{% endblock script %}

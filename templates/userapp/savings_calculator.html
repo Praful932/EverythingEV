@@ -1,161 +1,163 @@
-{% extends "userapp/layout.html" %} {% load static %} 
+{% extends "userapp/layout.html" %} {% load static %}
 {% block head %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>
-    Monthly Savings Calculator
+    Monthly Savings and Mileage Calculator
 </title>
-{% endblock %} 
+{% endblock %}
 {% block body %}
-<body></body>
-<br><br><br>
-<div class="container-fluid row" style="background-color: #F2F2F2; margin-left: 0px; margin-right: 0px;">
-    <div class="col-md-6 m-auto">
-        <h1 class="col-md-6" style="padding-left: 45%;">Savings</h1>
-        <h1 class="col-md-6" style="padding-left: 45%;">Calculator</h1>
+<main>
+    <div class="savingsBanner">
+        <h1>Savings <br> Calculator</h1>
+        <img src="{% static 'userapp/svg/savings_art.svg' %}">
     </div>
-    <img class="col-md-6" src="https://www.svgrepo.com/show/272153/savings.svg" alt="savings" style="width: fit-content; height:fit-content; ">  
-</div>
-<br>
-<div class="row container">
-    <div class="col-md-2"></div>
-    <div class="col-md-10 row" style="background-color: #445552; border-radius: 10px;">
-        <h3 class="col-md-12 text-white text-center pb-3 mt-5">Calculate your monthly savings if you're switching to Electric Vehicles.</h3>
-        <div class="col-md-1"></div>
-        <div class="col-md-4" style="background-color: white; border-radius: 10px;">
-            <h4 class="text-center">Step 1:</h4>
-            <div class="text-center mt-3">Choose the vehicle brand</div>
-            <div class="text-center mt-3">
-                <select name="" id="">
-                    <option selected disabled = "true">-- Select an EV --</option>
-                    {% for EV in Vehicle %}
+    <div class="calculate">
+        <h2>Calculate your monthly savings if you're switching to Electric Vehicles.</h2>
+        <div class="input-group">
+            <div class="brand">
+                <h3>Step 1</h3>
+                <div class="step1">
+                    <p>Choose the <br> Vehicle Brand</p>
+                    <select name="" id="">
+                        <option selected disabled="true">-- Select an EV --</option>
+                        {% for EV in Vehicle %}
                         <option>{{ EV.company }}</option>
-                    {% endfor %}
-                </select>                
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="distance">
+                <h3>Step 2</h3>
+                <div class="step3">
+                    <p>Enter the average
+                        <br>distance you travel
+                        <br>with car everyday</p>
+                    <div class="selection">
+                        <input type='number' id='nameField' maxlength="4"> km(s)
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-4" style="background-color: white; border-radius: 10px;">
-            <h4 class="text-center">Step 2:</h4>
-            <div class="text-center mt-3">Enter the average distance you travel with your car everyday</div>
-            <div class="text-center mt-3 mb-3">
-                <input type='number' id='nameField'> km(s)
+    </div>
+
+
+
+    <div class="result-group" id="results" style="margin-bottom: 100px;">
+        <div class="numeric">
+            <p class="title">Cost</p>
+            <div class="costings">
+                <p class="cars">For Fuel Cars:₹ <span id='nameDisplay'>0</span><span class="per">/month</span></p>
+                <p class="cars">For EV:<span id='EV'>0</span><span class="per">/month</span></p>
             </div>
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-12 mt-5"></div>
-    </div>
-
-    <div class="col-md-2"></div>
-    <div class="row col-md-10">
-        <h3 class="col-md-12 text-center mt-3 mb-5 pb-3 pt-2">Cost when you drive (per km.)...</h3>
-        <div class="col-md-5 text-center" style="background-color: #F2F2F2;  border-radius: 10px;">
-            <h4 class="mb-2 pt-3">Fuelled Vehicle</h4><hr>
-            <h5 class="pb-3">₹ <span id='nameDisplay'>0</span> monthly</h5>           
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-5 text-center" style="background-color: #F2F2F2;  border-radius: 10px;">
-            <h4 class="mb-2 pt-3">Electric Vehicle</h4><hr>
-            <h5 class="pb-3">₹ <span id='EV'>0</span> monthly</h5>           
+        <div class="numeric">
+            <p class="title">Your Estimated Savings*</p>
+            <div class="perMonth">
+                <p class="value">&#8377;<span id='monthly_savings'>0</span><span class="per">/month</span></p>
+            </div>
+            <div class="perYear">
+                <p class="value">&#8377;<span id='yearly_savings'>0</span><span class="per">/year</span></p>
+            </div>
         </div>
     </div>
-    <div class="col-md-2"></div>
-    <div class="row col-md-10 text-center">
-        <h3 class="col-md-12 mt-3 pt-2 pb-5">You save</h3><hr>
-        <h5 class="col-md-6 text-center">₹ <span id='monthly_savings'>0</span> monthly</h5>           
-        <h5 class="col-md-6 text-center">₹ <span id='yearly_savings'>0</span> yearly</h5>           
+
+    <div class="calculate">
+        <h2>Calculate the Distance you can travel.</h2>
+        <div class="input-group" style="grid-template-columns: 1fr 1fr;">
+            <div class="brand">
+                <h3>Step 1</h3>
+                <div class="step1">
+                    <p>Choose the <br> Vehicle Brand</p>
+                    <select name="" id="">
+                        <option selected disabled="true">-- Select an EV --</option>
+                        {% for EV in Vehicle %}
+                        <option>{{ EV.company }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="distance">
+                <h3>Step 2</h3>
+                <div class="step3">
+                    <p>Enter the current
+                        <br>charging status
+                        <br>of your car</p>
+                    <div class="selection">
+                        <input type="number" id='batteryPercent' aria-valuemin="0" aria-valuemax="100"><span
+                            style="font-size: 2rem;">%</span></input>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-2"></div>
-    <div class="row col-md-10 pt-5">
-        <p class="text-muted">* Disclaimer: This tool is only intended to provide an estimate of potential 
-            savings. Actual results will vary. Customers may not realize similar energy 
-            savings. Vehicle data is subject to change 
-            without notice. This is the estimated residential electricity rate for the 
-            utility. This rate may not include tiered or time-of-use rates. Rates change 
-            periodically. Utility does not warrant or represent that this data is accurate. 
-            In no event shall the utility or its suppliers be liable for any special, 
-            indirect or consequential damages or any damages whatsoever, including, but not 
+    <div class="result-group" style="height:fit-content">
+        <div class="numeric" style="height:fit-content">
+            <p class="title">Distance You can travel</p>
+            <div class="costings">
+                <p class="cars"><span class="cost" id='mileage'>0</span> km(s)</p>
+            </div>
+        </div>
+    </div>
+    <div class="result-group" style="height:fit-content">
+        <p style="color:#6c757d; font-size: 1rem;">* Disclaimer: This tool is only intended to provide an estimate of
+            potential
+            savings. Actual results will vary. Customers may not realize similar energy
+            savings. Vehicle data is subject to change
+            without notice. This is the estimated residential electricity rate for the
+            utility. This rate may not include tiered or time-of-use rates. Rates change
+            periodically. Utility does not warrant or represent that this data is accurate.
+            In no event shall the utility or its suppliers be liable for any special,
+            indirect or consequential damages or any damages whatsoever, including, but not
             limited to claims associated with the accuracy of this data or information.
-        </p>    
+        </p>
     </div>
-</div>
-<br><br>
-<!-- Calculation Logic -->
-<script>
-window.onload = function() {
 
-  var nameField = document.getElementById('nameField');
-  var perKmPetrolCost = 3.4;  // Average value of petrol per km in last 10 years
-  var kWh = 0.2; // Average kwh of an EV
-
-  updateNameDisplay();
-  
-  setInterval(updateNameDisplay, 100);
-  
-  function updateNameDisplay() {
-    var kms = nameField.value || 0;
-    var total_cost_of_FV_per_month = Math.round(perKmPetrolCost * kms * 30);
-    var total_cost_of_EV_per_month = Math.round(kWh * kms * 30);
-    var monthly_savings = Math.round(total_cost_of_FV_per_month - total_cost_of_EV_per_month);
-    var yearly_savings = Math.round(monthly_savings * 12);
-
-    if (kms > 0) {
-      document.getElementById('nameDisplay').innerHTML = total_cost_of_FV_per_month;
-      document.getElementById('EV').innerHTML = total_cost_of_EV_per_month;
-      document.getElementById('monthly_savings').innerHTML = monthly_savings;
-      document.getElementById('yearly_savings').innerHTML = yearly_savings;
-    }
-}
-};
-</script>
-</body>
-
-<footer>
-    <section id="footer">
-        <div class="container">
-            <div class="row text-center text-xs-center text-sm-left text-md-left mb-0 pb-0">
-                <div class="col-xs-12 col-sm-4 col-md-4">
-
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                    <h3 class="text-white text-center">Quick links</h3>
-                    <ul class="list-unstyled quick-links text-center">
-                        <li><a href="{% url 'index' %}"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Home</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">About</span></a></li>
-                        <li><a href="{% url 'Why-Choose-EV' %}"><span
-                            style="font-family:Trebuchet MS; font-size: 18px">Why Choose EV</span></a></li>
-                        <li><a href="{% url 'faqs' %}"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">FAQ</span></a></li>
-                        <li><a href="javascript:void();"><span style="font-family:Trebuchet MS; font-size: 18px">Get
-                                    Started</span></a></li>
-                        <li><a href="javascript:void();"><span
-                                    style="font-family:Trebuchet MS; font-size: 18px">Videos</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-
-                </div>
-            </div>
-            <div class="row" style="padding-top:0px;">
-                <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
-                    <ul class="list-unstyled list-inline social text-center" style="text-align:center;">
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-envelope"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-</footer>
+</main>
 {% endblock body %}
+{% block script %}
+<!--Savings Calculation Logic -->
+<script>
+    window.onload = function () {
+
+        var nameField = document.getElementById('nameField');
+        var perKmPetrolCost = 3.4;  // Average value of petrol per km in last 10 years
+        var kWh = 0.2; // Average kwh of an EV
+
+        updateNameDisplay();
+
+        setInterval(updateNameDisplay, 100);
+
+        function updateNameDisplay() {
+            var kms = nameField.value || 0;
+            var total_cost_of_FV_per_month = Math.round(perKmPetrolCost * kms * 30);
+            var total_cost_of_EV_per_month = Math.round(kWh * kms * 30);
+            var monthly_savings = Math.round(total_cost_of_FV_per_month - total_cost_of_EV_per_month);
+            var yearly_savings = Math.round(monthly_savings * 12);
+
+            if (kms > 0) {
+                document.getElementById('nameDisplay').innerHTML = total_cost_of_FV_per_month;
+                document.getElementById('EV').innerHTML = total_cost_of_EV_per_month;
+                document.getElementById('monthly_savings').innerHTML = monthly_savings;
+                document.getElementById('yearly_savings').innerHTML = yearly_savings;
+            }
+        }
+        var battery = document.getElementById('batteryPercent');
+        var avgRangeOfEV = 234.73;  // Average range of EV - Calculated from the list of vehicles in database
+
+        update();
+
+        setInterval(update, 100);
+
+        function update() {
+            var batteryPercent = battery.value || 0;
+            var mileage = Math.round((avgRangeOfEV * batteryPercent) / 100);
+
+            if (batteryPercent > 0) {
+                document.getElementById('mileage').innerHTML = mileage;
+            }
+        }
+
+    };
+</script>
+{% endblock script %}

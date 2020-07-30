@@ -5,13 +5,13 @@ from django import forms
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
-from django.utils import timezone
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
-                           ChargingStationForm, SupportForm, SurveyForm, CharpoolerForm)
+                           ChargingStationForm, SupportForm, CharpoolerForm)
 from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly, ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, UserRecord, Survey, Vehicle)
+from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
+                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle)
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from Sih.settings import EMAIL_HOST_USER
@@ -36,14 +36,17 @@ def get_distance(lat_1, lng_1, lat_2, lng_2):
 
 def check(request):
     if request.user.is_provider:
-        return redirect('Provider-Dashboard')
+        return redirect('dash-welcome')
     return redirect('index')
 
 
 def index(request):
     if request.user.is_authenticated:
+        username = request.user.username
         try:
-            if Consumer.objects.get(user=request.user):
+            if username == "admin":
+                pass
+            elif Consumer.objects.get(user=request.user):
                 pass
         except Consumer.DoesNotExist:
             try:
@@ -54,6 +57,7 @@ def index(request):
     return render(request, "userapp/index.html")
 
 
+@login_required
 def registerConsumerSocial(request):
     if request.method == 'POST':
         consumerform = ConsumerSignUpForm(request.POST)
@@ -66,6 +70,8 @@ def registerConsumerSocial(request):
             consumerform.save()
             return redirect('index')
     else:
+        if not request.user.is_consumer and not request.user.is_provider:
+            redirect('index')
         consumerform = ConsumerSignUpForm()
     context = {
         'consumerform': consumerform
@@ -163,7 +169,7 @@ def UpdateProfile(request):
         if userform.is_valid() and fieldform.is_valid():
             userform.save()
             fieldform.save()
-            return redirect('Provider-Dashboard')
+            return redirect('index')
     if request.user.is_consumer:
         return render(request, "userapp/updateprofile.html", context=context)
     return render(request, "userapp/provider_profile.html", context=context)
@@ -247,6 +253,10 @@ def ChargingStationConsumer(request):
     lat_user, lng_user = get_user_location()
     cslist = ChargingStation.objects.all()
     distid_list = []
+    pkid = []
+    for ids in cslist:
+        pkid.append(ids.pk)
+
     for cs in cslist:
         # Convert degree to radians
         lat_cs, lng_cs = map(math.radians, [float(cs.lat), float(cs.lng)])
@@ -295,7 +305,8 @@ def ChargingStationConsumer(request):
     cslist = ChargingStation.objects.filter(pk__in=id_list).order_by(preserved)
     context = {
         'csdata': json.dumps(csdata),
-        'cslist': cslist
+        'cslist': cslist,
+        'pkid': json.dumps(pkid)
     }
     return render(request, 'userapp/consumer_charging_stations.html', context=context)
     return redirect('index')
@@ -313,31 +324,35 @@ def ChargingStationAnalytics(request, pk):
         for i in range(24):
             # getattr to access changing field anme
             freq.append(getattr(report, 't'+str(i)))
-        wholecs = ChargingStationRecord.objects.all()
+        wholecs = ChargingStationRecord.objects.filter(cs=current_cs)
         consumption = []
-        sum = 0
-        n = 0
+        total_consumption = 0
+        total_revenue = 0
         for ele in wholecs:
-            n += 1
-            sum += ele.elec_consumption
-        sum /= n
-        consumption.append(sum)
+            total_consumption += float(ele.vehicle.charging_rate) * (ele.duration/60)
+        print(current_cs.price_kwh)
+        total_consumption = round(total_consumption, 2)
+        total_revenue = round(total_consumption * float(current_cs.price_kwh), 2)
         csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
-        sum = 0
+        s = 0
         n = 0
         for cs in csrecord:
             n += 1
-            sum = sum + cs.elec_consumption
-        consumption.append(sum)
+            s = s + cs.elec_consumption
+        consumption.append(s)
         weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
         wr = []
         for i in range(7):
             wr.append(getattr(weekreport, 'd'+str(i+1)))
+        supportform = SupportForm()
         context = {
             'totalcount': reportcount,
             'freq': json.dumps(freq),
             'consumption': json.dumps(consumption),
-            'wr': json.dumps(wr)
+            'wr': json.dumps(wr),
+            'supportform': supportform,
+            'total_revenue': round(total_revenue, 2),
+            'total_consumption': total_consumption
         }
         return render(request, "userapp/cs_analytics.html", context=context)
     return redirect('index')
@@ -360,8 +375,10 @@ def ChargingStationDashboard(request, pk):
             consumption_cleaned.append(int(record.elec_consumption))
         recorddata = [list(x) for x in zip(username_cleaned,
                                            vehicle_cleaned, duration_cleaned, consumption_cleaned)]
+        supportform = SupportForm()
         context = {
-            'records': recorddata
+            'records': recorddata,
+            'supportform': supportform,
         }
         return render(request, "userapp/dash_welcome.html", context=context)
     return redirect('index')
@@ -452,15 +469,15 @@ def bookMaintenanceMan(request, pk):
                 CsM.ph = request.POST.get('phone')
                 cname = request.POST.get('Cs')
                 c = ChargingStation.objects.filter(name=cname)[0]
-                supportform = SupportForm()
                 CsM.CsSelect = c
                 CsM.save()
+                return redirect('dash-welcome')
         return render(request, "booking.html", {'cs': cscount})
 
 
 class SearchListView(ListView):
     model = MaintenanceManDetails
-    template_name = 'userapp/table.html'
+    template_name = 'userapp/MaintainManTable.html'
     context_object_name = 'd'
 
 
@@ -479,8 +496,14 @@ class ComplaintsListView(ListView):
     context_object_name = 'd'
 
 
+@login_required
 def MaintenanceComplaint(request):
     m = MaintenanceManDetails.objects.get(own=request.user.provider)
+    if request.method == 'POST':
+        visited = request.POST.get('visited')
+        CsMaintenance.objects.get(pk=visited).delete()
+        m.CompletedComplaints += 1
+        return redirect('dash-welcome')
     d = m.jobs.all()
     locate = CsMaintenance.objects.filter(Mm=m.id)
     count = m.jobs.count()
@@ -496,10 +519,6 @@ def MaintenanceComplaint(request):
     js_data = [list(x) for x in zip(
         lats_cleaned, lngs_cleaned, pk_cleaned, name_cleaned
     )]
-    if request.method == 'POST':
-        visited = request.POST.get('visited')
-        CsMaintenance.objects.get(pk=visited).delete()
-        m.CompletedComplaints = m.CompletedComplaints+1
 
     total = count+m.CompletedComplaints
     supportform = SupportForm()
@@ -549,46 +568,16 @@ def faq(request):
     return render(request, "userapp/FAQs.html", context=context)
 
 
-def survey(request):
-    lat_user, lng_user = get_user_location()
-    survey_form = SurveyForm()
-    survey_form.fields['lat'].widget = forms.HiddenInput()
-    survey_form.fields['lng'].widget = forms.HiddenInput()
-    survey_form.fields['vehicle'].widget = forms.HiddenInput()
-    survey_form.fields['port_type'].widget = forms.HiddenInput()
-    survey_form.fields['start_time'].widget = forms.HiddenInput()
-    survey_form.fields['stop_time'].widget = forms.HiddenInput()
-    context = {
-        'survey_form': survey_form,
-        'lat_user': lat_user,
-        'lng_user': lng_user,
-    }
-    user_survey = Survey()
-    vehicleobj = Vehicle.objects.filter(user=request.user)
-    if request.method == "POST":
-        port_type = request.POST.get('port_type')
-        stop_time = request.POST.get('duration')
-        vehicle = request.POST.get('vehicle')
-        distance = request.POST.get('distance')
-        user_survey.consumer = request.user.consumer
-        if port_type == "slow":
-            user_survey.slow_port = True
-        else:
-            user_survey.fast_port = True
-        user_survey.distance_travelled = 10
-        user_survey.charging_time = 12
-        user_survey.vehicle_name = Vehicle.objects.first()
-        user_survey.save()
-
-    return render(request, "userapp/survey.html", context=context)
-
-
 def WhyChooseEV(request):
-    return render(request, "userapp/why_choose_ev.html")
+    supportform = SupportForm()
+    context = {
+        'supportform': supportform
+    }
+    return render(request, "userapp/why_choose_ev.html", context=context)
 
 
 def salesPage(request):
-    return render(request, "userapp/sales_page.html")
+    return render(request, "userapp/sales_home.html")
 
 
 def twoWheelers(request):
@@ -610,8 +599,59 @@ def heavyVehicles(request):
 def BuildCs(request):
     return render(request, "buildchargingstation.html")
 
+
 def savingsCalculator(request):
     company = Vehicle.objects.all()
     return render(request, "userapp/savings_calculator.html", {"Vehicle": company})
+
+
+@login_required
 def dashwelcome(request):
-    return render(request, "userapp/dash_welcome.html")
+    if request.user.is_provider:
+        current_provider = request.user.provider
+        all_cs = current_provider.ownerof.all()
+        try:
+            if request.user.provider.maintenancemandetails:
+                pass
+        except MaintenanceManDetails.DoesNotExist:
+            pass
+        # If only Maintainance not CS Owner
+        if not all_cs:
+            return redirect('Complaint-Dashboard')
+        total_visits = 0
+        total_consumption = 0
+        total_revenue = 0
+        best_revenue = 0
+        best_cs = ""
+        for cs in all_cs:
+            all_record_cs = cs.csrecord.all()
+            consumption_cs = 0
+            for record in all_record_cs:
+                total_visits += 1
+                consumption_cs += float(record.vehicle.charging_rate) * (record.duration/60)
+            currentcs_revenue = float(cs.price_kwh) * consumption_cs
+            if currentcs_revenue > best_revenue:
+                best_cs = cs.name
+                best_revenue = currentcs_revenue
+            total_revenue += currentcs_revenue
+            total_consumption += consumption_cs
+        supportform = SupportForm()
+        context = {
+            'supportform': supportform,
+            'total_visits': total_visits,
+            'total_revenue': round(total_revenue, 2),
+            'total_consumption': round(total_consumption, 2),
+            'best_revenue': round(best_revenue, 2),
+            'best_cs': best_cs
+        }
+        return render(request, "userapp/dash_welcome.html", context=context)
+    else:
+        # To Meme
+        return redirect('index')
+
+
+@login_required
+def live_data(request):
+    if not request.user.is_consumer and not request.user.is_provider:
+        return render(request, "userapp/live_data.html")
+    return redirect('index')

@@ -1,0 +1,266 @@
+main {
+    .savingsBanner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: #E9E9E9;
+        width: 100%;
+        padding-left: 2rem;
+        justify-items: center;
+
+        h1 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 6rem;
+            font-weight: 700;
+            align-self: center;
+            width: fit-content;
+            margin-left: 100px;
+        }
+
+        img {
+            width: 25rem;
+            height: 25rem;
+            margin-right: 100px;
+        }
+    }
+
+    .calculate {
+        background-color: #2d677a;
+        text-align: center;
+        width: 800px;
+        border-radius: 10px;
+        margin: 30px auto;
+        padding: 15px;
+        height: 240px;
+
+        h2 {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 0.5fr;
+            justify-content: center;
+
+            .brand,
+            .distance {
+                height: 150px;
+                margin: 10px;
+                width: 100%;
+
+                h3 {
+                    font-size: 2rem;
+                }
+
+                .step1,
+                .step2,
+                .step3 {
+                    margin: 5px auto;
+                    padding-top: 25px;
+                    background-color: white;
+                    height: 14rem;
+                    width: 80%;
+                    text-align: center;
+                    border-radius: 10px;
+
+                    p {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .step1 {
+                    p {
+                        margin: 15px 0;
+                    }
+
+                    select {
+                        border: 0.5px black solid;
+                    }
+                }
+
+                .step3 {
+                    .selection {
+                        margin-bottom: 10px;
+
+                        input {
+                            width: 60px;
+                            height: 25px;
+                            border: 0.5px black solid;
+                            font-size: 2rem;
+                        }
+
+                        select {
+                            border: 0.5px black solid;
+                        }
+                    }
+
+                    p {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+
+            .submitInput {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                a {
+                    text-decoration: none;
+                    font-size: 1.4rem;
+                    background-color: white;
+                    color: black;
+                    padding: 5px 20px;
+                    margin-top: 30px;
+                    border-radius: 5px;
+                }
+
+            }
+        }
+    }
+
+    .result-group {
+        display: flex;
+        justify-content: space-around;
+        height: 250px;
+        width: 800px;
+        margin: 40px auto;
+        align-content: center;
+
+        .numeric {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 300px;
+            height: 250px;
+            border: 0.5px #535353 solid;
+            border-radius: 5px;
+            margin-top: 20px;
+            padding: 20px;
+            padding-bottom: 0px;
+
+            .title {
+                font-size: 2rem;
+                color: #535353;
+                margin-bottom: 10px;
+            }
+
+            .costings {
+                .cars {
+                    display: block;
+                    font-size: 2rem;
+                    font-weight: 500;
+
+                    .cost {
+                        font-size: 3rem;
+                        font-weight: bold;
+                    }
+
+                    .per {
+                        font-weight: 400;
+                        display: inline;
+                        font-size: 1rem;
+                    }
+                }
+            }
+
+            .perMonth,
+            .perYear {
+                .value {
+                    font-size: 4rem;
+                    font-weight: bold;
+
+                    .per {
+                        font-weight: 400;
+                        display: inline;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+
+        .graph {
+            img {
+                width: 400px;
+                height: 230px;
+            }
+        }
+
+    }
+}
+
+
+@media(max-width:800px) {
+    main {
+        .savingsBanner {
+            h1 {
+                font-size: 5rem;
+            }
+        }
+
+        .calculate {
+            width: 100vw;
+        }
+
+        .result-group {
+            width: 90%;
+
+            .graph {
+                img {
+                    width: 350px;
+                    height: 230px;
+                }
+            }
+        }
+
+    }
+}
+
+@media(max-width:600px) {
+    main {
+        .savingsBanner {
+            height: 250px;
+
+            h1 {
+                font-size: 10vw;
+            }
+
+            img {
+                display: none;
+            }
+        }
+
+        .calculate {
+            height: auto;
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .input-group {
+                display: flex;
+                flex-direction: column;
+
+                .brand,
+                .model,
+                .distance {
+                    margin-top: 20px;
+                    height: auto;
+                }
+
+                .submitInput {
+                    a {
+                        margin: 10px;
+                    }
+                }
+            }
+        }
+
+        .result-group {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

@@ -1,365 +1,361 @@
-{% extends "userapp/dash_layout.html"%} {% load static %} {% block head %}
-<link rel="stylesheet" type="text/css" href="{%  static 'userapp/cs_analytics.css' %}"> {% endblock %} {% block body %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'userapp/dashboard_home.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 
-<!-- Individual Analytics -->
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                <div class="container">
-                    <div class="px-5 pt-4 text-center">
-                        <div class="col-md-12">
-                            <p id="businessName" class="h1 animated fadeInLeft"><b>Statistics</b></p>
-                        </div>
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #90ff82;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
+    <main>
+        <div id="thankyou" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thank you!</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p class="animated fadeInLeft"><span class="font-weight-bold">Data Sources:</span><span>
-                                    Users</span>
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <p class="animated fadeInLeft text-right">
-                            </p>
-                        </div>
+                    <div class="modal-body">
+                        <p>We will get back to you shortly</p>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card green-chart mb-4 animated fadeInLeft card-body">
-                                <p class="text-white font-weight-bold animated fadeInLeft">Total Users</p>
-                                <p class="h3 text-white animated fadeInLeft">{{ totalcount }}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card green-chart mb-4 animated fadeInLeft card-body">
-                                <p class="text-white font-weight-bold animated fadeInLeft">Total Charging Stations
-                                </p>
-                                <p class="h3 text-white animated fadeInLeft">dummy</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card green-chart mb-4 animated fadeInLeft card-body">
-                                <p class="text-white font-weight-bold animated fadeInLeft">Total Electricity Consumed(Today)
-                                </p>
-                                <p class="h3 text-white animated fadeInLeft">12000 KWh</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="card card-body animated fadeInLeft">
-                                <p class="black-text font-weight-bold animated fadeInLeft">Total Charging Expenses
-                                </p>
-                                <p class="h3 black-text animated fadeInLeft">Rs 100</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card card-body animated fadeInLeft">
-                                <p class="black-text font-weight-bold animated fadeInLeft">Total Savings</p>
-                                <p class="h3 black-text animated fadeInLeft">Rs 2000</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-10 justify-content-center">
-                            <div class="line-chart">
-                                <div class="aspect-ratio">
-                                    <canvas id="chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-10 justify-content-center">
-                            <div class="chartjs-wrapper">
-                                <canvas class="chartjs-gauge"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="container">
-                            <br />
-                            <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-10">
-                                    <!--       Chart.js Canvas Tag -->
-                                    <canvas id="barChart"></canvas>
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-10"><button type="button" class="btn btn-success btn-md" onclick="toggleChart();">Toggle Chart </button></div>
-                                <div class="col-md-1"></div>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
 
-    </div>
-    </div>
-</section>
+        <div class="modal fade" id="supportmodal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Your Issue</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" id="supportform">
+                            {% csrf_token %}
+                            {{ supportform|crispy }}
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Submit" form="supportform">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layout">
+            <div class="dashboardSidebar" id="sidebar">
+                <div class="upperSidebar">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    </a>
+                    <a href="#"><i class="fa fa-bell fa-lg"></i></a>
+                    <i class="fa fa-times" id="close"></i>
+                </div>
+                <div class="lowerSidebar">
+                    <div class="user">
+                        <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
+                        <h4>Hello, {{ request.user.username }}</h4>
+                    </div>
+                    <div class="links">
+                        <a href="{% url 'dash-welcome' %}"><i class="fa fa-home"></i>Home</a>
+                        <a href="{% url 'Provider-Dashboard' %}" class="active"><i
+                                class="fa fa-briefcase"></i>Business</a>
+                        {% if request.user.provider.maintenancemandetails %}
+                        <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
+                        {% else %}
+                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide
+                            Maintenance</a>
+                        {% endif %}
+                        {% if cslist %}
+                        <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
+                        {% endif %}
+                        <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboardContent">
+                <div class="upperContent">
+                    <a href="#">Logout</a>
+                    <div id="button"><i class="fa fa-bars"></i></div>
+                </div>
+                <div class="lowerContent">
+                    <div class="title">
+                        <h1>Statistics</h1>
+                        <p>Source: Users</p>
+                    </div>
+                    <div class="statCards">
+                        <div class="users">
+                            <p class="card-name">Total Users</p>
+                            <p class="value">{{ totalcount }}</p>
+                        </div>
+                        <div class="revenue">
+                            <p class="card-name">Total Revenue</p>
+                            <p class="value">&#8377; {{ total_revenue }}</p>
+                        </div>
+                        <div class="consumption">
+                            <p class="card-name">Electricity Consumption</p>
+                            <p class="value">{{ total_consumption }} kWh</p>
+                        </div>
+                    </div>
+                    <h3>Graphical Representation</h3>
+                    <div class="line-chart">
+                        <div class="aspect-ratio">
+                            <canvas id="chart"></canvas>
+                        </div>
+                    </div>
+                    <canvas id="barChart"></canvas>
+                    <button type="button" class="btn btn-success btn-md" onclick="toggleChart();">Toggle Chart </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('button');
+        const close = document.getElementById('close');
+        button.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+        close.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+    </script>
+    <script src=" https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
+    <script>
+        var freq = JSON.parse('{{ freq|safe }}');
+        var consumption = JSON.parse('{{ consumption|safe }}');
+        var wr = JSON.parse('{{ wr|safe }}');
+        // ============================================
+        // As of Chart.js v2.5.0
+        // http://www.chartjs.org/docs
+        // ============================================
+
+        var chart = document.getElementById('chart').getContext('2d'),
+            gradient = chart.createLinearGradient(0, 0, 0, 450);
+
+        gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)');
+        gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
 
 
-
-{% endblock %} {% block script %}
-<!-- Script -->
-<script src=" https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="script.js"></script>
-
-<!-- Script for charts -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script src="https://codepen.io/grayghostvisuals/pen/a08e0d79c150ff5030f9b6afaa137749"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>
-<script>
-    var freq = JSON.parse('{{ freq|safe }}');
-    var consumption = JSON.parse('{{ consumption|safe }}');
-    var wr = JSON.parse('{{ wr|safe }}');
-    // ============================================
-    // As of Chart.js v2.5.0
-    // http://www.chartjs.org/docs
-    // ============================================
-
-    var chart = document.getElementById('chart').getContext('2d'),
-        gradient = chart.createLinearGradient(0, 0, 0, 450);
-
-    gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)');
-    gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
-    gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
-
-
-    var data = {
-        labels: ['00am', '01am', '02am', '03am', '04am', '05am', '06am', '07am', '08am', '09am', '10am', '11am', '12pm', '01pm', '02pm', '03pm', '04pm', '05pm', '06pm', '07pm', '08pm', '09pm', '10pm', '11pm'],
-        datasets: [{
-            label: 'Traffic at your Station (in hours)',
-            backgroundColor: gradient,
-            pointBackgroundColor: 'white',
-            borderWidth: 1,
-            borderColor: '#911215',
-            data: freq
-        }]
-    };
-
-
-    var options = {
-        responsive: true,
-        lable: 'todays consumptions',
-        maintainAspectRatio: true,
-        animation: {
-            easing: 'easeInOutQuad',
-            duration: 520
-        },
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    color: 'rgba(200, 200, 200, 0.05)',
-                    lineWidth: 1
-                }
-            }],
-            yAxes: [{
-                gridLines: {
-                    color: 'rgba(200, 200, 200, 0.08)',
-                    lineWidth: 1
-                }
-            }]
-        },
-        elements: {
-            line: {
-                tension: 0.4
-            }
-        },
-        legend: {
-            display: false
-        },
-        point: {
-            backgroundColor: 'white'
-        },
-        tooltips: {
-            titleFontFamily: 'Open Sans',
-            backgroundColor: 'rgba(0,0,0,0.3)',
-            titleFontColor: 'red',
-            caretSize: 5,
-            cornerRadius: 2,
-            xPadding: 10,
-            yPadding: 10
-        }
-    };
-
-
-    var chartInstance = new Chart(chart, {
-        type: 'line',
-        data: data,
-        options: options
-    });
-
-    // Create chart
-    var ctx = document.getElementsByClassName("chartjs-gauge");
-    var chart = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-            labels: ["Red", "Blue"],
+        var data = {
+            labels: ['00am', '01am', '02am', '03am', '04am', '05am', '06am', '07am', '08am', '09am', '10am', '11am', '12pm', '01pm', '02pm', '03pm', '04pm', '05pm', '06pm', '07pm', '08pm', '09pm', '10pm', '11pm'],
             datasets: [{
-                label: "Gauge",
-                data: consumption,
-                backgroundColor: [
-                    "rgb(255, 99, 132)",
-                    "rgb(54, 162, 235)",
-                    "rgb(255, 205, 86)"
-                ]
+                label: 'Traffic at your Station (in hours)',
+                backgroundColor: gradient,
+                pointBackgroundColor: 'white',
+                borderWidth: 1,
+                borderColor: '#911215',
+                data: freq
             }]
-        },
-        options: {
-            circumference: Math.PI,
-            rotation: Math.PI,
-            cutoutPercentage: 80, // precent
-            plugins: {
-                datalabels: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    borderColor: '#ffffff',
-                    color: function(context) {
-                        return context.dataset.backgroundColor;
-                    },
-                    font: function(context) {
-                        var w = context.chart.width;
-                        return {
-                            size: w < 512 ? 18 : 20
-                        }
-                    },
-                    align: 'start',
-                    anchor: 'start',
-                    offset: 10,
-                    borderRadius: 4,
-                    borderWidth: 1,
-                    formatter: function(value, context) {
-                        var i = context.dataIndex;
-                        var len = context.dataset.data.length - 1;
-                        if (i == len) {
-                            return null;
-                        }
-                        return value + ' mph';
+        };
+
+
+        var options = {
+            responsive: true,
+            lable: 'todays consumptions',
+            maintainAspectRatio: true,
+            animation: {
+                easing: 'easeInOutQuad',
+                duration: 520
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        color: 'rgba(200, 200, 200, 0.05)',
+                        lineWidth: 1
                     }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        color: 'rgba(200, 200, 200, 0.08)',
+                        lineWidth: 1
+                    }
+                }]
+            },
+            elements: {
+                line: {
+                    tension: 0.4
                 }
             },
             legend: {
                 display: false
             },
+            point: {
+                backgroundColor: 'white'
+            },
             tooltips: {
-                enabled: false
+                titleFontFamily: 'Open Sans',
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                titleFontColor: 'red',
+                caretSize: 5,
+                cornerRadius: 2,
+                xPadding: 10,
+                yPadding: 10
             }
-        }
-    });
+        };
 
 
-    // DEMO Code: not relevant to example
-    function change_gauge(chart, label, data) {
-        chart.data.datasets.forEach((dataset) => {
-            if (dataset.label == label) {
-                dataset.data = data;
-            }
-        });
-        chart.update();
-    }
-
-    var accelerating = false;
-
-    function accelerate() {
-        accelerating = false;
-
-
-        window.setTimeout(function() {
-            change_gauge(chart, "Gauge", [60, 140])
-        }, 2000);
-
-        window.setTimeout(function() {
-            change_gauge(chart, "Gauge", [100, 100])
-        }, 3000);
-
-    }
-
-    // Start sequence
-
-    var canvas = document.getElementById("barChart");
-    var ctx = canvas.getContext('2d');
-    // We are only changing the chart type, so let's make that a global variable along with the chart object:
-    var chartType = 'bar';
-    var myBarChart;
-
-    // Global Options:
-    Chart.defaults.global.defaultFontColor = 'grey';
-    Chart.defaults.global.defaultFontSize = 16;
-
-    var data = {
-        labels: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
-        datasets: [{
-            label: "Electricity consumed within a week",
-            fill: true,
-            lineTension: 0.1,
-            backgroundColor: "rgba(0,255,0,0.4)",
-            borderColor: "green", // The main line color
-            borderCapStyle: 'square',
-            pointBorderColor: "white",
-            pointBackgroundColor: "green",
-            pointBorderWidth: 1,
-            pointHoverRadius: 8,
-            pointHoverBackgroundColor: "yellow",
-            pointHoverBorderColor: "green",
-            pointHoverBorderWidth: 2,
-            pointRadius: 4,
-            pointHitRadius: 10,
-            data: wr,
-            spanGaps: true,
-        }]
-    };
-
-    // Notice the scaleLabel at the same level as Ticks
-    var options = {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        },
-        title: {
-            fontSize: 18,
-            display: true,
-            text: '',
-            position: 'bottom'
-        }
-    };
-
-
-    // We add an init function down here after the chart options are declared.
-
-    init();
-
-    function init() {
-        // Chart declaration:
-        myBarChart = new Chart(ctx, {
-            type: chartType,
+        var chartInstance = new Chart(chart, {
+            type: 'line',
             data: data,
             options: options
         });
-    }
 
-    function toggleChart() {
-        //destroy chart:
-        myBarChart.destroy();
-        //change chart type: 
-        this.chartType = (this.chartType == 'bar') ? 'line' : 'bar';
-        //restart chart:
+        // Start sequence
+
+        var canvas = document.getElementById("barChart");
+        var ctx = canvas.getContext('2d');
+        // We are only changing the chart type, so let's make that a global variable along with the chart object:
+        var chartType = 'bar';
+        var myBarChart;
+
+        // Global Options:
+        Chart.defaults.global.defaultFontColor = 'grey';
+        Chart.defaults.global.defaultFontSize = 16;
+
+        var data = {
+            labels: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
+            datasets: [{
+                label: "Electricity consumed within a week",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(0,255,0,0.4)",
+                borderColor: "green", // The main line color
+                borderCapStyle: 'square',
+                pointBorderColor: "white",
+                pointBackgroundColor: "green",
+                pointBorderWidth: 1,
+                pointHoverRadius: 8,
+                pointHoverBackgroundColor: "yellow",
+                pointHoverBorderColor: "green",
+                pointHoverBorderWidth: 2,
+                pointRadius: 4,
+                pointHitRadius: 10,
+                data: wr,
+                spanGaps: true,
+            }]
+        };
+
+        // Notice the scaleLabel at the same level as Ticks
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            title: {
+                fontSize: 18,
+                display: true,
+                text: '',
+                position: 'bottom'
+            }
+        };
+
+
+        // We add an init function down here after the chart options are declared.
+
         init();
-    }
-</script>
-{% endblock %}
+
+        function init() {
+            // Chart declaration:
+            myBarChart = new Chart(ctx, {
+                type: chartType,
+                data: data,
+                options: options
+            });
+        }
+
+        function toggleChart() {
+            //destroy chart:
+            myBarChart.destroy();
+            //change chart type: 
+            this.chartType = (this.chartType == 'bar') ? 'line' : 'bar';
+            //restart chart:
+            init();
+        }
+    </script>
+    <script>
+        $('#supportbtn').click(function () {
+            $("#supportmodal").modal('show');
+        });
+        $(document).ready(function () {
+            $("#supportform").submit(function (e) {
+                e.preventDefault();
+                var subject = $("#id_subject").val();
+                var description = $("#id_description").val();
+                $.ajax({
+                    data: {
+                        'subject': subject,
+                        'description': description,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    url: "{% url 'SupportRequest' %}",
+                    type: "POST",
+                    success: function (response) {
+                        $("#supportform").trigger("reset");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                })
+                $("#supportmodal").modal('hide');
+                $("#thankyou").modal();
+            });
+        });
+    </script>
+</body>
+
+</html>

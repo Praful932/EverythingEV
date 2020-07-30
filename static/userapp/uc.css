@@ -1,43 +1,198 @@
 .column {
   float: left;
-  height:100%;
+  height: 100%;
 }
- html,body,.row,.column .right,.card .bg-light,#map
-{
-  
-  width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-body 
-{
-  background: #D3CCE3;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+html {
+  font-size: 62.5%;
 }
-html, body {
+
+.h3,
+.h4 {
+  font-size: 2.5rem !important;
+}
+
+html,
+body,
+.row,
+.column .right,
+.card .bg-light,
+#map {
+
+  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
 }
-#map
-{
-  height:100%;
+
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+.main {
+  width: 95vw !important;
+}
+
+header {
+  background-color: white;
+  position: relative;
+  padding: 5px 5px 0px 5px;
+  border-bottom: 0.5px #cacaca solid;
+}
+
+.logo img {
+  width: 20rem !important;
+  height: 6rem !important;
+  float: left;
+  margin-left: 2rem !important;
+}
+
+nav {
+  float: right !important;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex !important;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+nav ul li {
+  list-style: none;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+nav ul li a {
+  display: block;
+  margin: 1rem 1rem !important;
+  padding: 1rem 2rem !important;
+  color: black;
+  font-size: 2.2rem !important;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+nav ul li a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+nav ul li .active {
+  font-weight: 700;
+}
+
+nav ul li .login {
+  border: 3px #0DBA47 solid;
+  border-radius: 10px;
+  color: #0DBA47;
+  padding: 5px 20px;
+}
+
+nav ul li .signup {
+  background-color: #0DBA47;
+  padding: 8px 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+@media (max-width: 780px) {
+  .menu-toggle {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    background: #ccc;
+    float: right;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    color: #0DBA47;
+  }
+
+  .menu-toggle::before {
+    content: '\f0c9';
+    font-family: fontAwesome;
+    line-height: 40px;
+  }
+
+  .menu-toggle.active::before {
+    content: '\f00d';
+    font-family: fontAwesome;
+    line-height: 40px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  nav.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-transition: ease-in;
+    transition: ease-in;
+    block-size: -webkit-fit-content;
+    block-size: -moz-fit-content;
+    block-size: fit-content;
+  }
+
+  nav.active li {
+    text-align: center;
+  }
+
+  nav.active ul {
+    display: block;
+    block-size: -webkit-fit-content;
+    block-size: -moz-fit-content;
+    block-size: fit-content;
+    -webkit-writing-mode: horizontal-tb;
+    -ms-writing-mode: lr-tb;
+    writing-mode: horizontal-tb;
+  }
+
+  .login .signup {
+    padding: 0;
+  }
+
+  .nav-links {
+    padding: 5px;
+  }
+}
+
+
+
+#map {
+  height: 100%;
+}
+
 .left {
   width: 38%;
   /* background: #2193b0;
   background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  
   background: linear-gradient(to right, #6dd5ed, #2193b0);  */
   padding-right: 20px;
-  height:500px;
-  overflow-y:scroll;
+  height: 500px;
+  overflow-y: scroll;
 }
 
 .right {
@@ -55,11 +210,11 @@ html, body {
 }
 
 .card {
-  width: 450px;
+  width: 420px;
   height: 180px;
   background-color: #fff;
   background: linear-gradient(#f8f8f8, #fff);
-  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
   overflow: hidden;
   position: relative;
@@ -72,7 +227,7 @@ html, body {
 
 .card .additional {
   position: absolute;
-  width: 150px;
+  width: 120px;
   height: 100%;
   background: linear-gradient(#dE685E, #EE786E);
   transition: width 0.4s;
@@ -91,7 +246,7 @@ html, body {
 }
 
 .card .additional .user-card {
-  width: 150px;
+  width: 120px;
   height: 100%;
   position: relative;
   float: left;
@@ -104,7 +259,7 @@ html, body {
   top: 10%;
   right: -2px;
   height: 80%;
-  border-left: 2px solid rgba(0,0,0,0.025);
+  border-left: 2px solid rgba(0, 0, 0, 0.025);
 }
 
 .card .additional .user-card .level,
@@ -112,9 +267,8 @@ html, body {
   top: 15%;
   color: #fff;
   text-transform: uppercase;
-  font-size: 0.75em;
   font-weight: bold;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0, 0, 0, 0.15);
   padding: 0.125rem 0.75rem;
   border-radius: 100px;
   white-space: nowrap;
@@ -129,7 +283,7 @@ html, body {
 }
 
 .card .additional .more-info {
-  width: 300px;
+  width: 260px;
   float: left;
   position: absolute;
   left: 150px;
@@ -141,26 +295,29 @@ html, body {
   margin-bottom: 0;
 }
 
+.card .additional .more-info h3 {
+  font-size: 2rem !important;
+}
+
 .card.green .additional .more-info h1 {
   color: #224C36;
 }
 
 .card .additional .coords {
-  margin: 0 1rem;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 .card.green .additional .coords {
   color: #325C46;
 }
 
-.card .additional .coords span + span {
+.card .additional .coords span+span {
   float: right;
 }
 
 .card .additional .stats {
-  font-size: 2rem;
+  font-size: 2rem !important;
   display: flex;
   position: absolute;
   bottom: 1rem;
@@ -170,11 +327,19 @@ html, body {
   color: #fff;
 }
 
+.general p {
+  font-size: 1.5rem !important;
+}
+
+.general span {
+  font-size: 1.1rem;
+}
+
 .card.green .additional .stats {
   color: #325C46;
 }
 
-.card .additional .stats > div {
+.card .additional .stats>div {
   flex: 1;
   text-align: center;
 }
@@ -184,7 +349,7 @@ html, body {
 }
 
 .card .additional .stats div.title {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -211,9 +376,12 @@ html, body {
   padding-top: 0;
 }
 
+.card .general .h4 {
+  font-size: 2.5rem;
+}
+
 .card .general .more {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  font-size: 0.9em;
 }

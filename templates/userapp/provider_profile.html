@@ -1,61 +1,275 @@
-{% extends "userapp/dash_layout.html"%}
-{% load crispy_forms_tags %}
 {% load static %}
-{% block head %}
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="{% static 'userapp/provider_stations.css'%}">
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-<style>
-    .move{
-        background-color: #31BAFD;
-        color: azure;
-    }
-    .move:hover{
-        background-color: #2B9ED8;
-        box-shadow: 0 10px 15px 0 rgba(0,0,0,0.24),0 10px 10px 0 rgba(0,0,0,0.19);
-        color: azure;
-    }
-</style>
-{% endblock %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
-Dashboard
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{%  static 'userapp/dashboard_home.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1849fb7a64.js" crossorigin="anonymous"></script>
+    <style>
+        h3 {
+            margin: 10px;
+            text-align: center;
+            font-size: 2rem;
+        }
 
-{% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9 mx-auto" style="padding-left: 200px;">
-            <div class="card card-signin my-5" style="background-color:rgba(232, 236, 241, 0.5);">
-                <div class="card-body">
-                    <div style="margin-top: -30px;">
-                    <h5 class="card-title text-center" style="font-family: 'Roboto', sans-serif;font-size: 30px;">Your Profile</h5>
-                    <div class="text-center">
-                        <img src=https://www.associazionecoach.com/wp-content/uploads/2019/03/coach.png style="width: 130px;height:130px">
-                    </div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ userform|crispy }}
-                        {{ fieldform|crispy }}
-                        <button class="btn btn-lg  move"  type="submit">Update</button>
-                    </form>
+        .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px #717171;
+            width: 600px;
+            margin: 0px auto;
+            padding: 20px;
+        }
+
+        @media only screen and (max-width: 510px) {
+            .form {
+                width: 93%;
+            }
+
+            input,
+            textarea {
+                width: 200px !important;
+            }
+        }
+
+        .text-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            margin: 1.5rem auto 0px auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        small {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: red;
+        }
+
+        label {
+            font-size: 1.3rem !important;
+        }
+
+        input,
+        textarea {
+            font-size: 1.6rem;
+            border: 0.5px solid #b4b4b4;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            line-height: 25px;
+            width: 400px;
+        }
+
+        input:focus {
+            box-shadow: 0px 0px 5px #2196f3;
+        }
+
+        button[type="submit"] {
+            font-size: 2rem;
+            font-weight: 500;
+            padding: 8px 20px;
+            color: white;
+            border-radius: 5px;
+            margin: 1rem 0rem 0rem 0rem;
+            cursor: pointer;
+            background-color: #2b9ed8;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+        df-messenger {
+            --df-messenger-send-icon: #1eff00;
+            --df-messenger-button-titlebar-color: #90ff82;
+
+        }
+    </style>
+    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+        language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
+    </df-messenger>
+    <main>
+        <div id="thankyou" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Thank You!</h1>
+                    <span class="close-message">&times;</span>
                 </div>
+                <div class="modal-body">
+                    <p>We Will get back to you shortly!</p>
+                    <div class="btnflex">
+                        <button type="submit" class="close-message">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <div id="supportmodal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="heading">Your Issue</h1>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="supportform">
+                        {% csrf_token %}
+                        {{ supportform|crispy }}
+                    </form>
+                    <div class="btnflex">
+                        <button type="submit" class="close-modal" value="Submit" form="supportform">Submit</button>
+                        <button type="reset" class="close-modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{% endblock %}
+        <div class="layout">
+            <div class="dashboardSidebar" id="sidebar">
+                <div class="upperSidebar">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'userapp/svg/logo.svg' %}" alt="logo">
+                    </a>
+                    <a href="#"><i class="fa fa-bell fa-lg"></i></a>
+                    <i class="fa fa-times" id="close"></i>
+                </div>
+                <div class="lowerSidebar">
+                    <div class="user">
+                        <img src="{% static 'userapp/icons/profile.svg' %}" alt="user">
+                        <h4>Hello, {{ request.user.username }}</h4>
+                        <hr>
+                    </div>
+                    <div class="links">
+                        <a href="{% url 'dash-welcome' %}"><i class="fa fa-home"></i>Home</a>
+                        <a href="{% url 'Provider-Dashboard' %}"><i class="fa fa-briefcase"></i>Business</a>
+                        {% if request.user.provider.maintenancemandetails %}
+                        <a href="{% url 'Maintenance-man-dashboard' %}"><i class="fa fa-cogs"></i>Maintenance</a>
+                        {% else %}
+                        <a href="{% url 'Register-As-Maintenance' %}"><i class="fas fa-user-cog"></i>Provide
+                            Maintenance</a>
+                        {% endif %}
+                        {% if cslist %}
+                        <a href="{% url 'All-Maintenance-Man' %}"><i class="fa fa-cogs"></i>Need Maintenance?</a>
+                        {% endif %}
+                        <a class="active" href="#" id="profile"><i class="fa fa-user"></i>Profile</a>
+                        <a href="#" id="supportbtn"><i class="fa fa-headphones"></i>Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboardContent">
+                <div class="upperContent">
+                    <a href="{% url 'account_logout' %}">Logout</a>
+                    <div id="button"><i class="fa fa-bars"></i></div>
+                </div>
+                <div class="lowerContent">
+                    <div class="form">
+                        <h5 class="card-title text-center" style="font-family: 'Roboto', sans-serif;font-size: 30px;">
+                            Your Profile</h5>
+                        <div class="text-center">
+                            <img src=https://www.associazionecoach.com/wp-content/uploads/2019/03/coach.png
+                                style="width: 130px;height:130px">
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ userform|crispy }}
+                                {{ fieldform|crispy }}
+                                <button class="btn btn-lg  move" type="submit">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
 
-{% block script %}
-<script>
-    document.getElementById("dashboard").classList.add("sidebar-link");
-    document.getElementById("support").classList.add("sidebar-link");
-    document.getElementById("analytics").classList.add("sidebar-link");
-    document.getElementById("profile").classList.add("sidebar-link-active");
-    document.getElementById("business").classList.add("sidebar-link")
-    document.getElementById("maintain").classList.add("sidebar-link");
-</script>
-{% endblock %}
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const button = document.getElementById('button');
+        const close = document.getElementById('close');
+        button.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+        close.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        })
+    </script>
+    <script>
+        var modal = document.getElementById("supportmodal");
+        var message = document.getElementById("thankyou");
+        var closemessage = document.getElementsByClassName("close-message")[0];
+        var closebutton = document.getElementsByClassName("close-message")[1];
+        var closeBtn = document.getElementsByClassName("close-modal")[0];
+        var yesBtn = document.getElementsByClassName("close-modal")[1];
+        var noBtn = document.getElementsByClassName("close-modal")[2];
+        closeBtn.addEventListener("click", closemodal);
+        yesBtn.addEventListener("click", closemodal);
+        noBtn.addEventListener("click", closemodal);
+        closemessage.addEventListener("click", messageclose);
+        closebutton.addEventListener("click", messageclose);
+        function closemodal() {
+            modal.style.display = "none";
+        }
+        function messageclose() {
+            message.style.display = "none";
+        }
+    </script>
+    <script>
+        $('#supportbtn').click(function () {
+            $("#supportmodal").modal('show');
+        });
+        $(document).ready(function () {
+            $("#supportform").submit(function (e) {
+                e.preventDefault();
+                var subject = $("#id_subject").val();
+                var description = $("#id_description").val();
+                $.ajax({
+                    data: {
+                        'subject': subject,
+                        'description': description,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    dataType: 'json',
+                    url: "{% url 'SupportRequest' %}",
+                    type: "POST",
+                    success: function (response) {
+                        $("#supportform").trigger("reset");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                })
+                $("#supportmodal").modal('hide');
+                $("#thankyou").modal();
+            });
+        });
+    </script>
+</body>
+
+</html>

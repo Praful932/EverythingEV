@@ -1,0 +1,391 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+    margin: 0px;
+    border: 0px;
+    box-sizing: inherit;
+}
+
+main {
+    width: 100%;
+    padding: 12px;
+
+    .layout {
+        border-radius: 10px;
+        box-shadow: 0px 0px 80px 20px #46B04A;
+        display: grid;
+        grid-template-columns: 20% 80%;
+
+        .dashboardSidebar {
+            height: 96vh;
+
+            .upperSidebar {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                border-bottom: 0.5px #dadada solid;
+                margin: 0px;
+                padding: 0px;
+
+                img {
+                    width: 100px;
+                    height: 50px;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: #555555;
+                }
+
+                .fa-times {
+                    font-size: 2rem;
+                    margin: 15px;
+                    display: none;
+                }
+
+            }
+
+            .lowerSidebar {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: auto;
+
+                .user {
+                    margin: 20px;
+                    text-align: center;
+                    border-bottom: 0.5px #dadada solid;
+
+                    img {
+                        width: 10rem;
+                        height: 10rem;
+                    }
+
+                    h4 {
+                        margin: 15px;
+                        font-size: 1.5rem;
+                        color: black;
+                    }
+                }
+
+                .links {
+
+                    a {
+                        display: block;
+                        text-decoration: none;
+                        font-size: 1.6rem;
+                        color: #555555;
+                        margin: 30px;
+
+                        i {
+                            margin-right: 10px;
+                        }
+                    }
+
+                    .active {
+                        border-radius: 20px;
+                        padding: 0.8rem 0px;
+                        width: 80%;
+                        box-shadow: 0px 0px 5px #c0c0c0;
+                        color: black;
+                        text-align: center;
+                        font-weight: 500;
+                        background-color: white;
+                        z-index: 1000;
+
+                        i {
+                            color: #46B04A
+                        }
+                    }
+                }
+            }
+        }
+
+        .dashboardContent {
+            box-shadow: -10px 0px 80px 10px #e7e7e7;
+            z-index: -1;
+            width: 100%;
+
+            .upperContent {
+                display: block;
+                justify-content: right;
+                height: 50px;
+                border-bottom: 0.5px #dadada solid;
+
+                a {
+                    float: right;
+                    text-decoration: none;
+                    color: #555555;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    padding: 4px 15px;
+                    border: 3px #555555 solid;
+                    border-radius: 10px;
+                    margin: 9px 30px;
+                    align-self: center;
+                }
+
+                #button {
+                    position: absolute;
+                    font-size: 2rem;
+                    margin: 15px;
+                    cursor: pointer;
+                    display: none;
+                }
+            }
+
+            .lowerContent {
+                text-align: center;
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: 20px auto;
+                    padding-bottom: 15px;
+                    width: 80%;
+                    border-bottom: 0.5px #cacaca solid;
+
+                    h1 {
+                        font-size: 3rem;
+                    }
+
+                    p {
+                        font-size: 1.3rem;
+                    }
+                }
+
+                .statCards {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    width: 70%;
+                    margin: 0 auto;
+
+                    .users,
+                    .revenue,
+                    .consumption {
+                        padding: 10px 10px;
+                        margin: 30px;
+                        font-weight: 500;
+                        background-color: #018A27;
+                        color: white;
+                        box-shadow: 0px 0px 5px #018A27;
+
+                        .card-name {
+                            font-size: 1.6rem;
+                        }
+
+                        .value {
+                            font-size: 3rem;
+                        }
+                    }
+
+                    .consumption {
+                        padding: 10px 0px !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .line-chart {
+
+        animation: fadeIn 600ms cubic-bezier(.57, .25, .65, 1) 1 forwards;
+        max-width: 640px;
+        width: 100%;
+        height: 250px !important;
+        margin: 30px auto !important;
+    }
+
+    .aspect-ratio {
+        height: 0;
+        padding-bottom: 50%;
+    }
+
+
+    #barChart {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        width: 620px !important;
+        height: 500px !important;
+        margin: 100px auto 0px auto;
+        /*   Check out the fancy shadow  on this one */
+    }
+}
+
+
+@media(max-width:1024px) {
+    main {
+        .layout {
+            .dashboardContent {
+                .lowerContent {
+
+                    .shops,
+                    .title {
+                        width: 90%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width:768px) {
+    main {
+        .layout {
+            .dashboardSidebar {
+                .lowerSidebar {
+                    .links {
+                        a {
+                            font-size: 1.4rem;
+                            margin: 20px 10px;
+                        }
+                    }
+                }
+            }
+
+            .dashboardContent {
+                .lowerContent {
+
+                    .title,
+                    .shops {
+                        width: 100%;
+                    }
+
+                    .shops {
+                        .shopcard {
+                            margin: 10px 15px;
+
+                            .card-body {
+                                .name {
+                                    font-size: 1.8rem;
+                                }
+
+                                img {
+                                    width: 90%;
+                                    height: 90%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width:600px) {
+    main {
+        .layout {
+            display: block;
+
+            .open {
+                transform: translateX(0px) !important;
+            }
+
+            .dashboardSidebar {
+                transform: translateX(-1000px);
+                background-color: white;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                z-index: 100;
+                transition: 0.1s all ease-in;
+
+                .open {
+                    transform: translateX(0px) !important;
+                }
+
+                .upperSidebar {
+                    img {
+                        transform: scale(1.5);
+                    }
+
+                    .fa-times {
+                        display: inline;
+                        cursor: pointer;
+                    }
+
+                    .fa-bell {
+                        display: none;
+                    }
+                }
+
+                .lowerSidebar {
+                    .links {
+                        a {
+                            margin: 20px 40px;
+                        }
+
+                        .active {
+                            width: 50%;
+                        }
+                    }
+                }
+            }
+
+            .dashboardContent {
+                .open {
+                    transform: translateX(0px);
+                }
+
+                .upperContent {
+                    #button {
+                        display: block;
+                        font-weight: 500;
+                    }
+                }
+
+                .lowerContent {
+
+                    .title {
+                        margin-top: 30px;
+                        margin-bottom: 15px;
+                        width: 100%;
+
+                        h1 {
+                            font-size: 2rem;
+                        }
+
+                        a {
+                            font-size: 1.6rem;
+                        }
+                    }
+
+                    .shops {
+                        width: 70%;
+                        grid-template-columns: 1fr;
+                    }
+
+                    .shops {
+                        .shopcard {
+                            margin: 10px 15px;
+
+                            .card-body {
+                                .name {
+                                    font-size: 1.8rem;
+                                }
+
+                                img {
+                                    width: 90%;
+                                    height: 90%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
