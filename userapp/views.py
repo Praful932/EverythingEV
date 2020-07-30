@@ -330,7 +330,6 @@ def ChargingStationAnalytics(request, pk):
         total_revenue = 0
         for ele in wholecs:
             total_consumption += float(ele.vehicle.charging_rate) * (ele.duration/60)
-        print(current_cs.price_kwh)
         total_consumption = round(total_consumption, 2)
         total_revenue = round(total_consumption * float(current_cs.price_kwh), 2)
         csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
