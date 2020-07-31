@@ -17,10 +17,10 @@
                 <h3>Step 1</h3>
                 <div class="step1">
                     <p>Choose the <br> Vehicle Brand</p>
-                    <select name="" id="">
+                    <select name="details" id="details">
                         <option selected disabled="true">-- Select an EV --</option>
                         {% for EV in Vehicle %}
-                        <option>{{ EV.company }}</option>
+                        <option value="{{EV.battery_capacity}} {{EV.vehicle_range}}">{{ EV.company }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -46,8 +46,8 @@
         <div class="numeric">
             <p class="title">Cost</p>
             <div class="costings">
-                <p class="cars">For Fuel Cars:₹ <span id='nameDisplay'>0</span><span class="per">/month</span></p>
                 <p class="cars">For EV:<span id='EV'>0</span><span class="per">/month</span></p>
+                <p class="cars">For Fuel Cars:₹ <span id='nameDisplay'>0</span><span class="per">/month</span></p>
             </div>
         </div>
         <div class="numeric">
@@ -68,10 +68,10 @@
                 <h3>Step 1</h3>
                 <div class="step1">
                     <p>Choose the <br> Vehicle Brand</p>
-                    <select name="" id="">
+                    <select name="range" id="range1">
                         <option selected disabled="true">-- Select an EV --</option>
                         {% for EV in Vehicle %}
-                        <option>{{ EV.company }}</option>
+                        <option value="{{EV.vehicle_range}}">{{ EV.company }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -122,13 +122,16 @@
 
         var nameField = document.getElementById('nameField');
         var perKmPetrolCost = 3.4;  // Average value of petrol per km in last 10 years
-        var kWh = 0.2; // Average kwh of an EV
+        
 
         updateNameDisplay();
 
         setInterval(updateNameDisplay, 100);
 
         function updateNameDisplay() {
+            var details = document.getElementById("details").value;
+            var res = details.split(" ");
+            var kWh = Number(res[0]/res[1]) // Average kwh of an EV
             var kms = nameField.value || 0;
             var total_cost_of_FV_per_month = Math.round(perKmPetrolCost * kms * 30);
             var total_cost_of_EV_per_month = Math.round(kWh * kms * 30);
@@ -148,10 +151,12 @@
         update();
 
         setInterval(update, 100);
-
-        function update() {
+        
+            function update() {
             var batteryPercent = battery.value || 0;
-            var mileage = Math.round((avgRangeOfEV * batteryPercent) / 100);
+
+            var range = document.getElementById("range1").value;
+            var mileage = Math.round((range * batteryPercent) / 100);
 
             if (batteryPercent > 0) {
                 document.getElementById('mileage').innerHTML = mileage;
