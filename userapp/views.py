@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import ListView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+import random
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
@@ -233,6 +234,10 @@ def ProviderDashboard(request):
                 'cslist': cslist,
                 'supportform': supportform
             }
+            if request.method == "POST":
+                sform= SupportForm(request.POST)
+                if sform.is_valid():
+                    sform.save()
             return render(request, "userapp/provider_dashboard.html", context=context)
     return redirect('index')
 
@@ -380,20 +385,32 @@ def ChargingStationDashboard(request, pk):
             'records': recorddata,
             'supportform': supportform,
         }
+        if request.method == "POST":
+            sform = SupportForm(request.POST)
+            if sform.is_valid():
+                sform.save()
+
         return render(request, "userapp/dash_welcome.html", context=context)
     return redirect('index')
 
 
 @login_required
 def ChargePooling(request):
+    consumer = 0
     if request.user.is_consumer:
-        chargepoolers = ChargePooler.objects.all()
-        context = {
-            'chargepoolers': chargepoolers
+        consumer = 1
+    chargepoolers = ChargePooler.objects.all()
+    context = {
+            'chargepoolers': chargepoolers,
+            'consumer': consumer
         }
-        return render(request, "userapp/chargepoolerpage.html", context=context)
-    poolerform = CharpoolerForm()
+    return render(request, "userapp/chargepoolerpage.html", context=context)
 
+
+def Charpoolingform(request):
+    poolerform = CharpoolerForm()
+    consumer = request.User
+    
     return render(request, "chargepoolingform.html", {'form': poolerform})
 
 
@@ -644,6 +661,10 @@ def dashwelcome(request):
             'best_revenue': round(best_revenue, 2),
             'best_cs': best_cs
         }
+        if request.method == "POST":
+            sform= SupportForm(request.POST)
+            if sform.is_valid():
+                sform.save()
         return render(request, "userapp/dash_welcome.html", context=context)
     else:
         # To Meme
