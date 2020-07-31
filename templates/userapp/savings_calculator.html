@@ -134,7 +134,7 @@
             var kWh = Number(res[0]/res[1]) // Average kwh of an EV
             var kms = nameField.value || 0;
             var total_cost_of_FV_per_month = Math.round(perKmPetrolCost * kms * 30);
-            var total_cost_of_EV_per_month = Math.round(kWh * kms * 30);
+            var total_cost_of_EV_per_month = Math.round(kWh * kms * 30 * 5);
             var monthly_savings = Math.round(total_cost_of_FV_per_month - total_cost_of_EV_per_month);
             var yearly_savings = Math.round(monthly_savings * 12);
 
