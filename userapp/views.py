@@ -689,4 +689,4 @@ def demo(request):
         v.t23 = random.randrange(00, 15, 2)
         v.save()
 
-    return HttpResponse("hii")
+    return redirect("index") 
