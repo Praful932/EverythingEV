@@ -262,10 +262,10 @@ def sub():
 
 class ChargePooler(models.Model):
     consumer = models.OneToOneField(Consumer, on_delete=models.CASCADE, primary_key=True)
-    city = models.CharField(max_length=25, default=city)
-    local_area = models.CharField(max_length=25, default=sub)
-    ph_no = models.CharField(max_length=13, default=phone)
-    cost = models.CharField(max_length=25, default=price)
+    city = models.CharField(max_length=25)
+    local_area = models.CharField(max_length=25)
+    ph_no = models.CharField(max_length=13)
+    cost = models.CharField(max_length=25)
     normal_port = models.BooleanField(default=True)
     fast_port = models.BooleanField(default=False)
 

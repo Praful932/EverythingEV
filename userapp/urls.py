@@ -19,6 +19,7 @@ urlpatterns = [
     path('Charging-Station/dashboard/<int:pk>', views.ChargingStationDashboard, name='Charging-Station-Dashboard'),
     path('station/<int:pk>/delete/', ChargingStationProviderDeleteView.as_view(), name='DeleteStation'),
     path('Charging-Station/all-stations/', views.ChargingStationConsumer, name='Charging-Station-CLV'),
+    path('charge-poolong-form/',views.Charpoolingform,name="chargepoolingform"),
     path('Charge-Pooling/', views.ChargePooling, name='Charge-Pooling'),
     path('Route-Your-Way/', views.RouteYourWay, name='Route-Your-Way'),
     path('registerMaintenance/', MaintenanceMan.as_view(), name="Register-As-Maintenance"),
@@ -37,7 +38,9 @@ urlpatterns = [
     path('buildcs/', views.BuildCs, name="BuildCs"),
     path('savings-calculator/', views.savingsCalculator, name="savings-calculator"),
     path('dash-welcome/', views.dashwelcome, name="dash-welcome"),
-    path('live_data/', views.live_data, name="Live-Data")
+    path('live_data/', views.live_data, name="Live-Data"),
+    path('demo/', views.demo, name="Live-Data")
+
 ]
 
 if settings.DEBUG:
