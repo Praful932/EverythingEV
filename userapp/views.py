@@ -19,6 +19,7 @@ from Sih.settings import EMAIL_HOST_USER
 from userapp.helper import get_user_location
 import json
 import math
+import random
 
 
 def get_distance(lat_1, lng_1, lat_2, lng_2):
@@ -335,7 +336,6 @@ def ChargingStationAnalytics(request, pk):
         total_revenue = 0
         for ele in wholecs:
             total_consumption += float(ele.vehicle.charging_rate) * (ele.duration/60)
-        print(current_cs.price_kwh)
         total_consumption = round(total_consumption, 2)
         total_revenue = round(total_consumption * float(current_cs.price_kwh), 2)
         csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
@@ -675,7 +675,7 @@ def live_data(request):
         return render(request, "userapp/live_data.html")
     return redirect('index')
 
-
+@login_required
 def demo(request):
     c = ChargingStation.objects.all()
     for cs in c:
