@@ -18,6 +18,7 @@ from Sih.settings import EMAIL_HOST_USER
 from userapp.helper import get_user_location
 import json
 import math
+import random
 
 
 def get_distance(lat_1, lng_1, lat_2, lng_2):
@@ -688,4 +689,4 @@ def demo(request):
         v.t23 = random.randrange(00, 15, 2)
         v.save()
 
-    return HttpResponse("hii") 
+    return redirect("index") 
