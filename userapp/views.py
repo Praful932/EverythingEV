@@ -398,7 +398,7 @@ def ChargingStationDashboard(request, pk):
 def ChargePooling(request):
     consumer = 0
     if request.user.is_consumer:
-        a = 1
+        consumer = 1
     chargepoolers = ChargePooler.objects.all()
     context = {
             'chargepoolers': chargepoolers,
@@ -409,6 +409,8 @@ def ChargePooling(request):
 
 def Charpoolingform(request):
     poolerform = CharpoolerForm()
+    consumer = request.User
+    
     return render(request, "chargepoolingform.html", {'form': poolerform})
 
 
