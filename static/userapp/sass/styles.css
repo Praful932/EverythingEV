@@ -61,14 +61,14 @@ nav ul li .active {
 }
 
 nav ul li .login {
-  border: 3px #0DBA47 solid;
+  border: 3px #008916 solid !important;
   border-radius: 10px;
-  color: #0DBA47;
+  color: #008916;
   padding: 5px 20px;
 }
 
 nav ul li .signup {
-  background-color: #0DBA47;
+  background-color: #008916 !important;
   padding: 8px 20px;
   border-radius: 10px;
   color: white;
@@ -792,6 +792,7 @@ main .result-group .graph img {
 @media (max-width: 600px) {
   main .savingsBanner {
     height: 250px;
+    padding-left: 0px !important;
   }
   main .savingsBanner h1 {
     font-size: 10vw;
@@ -817,11 +818,15 @@ main .result-group .graph img {
   main .calculate .input-group .brand,
   main .calculate .input-group .model,
   main .calculate .input-group .distance {
+    margin-left: 0px !important;
     margin-top: 20px;
     height: auto;
   }
   main .calculate .input-group .submitInput a {
     margin: 10px;
+  }
+  main .mobile {
+    margin: 120px auto !important;
   }
   main .result-group {
     -webkit-box-orient: vertical;
@@ -834,6 +839,10 @@ main .result-group .graph img {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+  main .disclaimer {
+    height: 100% !important;
+    margin: 10px auto !important;
   }
 }
 
@@ -1295,7 +1304,7 @@ footer .footer-content .col-2 .input-group .submit {
 footer .footer-content .col-2 .input-group .submit a {
   display: inline-block;
   text-decoration: none;
-  color: #2699fb;
+  color: #09232C;
 }
 
 footer .footer-content .social {
@@ -1598,13 +1607,18 @@ footer .footer-bottom {
 }
 
 @media (max-width: 592px) {
+  df-messenger {
+    display: none;
+  }
   .front {
     width: 100%;
+    text-align: center;
+  }
+  .front .text {
+    margin: 0px auto;
   }
   .front .art img {
-    height: 5px;
-    width: 5px;
-    visibility: hidden;
+    display: none;
   }
   .service-row img {
     width: 100px;
@@ -1612,37 +1626,28 @@ footer .footer-bottom {
   }
   .banner-row > .banner-grid:nth-child(even) {
     background-color: #eee8a9;
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 40% 60%;
-        grid-template-columns: 40% 60%;
+    display: block;
   }
   .banner-row .banner-grid {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-rows: 99% 1%;
-        grid-template-rows: 99% 1%;
-    justify-items: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    display: block;
+  }
+  .banner-row .banner-grid section {
+    padding: 15px 0px;
   }
   .banner-row .banner-grid .text {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    display: block;
     width: 100%;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
     height: 120px;
-    padding: 20px;
+    margin-left: 0px !important;
+    text-align: left;
+    padding-left: 10px;
   }
   .banner-row .banner-grid .text h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    width: 95vw;
   }
   .banner-row .banner-grid .text p {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   .banner-row .banner-grid .img1,
   .banner-row .banner-grid .img2,
@@ -1650,10 +1655,6 @@ footer .footer-bottom {
   .banner-row .banner-grid .img4,
   .banner-row .banner-grid .img5,
   .banner-row .banner-grid .img6 {
-    width: 1px;
-    height: 1px;
-    margin: 0px;
-    padding: 0px;
     display: none;
   }
   footer {
