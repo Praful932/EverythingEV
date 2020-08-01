@@ -189,7 +189,7 @@
                         <div class="text-center">
                             <img src=https://www.associazionecoach.com/wp-content/uploads/2019/03/coach.png
                                 style="width: 130px;height:130px">
-                            <form method="POST">
+                            <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ userform|crispy }}
                                 {{ fieldform|crispy }}

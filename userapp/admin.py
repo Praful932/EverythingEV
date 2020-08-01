@@ -44,14 +44,20 @@ class Consumer(ImportExportModelAdmin):
 class Provider(ImportExportModelAdmin):
     pass
 
+@admin.register(CsMaintenance)
+class CsMaintenance(ImportExportModelAdmin):
+    pass
 
+@admin.register(MaintenanceManDetails)
+class MaintenanceManDetails(ImportExportModelAdmin):
+    pass
 # admin.site.register(Consumer)
 # admin.site.register(Provider)
 # admin.site.register(ChargingStation)
 # admin.site.register(ChargingStationRecord)
 # admin.site.register(ChargingStationWeekly)
-admin.site.register(CsMaintenance)
-admin.site.register(MaintenanceManDetails)
+# admin.site.register(CsMaintenance)
+# admin.site.register(MaintenanceManDetails)
 admin.site.register(Support)
 admin.site.register(UserRecord)
 admin.site.register(Survey)
@@ -59,12 +65,11 @@ ADDITIONAL_USER_FIELDS = (
     (None, {'fields': ('is_consumer', 'is_provider')}),
 )
 
-
-class MyUserAdmin(UserAdmin):
+@admin.register(User)
+class MyUserAdmin(UserAdmin,ImportExportModelAdmin):
     model = User
 
     add_fieldsets = UserAdmin.add_fieldsets + ADDITIONAL_USER_FIELDS
     fieldsets = UserAdmin.fieldsets + ADDITIONAL_USER_FIELDS
 
-
-admin.site.register(User, MyUserAdmin)
+# admin.site.register(User, MyUserAdmin)

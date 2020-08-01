@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import ListView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+import random
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
@@ -18,6 +19,7 @@ from Sih.settings import EMAIL_HOST_USER
 from userapp.helper import get_user_location
 import json
 import math
+import random
 
 
 def get_distance(lat_1, lng_1, lat_2, lng_2):
@@ -169,7 +171,7 @@ def UpdateProfile(request):
         if userform.is_valid() and fieldform.is_valid():
             userform.save()
             fieldform.save()
-            return redirect('Provider-Dashboard')
+            return redirect('index')
     if request.user.is_consumer:
         return render(request, "userapp/updateprofile.html", context=context)
     return render(request, "userapp/provider_profile.html", context=context)
@@ -232,6 +234,10 @@ def ProviderDashboard(request):
                 'cslist': cslist,
                 'supportform': supportform
             }
+            if request.method == "POST":
+                sform= SupportForm(request.POST)
+                if sform.is_valid():
+                    sform.save()
             return render(request, "userapp/provider_dashboard.html", context=context)
     return redirect('index')
 
@@ -330,7 +336,6 @@ def ChargingStationAnalytics(request, pk):
         total_revenue = 0
         for ele in wholecs:
             total_consumption += float(ele.vehicle.charging_rate) * (ele.duration/60)
-        print(current_cs.price_kwh)
         total_consumption = round(total_consumption, 2)
         total_revenue = round(total_consumption * float(current_cs.price_kwh), 2)
         csrecord = ChargingStationRecord.objects.filter(cs=current_cs)
@@ -380,20 +385,36 @@ def ChargingStationDashboard(request, pk):
             'records': recorddata,
             'supportform': supportform,
         }
+        if request.method == "POST":
+            sform = SupportForm(request.POST)
+            if sform.is_valid():
+                sform.save()
+
         return render(request, "userapp/dash_welcome.html", context=context)
     return redirect('index')
 
 
 @login_required
 def ChargePooling(request):
+    consumer = 0
     if request.user.is_consumer:
-        chargepoolers = ChargePooler.objects.all()
-        context = {
-            'chargepoolers': chargepoolers
+        consumer = 1
+    chargepoolers = ChargePooler.objects.all()
+    context = {
+            'chargepoolers': chargepoolers,
+            'consumer': consumer
         }
-        return render(request, "userapp/chargepoolerpage.html", context=context)
-    poolerform = CharpoolerForm()
+    return render(request, "userapp/chargepoolerpage.html", context=context)
 
+
+def Charpoolingform(request):
+    poolerform = CharpoolerForm()
+    consumer = request.user.is_consumer
+    if request.method == "POST":
+        poolerform = CharpoolerForm(request.POST)
+        if poolerform.is_valid():
+            # poolerform.consumer = request.user.consumer
+            poolerform.save()
     return render(request, "chargepoolingform.html", {'form': poolerform})
 
 
@@ -644,6 +665,10 @@ def dashwelcome(request):
             'best_revenue': round(best_revenue, 2),
             'best_cs': best_cs
         }
+        if request.method == "POST":
+            sform= SupportForm(request.POST)
+            if sform.is_valid():
+                sform.save()
         return render(request, "userapp/dash_welcome.html", context=context)
     else:
         # To Meme
@@ -655,3 +680,38 @@ def live_data(request):
     if not request.user.is_consumer and not request.user.is_provider:
         return render(request, "userapp/live_data.html")
     return redirect('index')
+
+@login_required
+def demo(request):
+    c = ChargingStation.objects.all()
+    for cs in c:
+        v= CsReport()
+        v.cs = cs
+        v.time = "2000-12-11"
+        v.t0 = random.randrange(00, 15, 2)
+        v.t1 = random.randrange(00, 15, 2)
+        v.t2 = random.randrange(00, 15, 2)
+        v.t3 = random.randrange(00, 15, 2)
+        v.t4 = random.randrange(00, 15, 2)
+        v.t5 = random.randrange(00, 15, 2)
+        v.t6 = random.randrange(00, 15, 2)
+        v.t7 = random.randrange(00, 15, 2)
+        v.t8 = random.randrange(00, 15, 2)
+        v.t9 = random.randrange(00, 15, 2)
+        v.t10 = random.randrange(00, 15, 2)
+        v.t11 = random.randrange(00, 15, 2)
+        v.t12 = random.randrange(00, 15, 2)
+        v.t13 = random.randrange(00, 15, 2)
+        v.t14 = random.randrange(00, 15, 2)
+        v.t15 = random.randrange(00, 15, 2)
+        v.t16 = random.randrange(00, 15, 2)
+        v.t17 = random.randrange(00, 15, 2)
+        v.t18 = random.randrange(00, 15, 2)
+        v.t19 = random.randrange(00, 15, 2)
+        v.t20 = random.randrange(00, 15, 2)
+        v.t21 = random.randrange(00, 15, 2)
+        v.t22 = random.randrange(00, 15, 2)
+        v.t23 = random.randrange(00, 15, 2)
+        v.save()
+
+    return redirect("index") 

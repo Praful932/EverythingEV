@@ -2,7 +2,7 @@
 {% load static %}
 {% block head %}
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  
 {% endblock %}
 {% block body%}
@@ -20,7 +20,7 @@
 <body>
     <h2 class="display-3 p-3 mb-2 bg-info text-primary " style="padding: 10px;">Charge-Pooling Form</h2>
 
-    <form method="POST" style="width: 15cm; margin:auto; border: 0px solid rgb(59, 199, 241);  padding: 20px; ">
+    <form method="POST" style="width: 100%; max-width:15cm; margin:auto; border: 0px solid rgb(59, 199, 241);  padding: 20px; ">
         {% csrf_token %}
 
         {{form|crispy}}
