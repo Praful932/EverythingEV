@@ -345,10 +345,12 @@ def ChargingStationAnalytics(request, pk):
             n += 1
             s = s + cs.elec_consumption
         consumption.append(s)
-        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
+        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)
+        oneweekreport = weekreport.first()
+        print(oneweekreport)
         wr = []
         for i in range(7):
-            wr.append(getattr(weekreport, 'd'+str(i+1)))
+            wr.append(getattr(oneweekreport, 'd'+str(i+1)))
         supportform = SupportForm()
         context = {
             'totalcount': reportcount,
@@ -716,3 +718,16 @@ def demo(request):
         v.save()
 
     return redirect("index") 
+
+def demo2(request):
+    cs = ChargingStation.objects.all()
+    for c in cs:
+        csw = ChargingStationWeekly()
+        csw.cs = c
+        for i in range(8):
+            if(i == 0):
+                continue
+            a = 'd'+str((i+1))
+            csw.a = random.randrange(15, 45, 1)
+        csw.save()
+    return HttpResponse("worked")
