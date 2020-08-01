@@ -14,17 +14,16 @@
 
 <body>
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <style>
-        df-messenger {
-            --df-messenger-send-icon: #1eff00;
-            --df-messenger-button-titlebar-color: #90ff82;
+  <style>
+    df-messenger {
+      --df-messenger-send-icon: #1eff00;
+      --df-messenger-button-titlebar-color: #90ff82;
 
-        }
-    </style>
-    <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
-        language-code="en"
-        chat-icon="https://www.synaptive.com/img/chatbot.png">
-    </df-messenger>
+    }
+  </style>
+  <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
+    language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
+  </df-messenger>
   <header>
     <div class="logo">
       <a href="{%url 'index' %}"><img src="{% static 'userapp/svg/logo.svg' %}" alt="logo"></a>
@@ -39,7 +38,7 @@
         {% else %}
         <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
         {% endif %}
-        <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+        <li><a href="{% url 'account_logout' %}" class="login" role="button">Log out</a></li>
         {% else %}
         <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
         <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
@@ -55,8 +54,8 @@
       <div class="card">
         <div class="additional">
           <div class="user-card">
-            <div class="level center" id="av_ports{{ cs.pk }}">
-              Ports Available :
+            <div class="ports level center " id="av_ports{{ cs.pk }}">
+              Ports Available:
             </div>
             <div class="points center" style="cursor: pointer;" id="update" onclick="foo('{{cs.pk}}')">
               Update
@@ -105,7 +104,7 @@
       {% endfor %}
     </div>
     <div class="column right">
-      <div class="card bg-light" style="height: 500px; width:800px;">
+      <div class="card bg-light" style="width:100%;height: 100%;">
         <div class="card-header">
           <input type="text" class="form-control float-right" style="width:300px;" id="location-text-box"
             placeholder="Enter place to search">
@@ -134,7 +133,7 @@
     var pkid = JSON.parse('{{pkid|safe}}');
   </script>
   <script>
-  
+
     document.getElementById('location-text-box').value = '';
     var i;
     // If you're adding a number of markers, you may want to drop them on the map
@@ -257,7 +256,7 @@
     }
 
 
-    
+
   </script>
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&libraries=places&callback=initMap"></script>
@@ -268,6 +267,7 @@
     }
     const imageBase = '{%  static "userapp/cars/" %}';
     $.updateport = function (pk) {
+      var width = window.innerWidth();
       var no = Math.floor(Math.random() * 25) + 1;
       const a = imageBase + no + ".jpg";
       document.getElementById('img').setAttribute("src", a);
@@ -282,25 +282,30 @@
               count++;
           }
           console.log(count);
+          if (width >= 600 && width <= 768) {
+            $("#av_ports" + pk).text("Available Ports: " + count);
+          }
+          else {
+            $("#av_ports" + pk).innnerHTML("<p>Available <br> Ports</p>: " + count);
+          }
 
-          $("#av_ports" + pk).text("Available Ports: " + count);
         });
       });
     }
-    
+
 
 
 
   </script>
-  
+
   <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
   <!-- Load the coco-ssd model. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
   <script>
-    
-    
-    setTimeout(foo(pkid[0].toString()),2200)
+
+
+    setTimeout(foo(pkid[0].toString()), 2200)
   </script>
 </body>
 

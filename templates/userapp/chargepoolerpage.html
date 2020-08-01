@@ -34,13 +34,13 @@
         <tbody id="myTable">
           {% for chargepooler in chargepoolers %}
           <tr>
-            <td>{{ chargepooler.local_area|title }}, {{ chargepooler.city|title }}</td>
-            <td><a href="tel: +91{{chargepooler.ph_no}}">{{ chargepooler.ph_no }}</a></td>
-            <td>{% if chargepooler.normal_port %}<i class="fas fa-check"></i>
+            <td data-label="Name">{{ chargepooler.local_area|title }}, {{ chargepooler.city|title }}</td>
+            <td data-label="Phone">{{ chargepooler.ph_no }}</td>
+            <td data-label="Slow Ports">{% if chargepooler.normal_port %}<i class="fas fa-check"></i>
               {% else %}<i class="fas fa-times"></i>{% endif%}</td>
-            <td>{% if chargepooler.fast_port %}<i class="fas fa-check"></i>
+            <td data-label="Fast Port">{% if chargepooler.fast_port %}<i class="fas fa-check"></i>
               {% else %}<i class="fas fa-times"></i> {% endif%}</td>
-            <td>{{ chargepooler.cost }}</td>
+            <td data-label="Cost">{{ chargepooler.cost }}</td>
           </tr>
           {% endfor %}
         </tbody>
