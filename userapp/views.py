@@ -410,11 +410,12 @@ def ChargePooling(request):
 def Charpoolingform(request):
     poolerform = CharpoolerForm()
     consumer = request.user.is_consumer
+    
     if request.method == "POST":
-        poolerform = CharpoolerForm(request.POST)
+        poolerform = CharpoolerForm(request.POST,instance=request.user.consumer)
         if poolerform.is_valid():
-            # poolerform.consumer = request.user.consumer
             poolerform.save()
+            return redirect('index')
     return render(request, "chargepoolingform.html", {'form': poolerform})
 
 
