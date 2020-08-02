@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from import_export.admin import ImportExportModelAdmin
 from userapp.models import (User, Consumer, Provider, ChargingStation, Vehicle, ChargingStationRecord, CsReport,
                             ChargingStationWeekly, ChargePooler, MaintenanceManDetails, CsMaintenance, Support,
-                            UserRecord, Survey)
+                            UserRecord, Survey,User_convert_specs,CovertSpecs)
 # Register your models here.
 @admin.register(Vehicle)
 class Vehicle(ImportExportModelAdmin):
@@ -14,6 +14,13 @@ class Vehicle(ImportExportModelAdmin):
 class ChargingStation(ImportExportModelAdmin):
     pass
 
+@admin.register(CovertSpecs)
+class CovertSpecs(ImportExportModelAdmin):
+    pass
+
+@admin.register(User_convert_specs)
+class User_convert_specs(ImportExportModelAdmin):
+    pass
 
 @admin.register(ChargingStationRecord)
 class ChargingStationRecord(ImportExportModelAdmin):

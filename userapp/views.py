@@ -12,7 +12,7 @@ from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
-                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle)
+                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle,CovertSpecs)
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from Sih.settings import EMAIL_HOST_USER
@@ -345,10 +345,12 @@ def ChargingStationAnalytics(request, pk):
             n += 1
             s = s + cs.elec_consumption
         consumption.append(s)
-        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
+        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)
+        oneweekreport = weekreport.first()
+        print(oneweekreport)
         wr = []
         for i in range(7):
-            wr.append(getattr(weekreport, 'd'+str(i+1)))
+            wr.append(getattr(oneweekreport, 'd'+str(i+1)))
         supportform = SupportForm()
         context = {
             'totalcount': reportcount,
@@ -410,11 +412,12 @@ def ChargePooling(request):
 def Charpoolingform(request):
     poolerform = CharpoolerForm()
     consumer = request.user.is_consumer
+    
     if request.method == "POST":
-        poolerform = CharpoolerForm(request.POST)
+        poolerform = CharpoolerForm(request.POST,instance=request.user.consumer)
         if poolerform.is_valid():
-            # poolerform.consumer = request.user.consumer
             poolerform.save()
+            return redirect('index')
     return render(request, "chargepoolingform.html", {'form': poolerform})
 
 
@@ -715,3 +718,38 @@ def demo(request):
         v.save()
 
     return redirect("index") 
+
+def demo2(request):
+    cs = ChargingStation.objects.all()
+    for c in cs:
+        csw = ChargingStationWeekly()
+        csw.cs = c
+        for i in range(8):
+            if(i == 0):
+                continue
+            a = 'd'+str((i+1))
+            csw.a = random.randrange(15, 45, 1)
+        csw.save()
+    return HttpResponse("worked")
+
+def companynames():
+    numberList = (["Tesla", "Snap Charging", "OLA Charge", "Mahindra Electric", "Relaince Charging",
+                   "HP Charging", "BP Charging", "Ather Energy", "Power EV", "PowerUP", "EV Charging"])
+    return random.choice(numberList)
+
+def demo3(request):
+    for s in range(10):
+        spec = CovertSpecs()
+        capacity = random.randrange(25, 60,1)
+        spec.battery_capacity=capacity
+        price = capacity*(5200)
+        spec.Pricing = price
+        limit1= 4.5*capacity
+        limit2 = 5.3*capacity
+        spec.range_in_kms = str(limit1)+'-'+str(limit2)
+        spec.battery_warranty = random.randrange(5, 8,1)
+        spec.rating = random.randrange(1,5,1)
+        spec.company = companynames()
+        spec.save()
+    return HttpResponse('deom3')
+

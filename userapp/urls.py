@@ -39,7 +39,10 @@ urlpatterns = [
     path('savings-calculator/', views.savingsCalculator, name="savings-calculator"),
     path('dash-welcome/', views.dashwelcome, name="dash-welcome"),
     path('live_data/', views.live_data, name="Live-Data"),
-    path('demo/',views.demo, name = "demo")
+    path('demo/',views.demo, name = "demo"),
+    path('demo2/',views.demo2,name= "demo2"),
+    path('demo3/',views.demo3,name= "demo2")
+
 ]
 
 if settings.DEBUG:

@@ -328,3 +328,29 @@ class Survey(models.Model):
     means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
+
+class User_convert_specs(models.Model):
+    vehicles = (
+        ('3 wheeler','3 wheeler'),
+        ('mini SUV','mini SUV'),
+        ('SUV','SUV'),
+        ('Sedan','Sendan'),
+        ('Heavy','Heavy')
+    )
+    prices =(
+        ('Below 5','Below 5'),
+        ('5 to 7.5','5 to 7.5'),
+        ('above 7','above 7')
+    )
+    fully_electric = models.BooleanField(default=True)
+    vehicle_type = models.CharField(max_length = 20,choices = vehicles,default= "")
+    price_range = models.IntegerField(choices = prices,default=0)
+    dtd_sercive = models.BooleanField(default=False)
+
+class CovertSpecs(models.Model):
+    battery_capacity = models.IntegerField()
+    range_in_kms =  models.CharField(max_length=20)
+    battery_warranty = models.IntegerField()
+    Pricing = models.IntegerField()
+    rating = models.IntegerField()
+    company = models.CharField(max_length = 25)
