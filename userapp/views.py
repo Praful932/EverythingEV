@@ -740,15 +740,15 @@ def companynames():
 def demo3(request):
     for s in range(10):
         spec = CovertSpecs()
-        capacity = random.randrange(00, 25, 60)
+        capacity = random.randrange(25, 60,1)
         spec.battery_capacity=capacity
         price = capacity*(5200)
         spec.Pricing = price
         limit1= 4.5*capacity
         limit2 = 5.3*capacity
         spec.range_in_kms = str(limit1)+'-'+str(limit2)
-        spec.battery_warranty = random.randrange(00, 5, 8)
-        spec.rating = random.randrange(00, 1,5)
+        spec.battery_warranty = random.randrange(5, 8,1)
+        spec.rating = random.randrange(1,5,1)
         spec.company = companynames()
         spec.save()
     return HttpResponse('deom3')
