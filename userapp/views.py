@@ -12,7 +12,7 @@ from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
-                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle)
+                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle,CovertSpecs)
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from Sih.settings import EMAIL_HOST_USER
@@ -731,3 +731,25 @@ def demo2(request):
             csw.a = random.randrange(15, 45, 1)
         csw.save()
     return HttpResponse("worked")
+
+def companynames():
+    numberList = (["Tesla", "Snap Charging", "OLA Charge", "Mahindra Electric", "Relaince Charging",
+                   "HP Charging", "BP Charging", "Ather Energy", "Power EV", "PowerUP", "EV Charging"])
+    return random.choice(numberList)
+
+def demo3(request):
+    for s in range(10):
+        spec = CovertSpecs()
+        capacity = random.randrange(00, 25, 60)
+        spec.battery_capacity=capacity
+        price = capacity*(5200)
+        spec.Pricing = price
+        limit1= 4.5*capacity
+        limit2 = 5.3*capacity
+        spec.range_in_kms = str(limit1)+'-'+str(limit2)
+        spec.battery_warranty = random.randrange(00, 5, 8)
+        spec.rating = random.randrange(00, 1,5)
+        spec.company = companynames()
+        spec.save()
+    return HttpResponse('deom3')
+
