@@ -41,8 +41,8 @@ urlpatterns = [
     path('live_data/', views.live_data, name="Live-Data"),
     path('demo/',views.demo, name = "demo"),
     path('demo2/',views.demo2,name= "demo2"),
-    path('demo3/',views.demo3,name= "demo2")
-
+    path('demo3/',views.demo3,name= "demo2"),
+    path('options/',views.options, name="options")
 ]
 
 if settings.DEBUG:

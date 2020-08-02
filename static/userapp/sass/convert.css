@@ -1,1 +1,151 @@
-/* No CSS *//*# sourceMappingURL=convert.css.map */
+main {
+  /* IMAGE STYLES */
+  /* CHECKED STYLES */
+  text-align: center;
+}
+
+main [type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+main [type=radio] + img {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+}
+
+main .convert_head {
+  padding: 10px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+main .convert_head h1 {
+  font-size: 5rem;
+  color: #111111;
+}
+
+main form .step_1 {
+  text-align: center;
+}
+
+main form .step_1 h3 {
+  font-size: 2rem;
+  color: white;
+  background-color: #111111;
+  padding: 20px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 20px auto;
+}
+
+main form .step_1 .options img {
+  width: 300px;
+  height: 250px;
+  margin: 30px;
+}
+
+main form .step_1 .options [type=radio]:checked + img {
+  border: 5px solid #717171;
+  -webkit-box-shadow: 0px 0px 5px #717171;
+          box-shadow: 0px 0px 5px #717171;
+  padding: 0px 10px;
+}
+
+main form .step_2 {
+  text-align: center;
+}
+
+main form .step_2 h3 {
+  font-size: 2rem;
+  color: white;
+  background-color: #111111;
+  padding: 20px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 20px auto;
+}
+
+main form .step_2 .options_2 img {
+  width: 250px;
+  height: 200px;
+  margin: 20px 30px;
+}
+
+main form .step_2 .options_2 [type=radio]:checked + img {
+  border: 5px solid #717171;
+  -webkit-box-shadow: 0px 0px 5px #717171;
+          box-shadow: 0px 0px 5px #717171;
+  padding: 0px 15px;
+}
+
+main form .step_3 {
+  text-align: center;
+  height: 80vh;
+}
+
+main form .step_3 h3 {
+  font-size: 2rem;
+  color: white;
+  background-color: #111111;
+  padding: 20px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 20px auto;
+}
+
+main form .step_3 .options_3 img {
+  width: 300px;
+  height: 250px;
+  margin: 30px 30px;
+}
+
+main form .step_3 .options_3 [type=radio]:checked + img {
+  border: 5px solid #717171;
+  -webkit-box-shadow: 0px 0px 5px #717171;
+          box-shadow: 0px 0px 5px #717171;
+  padding: 0px 20px;
+}
+
+main form .checkout {
+  height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main form .checkout .opt {
+  font-size: 3rem;
+}
+
+main form .checkout .opt input[type=checkbox] {
+  -webkit-transform: scale(2.5);
+          transform: scale(2.5);
+  color: green;
+  margin-right: 10px;
+}
+
+main form .checkout button[type=submit] {
+  font-size: 4rem;
+  background-color: #007226;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px;
+}
+/*# sourceMappingURL=convert.css.map */

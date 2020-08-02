@@ -753,3 +753,7 @@ def demo3(request):
         spec.save()
     return HttpResponse('deom3')
 
+
+def options(request):
+    return render(request,'userapp/available_options.html')
+
