@@ -52,6 +52,7 @@
                 {% endif %}
                 <li><a href="{% url 'account_logout' %}" role="button" class="login">Log out</a></li>
                 {% else %}
+                <li><a href="{% url 'convert' %}" role="button">Convert</a></li>
                 <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
                 <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
                 {% endif %}

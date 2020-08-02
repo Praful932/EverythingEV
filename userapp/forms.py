@@ -86,3 +86,9 @@ class ConvertForm(forms.ModelForm):
     class Meta:
         model = User_convert_specs
         fields = ['fully_electric','vehicle_type','price_range','dtd_sercive']
+        widgets = {
+            'fully_electric' : forms.HiddenInput(),
+            'vehicle_type' : forms.HiddenInput(),
+            'price_range' : forms.HiddenInput(),
+            'dtd_sercive' : forms.HiddenInput(),
+        }
