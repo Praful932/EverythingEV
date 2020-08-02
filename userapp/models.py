@@ -334,7 +334,7 @@ class User_convert_specs(models.Model):
         ('3 wheeler','3 wheeler'),
         ('mini SUV','mini SUV'),
         ('SUV','SUV'),
-        ('Sedan','Sendan'),
+        ('Sedan','Sedan'),
         ('Heavy','Heavy')
     )
     prices =(
@@ -344,7 +344,7 @@ class User_convert_specs(models.Model):
     )
     fully_electric = models.BooleanField(default=True)
     vehicle_type = models.CharField(max_length = 20,choices = vehicles,default= "")
-    price_range = models.IntegerField(choices = prices,default=0)
+    price_range = models.CharField(choices = prices,max_length = 20)
     dtd_sercive = models.BooleanField(default=False)
 
 class CovertSpecs(models.Model):

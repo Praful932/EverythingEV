@@ -759,4 +759,11 @@ def ConvertVehicle(request):
         context = {
             'convert_form' : convert_form
         }
-        return render(request, "userapp/convert.html")
+        return render(request, "userapp/convert.html", context = context)
+    else:
+        convert_form = ConvertForm(request.POST)
+        print(convert_form.errors)
+        if convert_form.is_valid():
+            ob = convert_form.save(commit=False)
+            print(ob.fully_electric,ob.vehicle_type,ob.price_range,ob.dtd_sercive)
+        return render(request, "userapp/available_options.html")
