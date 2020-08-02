@@ -12,78 +12,29 @@
         <p>These are the options available based on your input.</p>
     </div>
     <div class="options-content">
+          
+        {%for d in data%}
         <div class="option-card">
             <div class="option-card-head">
                 <img src="{% static 'userapp/CEIC_Logo.jpg' %}" alt="company-logo">
             </div>
             <div class="option-card-body">
-                <h3>CEIC Conversions</h3>
+                <h3>{{d.company}}</h3>
                 <div class="details">
-                    <p><span>Vehicle Range:</span>120km</p>
-                    <p><span>Battery capacity:</span></p>
-                    <p><span>Battery Warranty:</span>30kwh</p>
-                    <p><span>User Ratings:</span>4/5</p>
-                    <p><span>Conversion Price:</span>&#8377;6,44,230</p>
+                    <p><span>Vehicle Range:</span>{{d.range_in_kms}}</p>
+                    <p><span>Battery capacity:</span>{{d.battery_capacity}}</p>
+                    <p><span>Battery Warranty:</span>{{d.battery_warranty}}</p>
+                    <p><span>User Ratings:</span>{{d.ratings}}</p>
+                    <p><span>Conversion Price:</span>{{d.Pricing}}</p>
                 </div>
                 <div class="checkout">
                     <a href="/">Checkout</a>
                 </div>
             </div>
         </div>
-        <div class="option-card">
-            <div class="option-card-head">
-                <img src="{% static 'userapp/CEIC_Logo.jpg' %}" alt="company-logo">
-            </div>
-            <div class="option-card-body">
-                <h3>CEIC Conversions</h3>
-                <div class="details">
-                    <p><span>Vehicle Range:</span>120km</p>
-                    <p><span>Battery capacity:</span></p>
-                    <p><span>Battery Warranty:</span>30kwh</p>
-                    <p><span>User Ratings:</span>4/5</p>
-                    <p><span>Conversion Price:</span>&#8377;6,44,230</p>
-                </div>
-                <div class="checkout">
-                    <a href="/">Checkout</a>
-                </div>
-            </div>
-        </div>
-        <div class="option-card">
-            <div class="option-card-head">
-                <img src="{% static 'userapp/CEIC_Logo.jpg' %}" alt="company-logo">
-            </div>
-            <div class="option-card-body">
-                <h3>CEIC Conversions</h3>
-                <div class="details">
-                    <p><span>Vehicle Range:</span>120km</p>
-                    <p><span>Battery capacity:</span></p>
-                    <p><span>Battery Warranty:</span>30kwh</p>
-                    <p><span>User Ratings:</span>4/5</p>
-                    <p><span>Conversion Price:</span>&#8377;6,44,230</p>
-                </div>
-                <div class="checkout">
-                    <a href="/">Checkout</a>
-                </div>
-            </div>
-        </div>
-        <div class="option-card">
-            <div class="option-card-head">
-                <img src="{% static 'userapp/CEIC_Logo.jpg' %}" alt="company-logo">
-            </div>
-            <div class="option-card-body">
-                <h3>CEIC Conversions</h3>
-                <div class="details">
-                    <p><span>Vehicle Range:</span>120km</p>
-                    <p><span>Battery capacity:</span></p>
-                    <p><span>Battery Warranty:</span>30kwh</p>
-                    <p><span>User Ratings:</span>4/5</p>
-                    <p><span>Conversion Price:</span>&#8377;6,44,230</p>
-                </div>
-                <div class="checkout">
-                    <a href="/">Checkout</a>
-                </div>
-            </div>
-        </div>
+        {%endfor%}
+        
+        
     </div>
 </main>
 {% endblock body %}

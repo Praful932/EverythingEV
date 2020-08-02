@@ -766,4 +766,21 @@ def ConvertVehicle(request):
         if convert_form.is_valid():
             ob = convert_form.save(commit=False)
             print(ob.fully_electric,ob.vehicle_type,ob.price_range,ob.dtd_sercive)
-        return render(request, "userapp/available_options.html")
+            options = CovertSpecs.objects.all()
+            w3=0
+            if(ob.fully_electric==True):
+                if(ob.vehicle_type=="3 wheeler" or ob.vehicle_type=="mini SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=28)
+                if(ob.vehicle_type=="Sedan" or ob.vehicle_type=="SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=45)
+                if(ob.vehicle_type=="Heavy"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__gt=45)
+            else:
+                if(ob.vehicle_type=="3 wheeler" or ob.vehicle_type=="mini SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=20)
+                if(ob.vehicle_type=="Sedan" or ob.vehicle_type=="SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=35)
+                if(ob.vehicle_type=="Heavy"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__gt=40)
+                
+        return render(request, "userapp/available_options.html",{"data":w3})
