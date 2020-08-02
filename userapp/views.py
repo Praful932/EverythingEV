@@ -7,7 +7,7 @@ from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
-                           ChargingStationForm, SupportForm, CharpoolerForm)
+                           ChargingStationForm, SupportForm, CharpoolerForm, ConvertForm)
 from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
@@ -753,3 +753,10 @@ def demo3(request):
         spec.save()
     return HttpResponse('deom3')
 
+def ConvertVehicle(request):
+    if request.method == 'GET':
+        convert_form = ConvertForm()
+        context = {
+            'convert_form' : convert_form
+        }
+        return render(request, "userapp/convert.html")

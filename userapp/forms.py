@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from userapp.models import (Consumer, Provider, User, ChargingStation,
-                            Support, UserRecord, ChargePooler)
+                            Support, UserRecord, ChargePooler, User_convert_specs)
 
 
 class UserSignUpForm(UserCreationForm):
@@ -81,3 +81,8 @@ class CharpoolerForm(forms.ModelForm):
     class Meta:
         model = ChargePooler
         fields = ['city', 'local_area', 'ph_no', 'cost', 'normal_port', 'fast_port']
+
+class ConvertForm(forms.ModelForm):
+    class Meta:
+        model = User_convert_specs
+        fields = ['fully_electric','vehicle_type','price_range','dtd_sercive']

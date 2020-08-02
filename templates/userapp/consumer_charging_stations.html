@@ -267,7 +267,6 @@
     }
     const imageBase = '{%  static "userapp/cars/" %}';
     $.updateport = function (pk) {
-      var width = window.innerWidth();
       var no = Math.floor(Math.random() * 25) + 1;
       const a = imageBase + no + ".jpg";
       document.getElementById('img').setAttribute("src", a);
@@ -282,13 +281,7 @@
               count++;
           }
           console.log(count);
-          if (width >= 600 && width <= 768) {
             $("#av_ports" + pk).text("Available Ports: " + count);
-          }
-          else {
-            $("#av_ports" + pk).innnerHTML("<p>Available <br> Ports</p>: " + count);
-          }
-
         });
       });
     }
