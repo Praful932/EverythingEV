@@ -3,12 +3,15 @@ from django.contrib.auth.admin import UserAdmin
 from import_export.admin import ImportExportModelAdmin
 from userapp.models import (User, Consumer, Provider, ChargingStation, Vehicle, ChargingStationRecord, CsReport,
                             ChargingStationWeekly, ChargePooler, MaintenanceManDetails, CsMaintenance, Support,
-                            UserRecord, Survey,User_convert_specs,CovertSpecs)
+                            UserRecord, Survey,User_convert_specs,CovertSpecs,DrivingEnv)
 # Register your models here.
 @admin.register(Vehicle)
 class Vehicle(ImportExportModelAdmin):
     pass
 
+@admin.register(DrivingEnv)
+class DrivingEnv(ImportExportModelAdmin):
+    pass
 
 @admin.register(ChargingStation)
 class ChargingStation(ImportExportModelAdmin):
