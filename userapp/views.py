@@ -784,3 +784,6 @@ def ConvertVehicle(request):
                     w3 = CovertSpecs.objects.filter(battery_capacity__gt=40)
                 
         return render(request, "userapp/available_options.html",{"data":w3})
+
+def buildcs(request):
+    return render(request, "userapp/build_cs.html")

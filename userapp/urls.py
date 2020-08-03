@@ -42,7 +42,8 @@ urlpatterns = [
     path('demo/',views.demo, name = "demo"),
     path('demo2/',views.demo2,name= "demo2"),
     path('demo3/',views.demo3,name= "demo2"),
-    path('convert/',views.ConvertVehicle, name="convert")
+    path('convert/',views.ConvertVehicle, name="convert"),
+    path('build_cs/',views.buildcs,name="build_cs")
 ]
 
 if settings.DEBUG:
