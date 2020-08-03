@@ -354,3 +354,16 @@ class CovertSpecs(models.Model):
     Pricing = models.IntegerField()
     rating = models.IntegerField()
     company = models.CharField(max_length = 25)
+
+
+class DrivingEnv(models.Model):
+    roads = (
+        ('City','City'),
+        ('Highway','Highway'),
+        ('Off road','Off road')
+    )
+    consumption = models.IntegerField(default=0)
+    road_type = models.CharField(choices = roads,max_length = 20)
+    consumption_per_100 = models.IntegerField()
+    ac = models.BooleanField()
+    avg_speed = models.IntegerField()

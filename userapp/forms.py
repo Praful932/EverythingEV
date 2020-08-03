@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from userapp.models import (Consumer, Provider, User, ChargingStation,
-                            Support, UserRecord, ChargePooler, User_convert_specs)
+                            Support, UserRecord, ChargePooler, User_convert_specs,DrivingEnv)
 
 
 class UserSignUpForm(UserCreationForm):
@@ -92,3 +92,7 @@ class ConvertForm(forms.ModelForm):
             'price_range' : forms.HiddenInput(),
             'dtd_sercive' : forms.HiddenInput(),
         }
+class DrivingEnv(forms.ModelForm):
+    class Meta:
+        model = DrivingEnv
+        fields = ['consumption','road_type','consumption_per_100','ac','avg_speed']
