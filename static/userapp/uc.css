@@ -41,7 +41,7 @@ body {
 
 
 .main {
-  width: 95vw !important;
+  height: 80vh !important;
 }
 
 header {
@@ -191,13 +191,13 @@ nav ul li .signup {
   background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  
   background: linear-gradient(to right, #6dd5ed, #2193b0);  */
   padding-right: 20px;
-  height: 500px;
+  height: 100%;
   overflow-y: scroll;
 }
 
 .right {
   /* background-color: grey; */
-  width: 62%;
+  width: 60%;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Abel');
@@ -327,6 +327,10 @@ nav ul li .signup {
   color: #fff;
 }
 
+.card .general .h4 {
+  font-size: 2.5rem;
+}
+
 .general p {
   font-size: 1.5rem !important;
 }
@@ -384,4 +388,53 @@ nav ul li .signup {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+}
+
+
+@media only screen and (max-width:1024px) {
+  .card {
+    width: 100%;
+  }
+
+  .card .general {
+    width: 24rem;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .card .additional {
+    width: 80px;
+  }
+
+  .card .additional .user-card {
+    width: 80px;
+  }
+
+  .card .general {
+    width: 19rem;
+  }
+}
+
+@media only screen and (max-width:592px) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    height: auto;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .card .additional {
+    width: 120px;
+  }
+
+  .card .additional .user-card {
+    width: 120px;
+  }
+
+  .card .general {
+    width: 24em;
+  }
 }

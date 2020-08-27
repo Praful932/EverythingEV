@@ -1,0 +1,69 @@
+main {
+    .options-heading {
+        text-align: center;
+
+        h1 {
+            font-size: 4rem;
+            margin: 20px auto;
+        }
+
+        p {
+            font-size: 2rem;
+        }
+    }
+
+    .options-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+
+        .option-card {
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px #717171;
+            margin: 20px auto;
+            padding: 10px;
+
+            .option-card-head {
+                img {
+                    width: 250px;
+                    height: 200px;
+                }
+            }
+
+            .option-card-body {
+                background-color: #D3D3D3;
+                border-radius: 10px;
+                padding: 10px 20px;
+
+                h3 {
+                    font-size: 2rem;
+                }
+
+                .details {
+                    text-align: left;
+
+                    p {
+                        span {
+                            font-weight: 500;
+                        }
+
+                        margin-bottom: 5px !important;
+                    }
+                }
+
+                .checkout {
+                    margin: 20px auto;
+
+                    a {
+                        text-decoration: none;
+                        font-size: 2rem;
+                        padding: 10px 15px;
+                        background-color: rgb(59, 137, 240);
+                        border-radius: 10px;
+                        color: white
+                    }
+                }
+            }
+        }
+    }
+}

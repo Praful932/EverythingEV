@@ -23,8 +23,7 @@
         }
     </style>
     <df-messenger intent="WELCOME" chat-title="EverythingEV chatbot" agent-id="348918d8-72c3-486c-88b3-17ea3047c1f6"
-        language-code="en"
-        chat-icon="https://www.synaptive.com/img/chatbot.png">
+        language-code="en" chat-icon="https://www.synaptive.com/img/chatbot.png">
     </df-messenger>
     <header>
         <div class="logo">
@@ -40,7 +39,7 @@
                 {% else %}
                 <li><a href="{% url 'Profile' %}" role="button">Profile</a></li>
                 {% endif %}
-                <li><a href="{% url 'account_logout' %}" role="button">Log out</a></li>
+                <li><a href="{% url 'account_logout' %}" class="login" role="button">Log out</a></li>
                 {% else %}
                 <li><a href="{% url 'account_login' %}" class="login" role="button">Log in</a></li>
                 <li><a href="{% url 'register' %}" class="signup" role="button">Sign up</a></li>
@@ -54,13 +53,12 @@
     <div class="head">
         <div class="imghead">
             <img src="{% static 'userapp/bg.png' %}" alt="text" width="460" height="345">
-            <div class="centered" style="margin-top: 10vw;">
-               Why Choose EV?
+            <div class="centered">
+                Why Choose EV?
             </div>
         </div>
-        <div style="background-color: #2D677A;height:50%;">
-            <p
-                style="margin: -1px 10% 0% 10%;padding: 3% 0% 3% 0%;height: 50%;font-family: 'Noto Sans JP', sans-serif;color: azure;font-size: 2rem;">
+        <div class="head-text" style="background-color: #2D677A;height:50%;">
+            <p>
                 Electric vehicles are one solution to the negative environmental impact of
                 conventional vehicles. However, they have also proven to have many more
                 benefits to society. The advent of electric vehicles has called for an
@@ -480,10 +478,10 @@
                 </div>
             </div>
         </div>
-        
+
 
         <footer style="margin-top: 2%;width: 100%;">
-            <div class="footer-content" >
+            <div class="footer-content">
                 <div class="column-1">
                     <img src="{% static 'userapp/svg/logo-white.svg' %}" alt="logo">
                     <div class="links">
@@ -528,8 +526,8 @@
         <script>
             $(document).ready(function () {
                 $('.menu-toggle').click(function () {
-                    $('.menu-toggle').toggleClass('active');
-                    $('nav').toggleClass('active');
+                    $('.menu-toggle').toggleClass('active-class');
+                    $('nav').toggleClass('active-class');
                 })
             })
         </script>
@@ -582,7 +580,6 @@
                 });
             });
         </script>
-
 </body>
 
 </html>

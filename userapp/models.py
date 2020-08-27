@@ -262,10 +262,10 @@ def sub():
 
 class ChargePooler(models.Model):
     consumer = models.OneToOneField(Consumer, on_delete=models.CASCADE, primary_key=True)
-    city = models.CharField(max_length=25, default=city)
-    local_area = models.CharField(max_length=25, default=sub)
-    ph_no = models.CharField(max_length=13, default=phone)
-    cost = models.CharField(max_length=25, default=price)
+    city = models.CharField(max_length=25)
+    local_area = models.CharField(max_length=25)
+    ph_no = models.CharField(max_length=13)
+    cost = models.CharField(max_length=25)
     normal_port = models.BooleanField(default=True)
     fast_port = models.BooleanField(default=False)
 
@@ -328,3 +328,42 @@ class Survey(models.Model):
     means_of_travel = models.CharField(max_length=20, choices=travel_type, default="")
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
+
+class User_convert_specs(models.Model):
+    vehicles = (
+        ('3 wheeler','3 wheeler'),
+        ('mini SUV','mini SUV'),
+        ('SUV','SUV'),
+        ('Sedan','Sedan'),
+        ('Heavy','Heavy')
+    )
+    prices =(
+        ('Below 5','Below 5'),
+        ('5 to 7.5','5 to 7.5'),
+        ('above 7','above 7')
+    )
+    fully_electric = models.BooleanField(default=True)
+    vehicle_type = models.CharField(max_length = 20,choices = vehicles,default= "")
+    price_range = models.CharField(choices = prices,max_length = 20)
+    dtd_sercive = models.BooleanField(default=False)
+
+class CovertSpecs(models.Model):
+    battery_capacity = models.IntegerField()
+    range_in_kms =  models.CharField(max_length=20)
+    battery_warranty = models.IntegerField()
+    Pricing = models.IntegerField()
+    rating = models.IntegerField()
+    company = models.CharField(max_length = 25)
+
+
+class DrivingEnv(models.Model):
+    roads = (
+        ('City','City'),
+        ('Highway','Highway'),
+        ('Off road','Off road')
+    )
+    consumption = models.IntegerField(default=0)
+    road_type = models.CharField(choices = roads,max_length = 20)
+    consumption_per_100 = models.IntegerField()
+    ac = models.BooleanField()
+    avg_speed = models.IntegerField()

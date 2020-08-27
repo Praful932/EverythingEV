@@ -1,17 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import ListView, DeleteView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+import random
 from geopy.geocoders import Nominatim
 from django.urls import reverse_lazy
 from django.db.models import Case, When
 from userapp.forms import (UserSignUpForm, ConsumerSignUpForm, ProviderSignUpForm, UserUpdateForm,
-                           ChargingStationForm, SupportForm, CharpoolerForm)
+                           ChargingStationForm, SupportForm, CharpoolerForm, ConvertForm)
 from django.contrib.auth import logout, login
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from userapp.models import (User, Provider, ChargingStation, ChargingStationRecord, CsReport, ChargingStationWeekly,
-                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle)
+                            ChargePooler, MaintenanceManDetails, Consumer, CsMaintenance, Vehicle,CovertSpecs)
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from Sih.settings import EMAIL_HOST_USER
@@ -233,6 +234,10 @@ def ProviderDashboard(request):
                 'cslist': cslist,
                 'supportform': supportform
             }
+            if request.method == "POST":
+                sform= SupportForm(request.POST)
+                if sform.is_valid():
+                    sform.save()
             return render(request, "userapp/provider_dashboard.html", context=context)
     return redirect('index')
 
@@ -340,10 +345,12 @@ def ChargingStationAnalytics(request, pk):
             n += 1
             s = s + cs.elec_consumption
         consumption.append(s)
-        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)[0]
+        weekreport = ChargingStationWeekly.objects.filter(cs=current_cs)
+        oneweekreport = weekreport.first()
+        print(oneweekreport)
         wr = []
         for i in range(7):
-            wr.append(getattr(weekreport, 'd'+str(i+1)))
+            wr.append(getattr(oneweekreport, 'd'+str(i+1)))
         supportform = SupportForm()
         context = {
             'totalcount': reportcount,
@@ -380,20 +387,37 @@ def ChargingStationDashboard(request, pk):
             'records': recorddata,
             'supportform': supportform,
         }
+        if request.method == "POST":
+            sform = SupportForm(request.POST)
+            if sform.is_valid():
+                sform.save()
+
         return render(request, "userapp/dash_welcome.html", context=context)
     return redirect('index')
 
 
 @login_required
 def ChargePooling(request):
+    consumer = 0
     if request.user.is_consumer:
-        chargepoolers = ChargePooler.objects.all()
-        context = {
-            'chargepoolers': chargepoolers
+        consumer = 1
+    chargepoolers = ChargePooler.objects.all()
+    context = {
+            'chargepoolers': chargepoolers,
+            'consumer': consumer
         }
-        return render(request, "userapp/chargepoolerpage.html", context=context)
-    poolerform = CharpoolerForm()
+    return render(request, "userapp/chargepoolerpage.html", context=context)
 
+
+def Charpoolingform(request):
+    poolerform = CharpoolerForm()
+    consumer = request.user.is_consumer
+    
+    if request.method == "POST":
+        poolerform = CharpoolerForm(request.POST,instance=request.user.consumer)
+        if poolerform.is_valid():
+            poolerform.save()
+            return redirect('index')
     return render(request, "chargepoolingform.html", {'form': poolerform})
 
 
@@ -644,6 +668,10 @@ def dashwelcome(request):
             'best_revenue': round(best_revenue, 2),
             'best_cs': best_cs
         }
+        if request.method == "POST":
+            sform= SupportForm(request.POST)
+            if sform.is_valid():
+                sform.save()
         return render(request, "userapp/dash_welcome.html", context=context)
     else:
         # To Meme
@@ -689,4 +717,73 @@ def demo(request):
         v.t23 = random.randrange(00, 15, 2)
         v.save()
 
-    return HttpResponse("hii")
+    return redirect("index") 
+
+def demo2(request):
+    cs = ChargingStation.objects.all()
+    for c in cs:
+        csw = ChargingStationWeekly()
+        csw.cs = c
+        for i in range(8):
+            if(i == 0):
+                continue
+            a = 'd'+str((i+1))
+            csw.a = random.randrange(15, 45, 1)
+        csw.save()
+    return HttpResponse("worked")
+
+def companynames():
+    numberList = (["Tesla", "Snap Charging", "OLA Charge", "Mahindra Electric", "Relaince Charging",
+                   "HP Charging", "BP Charging", "Ather Energy", "Power EV", "PowerUP", "EV Charging"])
+    return random.choice(numberList)
+
+def demo3(request):
+    for s in range(10):
+        spec = CovertSpecs()
+        capacity = random.randrange(25, 60,1)
+        spec.battery_capacity=capacity
+        price = capacity*(5200)
+        spec.Pricing = price
+        limit1= 4.5*capacity
+        limit2 = 5.3*capacity
+        spec.range_in_kms = str(limit1)+'-'+str(limit2)
+        spec.battery_warranty = random.randrange(5, 8,1)
+        spec.rating = random.randrange(1,5,1)
+        spec.company = companynames()
+        spec.save()
+    return HttpResponse('deom3')
+
+def ConvertVehicle(request):
+    if request.method == 'GET':
+        convert_form = ConvertForm()
+        context = {
+            'convert_form' : convert_form
+        }
+        return render(request, "userapp/convert.html", context = context)
+    else:
+        convert_form = ConvertForm(request.POST)
+        print(convert_form.errors)
+        if convert_form.is_valid():
+            ob = convert_form.save(commit=False)
+            print(ob.fully_electric,ob.vehicle_type,ob.price_range,ob.dtd_sercive)
+            options = CovertSpecs.objects.all()
+            w3=0
+            if(ob.fully_electric==True):
+                if(ob.vehicle_type=="3 wheeler" or ob.vehicle_type=="mini SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=28)
+                if(ob.vehicle_type=="Sedan" or ob.vehicle_type=="SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=45)
+                if(ob.vehicle_type=="Heavy"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__gt=45)
+            else:
+                if(ob.vehicle_type=="3 wheeler" or ob.vehicle_type=="mini SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=20)
+                if(ob.vehicle_type=="Sedan" or ob.vehicle_type=="SUV"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__lt=35)
+                if(ob.vehicle_type=="Heavy"):
+                    w3 = CovertSpecs.objects.filter(battery_capacity__gt=40)
+                
+        return render(request, "userapp/available_options.html",{"data":w3})
+
+def buildcs(request):
+    return render(request, "userapp/build_cs.html")

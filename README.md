@@ -33,6 +33,12 @@ To run alpr, Install alpr for your OS from [here](https://github.com/openalpr/op
 
 `python3 main.py`
 
+Add Google Map API Keys in these pages:
+
+templates/userapp/add_charging_station.html
+templates/userapp/complaint_dashboard.html
+templates/userapp/consumer_charging_stations.html
+templates/userapp/routeyourway.html
 
 All Set!
 

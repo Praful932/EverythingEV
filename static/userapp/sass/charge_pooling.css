@@ -236,9 +236,9 @@ main .chargePooling .chargers_table th {
   color: black;
 }
 
-main .chargePooling .chargers_table tbody tr:nth-child(even) {
+/* main .chargePooling .chargers_table tbody tr:nth-child(even) {
   background-color: #dadada;
-}
+} */
 
 @media (max-width: 800px) {
   main .chargePooling {

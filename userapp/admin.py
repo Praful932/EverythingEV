@@ -3,17 +3,27 @@ from django.contrib.auth.admin import UserAdmin
 from import_export.admin import ImportExportModelAdmin
 from userapp.models import (User, Consumer, Provider, ChargingStation, Vehicle, ChargingStationRecord, CsReport,
                             ChargingStationWeekly, ChargePooler, MaintenanceManDetails, CsMaintenance, Support,
-                            UserRecord, Survey)
+                            UserRecord, Survey,User_convert_specs,CovertSpecs,DrivingEnv)
 # Register your models here.
 @admin.register(Vehicle)
 class Vehicle(ImportExportModelAdmin):
     pass
 
+@admin.register(DrivingEnv)
+class DrivingEnv(ImportExportModelAdmin):
+    pass
 
 @admin.register(ChargingStation)
 class ChargingStation(ImportExportModelAdmin):
     pass
 
+@admin.register(CovertSpecs)
+class CovertSpecs(ImportExportModelAdmin):
+    pass
+
+@admin.register(User_convert_specs)
+class User_convert_specs(ImportExportModelAdmin):
+    pass
 
 @admin.register(ChargingStationRecord)
 class ChargingStationRecord(ImportExportModelAdmin):
@@ -65,14 +75,11 @@ ADDITIONAL_USER_FIELDS = (
     (None, {'fields': ('is_consumer', 'is_provider')}),
 )
 
-
-class MyUserAdmin(UserAdmin):
+@admin.register(User)
+class MyUserAdmin(UserAdmin,ImportExportModelAdmin):
     model = User
 
     add_fieldsets = UserAdmin.add_fieldsets + ADDITIONAL_USER_FIELDS
     fieldsets = UserAdmin.fieldsets + ADDITIONAL_USER_FIELDS
 
-@admin.register(User)
-class User(ImportExportModelAdmin):
-    pass
 # admin.site.register(User, MyUserAdmin)

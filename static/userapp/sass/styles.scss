@@ -50,14 +50,14 @@ nav {
             }
 
             .login {
-                border: 3px #0DBA47 solid;
+                border: 3px #008916 solid !important;
                 border-radius: 10px;
-                color: #0DBA47;
+                color: #008916;
                 padding: 5px 20px;
             }
 
             .signup {
-                background-color: #0DBA47;
+                background-color: #008916 !important;
                 padding: 8px 20px;
                 border-radius: 10px;
                 color: white;
@@ -293,7 +293,7 @@ footer {
                     a {
                         display: inline-block;
                         text-decoration: none;
-                        color: #2699fb;
+                        color: #09232C;
                     }
                 }
             }
@@ -643,14 +643,22 @@ footer {
 }
 
 @media (max-width:592px) {
+
+    df-messenger {
+        display: none;
+    }
+
     .front {
         width: 100%;
+        text-align: center;
+
+        .text {
+            margin: 0px auto;
+        }
 
         .art {
             img {
-                height: 5px;
-                width: 5px;
-                visibility: hidden;
+                display: none;
             }
         }
     }
@@ -664,30 +672,32 @@ footer {
 
     .banner-row>.banner-grid:nth-child(even) {
         background-color: #eee8a9;
-        display: grid;
-        grid-template-columns: 40% 60%;
+        display: block;
     }
 
     .banner-row {
         .banner-grid {
-            display: grid;
-            grid-template-rows: 99% 1%;
-            justify-items: center;
-            align-items: center;
+            display: block;
+
+            section {
+                padding: 15px 0px;
+            }
 
             .text {
-                display: flex;
+                display: block;
                 width: 100%;
-                justify-content: space-evenly;
                 height: 120px;
-                padding: 20px;
+                margin-left: 0px !important;
+                text-align: left;
+                padding-left: 10px;
 
                 h2 {
-                    font-size: 1.2rem;
+                    font-size: 1.4rem;
+                    width: 95vw;
                 }
 
                 p {
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                 }
             }
 
@@ -697,10 +707,6 @@ footer {
             .img4,
             .img5,
             .img6 {
-                width: 1px;
-                height: 1px;
-                margin: 0px;
-                padding: 0px;
                 display: none;
             }
         }

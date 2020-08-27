@@ -31,10 +31,12 @@
                 <h2>What if my car's battery goes down in the middle?<br>Are EVs high maintenance?</h2>
                 <p>For these and a lot more questions,<br>head to our page, Why Choose EV.</p>
             </section>
-            <img class="img1" src="{% static 'userapp/svg/why choose ev_art.svg' %}" style="margin-right: 50%;">
+            <img class="img1" src="{% static 'userapp/svg/why choose ev_art.svg' %}" style="margin-right: 50%;"
+                alt="banner-art">
         </div>
         <div class="banner-grid">
-            <img class="img2" src="{% static 'userapp/svg/charging stations_art.svg' %}" style="margin-left: 30%;">
+            <img class="img2" src="{% static 'userapp/svg/charging stations_art.svg' %}" style="margin-left: 30%;"
+                alt="banner-art">
             <section class="text" style="margin-right: 20%;">
                 <h2>Wondering Where to charge your EV?</h2>
                 <p>We got you covered!
@@ -51,10 +53,12 @@
                     Our innovative feature Charge Pooling can help you
                     easily reach that person!</p>
             </section>
-            <img class="img3" src="{% static 'userapp/svg/charge pooling_art.svg' %}" style="margin-right: 70%;">
+            <img class="img3" src="{% static 'userapp/svg/charge pooling_art.svg' %}" style="margin-right: 70%;"
+                alt="banner-art">
         </div>
         <div class="banner-grid">
-            <img class="img4" src="{% static 'userapp/svg/route your way_art.svg' %}" style="margin-left: 35%;">
+            <img class="img4" src="{% static 'userapp/svg/route your way_art.svg' %}" style="margin-left: 35%;"
+                alt="banner-art">
             <section class="text">
                 <h2>Planning a long trip with EV?
                     <br>Afraid that battery might doze off?</h2>
@@ -71,10 +75,11 @@
                     <br>when you switch to EV?</h2>
                 <p>Go to Savings Calculator and find out easily!</p>
             </section>
-            <img class="img3" src="{% static 'userapp/svg/charge pooling_art.svg' %}" style="margin-right: 80%;">
+            <img class="img3" src="{% static 'userapp/svg/charge pooling_art.svg' %}" style="margin-right: 80%;"
+                alt="banner-art">
         </div>
         <div class="banner-grid">
-            <img class="img6" src="{% static 'userapp/svg/sales_art.svg' %}" style="margin-left: 30%;">
+            <img class="img6" src="{% static 'userapp/svg/sales_art.svg' %}" style="margin-left: 30%;" alt="banner-art">
             <section class="text">
                 <h2>You've made up your mind.
                     You're gonna buy a new supercool EV!
@@ -86,8 +91,8 @@
         </div>
     </div>
 </main>
-
-
+<script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+{% block script %}
 <script>
     $(document).ready(function () {
         $('.menu-toggle').click(function () {
@@ -105,5 +110,7 @@
         }
     })
 </script>
+
+{% endblock script %}
 
 {% endblock body %}

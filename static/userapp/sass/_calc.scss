@@ -119,6 +119,7 @@ main {
         }
     }
 
+
     .result-group {
         display: flex;
         justify-content: space-around;
@@ -221,6 +222,7 @@ main {
     main {
         .savingsBanner {
             height: 250px;
+            padding-left: 0px !important;
 
             h1 {
                 font-size: 10vw;
@@ -245,6 +247,7 @@ main {
                 .brand,
                 .model,
                 .distance {
+                    margin-left: 0px !important;
                     margin-top: 20px;
                     height: auto;
                 }
@@ -257,10 +260,19 @@ main {
             }
         }
 
+        .mobile {
+            margin: 120px auto !important;
+        }
+
         .result-group {
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        .disclaimer {
+            height: 100% !important;
+            margin: 10px auto !important;
         }
     }
 }

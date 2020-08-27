@@ -1,0 +1,139 @@
+main {
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* IMAGE STYLES */
+    [type=radio]+img {
+        cursor: pointer;
+        width: 100px;
+        height: 100px;
+    }
+
+    /* CHECKED STYLES */
+
+
+    text-align:center;
+
+    .convert_head {
+        padding: 10px;
+        text-align: center;
+        margin: 20px auto;
+
+        h1 {
+            font-size: 5rem;
+            color: #111111;
+        }
+    }
+        .step_1 {
+            text-align: center;
+
+            h3 {
+                font-size: 2rem;
+                color: white;
+                background-color: #111111;
+                padding: 20px;
+                width: fit-content;
+                margin: 20px auto;
+            }
+
+            .options {
+                img {
+                    width: 300px;
+                    height: 250px;
+                    margin: 30px;
+                }
+
+                [type=radio]:checked+img {
+                    border: 5px solid #717171;
+                    box-shadow: 0px 0px 5px #717171;
+                    padding: 0px 10px;
+                }
+            }
+        }
+
+        .step_2 {
+            text-align: center;
+
+            h3 {
+                font-size: 2rem;
+                color: white;
+                background-color: #111111;
+                padding: 20px;
+                width: fit-content;
+                margin: 20px auto;
+            }
+
+            .options_2 {
+                img {
+                    width: 250px;
+                    height: 200px;
+                    margin: 20px 30px;
+                }
+
+                [type=radio]:checked+img {
+                    border: 5px solid #717171;
+                    box-shadow: 0px 0px 5px #717171;
+                    padding: 0px 15px;
+                }
+            }
+        }
+
+        .step_3 {
+            text-align: center;
+            height: 80vh;
+
+            h3 {
+                font-size: 2rem;
+                color: white;
+                background-color: #111111;
+                padding: 20px;
+                width: fit-content;
+                margin: 20px auto;
+            }
+
+            .options_3 {
+                img {
+                    width: 300px;
+                    height: 250px;
+                    margin: 30px 30px;
+                }
+
+                [type=radio]:checked+img {
+                    border: 5px solid #717171;
+                    box-shadow: 0px 0px 5px #717171;
+                    padding: 0px 20px;
+                }
+            }
+        }
+
+        .checkout {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .opt {
+                font-size: 3rem;
+
+                input[type=checkbox] {
+                    transform: scale(2.5);
+                    color: green;
+                    margin-right: 10px;
+                }
+            }
+
+            button[type=submit] {
+                font-size: 4rem;
+                background-color: #007226;
+                color: white;
+                padding: 10px 20px;
+                margin: 20px;
+            }
+        }
+
+}

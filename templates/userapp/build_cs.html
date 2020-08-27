@@ -1,0 +1,110 @@
+{% extends "userapp/layout.html" %}"
+{% load static %}"
+{% block head %}"
+<title>EverythingEV</title>
+<link rel="stylesheet" type="text/css" href="{% static 'userapp/sass/build_cs.css' %}">
+</style>
+{% endblock head %}" {% block body %}" <main>
+    <div class="salesBanner">
+        <img src="{% static 'userapp/build_cs.svg' %}">
+        <section class="text">
+            <h2>Build Your Charging Station</h2>
+            <p>Interested in building your own charging station?<br> Here's a guide for you.
+            </p>
+        </section>
+    </div>
+    <div class="build-content">
+        <p class="intro">The Government of India has advised guidelines which are to be followed by people who
+            wish to
+            install the charging station.
+            <br><br>Here are some:</p>
+        <div class="content-banner">
+            <section class="text">
+                <h3>1. Area required for the charging station</h3>
+                <p>As per MoP guidelines, for Public Charging Station(PCS), minimum area required is
+                    13.5m x 5.5m.</p>
+            </section>
+            <img src="{% static 'userapp/area.svg' %}" alt="area">
+        </div>
+        <div class="content-banner2">
+            <section class="text">
+                <h3>2. Charging station types (based on location)</h3>
+                <p>There are 3 main types:
+                    <br>
+                    <strong>Category A:</strong> Charging stations established at public places for commercial
+                    purpose to charge electric vehicles and are available to any individual without
+                    any restrictions for charging their vehicles; and are installed as per MoP
+                    notification dated 14th Dec 2018 and its amendment thereof. (e.g., EV Charging
+                    station established in at Municipal Parking Lots, Petrol Stations, Streets, Malls, and
+                    Market Complexes etc.) <br><br>
+                    <strong>Category B:</strong> Charging stations established within the premises of a state or
+                    central government office complex, Government
+                    Hospitals/clinics/Dispensaries, Government educational Institutions or any
+                    other Public office for non-commercial use. (e.g., EV Charging station established
+                    in Udyog Bhawan, Shram Shakti Bhawan, PSU office Complex etc.) <br><br>
+                    <strong>Category C:</strong> Charging stations established within the semi-restricted
+                    premises
+                    for commercial or non-commercial purpose for charging of Electric vehicles.
+                    However, said chargers are also available to any individual for charging of
+                    Electric Vehicle (EV) without any restrictions. (e.g., EV Charging stations
+                    established for Taxi Aggregators for charging of Taxies, Co-operative housing societies)
+                </p>
+            </section>
+            <img src="{% static 'userapp/think_3.svg' %}" alt="area">
+        </div>
+        <div class="content-banner3">
+            <section class="text">
+                <h3>3.Charger Types</h3>
+                <p>
+                    <strong>1. Fast</strong>
+                    <br>
+                    a) CCS (min 50 kW) --- Rated Voltage - 200-1000V <br>
+                    b) CHAdeMO (min 50 kW) --- Rated Voltage - 200-1000V <br>
+                    c) Type-2 AC (min 22 kW) --- Rated Voltage - 380-480V <br> <br>
+                    <strong>2. Slow</strong>
+                    <br>
+                    a) Bharat DC-001 (15 kW) --- Rated Voltage - 72-200 V <br>
+                    b) Bharat AC-001 (10 kW) --- Rated Voltage - 230 V <br>
+                </p>
+            </section>
+            <img src="{% static 'userapp/charging-station.svg' %}" alt="">
+        </div>
+        <div class="content-banner4">
+            <section class="text">
+                <h3>4.Cost</h3>
+                <p>For Chargers:₹ 99,120.00 Onwards</p>
+                <p>For Softwares:Variable</p>
+            </section>
+            <img src="{% static 'userapp/cost.svg' %}" alt="">
+        </div>
+        <div class="content-banner3">
+            <section class="text">
+                <h3>5. Tie-ups</h3>
+                <p>Tie up with at least one online Network Service Providers (NSPs) to enable
+                    advance remote/online booking of charging slots by EV owners. Such online
+                    information Lo EV owners should also include information regarding location.
+                    types and numbers of chargers installed/available etc.
+                </p>
+            </section>
+            <img src="{% static 'userapp/agreement.svg' %}" alt="">
+        </div>
+        <div class="what-now">
+            <section class="text">
+                <h3>So, once you install a charging station,,<br><a href="{% url 'registerProvider' %}">Register</a> at
+                    our
+                    website to get these exciting features!</h3>
+                <ul>
+                    <li>Manage your network of charging stations</li>
+                    <li>Get Detailed Reports</li>
+                    <li>Get easy maintenance service</li>
+                    <li>Get peak time</li>
+                    <li>Get statistics</li>
+                </ul>
+            </section>
+            <img src="{% static 'userapp/svg/logo.svg' %}" alt="">
+        </div>
+    </div>
+</main>
+
+
+{% endblock body %}"

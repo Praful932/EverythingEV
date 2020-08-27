@@ -1,0 +1,225 @@
+main .salesBanner {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100% !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  background-color: #d2f2ed !important;
+  height: 300px !important;
+}
+
+main .salesBanner img {
+  width: 500 !important;
+  height: 300px !important;
+  margin: 10px !important;
+  margin-right: 60px !important;
+}
+
+main .salesBanner .text h2 {
+  font-size: 3rem !important;
+  margin-bottom: 15px !important;
+}
+
+main .salesBanner .text p {
+  font-size: 1.8rem !important;
+  margin-right: 20px !important;
+}
+
+main .build-content {
+  text-align: left;
+}
+
+main .build-content .intro {
+  font-size: 2.5rem !important;
+  margin: 50px !important;
+}
+
+main .build-content .content-banner {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100% !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  background-color: #feffdc !important;
+  height: 300px !important;
+}
+
+main .build-content .content-banner img {
+  width: 400px !important;
+  height: 200px !important;
+  margin: 10px !important;
+}
+
+main .build-content .content-banner .text {
+  width: 50% !important;
+}
+
+main .build-content .content-banner .text h3 {
+  font-size: 2rem !important;
+  margin-bottom: 15px !important;
+}
+
+main .build-content .content-banner .text p {
+  font-size: 1.6rem !important;
+  margin-right: 20px !important;
+}
+
+main .build-content .content-banner2 {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100% !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  background-color: #ebf1ff !important;
+  height: 500px !important;
+}
+
+main .build-content .content-banner2 img {
+  width: 300px !important;
+  height: 500px !important;
+  margin: 10px !important;
+}
+
+main .build-content .content-banner2 .text {
+  width: 58% !important;
+}
+
+main .build-content .content-banner2 .text h3 {
+  font-size: 2rem !important;
+  margin-bottom: 15px !important;
+}
+
+main .build-content .content-banner2 .text p {
+  font-size: 1.6rem !important;
+}
+
+main .build-content .content-banner3 {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100% !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  background-color: #feffdc !important;
+}
+
+main .build-content .content-banner3 img {
+  width: 400px !important;
+  height: 200px !important;
+  margin: 10px !important;
+}
+
+main .build-content .content-banner3 .text {
+  width: 50% !important;
+}
+
+main .build-content .content-banner3 .text h3 {
+  font-size: 2rem !important;
+  margin-bottom: 15px !important;
+}
+
+main .build-content .content-banner3 .text p {
+  font-size: 1.8rem !important;
+  margin-right: 20px !important;
+}
+
+main .build-content .content-banner3 .text .red {
+  color: #D22F21 !important;
+  font-size: 1.6rem !important;
+}
+
+main .build-content .content-banner3 .text li {
+  font-size: 1.6rem !important;
+}
+
+main .build-content .content-banner4 {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100% !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  background-color: #ebf1ff !important;
+}
+
+main .build-content .content-banner4 img {
+  width: 400px !important;
+  height: 200px !important;
+  margin: 10px !important;
+}
+
+main .build-content .content-banner4 .text {
+  width: 50% !important;
+}
+
+main .build-content .content-banner4 .text h3 {
+  font-size: 2rem !important;
+  margin-bottom: 15px !important;
+}
+
+main .build-content .content-banner4 .text p {
+  font-size: 1.6rem !important;
+  margin-right: 20px !important;
+}
+
+main .build-content .what-now {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100% !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  background-color: #ebf1ff !important;
+}
+
+main .build-content .what-now img {
+  width: 400px !important;
+  height: 200px !important;
+  margin: 10px !important;
+}
+
+main .build-content .what-now .text {
+  width: 50% !important;
+}
+
+main .build-content .what-now .text h3 {
+  font-size: 2rem !important;
+  margin-bottom: 15px !important;
+}
+
+main .build-content .what-now .text p {
+  font-size: 1.6rem !important;
+  margin-right: 20px !important;
+}
+
+main .build-content .what-now .text li {
+  font-size: 1.6rem;
+}
+/*# sourceMappingURL=build_cs.css.map */
