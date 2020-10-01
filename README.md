@@ -1,5 +1,7 @@
 # EverythingEV
 
+For Contributing Refer [here](https://github.com/Praful932/EverythingEV/blob/master/Contributing.md).
+
 Smart India Hackathon 2020 Project
 
 Problem Statement - Electric Vehicle Ecosystem
