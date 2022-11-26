@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userapp', '0010_csmaintenance_csselect'),
+        ("userapp", "0010_csmaintenance_csselect"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='csmaintenance',
-            name='ph',
+            model_name="csmaintenance",
+            name="ph",
             field=models.CharField(default=1, max_length=14),
             preserve_default=False,
         ),

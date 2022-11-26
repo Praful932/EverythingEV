@@ -7,28 +7,50 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userapp', '0005_chargepooler'),
+        ("userapp", "0005_chargepooler"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MaintenanceManDetails',
+            name="MaintenanceManDetails",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('OrgName', models.CharField(max_length=30)),
-                ('ph1', models.CharField(max_length=14)),
-                ('ph2', models.CharField(max_length=14)),
-                ('OfficeAdd', models.TextField()),
-                ('AreaLocality', models.CharField(max_length=30)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
+                ("OrgName", models.CharField(max_length=30)),
+                ("ph1", models.CharField(max_length=14)),
+                ("ph2", models.CharField(max_length=14)),
+                ("OfficeAdd", models.TextField()),
+                ("AreaLocality", models.CharField(max_length=30)),
             ],
         ),
         migrations.CreateModel(
-            name='CsMaintenance',
+            name="CsMaintenance",
             fields=[
-                ('csm', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='userapp.ChargingStation')),
-                ('Problem', models.TextField()),
-                ('Mm', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.MaintenanceManDetails')),
+                (
+                    "csm",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="userapp.ChargingStation",
+                    ),
+                ),
+                ("Problem", models.TextField()),
+                (
+                    "Mm",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="userapp.MaintenanceManDetails",
+                    ),
+                ),
             ],
         ),
     ]

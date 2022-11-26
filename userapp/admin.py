@@ -1,29 +1,51 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from import_export.admin import ImportExportModelAdmin
-from userapp.models import (User, Consumer, Provider, ChargingStation, Vehicle, ChargingStationRecord, CsReport,
-                            ChargingStationWeekly, ChargePooler, MaintenanceManDetails, CsMaintenance, Support,
-                            UserRecord, Survey,User_convert_specs,CovertSpecs,DrivingEnv)
+from userapp.models import (
+    User,
+    Consumer,
+    Provider,
+    ChargingStation,
+    Vehicle,
+    ChargingStationRecord,
+    CsReport,
+    ChargingStationWeekly,
+    ChargePooler,
+    MaintenanceManDetails,
+    CsMaintenance,
+    Support,
+    UserRecord,
+    Survey,
+    User_convert_specs,
+    CovertSpecs,
+    DrivingEnv,
+)
+
 # Register your models here.
 @admin.register(Vehicle)
 class Vehicle(ImportExportModelAdmin):
     pass
 
+
 @admin.register(DrivingEnv)
 class DrivingEnv(ImportExportModelAdmin):
     pass
+
 
 @admin.register(ChargingStation)
 class ChargingStation(ImportExportModelAdmin):
     pass
 
+
 @admin.register(CovertSpecs)
 class CovertSpecs(ImportExportModelAdmin):
     pass
 
+
 @admin.register(User_convert_specs)
 class User_convert_specs(ImportExportModelAdmin):
     pass
+
 
 @admin.register(ChargingStationRecord)
 class ChargingStationRecord(ImportExportModelAdmin):
@@ -54,13 +76,17 @@ class Consumer(ImportExportModelAdmin):
 class Provider(ImportExportModelAdmin):
     pass
 
+
 @admin.register(CsMaintenance)
 class CsMaintenance(ImportExportModelAdmin):
     pass
 
+
 @admin.register(MaintenanceManDetails)
 class MaintenanceManDetails(ImportExportModelAdmin):
     pass
+
+
 # admin.site.register(Consumer)
 # admin.site.register(Provider)
 # admin.site.register(ChargingStation)
@@ -71,15 +97,15 @@ class MaintenanceManDetails(ImportExportModelAdmin):
 admin.site.register(Support)
 admin.site.register(UserRecord)
 admin.site.register(Survey)
-ADDITIONAL_USER_FIELDS = (
-    (None, {'fields': ('is_consumer', 'is_provider')}),
-)
+ADDITIONAL_USER_FIELDS = ((None, {"fields": ("is_consumer", "is_provider")}),)
+
 
 @admin.register(User)
-class MyUserAdmin(UserAdmin,ImportExportModelAdmin):
+class MyUserAdmin(UserAdmin, ImportExportModelAdmin):
     model = User
 
     add_fieldsets = UserAdmin.add_fieldsets + ADDITIONAL_USER_FIELDS
     fieldsets = UserAdmin.fieldsets + ADDITIONAL_USER_FIELDS
+
 
 # admin.site.register(User, MyUserAdmin)

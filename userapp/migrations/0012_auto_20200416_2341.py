@@ -7,24 +7,30 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userapp', '0011_csmaintenance_ph'),
+        ("userapp", "0011_csmaintenance_ph"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='maintenancemandetails',
-            name='CompletedComplaints',
+            model_name="maintenancemandetails",
+            name="CompletedComplaints",
             field=models.IntegerField(blank=True, default=1),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='csmaintenance',
-            name='Mm',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='jobs', to='userapp.MaintenanceManDetails'),
+            model_name="csmaintenance",
+            name="Mm",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="jobs",
+                to="userapp.MaintenanceManDetails",
+            ),
         ),
         migrations.AlterField(
-            model_name='maintenancemandetails',
-            name='own',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='userapp.Provider'),
+            model_name="maintenancemandetails",
+            name="own",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="userapp.Provider"
+            ),
         ),
     ]

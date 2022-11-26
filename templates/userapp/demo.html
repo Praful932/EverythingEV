@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{%  static 'userapp/complaint_style.css' %}"> {% endblock %} {% block body %}
 <!--<p style="margin-top: 50px;"></p>
 <body style="background-image: linear-gradient(#62C3C8, #37B9E9);"></body>
-<div class="container-fluid"> 
+<div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
@@ -63,11 +63,11 @@
               {% csrf_token %}
             <td><button type="submit" value="{{a.pk}}" name="visited" class="btn btn-success">Visited</button>
             </td>
-    
+
               </form>
           </tr>
           {%endfor%}
-          
+
         </tbody>
       </table>
     </div>-->
@@ -222,7 +222,7 @@
 <!-- partial -->
 <script src='https://npmcdn.com/flickity@2/dist/flickity.pkgd.js'></script>
 <script src='https://maps.googleapis.com/maps/api/js'></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9Y9_KDeiRBLZorVqObm42FaX_XnAxJoY&callback=initMap">
 </script>
 <script src="{%  static 'userapp/complaint_script.js' %}"></script>
 {% endblock body %}

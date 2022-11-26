@@ -7,20 +7,35 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userapp', '0017_userrecord_port_type'),
+        ("userapp", "0017_userrecord_port_type"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Survey',
+            name="Survey",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('charging_time', models.IntegerField(default=0)),
-                ('slow_port', models.BooleanField(default=False)),
-                ('fast_port', models.BooleanField(default=False)),
-                ('vehicle_no', models.IntegerField(default=1)),
-                ('distance_travelled', models.IntegerField(default=0)),
-                ('consumer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='consumer_survey', to='userapp.Consumer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("charging_time", models.IntegerField(default=0)),
+                ("slow_port", models.BooleanField(default=False)),
+                ("fast_port", models.BooleanField(default=False)),
+                ("vehicle_no", models.IntegerField(default=1)),
+                ("distance_travelled", models.IntegerField(default=0)),
+                (
+                    "consumer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="consumer_survey",
+                        to="userapp.Consumer",
+                    ),
+                ),
             ],
         ),
     ]
