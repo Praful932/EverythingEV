@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "RANDOM_KEY")
 DEBUG = str(os.environ.get("DEBUG", True)) == "True"
 
 ALLOWED_HOSTS = [
-    "everything-ev.herokuapp.com/",
+    "everything-ev.herokuapp.com",
     "everything-ev.up.railway.app",
     "127.0.0.1",
     "localhost",
