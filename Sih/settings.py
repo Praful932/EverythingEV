@@ -125,6 +125,9 @@ else:
         }
     }
 
+if not DEBUG:
+    # access via https in production
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
