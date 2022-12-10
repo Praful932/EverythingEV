@@ -7,14 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userapp', '0009_auto_20200416_1032'),
+        ("userapp", "0009_auto_20200416_1032"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='csmaintenance',
-            name='CsSelect',
-            field=models.OneToOneField(default=1, on_delete=django.db.models.deletion.CASCADE, to='userapp.ChargingStation'),
+            model_name="csmaintenance",
+            name="CsSelect",
+            field=models.OneToOneField(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="userapp.ChargingStation",
+            ),
             preserve_default=False,
         ),
     ]

@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('userapp', '0016_userrecord'),
+        ("userapp", "0016_userrecord"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userrecord',
-            name='port_type',
-            field=models.CharField(choices=[('Type1', 'Type1'), ('Type2', 'Type2'), ('Type3', 'Type3')], default='', max_length=20),
+            model_name="userrecord",
+            name="port_type",
+            field=models.CharField(
+                choices=[("Type1", "Type1"), ("Type2", "Type2"), ("Type3", "Type3")],
+                default="",
+                max_length=20,
+            ),
         ),
     ]

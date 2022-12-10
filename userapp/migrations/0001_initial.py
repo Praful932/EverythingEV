@@ -14,102 +14,291 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0011_update_proxy_permissions'),
+        ("auth", "0011_update_proxy_permissions"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('username', models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username')),
-                ('first_name', models.CharField(blank=True, max_length=30, verbose_name='first name')),
-                ('last_name', models.CharField(blank=True, max_length=150, verbose_name='last name')),
-                ('email', models.EmailField(blank=True, max_length=254, verbose_name='email address')),
-                ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
-                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
-                ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('is_consumer', models.BooleanField(default=False, verbose_name='consumer status')),
-                ('is_provider', models.BooleanField(default=False, verbose_name='provider status')),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "is_superuser",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        verbose_name="superuser status",
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        error_messages={
+                            "unique": "A user with that username already exists."
+                        },
+                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                        max_length=150,
+                        unique=True,
+                        validators=[
+                            django.contrib.auth.validators.UnicodeUsernameValidator()
+                        ],
+                        verbose_name="username",
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, max_length=30, verbose_name="first name"
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="last name"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True, max_length=254, verbose_name="email address"
+                    ),
+                ),
+                (
+                    "is_staff",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates whether the user can log into this admin site.",
+                        verbose_name="staff status",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+                        verbose_name="active",
+                    ),
+                ),
+                (
+                    "date_joined",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="date joined"
+                    ),
+                ),
+                (
+                    "is_consumer",
+                    models.BooleanField(default=False, verbose_name="consumer status"),
+                ),
+                (
+                    "is_provider",
+                    models.BooleanField(default=False, verbose_name="provider status"),
+                ),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.Group",
+                        verbose_name="groups",
+                    ),
+                ),
+                (
+                    "user_permissions",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="Specific permissions for this user.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.Permission",
+                        verbose_name="user permissions",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'abstract': False,
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "abstract": False,
             },
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
-            name='ChargingStation',
+            name="ChargingStation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default=userapp.models.csnames, max_length=100)),
-                ('city', models.CharField(default='city', max_length=100)),
-                ('suburb', models.CharField(default='suburb', max_length=100)),
-                ('lat', models.DecimalField(decimal_places=6, default=0.0, max_digits=9)),
-                ('lng', models.DecimalField(decimal_places=6, default=0.0, max_digits=9)),
-                ('no_of_ports', models.IntegerField(default=userapp.models.portscount)),
-                ('available_ports', models.IntegerField(default=0)),
-                ('fast_dc', models.IntegerField(default=userapp.models.fasports)),
-                ('created_at', models.DateTimeField(default=django.utils.timezone.now)),
-                ('slow_ac', models.IntegerField(default=userapp.models.slowports)),
-                ('price_kwh', models.DecimalField(decimal_places=2, default=12, max_digits=5)),
-                ('restroom', models.BooleanField(default=False)),
-                ('cctv', models.BooleanField(default=True)),
-                ('opening_time', models.TimeField(default=userapp.models.starttime)),
-                ('closing_time', models.TimeField(default=userapp.models.stoptime)),
-                ('image', models.ImageField(null=True, upload_to='station_pics')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(default=userapp.models.csnames, max_length=100),
+                ),
+                ("city", models.CharField(default="city", max_length=100)),
+                ("suburb", models.CharField(default="suburb", max_length=100)),
+                (
+                    "lat",
+                    models.DecimalField(decimal_places=6, default=0.0, max_digits=9),
+                ),
+                (
+                    "lng",
+                    models.DecimalField(decimal_places=6, default=0.0, max_digits=9),
+                ),
+                ("no_of_ports", models.IntegerField(default=userapp.models.portscount)),
+                ("available_ports", models.IntegerField(default=0)),
+                ("fast_dc", models.IntegerField(default=userapp.models.fasports)),
+                ("created_at", models.DateTimeField(default=django.utils.timezone.now)),
+                ("slow_ac", models.IntegerField(default=userapp.models.slowports)),
+                (
+                    "price_kwh",
+                    models.DecimalField(decimal_places=2, default=12, max_digits=5),
+                ),
+                ("restroom", models.BooleanField(default=False)),
+                ("cctv", models.BooleanField(default=True)),
+                ("opening_time", models.TimeField(default=userapp.models.starttime)),
+                ("closing_time", models.TimeField(default=userapp.models.stoptime)),
+                ("image", models.ImageField(null=True, upload_to="station_pics")),
             ],
         ),
         migrations.CreateModel(
-            name='Vehicle',
+            name="Vehicle",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('company', models.CharField(max_length=100)),
-                ('type4or2', models.IntegerField()),
-                ('horsepower', models.CharField(max_length=100)),
-                ('vehicle_range', models.IntegerField()),
-                ('price', models.DecimalField(decimal_places=6, max_digits=9)),
-                ('battery_type', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("company", models.CharField(max_length=100)),
+                ("type4or2", models.IntegerField()),
+                ("horsepower", models.CharField(max_length=100)),
+                ("vehicle_range", models.IntegerField()),
+                ("price", models.DecimalField(decimal_places=6, max_digits=9)),
+                ("battery_type", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Consumer',
+            name="Consumer",
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('have_vehicle', models.CharField(choices=[('Yes', 'Yes'), ('No', 'No')], default='', max_length=10)),
-                ('city', models.CharField(choices=[('None', 'None'), ('Mumbai', 'Mumbai'), ('Pune', 'Pune'), ('Hyderabad', 'Hyderabad')], default='', max_length=20)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "have_vehicle",
+                    models.CharField(
+                        choices=[("Yes", "Yes"), ("No", "No")],
+                        default="",
+                        max_length=10,
+                    ),
+                ),
+                (
+                    "city",
+                    models.CharField(
+                        choices=[
+                            ("None", "None"),
+                            ("Mumbai", "Mumbai"),
+                            ("Pune", "Pune"),
+                            ("Hyderabad", "Hyderabad"),
+                        ],
+                        default="",
+                        max_length=20,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Provider',
+            name="Provider",
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('business_name', models.CharField(max_length=100)),
-                ('image', models.ImageField(blank=True, upload_to='provider_pics')),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("business_name", models.CharField(max_length=100)),
+                ("image", models.ImageField(blank=True, upload_to="provider_pics")),
             ],
         ),
         migrations.CreateModel(
-            name='ChargingStationRecord',
+            name="ChargingStationRecord",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('duration', models.IntegerField(default=userapp.models.duration)),
-                ('elec_consumption', models.IntegerField(default=userapp.models.cost)),
-                ('cs', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.ChargingStation')),
-                ('vehicle', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='csvehicles', to='userapp.Vehicle')),
-                ('consumer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='recordof', to='userapp.Consumer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("duration", models.IntegerField(default=userapp.models.duration)),
+                ("elec_consumption", models.IntegerField(default=userapp.models.cost)),
+                (
+                    "cs",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="userapp.ChargingStation",
+                    ),
+                ),
+                (
+                    "vehicle",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="csvehicles",
+                        to="userapp.Vehicle",
+                    ),
+                ),
+                (
+                    "consumer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="recordof",
+                        to="userapp.Consumer",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='chargingstation',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ownerof', to='userapp.Provider'),
+            model_name="chargingstation",
+            name="owner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="ownerof",
+                to="userapp.Provider",
+            ),
         ),
     ]

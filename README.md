@@ -17,34 +17,13 @@ Environment Setup
 
 `$ cd SIH-2020/`
 
-If virtualenv is not installed [(What is virtualenv?)](https://www.youtube.com/watch?v=N5vscPTWKOk&t=313s):
+Install requirements from [poetry](https://python-poetry.org/docs/#installation) - `poetry install`
+    - OR If you prefer the vanilla route using virtual env `poetry export -f requirements.txt --output requirements.txt --without-hashes`
 
-`$ pip install virtualenv`
 
-Create a virtual environment
+Activate the environment -  `poetry shell`
 
-`$ virtualenv venv`
-
-Activate the environment everytime you open the project
-
-`$ source venv/Scripts/activate`
-
-`$ git checkout dev`
-
-Install requirements
-
-`$ pip install -r requirements.txt`
-
-To run alpr, Install alpr for your OS from [here](https://github.com/openalpr/openalpr) using the docs, preferrably use Ubuntu, then put this file - `alpr/main.py` where alpr is installed and make sure the videos, runtime and config paths in the script point to the path in your system. Then run the script to see the Live Feed
-
-`python3 main.py`
-
-Add Google Map API Keys in these pages:
-
-templates/userapp/add_charging_station.html
-templates/userapp/complaint_dashboard.html
-templates/userapp/consumer_charging_stations.html
-templates/userapp/routeyourway.html
+(Optional)To run alpr, Install alpr for your OS from [here](https://github.com/openalpr/openalpr) using the docs, preferrably use Ubuntu, then put this file - `alpr/main.py` where alpr is installed and make sure the videos, runtime and config paths in the script point to the path in your system. Then run the script to see the Live Feed
 
 All Set!
 
@@ -52,11 +31,5 @@ All Set!
 
 Before you do a git add/commit make sure to check the code base for coding style/programming errors
 
-`$ flake8`
-
-Fix it then stage changes!
-
-To exit the environment
-
-`$ deactivate `
+`pre-commit run --all-files`
 

@@ -6,6 +6,7 @@ from datetime import date
 from geopy.geocoders import Nominatim
 
 import datetime
+
 # Create your models here.
 due = 0
 lat = 0
@@ -13,8 +14,8 @@ lng = 0
 
 
 class User(AbstractUser):
-    is_consumer = models.BooleanField('consumer status', default=False)
-    is_provider = models.BooleanField('provider status', default=False)
+    is_consumer = models.BooleanField("consumer status", default=False)
+    is_provider = models.BooleanField("provider status", default=False)
 
     def __str__(self):
         return self.username
@@ -22,35 +23,43 @@ class User(AbstractUser):
 
 class Consumer(models.Model):
     city = (
-        ('None', 'None'),
-        ('Mumbai', 'Mumbai'),
-        ('Pune', 'Pune'),
-        ('Hyderabad', 'Hyderabad')
+        ("None", "None"),
+        ("Mumbai", "Mumbai"),
+        ("Pune", "Pune"),
+        ("Hyderabad", "Hyderabad"),
     )
-    have_vehicle = (
-        ('Yes', 'Yes'),
-        ('No', 'No')
-    )
+    have_vehicle = (("Yes", "Yes"), ("No", "No"))
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     have_vehicle = models.CharField(max_length=10, choices=have_vehicle, default="")
     city = models.CharField(max_length=20, choices=city, default="")
 
     def __str__(self):
-        return self.user.username + ' - Consumer'
+        return self.user.username + " - Consumer"
 
 
 class Provider(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     business_name = models.CharField(max_length=100)
-    image = models.ImageField(blank=True, upload_to='provider_pics')
+    image = models.ImageField(blank=True, upload_to="provider_pics")
 
     def __str__(self):
-        return self.user.username + ' - Provider'
+        return self.user.username + " - Provider"
 
 
 def csnames():
-    numberList = (["Quick EV Charging", "Snap Charging", "OLA Charge", "Mahindra Electric", "Relaince Charging",
-                   "HP Charging", "BP Charging", "Ather Energy", "Power EV", "PowerUP", "EV Charging"])
+    numberList = [
+        "Quick EV Charging",
+        "Snap Charging",
+        "OLA Charge",
+        "Mahindra Electric",
+        "Relaince Charging",
+        "HP Charging",
+        "BP Charging",
+        "Ather Energy",
+        "Power EV",
+        "PowerUP",
+        "EV Charging",
+    ]
     return random.choice(numberList)
 
 
@@ -67,22 +76,22 @@ lng = generate_lng()
 
 
 def geocity():
-    geolocator = Nominatim(user_agent='EV')
+    geolocator = Nominatim(user_agent="EV")
     lat = generate_lat()
     lng = generate_lng()
-    location = geolocator.reverse(str(lat)+', ' + str(lng), timeout=100)
-    if location.raw['address']['city']:
-        return location.raw['address']['city']
+    location = geolocator.reverse(str(lat) + ", " + str(lng), timeout=100)
+    if location.raw["address"]["city"]:
+        return location.raw["address"]["city"]
     return "Lorem ipsum"
 
 
 def geosub():
-    geolocator = Nominatim(user_agent='EV')
+    geolocator = Nominatim(user_agent="EV")
     lat = generate_lat()
     lng = generate_lng()
-    location = geolocator.reverse(str(lat)+', ' + str(lng), timeout=100)
-    if location.raw['address']['suburb']:
-        return location.raw['address']['suburb']
+    location = geolocator.reverse(str(lat) + ", " + str(lng), timeout=100)
+    if location.raw["address"]["suburb"]:
+        return location.raw["address"]["suburb"]
     return "Lorem ipsum"
 
 
@@ -115,7 +124,9 @@ class ChargingStation(models.Model):
     name = models.CharField(max_length=100, default=csnames)
     city = models.CharField(max_length=100, default="city")
     suburb = models.CharField(max_length=100, default="suburb")
-    owner = models.ForeignKey(Provider, on_delete=models.CASCADE, related_name="ownerof")
+    owner = models.ForeignKey(
+        Provider, on_delete=models.CASCADE, related_name="ownerof"
+    )
     lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.00)
     lng = models.DecimalField(max_digits=9, decimal_places=6, default=0.00)
     no_of_ports = models.IntegerField(default=portscount)
@@ -128,13 +139,13 @@ class ChargingStation(models.Model):
     cctv = models.BooleanField(default=True)
     opening_time = models.TimeField(default=starttime)
     closing_time = models.TimeField(default=stoptime)
-    image = models.ImageField(null=True, upload_to='station_pics')
+    image = models.ImageField(null=True, upload_to="station_pics")
 
     def __str__(self):
-        return str(self.pk) + '. ' + self.owner.user.username + ' ' + self.city
+        return str(self.pk) + ". " + self.owner.user.username + " " + self.city
 
-    class Meta():
-        ordering = ['-created_at']
+    class Meta:
+        ordering = ["-created_at"]
 
 
 def duration():
@@ -145,13 +156,13 @@ due = duration()
 
 
 def cost():
-    if(45 <= due <= 60):
+    if 45 <= due <= 60:
         return random.randrange(10, 15, 1)
-    if(61 <= due <= 80):
+    if 61 <= due <= 80:
         return random.randrange(15, 25, 1)
-    if(81 <= due <= 105):
+    if 81 <= due <= 105:
         return random.randrange(25, 35, 1)
-    if(106 <= due <= 120):
+    if 106 <= due <= 120:
         return random.randrange(35, 50, 1)
 
 
@@ -165,20 +176,26 @@ class Vehicle(models.Model):
     charging_rate = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
-        return str(self.pk) + '. ' + self.company
+        return str(self.pk) + ". " + self.company
 
 
 class ChargingStationRecord(models.Model):
     # Records for ChargingStation arrivals of vehicle
     # time start-end, elec reqd
-    cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE, related_name="csrecord")
-    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE, related_name="recordof")
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="csvehicles")
+    cs = models.ForeignKey(
+        ChargingStation, on_delete=models.CASCADE, related_name="csrecord"
+    )
+    consumer = models.ForeignKey(
+        Consumer, on_delete=models.CASCADE, related_name="recordof"
+    )
+    vehicle = models.ForeignKey(
+        Vehicle, on_delete=models.CASCADE, related_name="csvehicles"
+    )
     duration = models.IntegerField(default=duration)
     elec_consumption = models.IntegerField(default=cost)
 
     def __str__(self):
-        return str(self.pk) + '. ' + self.consumer.user.username
+        return str(self.pk) + ". " + self.consumer.user.username
 
 
 class ChargingStationWeekly(models.Model):
@@ -205,7 +222,8 @@ def randomdate():
 
 
 class CsReport(models.Model):
-    """ Model Denoting Frequency of vehicle recorded at each hour of a particular day"""
+    """Model Denoting Frequency of vehicle recorded at each hour of a particular day"""
+
     cs = models.ForeignKey(ChargingStation, on_delete=models.CASCADE)
     time = models.DateField(default=randomdate)
     t0 = models.IntegerField(default=randomvehicles)
@@ -234,34 +252,53 @@ class CsReport(models.Model):
     t23 = models.IntegerField(default=randomvehicles)
 
     def __str__(self):
-        return str(self.pk) + '. ' + self.cs.name+' .'+self.cs.city
+        return str(self.pk) + ". " + self.cs.name + " ." + self.cs.city
 
 
 def city():
-    numberList = (["Mumbai", "Pune", "Aurangabad", "Nagpur", "Hyderabad", "Banglore", "Chennai", "Chandigarh"])
+    numberList = [
+        "Mumbai",
+        "Pune",
+        "Aurangabad",
+        "Nagpur",
+        "Hyderabad",
+        "Banglore",
+        "Chennai",
+        "Chandigarh",
+    ]
     cName = random.choice(numberList)
     return cName
 
 
 def phone():
-    numberList = (["905XXXX876", "7798XXXX67", "876XXXXX12", "234XXXX345",
-                   "343XXXX909", "2345XXX436", "3333XXXX23", "6787XXX123"])
+    numberList = [
+        "905XXXX876",
+        "7798XXXX67",
+        "876XXXXX12",
+        "234XXXX345",
+        "343XXXX909",
+        "2345XXX436",
+        "3333XXXX23",
+        "6787XXX123",
+    ]
     return random.choice(numberList)
 
 
 def price():
-    p = ([12, 32, 9, 10, 12, 20])
+    p = [12, 32, 9, 10, 12, 20]
     return random.choice(p)
 
 
 def sub():
-    numberList = (["sector 29", "sector 32", "sector 21", "sector 18", "Dwarka"])
+    numberList = ["sector 29", "sector 32", "sector 21", "sector 18", "Dwarka"]
     sName = random.choice(numberList)
     return sName
 
 
 class ChargePooler(models.Model):
-    consumer = models.OneToOneField(Consumer, on_delete=models.CASCADE, primary_key=True)
+    consumer = models.OneToOneField(
+        Consumer, on_delete=models.CASCADE, primary_key=True
+    )
     city = models.CharField(max_length=25)
     local_area = models.CharField(max_length=25)
     ph_no = models.CharField(max_length=13)
@@ -283,7 +320,9 @@ class MaintenanceManDetails(models.Model):
 
 
 class CsMaintenance(models.Model):
-    Mm = models.ForeignKey(MaintenanceManDetails, on_delete=models.CASCADE, related_name="jobs")
+    Mm = models.ForeignKey(
+        MaintenanceManDetails, on_delete=models.CASCADE, related_name="jobs"
+    )
     csm = models.OneToOneField(Provider, on_delete=models.CASCADE, primary_key=True)
     CsSelect = models.OneToOneField(ChargingStation, on_delete=models.CASCADE)
     ph = models.CharField(max_length=14)
@@ -291,19 +330,21 @@ class CsMaintenance(models.Model):
 
 
 class Support(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="support_requests")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="support_requests"
+    )
     subject = models.CharField(max_length=20, verbose_name="Title")
-    description = models.TextField(max_length=200, verbose_name="Describe issue you are facing")
+    description = models.TextField(
+        max_length=200, verbose_name="Describe issue you are facing"
+    )
 
 
 class UserRecord(models.Model):
-    ports = (
-        ('Type1', 'Type1'),
-        ('Type2', 'Type2'),
-        ('Type3', 'Type3')
-    )
+    ports = (("Type1", "Type1"), ("Type2", "Type2"), ("Type3", "Type3"))
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="data_by")
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="vehicles_charged")
+    vehicle = models.ForeignKey(
+        Vehicle, on_delete=models.CASCADE, related_name="vehicles_charged"
+    )
     start_time = models.DateTimeField(default=timezone.now)
     stop_time = models.DateTimeField(default=timezone.now)
     port_type = models.CharField(max_length=20, choices=ports, default="")
@@ -313,14 +354,16 @@ class UserRecord(models.Model):
 
 class Survey(models.Model):
     travel_type = (
-        ('Personal', 'Personal'),
-        ('Ambulance', 'Ambulance'),
-        ('Private Authority', 'Private Authority'),
-        ('Goverment', 'Goverment'),
-        ('Tours and Travel', 'Tours and Travel'),
-        ('Goods Carrier', 'Goods Carrier')
+        ("Personal", "Personal"),
+        ("Ambulance", "Ambulance"),
+        ("Private Authority", "Private Authority"),
+        ("Goverment", "Goverment"),
+        ("Tours and Travel", "Tours and Travel"),
+        ("Goods Carrier", "Goods Carrier"),
     )
-    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE, related_name="consumer_survey")
+    consumer = models.ForeignKey(
+        Consumer, on_delete=models.CASCADE, related_name="consumer_survey"
+    )
     charging_time = models.IntegerField(default=0)
     slow_port = models.BooleanField(default=False)
     fast_port = models.BooleanField(default=False)
@@ -329,41 +372,35 @@ class Survey(models.Model):
     distance_travelled = models.IntegerField(default=0)
     datetime = models.DateTimeField(default=timezone.now)
 
+
 class User_convert_specs(models.Model):
     vehicles = (
-        ('3 wheeler','3 wheeler'),
-        ('mini SUV','mini SUV'),
-        ('SUV','SUV'),
-        ('Sedan','Sedan'),
-        ('Heavy','Heavy')
+        ("3 wheeler", "3 wheeler"),
+        ("mini SUV", "mini SUV"),
+        ("SUV", "SUV"),
+        ("Sedan", "Sedan"),
+        ("Heavy", "Heavy"),
     )
-    prices =(
-        ('Below 5','Below 5'),
-        ('5 to 7.5','5 to 7.5'),
-        ('above 7','above 7')
-    )
+    prices = (("Below 5", "Below 5"), ("5 to 7.5", "5 to 7.5"), ("above 7", "above 7"))
     fully_electric = models.BooleanField(default=True)
-    vehicle_type = models.CharField(max_length = 20,choices = vehicles,default= "")
-    price_range = models.CharField(choices = prices,max_length = 20)
+    vehicle_type = models.CharField(max_length=20, choices=vehicles, default="")
+    price_range = models.CharField(choices=prices, max_length=20)
     dtd_sercive = models.BooleanField(default=False)
+
 
 class CovertSpecs(models.Model):
     battery_capacity = models.IntegerField()
-    range_in_kms =  models.CharField(max_length=20)
+    range_in_kms = models.CharField(max_length=20)
     battery_warranty = models.IntegerField()
     Pricing = models.IntegerField()
     rating = models.IntegerField()
-    company = models.CharField(max_length = 25)
+    company = models.CharField(max_length=25)
 
 
 class DrivingEnv(models.Model):
-    roads = (
-        ('City','City'),
-        ('Highway','Highway'),
-        ('Off road','Off road')
-    )
+    roads = (("City", "City"), ("Highway", "Highway"), ("Off road", "Off road"))
     consumption = models.IntegerField(default=0)
-    road_type = models.CharField(choices = roads,max_length = 20)
+    road_type = models.CharField(choices=roads, max_length=20)
     consumption_per_100 = models.IntegerField()
     ac = models.BooleanField()
     avg_speed = models.IntegerField()
